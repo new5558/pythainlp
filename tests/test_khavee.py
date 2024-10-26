@@ -23,6 +23,8 @@ class TestKhaveePackage(unittest.TestCase):
         self.assertEqual(kv.check_marttra("ตรวจ"), "กด")
         self.assertEqual(kv.check_marttra("คน"), "กน")
         self.assertEqual(kv.check_marttra("ทมิฬ"), "กน")
+        self.assertEqual(kv.check_marttra("บรร"), "กน")
+        self.assertEqual(kv.check_marttra("กร"), "กน")
         self.assertEqual(kv.check_marttra("ชอบ"), "กบ")
         self.assertEqual(kv.check_marttra("ภาพ"), "กบ")
         self.assertEqual(kv.check_marttra("ปลา"), "กา")
