@@ -326,13 +326,9 @@ def word_tokenize(
 def indices_words(words):
     indices = []
     start_index = 0
-
     for word in words:
-        if len(word) > 1:
-            _temp = len(word)-1
-        else:
-            _temp = 1
-        indices.append((start_index, start_index + _temp))
+        end_index = start_index + len(word) - 1
+        indices.append((start_index, end_index))
         start_index += len(word)
 
     return indices
@@ -342,12 +338,10 @@ def map_indices_to_words(index_list, sentences):
     result = []
     c = copy.copy(index_list)
     n_sum = 0
-
     for sentence in sentences:
         words = sentence
         sentence_result = []
         n = 0
-
         for start, end in c:
             if start > n_sum+len(words)-1:
                 break
@@ -455,6 +449,11 @@ def sent_tokenize(
         from pythainlp.tokenize.crfcut import segment
 
         segments = segment(original_text)
+
+        if is_list_input:
+            word_indices = indices_words(text)
+            result = map_indices_to_words(word_indices, [original_text])
+            return result
     elif engine == "whitespace":
         segments = re.split(r" +", original_text, flags=re.U)
         if is_list_input:
@@ -468,13 +467,11 @@ def sent_tokenize(
             word_indices = indices_words(non_whitespace_newline_text)
     elif engine == "tltk":
         from pythainlp.tokenize.tltk import sent_tokenize as segment
-
         segments = segment(original_text)
     elif engine == "thaisum":
         from pythainlp.tokenize.thaisumcut import (
             ThaiSentenceSegmentor as segmentor,
         )
-
         segment = segmentor()
         segments = segment.split_into_sentences(original_text)
     elif engine.startswith("wtp"):
@@ -483,7 +480,6 @@ def sent_tokenize(
         else:
             _size = engine.split("-")[-1]
         from pythainlp.tokenize.wtsplit import tokenize as segment
-
         segments = segment(original_text, size=_size, tokenize="sentence")
     else:
         raise ValueError(
@@ -494,13 +490,12 @@ def sent_tokenize(
     if not keep_whitespace:
         segments = strip_whitespace(segments)
 
-    if is_list_input:
-        if engine not in ["whitespace", "whitespace+newline"]:
-            word_indices = indices_words(text)
+    if is_list_input and engine not in ["crfcut", "whitespace"]:
+        word_indices = indices_words(text)
         result = map_indices_to_words(word_indices, segments)
         return result
     else:
-        return segments
+        return [segments]
 
 
 def paragraph_tokenize(
