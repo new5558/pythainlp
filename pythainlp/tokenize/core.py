@@ -467,7 +467,7 @@ def sent_tokenize(
                     _temp = []
                 else:
                     _temp.append(w)
-                if i+1 == len(text):
+                if i + 1 == len(text):
                     result.append(_temp)
             return result
     elif engine == "whitespace+newline":
@@ -475,18 +475,19 @@ def sent_tokenize(
         if is_list_input:
             result = []
             _temp = []
-            for i,w in enumerate(text):
+            for i, w in enumerate(text):
                 if ((
-                    re.findall(r"\s",w) != [] or
-                    re.findall(r"\n",w) != []) and
-                    re.findall(r"\w",w) == []):
+                    re.findall(r"\s", w) != []
+                    or re.findall(r"\n", w) != [])
+                    and re.findall(r"\w", w) == []
+                ):
                     if _temp == []:
                         continue
                     result.append(_temp)
                     _temp = []
                 else:
                     _temp.append(w)
-                if i+1 == len(text):
+                if i + 1 == len(text):
                     result.append(_temp)
             return result
     elif engine == "tltk":
