@@ -476,9 +476,9 @@ def sent_tokenize(
             result = []
             _temp = []
             for i, w in enumerate(text):
-                if ((
-                    re.findall(r"\s", w) != []
-                    or re.findall(r"\n", w) != [])
+                if (
+                    (re.findall(r"\s", w) != [] or
+                        re.findall(r"\n", w) != [])
                     and re.findall(r"\w", w) == []
                 ):
                     if _temp == []:
