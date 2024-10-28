@@ -460,7 +460,7 @@ def sent_tokenize(
             result = []
             _temp = []
             for i, w in enumerate(text):
-                if re.findall(r"\s", w) != [] and re.findall(r"\w", w) == []:
+                if re.findall(r" ", w) != [] and re.findall(r"\w", w) == []:
                     if _temp == []:
                         continue
                     result.append(_temp)
@@ -478,8 +478,8 @@ def sent_tokenize(
             for i, w in enumerate(text):
                 if (
                     (re.findall(r"\s", w) != [] or
-                        re.findall(r"\n", w) != [])
-                    and re.findall(r"\w", w) == []
+                        re.findall(r"\n", w) != []) and
+                        re.findall(r"\w", w) == []
                 ):
                     if _temp == []:
                         continue

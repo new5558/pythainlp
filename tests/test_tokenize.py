@@ -333,6 +333,23 @@ class TestTokenizePackage(unittest.TestCase):
         #         engine="wtp-large",
         #     ),
         # )
+        sent_4 = ["ผม", "กิน", "ข้าว", " ", "\n", "เธอ", "เล่น", "เกม"]
+        self.assertEqual(
+            sent_tokenize(sent_4, engine="crfcut"),
+            [["ผม", "กิน", "ข้าว", " ", "\n", "เธอ", "เล่น", "เกม"]],
+        )
+        self.assertEqual(
+            sent_tokenize(sent_4, engine="whitespace"),
+            [["ผม", "กิน", "ข้าว"], ["\n", "เธอ", "เล่น", "เกม"]],
+        )
+        self.assertEqual(
+            sent_tokenize(sent_4, engine="whitespace+newline"),
+            [["ผม", "กิน", "ข้าว"], ["เธอ", "เล่น", "เกม"]],
+        )
+        self.assertEqual(
+            sent_tokenize(sent_4, engine="thaisum"),
+            [["ผม", "กิน", "ข้าว", " ", "เธอ", "เล่น", "เกม"]],
+        )
         self.assertFalse(
             " "
             in sent_tokenize(
