@@ -457,14 +457,35 @@ def sent_tokenize(
     elif engine == "whitespace":
         segments = re.split(r" +", original_text, flags=re.U)
         if is_list_input:
-            non_whitespace_text = [word for word in text if word.strip()]
-            word_indices = indices_words(non_whitespace_text)
+            result = []
+            _temp = []
+            for i,w in enumerate(text):
+                if re.findall(r"\s",w) != [] and re.findall(r"\w",w) == []:
+                    if _temp == []:
+                        continue
+                    result.append(_temp)
+                    _temp = []
+                else:
+                    _temp.append(w)
+                if i+1 == len(text):
+                    result.append(_temp)
+            return result
     elif engine == "whitespace+newline":
         segments = original_text.split()
         if is_list_input:
-            non_whitespace_newline_text = [
-                word for word in text if word.strip() and word != '\n']
-            word_indices = indices_words(non_whitespace_newline_text)
+            result = []
+            _temp = []
+            for i,w in enumerate(text):
+                if (re.findall(r"\s",w) != [] or re.findall(r"\n",w) != []) and re.findall(r"\w",w) == []:
+                    if _temp==[]:
+                        continue
+                    result.append(_temp)
+                    _temp=[]
+                else:
+                    _temp.append(w)
+                if i+1==len(text):
+                    result.append(_temp)
+            return result
     elif engine == "tltk":
         from pythainlp.tokenize.tltk import sent_tokenize as segment
         segments = segment(original_text)
@@ -490,7 +511,7 @@ def sent_tokenize(
     if not keep_whitespace:
         segments = strip_whitespace(segments)
 
-    if is_list_input and engine not in ["crfcut", "whitespace"]:
+    if is_list_input and engine not in ["crfcut"]:
         word_indices = indices_words(text)
         result = map_indices_to_words(word_indices, segments)
         return result
