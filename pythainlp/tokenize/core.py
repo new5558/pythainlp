@@ -343,10 +343,10 @@ def map_indices_to_words(index_list, sentences):
         sentence_result = []
         n = 0
         for start, end in c:
-            if start > n_sum+len(words)-1:
+            if start > n_sum + len(words) - 1:
                 break
             else:
-                word = sentence[start-n_sum:end+1-n_sum]
+                word = sentence[start - n_sum:end + 1 - n_sum]
                 sentence_result.append(word)
                 n += 1
 
@@ -459,8 +459,8 @@ def sent_tokenize(
         if is_list_input:
             result = []
             _temp = []
-            for i,w in enumerate(text):
-                if re.findall(r"\s",w) != [] and re.findall(r"\w",w) == []:
+            for i, w in enumerate(text):
+                if re.findall(r"\s", w) != [] and re.findall(r"\w", w) == []:
                     if _temp == []:
                         continue
                     result.append(_temp)
@@ -476,14 +476,17 @@ def sent_tokenize(
             result = []
             _temp = []
             for i,w in enumerate(text):
-                if (re.findall(r"\s",w) != [] or re.findall(r"\n",w) != []) and re.findall(r"\w",w) == []:
-                    if _temp==[]:
+                if ((
+                    re.findall(r"\s",w) != [] or
+                    re.findall(r"\n",w) != []) and
+                    re.findall(r"\w",w) == []):
+                    if _temp == []:
                         continue
                     result.append(_temp)
-                    _temp=[]
+                    _temp = []
                 else:
                     _temp.append(w)
-                if i+1==len(text):
+                if i+1 == len(text):
                     result.append(_temp)
             return result
     elif engine == "tltk":
