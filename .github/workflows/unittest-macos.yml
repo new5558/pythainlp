@@ -62,7 +62,7 @@ jobs:
     - name: Install PyThaiNLP
       shell: bash -l {0}
       run: |
-        python -m pip install .[full]
+        python -m pip install .[icu,isa,thai2fit,translate,textaugment,wordnet,generate,nlpo3,thai_nner,wsd]
         python -m nltk.downloader omw-1.4
     - name: Test
       shell: bash -l {0}

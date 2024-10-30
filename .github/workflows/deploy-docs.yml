@@ -22,11 +22,10 @@ jobs:
         SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL: True
       run: |
         python -m pip install --upgrade pip
-        pip install pytest coverage coveralls
+        python -m pip install coverage coveralls pytest
         if [ -f docker_requirements.txt ]; then pip install -r docker_requirements.txt; fi
-        pip install deepcut
-        pip install .[full]
-        pip install boto smart_open sphinx sphinx-rtd-theme
+        python -m pip install .[full]
+        python -m pip install boto smart_open sphinx sphinx-rtd-theme
         python -m nltk.downloader omw-1.4
     - name: Build sphinx documentation
       run: |
