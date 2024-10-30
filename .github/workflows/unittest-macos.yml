@@ -22,7 +22,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-latest, self-hosted]
-        python-version: [3.8]
+        python-version: ["3.9"]
 
     steps:
     - name: Checkout
@@ -47,8 +47,8 @@ jobs:
       shell: bash -l {0}
       run: |
         source ~/miniconda3/etc/profile.d/conda.sh
-        conda create -y -n pythainlpwork38 python=3.8
-        conda activate pythainlpwork38
+        conda create -y -n pythainlpwork python=3.9
+        conda activate pythainlpwork
         conda info
         conda list
         python -m pip install --upgrade pip
