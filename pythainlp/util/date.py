@@ -236,7 +236,7 @@ def thai_strptime(
         #   9,
         #   0,
         #   1,
-        #   tzinfo=backports.zoneinfo.ZoneInfo(key='Asia/Bangkok')
+        #   tzinfo=zoneinfo.ZoneInfo(key='Asia/Bangkok')
         # )
     """
     d = ""
