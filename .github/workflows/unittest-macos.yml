@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["macos-15"]  # other versions failed PyTorch installation
+        os: ["macos-14"]  # other versions failed PyTorch installation
         python-version: ["3.9"]
 
     runs-on: ${{ matrix.os }}
