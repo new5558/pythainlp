@@ -4,14 +4,14 @@ A framework for benchmarking tokenization algorithms for Thai.
 It has a command-line interface that allows users to conveniently execute the benchmarks
 as well as a module interface for later use in their development pipelines.
 
-
 ## Metrics
+
 <div align="center">
     <img src="https://i.imgur.com/jVBOLa2.png"/>
 </div>
 
-
 ### Character-Level (CL)
+
 - True Positive (TP): no. of starting characters that are correctly predicted.
 - True Negative (TN): no. of non-starting characters that are correctly predicted.
 - False Positive (FP): no. of non-starting characters that are wrongly predicted as starting characters.
@@ -20,13 +20,12 @@ as well as a module interface for later use in their development pipelines.
 - Recall: TP / (TP+FN)
 - f1: ...
 
-
 ### Word-Level (WL)
+
 - Correctly Tokenized Words (CTW): no. of words in reference that are correctly tokenized.
 - Precision: CTW / no. words in reference solution
 - Recall: CTW / no. words in sample
 -**** f1: ...
-
 
 ## Benchmark Results
 
@@ -47,21 +46,25 @@ as well as a module interface for later use in their development pipelines.
 [res-BEST-val-Sertis-BiGRU]: https://pythainlp.org/tokenization-benchmark-visualization/?experiment-name=BEST-val-Sertis-BiGRU
 [res-WiseSight160-Sertis-BiGRU]: https://pythainlp.org/tokenization-benchmark-visualization/?experiment-name=WiseSight160-Sertis-BiGRU
 
-
 ## Installation (WIP)
-```
+
+```shell
 pip ...
 ```
 
 ## Usages (to be updated)
 
 1. Command-line Interface
-    ```
+
+    ```shell
     PYTHONPATH=`pwd` python scripts/thai-tokenisation-benchmark.py \
     --test-file ./data/best-2010/TEST_100K_ANS.txt \
     --input ./data/best-2010-syllable.txt
+    ```
 
-    # Sample output
+    Sample output:
+
+    ```text
     Benchmarking ./data/best-2010-deepcut.txt against ./data/best-2010/TEST_100K_ANS.txt with 2252 samples in total
     ============== Benchmark Result ==============
                     metric       mean±std       min    max
@@ -78,7 +81,8 @@ pip ...
     ```
 
 2. Module Interface
-    ```
+
+    ```python
     from pythainlp.benchmarks import word_tokenisation as bwt
 
     ref_samples = array of reference tokenised samples
@@ -89,16 +93,19 @@ pip ...
     ```
 
 ## Related Work
+
 - [Thai Tokenizers Docker][docker]: collection of Docker containers of pre-built Thai tokenizers.
 
-
 ## Development
-```
-# unitests
-$ TEST_VERBOSE=1 PYTHONPATH=. python tests/__init__.py
+
+Unit tests
+
+```shell
+TEST_VERBOSE=1 PYTHONPATH=. python tests/__init__.py
 ```
 
 ## Acknowledgement
+
 This project was initially started by [Pattarawat Chormai][pat], while he was interning at [Dr. Attapol Thamrongrattanarit][ate]'s lab.
 
 [docker]: https://github.com/PyThaiNLP/docker-thai-tokenizers
