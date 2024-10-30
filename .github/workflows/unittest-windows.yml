@@ -16,13 +16,13 @@ on:
 
 jobs:
   build:
-
-    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest]
+        os: ["windows-latest"]
         python-version: ["3.9"]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Checkout
