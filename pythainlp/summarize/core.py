@@ -5,12 +5,12 @@
 Text summarization and keyword extraction
 """
 
-from typing import List, Iterable, Optional, Tuple
+from typing import Iterable, List, Optional, Tuple
 
 from pythainlp.summarize import (
-    DEFAULT_SUMMARIZE_ENGINE,
     CPE_KMUTT_THAI_SENTENCE_SUM,
     DEFAULT_KEYWORD_EXTRACTION_ENGINE,
+    DEFAULT_SUMMARIZE_ENGINE,
 )
 from pythainlp.summarize.freq import FrequencySummarizer
 from pythainlp.tokenize import sent_tokenize
@@ -198,8 +198,8 @@ def extract_keywords(
         tokenizer: str = "newmm",
         stop_words: Optional[Iterable[str]] = None,
     ):
-        from pythainlp.util.keywords import rank
         from pythainlp.tokenize import word_tokenize
+        from pythainlp.util.keywords import rank
 
         tokens = word_tokenize(text, engine=tokenizer, keep_whitespace=False)
 

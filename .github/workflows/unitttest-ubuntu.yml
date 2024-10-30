@@ -1,4 +1,4 @@
-name: Unit test and code coverage
+name: Unit test and code coverage (Ubuntu)
 
 on:
   push:
