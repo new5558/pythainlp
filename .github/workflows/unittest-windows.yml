@@ -44,12 +44,12 @@ jobs:
         python -m pip install --disable-pip-version-check --user --upgrade pip setuptools
         python -m pip install coverage coveralls pytest
         python -m pip install "https://github.com/cgohlke/pyicu-build/releases/download/v2.13/PyICU-2.13-cp39-cp39-win_amd64.whl"
-    - name: Install dependencies
-      shell: powershell
-      env:
-        SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL: True
-      run: |
-        python -m pip install -r docker_requirements.txt
+    # - name: Install dependencies
+    #   shell: powershell
+    #   env:
+    #     SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL: True
+    #   run: |
+    #     python -m pip install -r docker_requirements.txt
     - name: Install PyThaiNLP
       shell: powershell
       run: |
