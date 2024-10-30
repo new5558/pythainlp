@@ -34,7 +34,7 @@ jobs:
     - name: Install build tools
       shell: bash -l {0}
       run: |
-        python -m pip install --upgrade pip setuptools
+        python -m pip install --upgrade "pip<24.1" setuptools
         python -m pip install coverage coveralls pytest
     - name: Install ICU
       shell: bash -l {0}
