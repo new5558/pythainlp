@@ -6,10 +6,9 @@ Please refer to our [Contributor Covenant Code of Conduct](https://github.com/Py
 
 ## Issue Report and Discussion
 
-- Discussion: https://github.com/PyThaiNLP/pythainlp/discussions
-- GitHub issues (for problems and suggestions): https://github.com/PyThaiNLP/pythainlp/issues
-- Facebook group (not specific to PyThaiNLP, for Thai NLP discussion in general): https://www.facebook.com/groups/thainlp
-
+- Discussion: <https://github.com/PyThaiNLP/pythainlp/discussions>
+- GitHub issues (for problems and suggestions): <https://github.com/PyThaiNLP/pythainlp/issues>
+- Facebook group (not specific to PyThaiNLP, for Thai NLP discussion in general): <https://www.facebook.com/groups/thainlp>
 
 ## Code
 
@@ -49,7 +48,6 @@ to manage our branches.
 and several checks automatically. Click the "Details" link at the end of
 each check to see what needs to be fixed.
 
-
 ## Documentation
 
 - We use [Sphinx](https://www.sphinx-doc.org/en/master/) to generate API document
@@ -57,8 +55,7 @@ automatically from "docstring" comments in source codes. This means the comment
 section in the source codes is important for the quality of documentation.
 - A docstring should start with one summary line, end with one line with a full stop (period),
 then be followed by a blank line before starting a new paragraph.
-- A commit to release branches (e.g. `2.2`, `2.1`) with a title **"(build and deploy docs)"** (without quotes) will trigger the system to rebuild the documentation files and upload them to the website https://pythainlp.org/docs.
-
+- A commit to release branches (e.g. `2.2`, `2.1`) with a title **"(build and deploy docs)"** (without quotes) will trigger the system to rebuild the documentation files and upload them to the website <https://pythainlp.org/docs>.
 
 ## Testing
 
@@ -67,29 +64,33 @@ We use standard Python `unittest`. The test suite is in `tests/` directory.
 To run unit tests locally together with code coverage test:
 
 (from main `pythainlp/` directory)
+
 ```sh
 coverage run -m unittest discover
 ```
 
 See code coverage test:
+
 ```sh
 coverage report
 ```
 
 Generate code coverage test in HTML (files will be available in `htmlcov/` directory):
+
 ```sh
 coverage html
 ```
 
 Make sure the tests pass on both Github Actions and AppVeyor.
 
-
 ## Releasing
+
 - We use [semantic versioning](https://semver.org/): MAJOR.MINOR.PATCH, with development build suffix: MAJOR.MINOR.PATCH-devBUILD
 - We use [`bumpversion`](https://github.com/c4urself/bump2version/#installation) to manage versioning.
   - `bumpversion [major|minor|patch|release|build]`
   - Example:
-  ```
+
+  ```sh
   #current_version = 2.3.3-dev0
 
   bumpversion build
@@ -132,10 +133,11 @@ Make sure the tests pass on both Github Actions and AppVeyor.
 Thanks to all [contributors](https://github.com/PyThaiNLP/pythainlp/graphs/contributors). (Image made with [contributors-img](https://contributors-img.firebaseapp.com))
 
 ### Development Leads
+
 - Wannaphong Phatthiyaphaibun <wannaphong@yahoo.com> - foundation, distribution and maintenance
 - Korakot Chaovavanich - initial tokenization and soundex codes
 - Charin Polpanumas - classification and benchmarking
-- Arthit Suriyawongkul - refactoring, packaging, distribution, and maintenance
+- Arthit Suriyawongkul - documentation, refactoring, packaging, distribution, and maintenance
 - Lalita Lowphansirikul - documentation
 - Pattarawat Chormai - benchmarking
 - Peerat Limkonchotiwat
@@ -143,18 +145,19 @@ Thanks to all [contributors](https://github.com/PyThaiNLP/pythainlp/graphs/contr
 - Can Udomcharoenchaikit - documentation and codes
 
 ### Maintainers
+
 - Arthit Suriyawongkul
 - Wannaphong Phatthiyaphaibun
 
-
 ### Past
+
 - Peeradej Tanruangporn - documentation
 
 ## References
 
-- **[Maximum Matching]** -- Manabu Sassano. Deterministic Word Segmentation Using Maximum Matching with Fully Lexicalized Rules. Retrieved from http://www.aclweb.org/anthology/E14-4016
-- **[MetaSound]** -- Snae & Brückner. (2009). Novel Phonetic Name Matching Algorithm with a Statistical Ontology for Analysing Names Given in Accordance with Thai Astrology. Retrieved from https://pdfs.semanticscholar.org/3983/963e87ddc6dfdbb291099aa3927a0e3e4ea6.pdf
+- **[Maximum Matching]** -- Manabu Sassano. Deterministic Word Segmentation Using Maximum Matching with Fully Lexicalized Rules. Retrieved from <http://www.aclweb.org/anthology/E14-4016>
+- **[MetaSound]** -- Snae & Brückner. (2009). Novel Phonetic Name Matching Algorithm with a Statistical Ontology for Analysing Names Given in Accordance with Thai Astrology. Retrieved from <https://pdfs.semanticscholar.org/3983/963e87ddc6dfdbb291099aa3927a0e3e4ea6.pdf>
 - **[Thai Character Cluster]** -- T. Teeramunkong, V. Sornlertlamvanich, T. Tanhermhong and W. Chinnan, “Character cluster based Thai information retrieval,” in IRAL '00 Proceedings of the fifth international workshop on on Information retrieval with Asian languages, 2000.
 - **[Enhanced Thai Character Cluster]** -- Jeeragone Inrut, Patiroop Yuanghirun, Sarayut Paludkong, Supot Nitsuwat, and Para Limmaneepraserth. “Thai word segmentation using combination of forward and backward longest matching techniques.” In International Symposium on Communications and Information Technology (ISCIT), pp. 37-40. 2001.
 - เพ็ญศิริ ลี้ตระกูล. การเลือกประโยคสำคัญในการสรุปความภาษาไทย โดยใช้แบบจำลองแบบลำดับชั้น (Selection of Important Sentences in Thai Text Summarization Using a Hierarchical Model). Retrieved from [http://digi.library.tu.ac.th/thesis/st/0192/](https://digital.library.tu.ac.th/tu_dc/frontend/Info/item/dc:124897)
-- **[Thai Discourse Treebank]** -- Ponrawee Prasertsom, Apiwat Jaroonpol, Attapol T. Rutherford; The Thai Discourse Treebank: Annotating and Classifying Thai Discourse Connectives. Transactions of the Association for Computational Linguistics 2024; 12 613–629. doi: https://doi.org/10.1162/tacl_a_00650
+- **[Thai Discourse Treebank]** -- Ponrawee Prasertsom, Apiwat Jaroonpol, Attapol T. Rutherford; The Thai Discourse Treebank: Annotating and Classifying Thai Discourse Connectives. Transactions of the Association for Computational Linguistics 2024; 12 613–629. doi: <https://doi.org/10.1162/tacl_a_00650>

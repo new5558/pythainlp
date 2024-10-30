@@ -1,4 +1,4 @@
-name: macOS Unit test and code coverage
+name: Unit test and code coverage (MacOS)
 
 on:
   push:
@@ -25,8 +25,10 @@ jobs:
         python-version: [3.8]
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: conda-incubator/setup-miniconda@v3
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: conda-incubator/setup-miniconda@v3
       with:
         python-version: ${{ matrix.python-version }}
         auto-activate-base: false
@@ -64,7 +66,8 @@ jobs:
         python -m pip cache purge
         python -m unittest discover
       if: matrix.os == 'self-hosted'
-    - shell: bash -l {0}
+    - name: Show environment
+      shell: bash -l {0}
       run: |
         conda info
         conda list

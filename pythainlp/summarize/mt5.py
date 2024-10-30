@@ -5,7 +5,8 @@
 Summarization by mT5 model
 """
 from typing import List
-from transformers import T5Tokenizer, MT5ForConditionalGeneration
+
+from transformers import MT5ForConditionalGeneration, T5Tokenizer
 
 from pythainlp.summarize import CPE_KMUTT_THAI_SENTENCE_SUM
 

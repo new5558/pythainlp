@@ -1,4 +1,4 @@
-name: Windows Unit test and code coverage
+name: Unit test and code coverage (Windows)
 
 on:
   push:
@@ -25,13 +25,16 @@ jobs:
         python-version: [3.8]
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: conda-incubator/setup-miniconda@v3
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: conda-incubator/setup-miniconda@v3
       with:
         python-version: ${{ matrix.python-version }}
         auto-activate-base: true
         auto-update-conda: true
-    - shell: powershell
+    - name: Show environment
+      shell: powershell
       run: |
         conda info
         conda list

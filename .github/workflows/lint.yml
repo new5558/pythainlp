@@ -17,13 +17,13 @@ on:
       - 'docs/**'
 
 jobs:
-    ruff:
-      runs-on: ubuntu-24.04
-      steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Ruff
-        uses: astral-sh/ruff-action@v1
-        with:
-          src: "./pythainlp"
-          args: check --verbose --line-length 79 --select C901
+  ruff:
+    runs-on: ubuntu-24.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Ruff
+      uses: astral-sh/ruff-action@v1
+      with:
+        src: "./pythainlp"
+        args: check --verbose --line-length 79 --select C901
