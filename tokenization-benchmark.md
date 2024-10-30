@@ -25,7 +25,7 @@ as well as a module interface for later use in their development pipelines.
 - Correctly Tokenized Words (CTW): no. of words in reference that are correctly tokenized.
 - Precision: CTW / no. words in reference solution
 - Recall: CTW / no. words in sample
--**** f1: ...
+- f1: ...
 
 ## Benchmark Results
 
