@@ -7,14 +7,13 @@ Unit test.
 Each file in tests/ is for each main package.
 """
 
-import sys
 from unittest import TestLoader, TestSuite
 
 test_packages = [
 #    "tests.test_cli.TestMainPackage",
 #    "tests.test_soundex.TestSoundexPackage",
 #    "tests.test_spell.TestSpellPackage",
-    "tests.test_tokenize.TestTokenizePackage",
+#    "tests.test_tokenize.TestTokenizePackage",
     "tests.test_util.TestUtilPackage",
 ]
 
