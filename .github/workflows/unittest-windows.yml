@@ -31,31 +31,25 @@ jobs:
         python-version: ${{ matrix.python-version }}
         cache: "pip"
     - name: Install build tools
-      shell: powershell
       run: |
         python -m pip install --upgrade "pip<24.1" "setuptools==73.0.1"
         python -m pip install coverage coveralls
     - name: Install ICU
-      shell: powershell
       run: |
         python -m pip install "https://github.com/cgohlke/pyicu-build/releases/download/v2.14/PyICU-2.14-cp310-cp310-win_amd64.whl"
       # if needed, get pip wheel link from https://github.com/cgohlke/pyicu-build/releases
     - name: Install PyTorch
-      shell: powershell
       run: python -m pip install torch
       # if needed, get pip wheel link from http://download.pytorch.org/whl/torch/
     # - name: Install dependencies
-    #   shell: powershell
     #   env:
     #     SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL: True
     #   run: |
     #     python -m pip install -r docker_requirements.txt
     - name: Install PyThaiNLP
-      shell: powershell
       run: |
         python -m pip install .
     - name: Test
-      shell: powershell
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_SERVICE_NAME: github
