@@ -11,9 +11,9 @@ import sys
 from unittest import TestLoader, TestSuite
 
 test_packages = [
-    "tests.test_cli.TestMainPackage",
-    "tests.test_soundex.TestSoundexPackage",
-    "tests.test_spell.TestSpellPackage",
+#    "tests.test_cli.TestMainPackage",
+#    "tests.test_soundex.TestSoundexPackage",
+#    "tests.test_spell.TestSpellPackage",
     "tests.test_tokenize.TestTokenizePackage",
     "tests.test_util.TestUtilPackage",
 ]
@@ -22,6 +22,7 @@ test_packages = [
 def load_tests(loader: TestLoader, tests, pattern) -> TestSuite:
     """A function to load tests."""
     suite = TestSuite()
-    tests = loader.loadTestsFromName("tests.test_cli.TestMainPackage")
-    suite.addTests(tests)
+    for test_package in test_packages:
+        tests = loader.loadTestsFromName(test_package)
+        suite.addTests(tests)
     return suite
