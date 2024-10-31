@@ -5,7 +5,7 @@ on:
     - cron: '0 0 * * *' # Once per day
 
 jobs:
-  build:
+  pypi-test:
 
     runs-on: ubuntu-20.04
     strategy:

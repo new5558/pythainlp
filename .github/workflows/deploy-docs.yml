@@ -8,11 +8,12 @@ on:
       - '**.yml'
 
 jobs:
-  release:
-    name: Build
+  deploy-docs:
+    name: Build and deploy documentation
     runs-on: ubuntu-24.04
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -31,7 +32,7 @@ jobs:
       run: |
         cd docs && make html
         cd ..
-    - name: Deploy
+    - name: Deploy documentation
       uses: peaceiris/actions-gh-pages@v4
       with:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
