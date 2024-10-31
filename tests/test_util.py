@@ -15,7 +15,6 @@ from pythainlp.corpus import _CORPUS_PATH, thai_words
 from pythainlp.corpus.common import _THAI_WORDS_FILENAME
 from pythainlp.util import (
     Trie,
-    # abbreviation_to_full_text,
     arabic_digit_to_thai_digit,
     bahttext,
     collate,
@@ -45,7 +44,6 @@ from pythainlp.util import (
     remove_tonemark,
     remove_trailing_repeat_consonants,
     remove_zw,
-    rhyme,
     sound_syllable,
     syllable_length,
     syllable_open_close_detector,
@@ -57,7 +55,6 @@ from pythainlp.util import (
     thai_strftime,
     thai_strptime,
     thai_to_eng,
-    thai_word_tone_detector,
     thaiword_to_date,
     thaiword_to_num,
     thaiword_to_time,
@@ -816,10 +813,6 @@ class TestUtilPackage(unittest.TestCase):
             spell_word("คนดี"), ["คอ", "นอ", "คน", "ดอ", "อี", "ดี", "คนดี"]
         )
 
-    def test_rhyme(self):
-        self.assertIsInstance(rhyme("แมว"), list)
-        self.assertTrue(len(rhyme("แมว")) > 2)
-
     def test_remove_repeat_consonants(self):
         # update of pythainlp.copus.thai_words() able to break this
         self.assertEqual(
@@ -853,12 +846,3 @@ class TestUtilPackage(unittest.TestCase):
 
     # def test_abbreviation_to_full_text(self):
     #     self.assertIsInstance(abbreviation_to_full_text("รร.ของเราน่าอยู่", list))
-
-
-# for functions that need extra imports
-class TestUtilPackageX(unittest.TestCase):
-    def test_thai_word_tone_detector(self):
-        self.assertIsNotNone(thai_word_tone_detector("คนดี"))
-        self.assertEqual(
-            thai_word_tone_detector("ราคา"), [("รา", "m"), ("คา", "m")]
-        )
