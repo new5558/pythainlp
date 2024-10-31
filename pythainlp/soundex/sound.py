@@ -2,10 +2,12 @@
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
 from typing import List
+
 import panphon
 import panphon.distance
-from pythainlp.transliterate import pronunciate, transliterate
+
 from pythainlp.tokenize import word_tokenize
+from pythainlp.transliterate import pronunciate, transliterate
 
 _ft = panphon.FeatureTable()
 _dst = panphon.distance.Distance()

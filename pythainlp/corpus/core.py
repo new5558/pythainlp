@@ -4,14 +4,13 @@
 """
 Corpus related functions.
 """
+import json
 import os
 from typing import Union
-import json
 
+from pythainlp import __version__
 from pythainlp.corpus import corpus_db_path, corpus_db_url, corpus_path
 from pythainlp.tools import get_full_data_path
-from pythainlp import __version__
-
 
 _CHECK_MODE = os.getenv("PYTHAINLP_READ_MODE")
 
@@ -293,8 +292,9 @@ def _download(url: str, dst: str) -> int:
     """
     _CHUNK_SIZE = 64 * 1024  # 64 KiB
 
-    import requests
     from urllib.request import urlopen
+
+    import requests
 
     file_size = int(urlopen(url).info().get("Content-Length", -1))
     r = requests.get(url, stream=True)

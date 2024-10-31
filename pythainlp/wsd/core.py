@@ -3,9 +3,9 @@
 # SPDX-License-Identifier: Apache-2.0
 from typing import List, Tuple, Union
 
+from pythainlp.corpus import thai_wsd_dict
 from pythainlp.tokenize import Tokenizer
 from pythainlp.util.trie import Trie
-from pythainlp.corpus import thai_wsd_dict
 
 _wsd_dict = thai_wsd_dict()
 _mean_all = {}

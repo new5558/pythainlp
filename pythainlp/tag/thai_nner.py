@@ -2,7 +2,9 @@
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
 from typing import List, Tuple
+
 from thai_nner import NNER
+
 from pythainlp.corpus import get_corpus_path
 
 

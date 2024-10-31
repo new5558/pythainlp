@@ -10,8 +10,9 @@ import random
 
 import numpy as np
 import torch
-from torch import nn
 import torch.nn.functional as F
+from torch import nn
+
 from pythainlp.corpus import get_corpus_path
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")

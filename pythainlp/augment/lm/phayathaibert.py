@@ -2,12 +2,11 @@
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import List
 import random
 import re
+from typing import List
 
 from pythainlp.phayathaibert.core import ThaiTextProcessor
-
 
 _MODEL_NAME = "clicknext/phayathaibert"
 
@@ -15,8 +14,8 @@ _MODEL_NAME = "clicknext/phayathaibert"
 class ThaiTextAugmenter:
     def __init__(self) -> None:
         from transformers import (
-            AutoTokenizer,
             AutoModelForMaskedLM,
+            AutoTokenizer,
             pipeline,
         )
 

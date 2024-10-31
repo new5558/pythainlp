@@ -5,6 +5,6 @@
 Thai Text Generation
 """
 
-__all__ = ["Unigram", "Bigram", "Trigram"]
+__all__ = ["Bigram", "Trigram", "Unigram"]
 
-from pythainlp.generate.core import Unigram, Bigram, Trigram
+from pythainlp.generate.core import Bigram, Trigram, Unigram

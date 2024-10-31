@@ -6,7 +6,7 @@ Utility functions for tokenize module.
 """
 
 import re
-from typing import List, Callable
+from typing import Callable, List
 
 _DIGITS_WITH_SEPARATOR = re.compile(r"(\d+[\.\,:])+\d+")
 

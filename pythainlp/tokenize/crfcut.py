@@ -20,6 +20,7 @@ import os
 from typing import List
 
 import pycrfsuite
+
 from pythainlp.corpus import corpus_path
 from pythainlp.tokenize import word_tokenize
 

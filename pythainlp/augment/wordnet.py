@@ -9,15 +9,15 @@ __all__ = [
     "postype2wordnet",
 ]
 
-from collections import OrderedDict
 import itertools
+from collections import OrderedDict
 from typing import List
 
 from nltk.corpus import wordnet as wn
-from pythainlp.corpus import wordnet
-from pythainlp.tokenize import word_tokenize
-from pythainlp.tag import pos_tag
 
+from pythainlp.corpus import wordnet
+from pythainlp.tag import pos_tag
+from pythainlp.tokenize import word_tokenize
 
 orchid = {
     "": "",

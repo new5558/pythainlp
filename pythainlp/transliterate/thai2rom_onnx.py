@@ -5,10 +5,11 @@
 Romanization of Thai words based on machine-learnt engine in ONNX runtime ("thai2rom")
 """
 import json
+
 import numpy as np
 from onnxruntime import InferenceSession
-from pythainlp.corpus import get_corpus_path
 
+from pythainlp.corpus import get_corpus_path
 
 _MODEL_ENCODER_NAME = "thai2rom_encoder_onnx"
 _MODEL_DECODER_NAME = "thai2rom_decoder_onnx"

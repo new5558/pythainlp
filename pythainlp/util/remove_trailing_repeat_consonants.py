@@ -4,10 +4,11 @@
 """
 Removement of repeated consonants at the end of words
 """
+from typing import Iterable, List, Tuple
+
+from pythainlp import thai_consonants as consonants
 from pythainlp.corpus import thai_words
 from pythainlp.util.trie import Trie
-from pythainlp import thai_consonants as consonants
-from typing import Iterable, List, Tuple
 
 # used by remove_trailing_repeat_consonants()
 # contains all words that has repeating consonants at the end

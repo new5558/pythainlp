@@ -5,6 +5,7 @@
 Syllable tools
 """
 import re
+
 from pythainlp import thai_consonants, thai_tonemarks
 
 spelling_class = {

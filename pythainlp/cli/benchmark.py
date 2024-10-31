@@ -8,6 +8,7 @@ import json
 import os
 
 import yaml
+
 from pythainlp import cli
 from pythainlp.benchmarks import word_tokenization
 

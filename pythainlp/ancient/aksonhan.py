@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
-from pythainlp.util import Trie
 from pythainlp import thai_consonants, thai_tonemarks
-from pythainlp.tokenize import Tokenizer
 from pythainlp.corpus import thai_orst_words
-
+from pythainlp.tokenize import Tokenizer
+from pythainlp.util import Trie
 
 _dict_aksonhan = {}
 for i in list(thai_consonants):

@@ -4,9 +4,8 @@
 from typing import List
 
 from pythainlp.corpus import thai_words
-from pythainlp.tokenize import syllable_tokenize
 from pythainlp.khavee import KhaveeVerifier
-
+from pythainlp.tokenize import syllable_tokenize
 
 kv = KhaveeVerifier()
 all_thai_words_dict = None

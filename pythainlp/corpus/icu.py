@@ -8,7 +8,6 @@ from typing import FrozenSet
 
 from pythainlp.corpus.common import get_corpus
 
-
 _THAI_ICU_FILENAME = "icubrk_th.txt"
 
 

@@ -7,6 +7,7 @@ Where's the Point? Self-Supervised Multilingual Punctuation-Agnostic Sentence Se
 GitHub: https://github.com/bminixhofer/wtpsplit
 """
 from typing import List
+
 from wtpsplit import WtP
 
 _MODEL = None

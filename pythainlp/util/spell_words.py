@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 import re
 from typing import List
+
 from pythainlp import (
     thai_above_vowels,
     thai_below_vowels,
@@ -12,8 +13,7 @@ from pythainlp import (
     thai_letters,
     thai_tonemarks,
 )
-from pythainlp.tokenize import subword_tokenize, Tokenizer
-
+from pythainlp.tokenize import Tokenizer, subword_tokenize
 
 _r1 = ["เ-ย", "เ-ะ", "แ-ะ", "โ-ะ", "เ-าะ", "เ-อะ", "เ-อ", "เ-า"]
 _r2 = ["–ั:วะ", "เ–ี:ยะ", "เ–ือะ", "–ั:ว", "เ–ี:ย", "เ–ื:อ", "–ื:อ"]

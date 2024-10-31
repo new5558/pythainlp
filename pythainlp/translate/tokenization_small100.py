@@ -23,9 +23,7 @@ from shutil import copyfile
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 import sentencepiece
-
 from transformers.tokenization_utils import BatchEncoding, PreTrainedTokenizer
-
 
 SPIECE_UNDERLINE = "▁"
 

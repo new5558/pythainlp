@@ -23,8 +23,8 @@ __all__ = [
     "thai_wsd_dict",
 ]
 
-from typing import FrozenSet, List, Union
 import warnings
+from typing import FrozenSet, List, Union
 
 from pythainlp.corpus import get_corpus, get_corpus_as_is, get_corpus_path
 

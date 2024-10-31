@@ -2,16 +2,16 @@
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Callable, List, Tuple, Union
 import random
 import re
 import warnings
+from typing import Callable, List, Tuple, Union
 
-from pythainlp.tokenize import word_tokenize
 from transformers import (
     CamembertTokenizer,
 )
 
+from pythainlp.tokenize import word_tokenize
 
 _PAT_URL = r"(http|ftp|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?"
 
@@ -305,8 +305,8 @@ class PartOfSpeechTagger:
     def __init__(self, model: str = "lunarlist/pos_thai_phayathai") -> None:
         # Load model directly
         from transformers import (
-            AutoTokenizer,
             AutoModelForTokenClassification,
+            AutoTokenizer,
         )
 
         self.tokenizer = AutoTokenizer.from_pretrained(model)
@@ -349,8 +349,8 @@ class PartOfSpeechTagger:
 class NamedEntityTagger:
     def __init__(self, model: str = "Pavarissy/phayathaibert-thainer") -> None:
         from transformers import (
-            AutoTokenizer,
             AutoModelForTokenClassification,
+            AutoTokenizer,
         )
 
         self.tokenizer = AutoTokenizer.from_pretrained(model)

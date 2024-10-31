@@ -2,6 +2,7 @@
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
 import spacy
+
 from pythainlp.coref._fastcoref import FastCoref
 
 

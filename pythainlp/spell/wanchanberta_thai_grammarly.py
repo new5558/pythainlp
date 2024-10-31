@@ -10,9 +10,12 @@ Two-stage Thai Misspelling Correction based on Pre-trained Language Models
     * GitHub: \
         https://github.com/bookpanda/Two-stage-Thai-Misspelling-Correction-Based-on-Pre-trained-Language-Models
 """
-from transformers import AutoModelForMaskedLM
-from transformers import AutoTokenizer, BertForTokenClassification
 import torch
+from transformers import (
+    AutoModelForMaskedLM,
+    AutoTokenizer,
+    BertForTokenClassification,
+)
 
 use_cuda = torch.cuda.is_available()
 device = torch.device("cuda" if use_cuda else "cpu")

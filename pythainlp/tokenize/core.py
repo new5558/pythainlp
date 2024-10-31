@@ -4,9 +4,10 @@
 """
 Generic functions of tokenizers
 """
+
+import copy
 import re
 from typing import Iterable, List, Union
-import copy
 
 from pythainlp.tokenize import (
     DEFAULT_SENT_TOKENIZE_ENGINE,
@@ -37,7 +38,21 @@ def clause_tokenize(doc: List[str]) -> List[List[str]]:
     ::
 
         from pythainlp.tokenize import clause_tokenize
-        clause_tokenize(["ฉัน","นอน","และ","คุณ","เล่น","มือถือ","ส่วน","น้อง","เขียน","โปรแกรม"])
+
+        clause_tokenize(
+            [
+                "ฉัน",
+                "นอน",
+                "และ",
+                "คุณ",
+                "เล่น",
+                "มือถือ",
+                "ส่วน",
+                "น้อง",
+                "เขียน",
+                "โปรแกรม",
+            ]
+        )
         # [['ฉัน', 'นอน'],
         # ['และ', 'คุณ', 'เล่น', 'มือถือ'],
         # ['ส่วน', 'น้อง', 'เขียน', 'โปรแกรม']]
@@ -63,6 +78,7 @@ def word_detokenize(
     ::
 
         from pythainlp.tokenize import word_detokenize
+
         print(word_detokenize(["เรา", "เล่น"]))
         # output: เราเล่น
     """
@@ -291,18 +307,19 @@ def word_tokenize(
         segments = segment(text)
     elif engine == "nlpo3":
         from pythainlp.tokenize.nlpo3 import segment
+
         # Currently cannot handle custom_dict from inside word_tokenize(),
         # due to difference in type.
-        #if isinstance(custom_dict, str):
+        # if isinstance(custom_dict, str):
         #    segments = segment(text, custom_dict=custom_dict)
-        #elif not isinstance(custom_dict, str) and not custom_dict:
+        # elif not isinstance(custom_dict, str) and not custom_dict:
         #    raise ValueError(
         #        f"""Tokenizer \"{engine}\":
         #        custom_dict must be a str.
         #        It is a dictionary name as assigned with load_dict().
         #        See pythainlp.tokenize.nlpo3.load_dict()"""
         #    )
-        #else:
+        # else:
         #    segments = segment(text)
         segments = segment(text)
     else:
@@ -346,7 +363,7 @@ def map_indices_to_words(index_list, sentences):
             if start > n_sum + len(words) - 1:
                 break
             else:
-                word = sentence[start - n_sum:end + 1 - n_sum]
+                word = sentence[start - n_sum : end + 1 - n_sum]
                 sentence_result.append(word)
                 n += 1
 
@@ -355,6 +372,7 @@ def map_indices_to_words(index_list, sentences):
         for _ in range(n):
             del c[0]
     return result
+
 
 def sent_tokenize(
     text: Union[str, List[str]],
@@ -434,7 +452,6 @@ def sent_tokenize(
     is_list_input = isinstance(text, list)
 
     if is_list_input:
-
         try:
             original_text = "".join(text)
         except ValueError:
@@ -477,10 +494,8 @@ def sent_tokenize(
             _temp = []
             for i, w in enumerate(text):
                 if (
-                    (re.findall(r"\s", w) != [] or
-                        re.findall(r"\n", w) != []) and
-                        re.findall(r"\w", w) == []
-                ):
+                    re.findall(r"\s", w) != [] or re.findall(r"\n", w) != []
+                ) and re.findall(r"\w", w) == []:
                     if _temp == []:
                         continue
                     result.append(_temp)
@@ -492,11 +507,13 @@ def sent_tokenize(
             return result
     elif engine == "tltk":
         from pythainlp.tokenize.tltk import sent_tokenize as segment
+
         segments = segment(original_text)
     elif engine == "thaisum":
         from pythainlp.tokenize.thaisumcut import (
             ThaiSentenceSegmentor as segmentor,
         )
+
         segment = segmentor()
         segments = segment.split_into_sentences(original_text)
     elif engine.startswith("wtp"):
@@ -505,6 +522,7 @@ def sent_tokenize(
         else:
             _size = engine.split("-")[-1]
         from pythainlp.tokenize.wtsplit import tokenize as segment
+
         segments = segment(original_text, size=_size, tokenize="sentence")
     else:
         raise ValueError(

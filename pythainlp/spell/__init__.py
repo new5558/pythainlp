@@ -7,15 +7,15 @@ Spell checking and correction.
 
 __all__ = [
     "DEFAULT_SPELL_CHECKER",
-    "correct",
-    "spell",
     "NorvigSpellChecker",
-    "spell_sent",
+    "correct",
     "correct_sent",
+    "spell",
+    "spell_sent",
 ]
 
 from pythainlp.spell.pn import NorvigSpellChecker
 
 DEFAULT_SPELL_CHECKER = NorvigSpellChecker()
 
-from pythainlp.spell.core import correct, spell, correct_sent, spell_sent
+from pythainlp.spell.core import correct, correct_sent, spell, spell_sent

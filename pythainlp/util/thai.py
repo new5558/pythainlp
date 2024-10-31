@@ -8,16 +8,16 @@ import string
 from typing import Tuple
 
 from pythainlp import (
-    thai_lead_vowels,
-    thai_follow_vowels,
     thai_above_vowels,
     thai_below_vowels,
     thai_consonants,
-    thai_vowels,
-    thai_tonemarks,
-    thai_signs,
     thai_digits,
+    thai_follow_vowels,
+    thai_lead_vowels,
     thai_punctuations,
+    thai_signs,
+    thai_tonemarks,
+    thai_vowels,
 )
 from pythainlp.transliterate import pronunciate
 from pythainlp.util.syllable import tone_detector

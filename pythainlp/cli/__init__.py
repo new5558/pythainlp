@@ -5,7 +5,7 @@
 import sys
 from argparse import ArgumentParser
 
-from pythainlp.cli import data, soundex, tag, tokenize, benchmark
+from pythainlp.cli import benchmark, data, soundex, tag, tokenize
 
 # a command should start with a verb when possible
 COMMANDS = sorted(["data", "soundex", "tag", "tokenize", "benchmark"])

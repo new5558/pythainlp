@@ -5,7 +5,12 @@
 Transliteration.
 """
 
-__all__ = ["romanize", "transliterate", "pronunciate", "puan"]
+__all__ = [
+    "pronunciate",
+    "puan",
+    "romanize",
+    "transliterate",
+]
 
-from pythainlp.transliterate.core import romanize, transliterate, pronunciate
+from pythainlp.transliterate.core import pronunciate, romanize, transliterate
 from pythainlp.transliterate.spoonerism import puan

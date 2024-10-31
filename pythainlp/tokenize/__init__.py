@@ -18,18 +18,8 @@ __all__ = [
     "word_tokenize",
 ]
 
+from pythainlp.corpus import get_corpus as _get_corpus
 from pythainlp.corpus import thai_syllables, thai_words
-from pythainlp.util.trie import Trie
-
-DEFAULT_WORD_TOKENIZE_ENGINE = "newmm"
-DEFAULT_SENT_TOKENIZE_ENGINE = "crfcut"
-DEFAULT_SUBWORD_TOKENIZE_ENGINE = "tcc"
-DEFAULT_SYLLABLE_TOKENIZE_ENGINE = "han_solo"
-
-DEFAULT_WORD_DICT_TRIE = Trie(thai_words())
-DEFAULT_SYLLABLE_DICT_TRIE = Trie(thai_syllables())
-DEFAULT_DICT_TRIE = DEFAULT_WORD_DICT_TRIE
-
 from pythainlp.tokenize.core import (
     Tokenizer,
     clause_tokenize,
@@ -40,8 +30,16 @@ from pythainlp.tokenize.core import (
     word_detokenize,
     word_tokenize,
 )
+from pythainlp.util.trie import Trie
 
-from pythainlp.corpus import get_corpus as _get_corpus
+DEFAULT_WORD_TOKENIZE_ENGINE = "newmm"
+DEFAULT_SENT_TOKENIZE_ENGINE = "crfcut"
+DEFAULT_SUBWORD_TOKENIZE_ENGINE = "tcc"
+DEFAULT_SYLLABLE_TOKENIZE_ENGINE = "han_solo"
+
+DEFAULT_WORD_DICT_TRIE = Trie(thai_words())
+DEFAULT_SYLLABLE_DICT_TRIE = Trie(thai_syllables())
+DEFAULT_DICT_TRIE = DEFAULT_WORD_DICT_TRIE
 
 THAI2FIT_TOKENIZER = Tokenizer(
     custom_dict=_get_corpus("words_th_thai2fit_201810.txt"), engine="mm"

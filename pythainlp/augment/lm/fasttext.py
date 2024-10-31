@@ -3,8 +3,10 @@
 # SPDX-License-Identifier: Apache-2.0
 import itertools
 from typing import List, Tuple
+
 from gensim.models.fasttext import FastText as FastText_gensim
 from gensim.models.keyedvectors import KeyedVectors
+
 from pythainlp.tokenize import word_tokenize
 
 

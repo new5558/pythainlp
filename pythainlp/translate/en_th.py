@@ -15,7 +15,6 @@ from sacremoses import MosesTokenizer
 
 from pythainlp.corpus import download, get_corpus_path
 
-
 _EN_TH_MODEL_NAME = "scb_1m_en-th_moses"
 # SCB_1M-MT_OPUS+TBASE_en-th_moses-spm_130000-16000_v1.0.tar.gz
 _EN_TH_FILE_NAME = "SCB_1M-MT_OPUS+TBASE_en-th_moses-spm_130000-16000_v1.0"

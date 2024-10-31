@@ -2,6 +2,7 @@
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
 from typing import List, Tuple, Union
+
 try:
     from tltk import nlp
 except ImportError:

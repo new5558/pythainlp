@@ -9,17 +9,22 @@ https://github.com/PyThaiNLP/tutorials/blob/master/source/notebooks/text_generat
 """
 __all__ = ["gen_sentence"]
 
-import random
 import pickle
+import random
 from typing import List, Union
-import pandas as pd
 
 # fastai
 import fastai
+import pandas as pd
 from fastai.text import *
 
 # pythainlp
-from pythainlp.ulmfit import *
+from pythainlp.ulmfit import (
+    THWIKI_LSTM,
+    ThaiTokenizer,
+    post_rules_th,
+    pre_rules_th,
+)
 
 # get dummy data
 imdb = untar_data(URLs.IMDB_SAMPLE)
@@ -78,7 +83,7 @@ learn.load_pretrained(**thwiki)
 
 def gen_sentence(
     start_seq: str = None,
-    N: int = 4,
+    n: int = 4,
     prob: float = 0.001,
     output_str: bool = True,
 ) -> Union[List[str], str]:
@@ -107,7 +112,7 @@ def gen_sentence(
     if start_seq is None:
         start_seq = random.choice(list(thwiki_itos))
     list_word = learn.predict(
-        start_seq, N, temperature=0.8, min_p=prob, sep="-*-"
+        start_seq, n, temperature=0.8, min_p=prob, sep="-*-"
     ).split("-*-")
     if output_str:
         return "".join(list_word)

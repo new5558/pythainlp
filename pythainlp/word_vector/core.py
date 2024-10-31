@@ -6,6 +6,7 @@ from typing import List, Tuple
 from gensim.models import KeyedVectors
 from gensim.models.keyedvectors import Word2VecKeyedVectors
 from numpy import ndarray, zeros
+
 from pythainlp.corpus import get_corpus_path
 from pythainlp.tokenize import THAI2FIT_TOKENIZER, word_tokenize
 

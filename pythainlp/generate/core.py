@@ -9,13 +9,14 @@ https://towardsdatascience.com/understanding-word-n-grams-and-n-gram-probability
 """
 import random
 from typing import List, Union
-from pythainlp.corpus.tnc import unigram_word_freqs as tnc_word_freqs_unigram
-from pythainlp.corpus.tnc import bigram_word_freqs as tnc_word_freqs_bigram
-from pythainlp.corpus.tnc import trigram_word_freqs as tnc_word_freqs_trigram
-from pythainlp.corpus.ttc import unigram_word_freqs as ttc_word_freqs_unigram
+
 from pythainlp.corpus.oscar import (
     unigram_word_freqs as oscar_word_freqs_unigram,
 )
+from pythainlp.corpus.tnc import bigram_word_freqs as tnc_word_freqs_bigram
+from pythainlp.corpus.tnc import trigram_word_freqs as tnc_word_freqs_trigram
+from pythainlp.corpus.tnc import unigram_word_freqs as tnc_word_freqs_unigram
+from pythainlp.corpus.ttc import unigram_word_freqs as ttc_word_freqs_unigram
 
 
 class Unigram:

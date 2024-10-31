@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 import warnings
 
+
 def is_native_thai(word: str) -> bool:
     warnings.warn(
         """

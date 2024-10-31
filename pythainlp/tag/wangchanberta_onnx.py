@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
-from typing import List
 import json
+from typing import List
 
 import numpy as np
+
 from pythainlp.corpus import get_path_folder_corpus
 
 
@@ -18,9 +19,9 @@ class WngchanBerta_ONNX:
     ) -> None:
         import sentencepiece as spm
         from onnxruntime import (
+            GraphOptimizationLevel,
             InferenceSession,
             SessionOptions,
-            GraphOptimizationLevel,
         )
 
         self.model_name = model_name

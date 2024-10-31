@@ -15,10 +15,11 @@ Cite:
     school={Beijing Institute of Technology}
 """
 
-import re
-import operator
 import math
+import operator
+import re
 from typing import List
+
 from pythainlp.tokenize import word_tokenize
 
 
