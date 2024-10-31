@@ -2,10 +2,9 @@
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
 """Command line helpers."""
+
 import sys
 from argparse import ArgumentParser
-
-from pythainlp.cli import benchmark, data, soundex, tag, tokenize
 
 # a command should start with a verb when possible
 COMMANDS = sorted(["data", "soundex", "tag", "tokenize", "benchmark"])
