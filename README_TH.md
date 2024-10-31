@@ -55,7 +55,6 @@ PyThaiNLP มีความสามารถพื้นฐานสำหร�
 
 อ่านรายละเอียดได้ที่ [tutorials](https://pythainlp.org/tutorials)
 
-
 ## การติดตั้ง
 
 ```sh
@@ -122,11 +121,11 @@ thainlp help
 
 หากคุณใช้ซอฟต์แวร์ `PyThaiNLP` ในโครงงานหรืองานวิจัยของคุณ คุณสามารถอ้างอิงได้ตามนี้
 
-Wannaphong Phatthiyaphaibun, Korakot Chaovavanich, Charin Polpanumas, Arthit Suriyawongkul, Lalita Lowphansirikul, & Pattarawat Chormai. (2016, Jun 27). PyThaiNLP: Thai Natural Language Processing in Python. Zenodo. http://doi.org/10.5281/zenodo.3519354
+> Wannaphong Phatthiyaphaibun, Korakot Chaovavanich, Charin Polpanumas, Arthit Suriyawongkul, Lalita Lowphansirikul, & Pattarawat Chormai. (2016, Jun 27). PyThaiNLP: Thai Natural Language Processing in Python. Zenodo. <http://doi.org/10.5281/zenodo.3519354>
 
 โดยสามารถใช้ BibTeX นี้:
 
-``` bib
+```bib
 @misc{pythainlp,
     author       = {Wannaphong Phatthiyaphaibun, Korakot Chaovavanich, Charin Polpanumas, Arthit Suriyawongkul, Lalita Lowphansirikul, Pattarawat Chormai},
     title        = {{PyThaiNLP: Thai Natural Language Processing in Python}},
@@ -140,7 +139,7 @@ Wannaphong Phatthiyaphaibun, Korakot Chaovavanich, Charin Polpanumas, Arthit Sur
 
 บทความของเราในงานประชุมวิชาการ [NLP-OSS 2023](https://nlposs.github.io/2023/):
 
-Wannaphong Phatthiyaphaibun, Korakot Chaovavanich, Charin Polpanumas, Arthit Suriyawongkul, Lalita Lowphansirikul, Pattarawat Chormai, Peerat Limkonchotiwat, Thanathip Suntorntip, and Can Udomcharoenchaikit. 2023. [PyThaiNLP: Thai Natural Language Processing in Python.](https://aclanthology.org/2023.nlposs-1.4) In Proceedings of the 3rd Workshop for Natural Language Processing Open Source Software (NLP-OSS 2023), pages 25–36, Singapore, Singapore. Empirical Methods in Natural Language Processing.
+> Wannaphong Phatthiyaphaibun, Korakot Chaovavanich, Charin Polpanumas, Arthit Suriyawongkul, Lalita Lowphansirikul, Pattarawat Chormai, Peerat Limkonchotiwat, Thanathip Suntorntip, and Can Udomcharoenchaikit. 2023. [PyThaiNLP: Thai Natural Language Processing in Python.](https://aclanthology.org/2023.nlposs-1.4) In Proceedings of the 3rd Workshop for Natural Language Processing Open Source Software (NLP-OSS 2023), pages 25–36, Singapore, Singapore. Empirical Methods in Natural Language Processing.
 
 โดยสามารถใช้ BibTeX นี้:
 

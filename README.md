@@ -92,7 +92,7 @@ For dependency details, look at the `extras` variable in [`setup.py`](https://gi
 - Some additional data, like word lists and language models, may be automatically downloaded during runtime.
 - PyThaiNLP caches these data under the directory `~/pythainlp-data` by default.
 - The data directory can be changed by specifying the environment variable `PYTHAINLP_DATA_DIR`.
-- See the data catalog (`db.json`) at https://github.com/PyThaiNLP/pythainlp-corpus
+- See the data catalog (`db.json`) at <https://github.com/PyThaiNLP/pythainlp-corpus>
 
 ## Command-Line Interface
 
@@ -132,11 +132,11 @@ You can read [INTHEWILD.md](https://github.com/PyThaiNLP/pythainlp/blob/dev/INTH
 
 If you use `PyThaiNLP` in your project or publication, please cite the library as follows:
 
-Wannaphong Phatthiyaphaibun, Korakot Chaovavanich, Charin Polpanumas, Arthit Suriyawongkul, Lalita Lowphansirikul, & Pattarawat Chormai. (2016, Jun 27). PyThaiNLP: Thai Natural Language Processing in Python. Zenodo. http://doi.org/10.5281/zenodo.3519354
+> Wannaphong Phatthiyaphaibun, Korakot Chaovavanich, Charin Polpanumas, Arthit Suriyawongkul, Lalita Lowphansirikul, & Pattarawat Chormai. (2016, Jun 27). PyThaiNLP: Thai Natural Language Processing in Python. Zenodo. <http://doi.org/10.5281/zenodo.3519354>
 
 or by BibTeX entry:
 
-``` bib
+```bib
 @misc{pythainlp,
     title = "{P}y{T}hai{NLP}: {T}hai Natural Language Processing in {P}ython",
     author = "Phatthiyaphaibun, Wannaphong  and
@@ -155,7 +155,7 @@ or by BibTeX entry:
 
 Our [NLP-OSS 2023](https://nlposs.github.io/2023/) paper:
 
-Wannaphong Phatthiyaphaibun, Korakot Chaovavanich, Charin Polpanumas, Arthit Suriyawongkul, Lalita Lowphansirikul, Pattarawat Chormai, Peerat Limkonchotiwat, Thanathip Suntorntip, and Can Udomcharoenchaikit. 2023. [PyThaiNLP: Thai Natural Language Processing in Python.](https://aclanthology.org/2023.nlposs-1.4) In Proceedings of the 3rd Workshop for Natural Language Processing Open Source Software (NLP-OSS 2023), pages 25–36, Singapore, Singapore. Empirical Methods in Natural Language Processing.
+> Wannaphong Phatthiyaphaibun, Korakot Chaovavanich, Charin Polpanumas, Arthit Suriyawongkul, Lalita Lowphansirikul, Pattarawat Chormai, Peerat Limkonchotiwat, Thanathip Suntorntip, and Can Udomcharoenchaikit. 2023. [PyThaiNLP: Thai Natural Language Processing in Python.](https://aclanthology.org/2023.nlposs-1.4) In Proceedings of the 3rd Workshop for Natural Language Processing Open Source Software (NLP-OSS 2023), pages 25–36, Singapore, Singapore. Empirical Methods in Natural Language Processing.
 
 and its BibTeX entry:
 
