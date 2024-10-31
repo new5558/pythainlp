@@ -11,7 +11,7 @@ from pythainlp.soundex import (
     soundex,
     udom83,
 )
-from pythainlp.soundex.sound import word_approximation, audio_vector
+from pythainlp.soundex.sound import audio_vector, word_approximation
 
 
 class TestSoundexPackage(unittest.TestCase):

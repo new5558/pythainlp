@@ -4,7 +4,7 @@
 
 import unittest
 
-from pythainlp.generate import Unigram, Bigram, Trigram
+from pythainlp.generate import Bigram, Trigram, Unigram
 from pythainlp.generate.thai2fit import gen_sentence
 
 

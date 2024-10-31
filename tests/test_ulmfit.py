@@ -3,13 +3,14 @@
 import pickle
 import unittest
 
-import pandas as pd
-import torch
-
 # fastai
 import fastai
+import pandas as pd
+import torch
 from fastai.text import *
+
 from pythainlp.tokenize import THAI2FIT_TOKENIZER
+from pythainlp.ulmfit import *
 from pythainlp.ulmfit import (
     THWIKI_LSTM,
     ThaiTokenizer,
@@ -37,9 +38,6 @@ from pythainlp.ulmfit.preprocess import (
     ungroup_emoji,
 )
 from pythainlp.ulmfit.tokenizer import BaseTokenizer as base_tokenizer
-
-# pythainlp
-from pythainlp.ulmfit import *
 
 
 class TestUlmfitPackage(unittest.TestCase):

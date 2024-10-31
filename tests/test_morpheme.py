@@ -3,7 +3,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import unittest
-from pythainlp.morpheme import nighit, is_native_thai
+
+from pythainlp.morpheme import is_native_thai, nighit
 
 
 class TestMorphemePackage(unittest.TestCase):

@@ -3,12 +3,13 @@
 import unittest
 
 import torch
-from pythainlp.transliterate import romanize, transliterate, pronunciate, puan
+
+from pythainlp.corpus import remove
+from pythainlp.transliterate import pronunciate, puan, romanize, transliterate
 from pythainlp.transliterate.ipa import trans_list, xsampa_list
 from pythainlp.transliterate.thai2rom import ThaiTransliterator
 from pythainlp.transliterate.thai2rom_onnx import ThaiTransliterator_ONNX
 from pythainlp.transliterate.wunsen import WunsenTransliterate
-from pythainlp.corpus import remove
 
 _BASIC_TESTS = {
     None: "",
