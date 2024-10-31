@@ -47,6 +47,7 @@ jobs:
       shell: powershell
       run: |
         python -m pip install "https://github.com/cgohlke/pyicu-build/releases/download/v2.14/PyICU-2.14-cp310-cp310-win_amd64.whl"
+      # if needed, get pip wheel link from https://github.com/cgohlke/pyicu-build/releases
     - name: Install PyTorch
       shell: powershell
       run: python -m pip install torch
