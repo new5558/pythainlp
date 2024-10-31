@@ -475,10 +475,10 @@ def sent_tokenize(
         segments = re.split(r" +", original_text, flags=re.U)
         if is_list_input:
             result = []
-            _temp = []
+            _temp: list[str] = []
             for i, w in enumerate(text):
                 if re.findall(r" ", w) != [] and re.findall(r"\w", w) == []:
-                    if _temp == []:
+                    if not _temp:
                         continue
                     result.append(_temp)
                     _temp = []
@@ -496,7 +496,7 @@ def sent_tokenize(
                 if (
                     re.findall(r"\s", w) != [] or re.findall(r"\n", w) != []
                 ) and re.findall(r"\w", w) == []:
-                    if _temp == []:
+                    if not _temp:
                         continue
                     result.append(_temp)
                     _temp = []
