@@ -100,17 +100,10 @@ from pythainlp.util.normalize import (
 )
 from pythainlp.util.numtoword import bahttext, num_to_thaiword
 from pythainlp.util.phoneme import ipa_to_rtgs, nectec_to_ipa, remove_tone_ipa
-from pythainlp.util.pronounce import rhyme
 from pythainlp.util.remove_trailing_repeat_consonants import (
     remove_trailing_repeat_consonants,
 )
 from pythainlp.util.strftime import thai_strftime
-from pythainlp.util.syllable import (
-    sound_syllable,
-    syllable_length,
-    syllable_open_close_detector,
-    tone_detector,
-)
 from pythainlp.util.thai import (
     count_thai_chars,
     countthai,
@@ -123,3 +116,12 @@ from pythainlp.util.thaiwordcheck import is_native_thai
 from pythainlp.util.time import thaiword_to_time, time_to_thaiword
 from pythainlp.util.trie import Trie, dict_trie
 from pythainlp.util.wordtonum import text_to_num, thaiword_to_num, words_to_num
+
+# syllable and pronounce have to be imported last
+from pythainlp.util.syllable import (
+    sound_syllable,
+    syllable_length,
+    syllable_open_close_detector,
+    tone_detector,
+)
+from pythainlp.util.pronounce import rhyme

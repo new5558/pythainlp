@@ -14,8 +14,7 @@ __all__ = [
     "spell_sent",
 ]
 
+from pythainlp.spell.core import correct, correct_sent, spell, spell_sent
 from pythainlp.spell.pn import NorvigSpellChecker
 
 DEFAULT_SPELL_CHECKER = NorvigSpellChecker()
-
-from pythainlp.spell.core import correct, correct_sent, spell, spell_sent
