@@ -1,4 +1,4 @@
-name: Unit test and code coverage (Windows)
+name: Unit test and code coverage
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["windows-latest"]
+        os: ["macos-latest", "ubuntu-latest", "windows-latest"]
         python-version: ["3.10"]
 
     runs-on: ${{ matrix.os }}
@@ -34,12 +34,22 @@ jobs:
       run: |
         python -m pip install --upgrade "pip<24.1" "setuptools==73.0.1"
         python -m pip install coverage coveralls
-    - name: Install ICU
+    - name: Install ICU (macOS)
+      if: startsWith(matrix.os, 'macos-')
+      run: |
+        brew install icu4c
+        PKG_CONFIG_PATH=$(brew --prefix)/opt/icu4c/lib/pkgconfig
+        echo "PKG_CONFIG_PATH=${PKG_CONFIG_PATH}" >> "${GITHUB_ENV}"
+        ICU_VER=$(pkg-config --modversion icu-i18n)
+        echo "ICU_VER=${ICU_VER}"
+        echo "ICU_VER=${ICU_VER}" >> "${GITHUB_ENV}"
+    - name: Install ICU (Windows)
+      if: startsWith(matrix.os, 'windows-')
       run: |
         python -m pip install "https://github.com/cgohlke/pyicu-build/releases/download/v2.14/PyICU-2.14-cp310-cp310-win_amd64.whl"
       # if needed, get pip wheel link from https://github.com/cgohlke/pyicu-build/releases
     - name: Install PyTorch
-      run: python -m pip install torch
+      run: pip install torch
       # if needed, get pip wheel link from http://download.pytorch.org/whl/torch/
     # - name: Install dependencies
     #   env:
