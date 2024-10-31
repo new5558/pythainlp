@@ -29,6 +29,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: "pip"
     - name: Print system info
       run: sw_vers; python --version; arch
     - name: Install build tools
