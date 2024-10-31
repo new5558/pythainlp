@@ -4,6 +4,7 @@
 """
 Text normalization
 """
+
 import re
 from typing import List, Union
 
@@ -75,7 +76,7 @@ def remove_dangling(text: str) -> str:
 
         from pythainlp.util import remove_dangling
 
-        remove_dangling('๊ก')
+        remove_dangling("๊ก")
         # output: 'ก'
     """
     return _RE_REMOVE_DANGLINGS.sub("", text)
@@ -97,7 +98,7 @@ def remove_dup_spaces(text: str) -> str:
 
         from pythainlp.util import remove_dup_spaces
 
-        remove_dup_spaces('ก    ข    ค')
+        remove_dup_spaces("ก    ข    ค")
         # output: 'ก ข ค'
     """
     while "  " in text:
@@ -131,7 +132,7 @@ def remove_tonemark(text: str) -> str:
 
         from pythainlp.util import remove_tonemark
 
-        remove_tonemark('สองพันหนึ่งร้อยสี่สิบเจ็ดล้านสี่แสนแปดหมื่นสามพันหกร้อยสี่สิบเจ็ด')
+        remove_tonemark("สองพันหนึ่งร้อยสี่สิบเจ็ดล้านสี่แสนแปดหมื่นสามพันหกร้อยสี่สิบเจ็ด")
         # output: สองพันหนึงรอยสีสิบเจ็ดลานสีแสนแปดหมืนสามพันหกรอยสีสิบเจ็ด
     """
     for ch in tonemarks:
@@ -234,10 +235,10 @@ def normalize(text: str) -> str:
 
         from pythainlp.util import normalize
 
-        normalize('เเปลก')  # starts with two Sara E
+        normalize("เเปลก")  # starts with two Sara E
         # output: แปลก
 
-        normalize('นานาาา')
+        normalize("นานาาา")
         # output: นานา
     """
     text = remove_zw(text)
@@ -267,7 +268,7 @@ def maiyamok(sent: Union[str, List[str]]) -> List[str]:
         maiyamok("เด็กๆชอบไปโรงเรียน")
         # output: ['เด็ก', 'เด็ก', 'ชอบ', 'ไป', 'โรงเรียน']
 
-        maiyamok(["ทำไม","คน","ดี"," ","ๆ","ๆ"," ","ถึง","ทำ","ไม่ได้"])
+        maiyamok(["ทำไม", "คน", "ดี", " ", "ๆ", "ๆ", " ", "ถึง", "ทำ", "ไม่ได้"])
         # output: ['ทำไม', 'คน', 'ดี', 'ดี', 'ดี', ' ', 'ถึง', 'ทำ', 'ไม่ได้']
     """
     if isinstance(sent, str):
