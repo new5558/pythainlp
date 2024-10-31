@@ -32,7 +32,7 @@ jobs:
     - name: Install build tools
       run: |
         python -m pip install --upgrade "pip<24.1" "setuptools==73.0.1"
-        python -m pip install coverage coveralls pytest
+        python -m pip install coverage coveralls
     - name: Install PyTorch
       run: python -m pip install torch
       # if needed, get pip wheel link from http://download.pytorch.org/whl/torch/
@@ -43,12 +43,12 @@ jobs:
     #     python -m pip install -r docker_requirements.txt
     - name: Install PyThaiNLP
       run: |
-        python -m pip install .
+        python -m pip install .[icu,ipa,wordnet]
     - name: Test
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_SERVICE_NAME: github
       run: |
         python -c "import nltk; nltk.download('omw-1.4')"
+        coverage run -m unittest discover
         coveralls
-#        coverage run -m unittest discover
