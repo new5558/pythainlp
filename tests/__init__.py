@@ -19,7 +19,7 @@ test_packages = [
 ]
 
 
-def load_tests(loader: TestLoader, tests, pattern: str) -> TestSuite:
+def load_tests(loader: TestLoader, tests, pattern) -> TestSuite:
     """A function to load tests."""
     suite = TestSuite()
     for test_package in test_packages:
