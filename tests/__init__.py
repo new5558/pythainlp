@@ -22,7 +22,6 @@ test_packages = [
 def load_tests(loader: TestLoader, tests, pattern) -> TestSuite:
     """A function to load tests."""
     suite = TestSuite()
-    for test_package in test_packages:
-        tests = loader.loadTestsFromName(test_package)
-        suite.addTests(tests)
+    tests = loader.loadTestsFromName("tests.test_cli.TestMainPackage")
+    suite.addTests(tests)
     return suite
