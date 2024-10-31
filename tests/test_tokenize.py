@@ -214,7 +214,7 @@ class TestTokenizePackage(unittest.TestCase):
         _tokenizer = Tokenizer()
         self.assertEqual(_tokenizer.word_tokenize("ก"), ["ก"])
         with self.assertRaises(NotImplementedError):
-            Tokenizer(engine="catcut")
+            Tokenizer(engine="catcut888")
 
     def test_sent_tokenize(self):
         self.assertEqual(sent_tokenize(None), [])
