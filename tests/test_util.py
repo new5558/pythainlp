@@ -5,6 +5,7 @@
 """
 Unit tests for pythainlp.util module.
 """
+
 import os
 import unittest
 from collections import Counter
@@ -541,8 +542,8 @@ class TestUtilPackage(unittest.TestCase):
         )
         self.assertEqual(
             maiyamok("เด็กๆๆชอบไปโรงเรียน"),
-            ['เด็ก', 'เด็ก', 'เด็ก', 'ชอบ', 'ไป', 'โรงเรียน'],
-        ) # 914
+            ["เด็ก", "เด็ก", "เด็ก", "ชอบ", "ไป", "โรงเรียน"],
+        )  # 914
         self.assertEqual(
             maiyamok(
                 ["ทำไม", "คน", "ดี", " ", "ๆ", "ๆ", " ", "ถึง", "ทำ", "ไม่ได้"]
@@ -745,12 +746,6 @@ class TestUtilPackage(unittest.TestCase):
     def test_to_idna(self):
         self.assertEqual(to_idna("คนละครึ่ง.com"), "xn--42caj4e6bk1f5b1j.com")
 
-    def test_thai_word_tone_detector(self):
-        self.assertIsNotNone(thai_word_tone_detector("คนดี"))
-        self.assertEqual(
-            thai_word_tone_detector("ราคา"), [("รา", "m"), ("คา", "m")]
-        )
-
     def test_thai_strptime(self):
         self.assertIsNotNone(
             thai_strptime(
@@ -858,3 +853,12 @@ class TestUtilPackage(unittest.TestCase):
 
     # def test_abbreviation_to_full_text(self):
     #     self.assertIsInstance(abbreviation_to_full_text("รร.ของเราน่าอยู่", list))
+
+
+# for functions that need extra imports
+class TestUtilPackageX(unittest.TestCase):
+    def test_thai_word_tone_detector(self):
+        self.assertIsNotNone(thai_word_tone_detector("คนดี"))
+        self.assertEqual(
+            thai_word_tone_detector("ราคา"), [("รา", "m"), ("คา", "m")]
+        )
