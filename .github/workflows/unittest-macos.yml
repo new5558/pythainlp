@@ -29,12 +29,13 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: "pip"
     - name: Print system info
       run: sw_vers; python --version; arch
     - name: Install build tools
       run: |
         python -m pip install --upgrade "pip<24.1" "setuptools==73.0.1"
-        python -m pip install coverage coveralls pytest
+        python -m pip install coverage coveralls
     - name: Install ICU
       run: |
         brew install icu4c
@@ -59,6 +60,5 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_SERVICE_NAME: github
       run: |
-        python -c "import nltk; nltk.download('omw-1.4')"
         coveralls
 #        coverage run -m unittest discover
