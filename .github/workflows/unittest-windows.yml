@@ -68,6 +68,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_SERVICE_NAME: github
       run: |
-        python -m nltk.downloader omw-1.4
+        python -c "import nltk; nltk.download('omw-1.4')"
         coveralls
 #        coverage run -m unittest discover
