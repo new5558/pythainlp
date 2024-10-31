@@ -3,7 +3,9 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import unittest
+
 import numpy as np
+
 from pythainlp.tools.misspell import misspell
 
 

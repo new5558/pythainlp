@@ -4,7 +4,7 @@
 
 import unittest
 
-from pythainlp.summarize import summarize, extract_keywords
+from pythainlp.summarize import extract_keywords, summarize
 
 
 class TestSummarizePackage(unittest.TestCase):

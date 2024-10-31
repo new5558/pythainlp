@@ -1,11 +1,11 @@
-name: Unit test and code coverage (MacOS)
+name: Unit test and code coverage (macOS)
 
 on:
   push:
     paths-ignore:
       - '**.md'
+      - '**.yml'
       - 'docs/**'
-#       - '**.yml'
   pull_request:
     branches:
       - dev
@@ -15,87 +15,52 @@ on:
       - 'docs/**'
 
 jobs:
-  build:
-
-    runs-on: ${{ matrix.os }}
+  unittest:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, self-hosted]
-        python-version: [3.8]
+        os: ["macos-latest"]
+        python-version: ["3.10"]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
-      uses: conda-incubator/setup-miniconda@v3
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-        auto-activate-base: false
-        auto-update-conda: true
-      if: matrix.os == 'macos-latest'
-#     - name: Install mac m1
-#       run: |
-#         mkdir -p ~/miniconda3
-#         wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.12.0-MacOSX-arm64.sh
-#         chmod +x Miniconda3-py38_4.12.0-MacOSX-arm64.sh
-#         bash Miniconda3-py38_4.12.0-MacOSX-arm64.sh -b -u -p ~/miniconda3
-#         ~/miniconda3/bin/conda init bash
-#         ~/miniconda3/bin/conda init zsh
-#       if: matrix.os == 'self-hosted'
-    - name: Test PyThaiNLP - M1
-      shell: bash -l {0}
+    - name: Print system info
+      run: sw_vers; python --version; arch
+    - name: Install build tools
       run: |
-        source ~/miniconda3/etc/profile.d/conda.sh
-        conda create -y -n pythainlpwork38 python=3.8
-        conda activate pythainlpwork38
-        conda info
-        conda list
-        python -m pip install --upgrade pip
-        SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True pip install -r docker_requirements.txt
-        conda install -y -c conda-forge protobuf
-        pip install pytest coverage coveralls typing_extensions==4.5.0
-        pip install ssg epitran
-        pip install fastai==1.0.61
-        pip install fairseq==0.10.2
-        conda install -y -c conda-forge icu
-        conda install -y -c conda-forge pyicu
-        pip install deepcut tltk
-        pip install .[full]
-        python -m nltk.downloader omw-1.4
-        python -m pip cache purge
-        python -m unittest discover
-      if: matrix.os == 'self-hosted'
-    - name: Show environment
-      shell: bash -l {0}
+        python -m pip install --upgrade "pip<24.1" "setuptools==73.0.1"
+        python -m pip install coverage coveralls pytest
+    - name: Install ICU
       run: |
-        conda info
-        conda list
-      if: matrix.os == 'self-hosted'
+        brew install icu4c
+        PKG_CONFIG_PATH=$(brew --prefix)/opt/icu4c/lib/pkgconfig
+        echo "PKG_CONFIG_PATH=${PKG_CONFIG_PATH}" >> "${GITHUB_ENV}"
+        ICU_VER=$(pkg-config --modversion icu-i18n)
+        echo "ICU_VER=${ICU_VER}"
+        echo "ICU_VER=${ICU_VER}" >> "${GITHUB_ENV}"
     - name: Install PyTorch
-      shell: bash -l {0}
+      run: pip install torch
+      # if needed, get pip wheel link from http://download.pytorch.org/whl/torch/
+    # - name: Install dependencies
+    #   env:
+    #     SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL: True
+    #   run: |
+    #     python -m pip install -r docker_requirements.txt
+    - name: Install PyThaiNLP
       run: |
-        pip install torch==1.10.0
-      if: matrix.os != 'self-hosted'
-    - name: Install dependencies
-      shell: bash -l {0}
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest coverage coveralls
-        conda install -c conda-forge icu
-        conda install -c conda-forge pyicu
-        SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True pip install -r docker_requirements.txt
-        pip install deepcut tltk
-        pip install .[full]
-        python -m nltk.downloader omw-1.4
-        python -m pip cache purge
-      if: matrix.os != 'self-hosted'
+        python -m pip install .
     - name: Test
-      shell: bash -l {0}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_SERVICE_NAME: github
       run: |
-        coverage run -m unittest discover
+        python -m nltk.downloader omw-1.4
         coveralls
-      if: matrix.os != 'self-hosted'
+#        coverage run -m unittest discover

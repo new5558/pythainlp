@@ -6,6 +6,7 @@ import unittest
 
 import numpy as np
 import yaml
+
 from pythainlp.benchmarks import word_tokenization
 
 with open("./tests/data/sentences.yml", "r", encoding="utf8") as stream:

@@ -3,15 +3,16 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import unittest
+
 import nltk
+
 from pythainlp.augment import WordNetAug
-from pythainlp.augment.wordnet import postype2wordnet
+
 # from pythainlp.augment.lm import Thai2transformersAug
 # from pythainlp.augment.lm.phayathaibert import ThaiTextAugmenter
+from pythainlp.augment.word2vec import LTW2VAug
 from pythainlp.augment.word2vec.bpemb_wv import BPEmbAug
-from pythainlp.augment.word2vec import (
-    LTW2VAug
-)
+from pythainlp.augment.wordnet import postype2wordnet
 
 
 class TestTextaugmentPackage(unittest.TestCase):

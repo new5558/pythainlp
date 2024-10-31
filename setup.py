@@ -6,9 +6,10 @@ Setup script for PyThaiNLP.
 
 https://github.com/PyThaiNLP/pythainlp
 """
+
 from setuptools import find_packages, setup
 
-readme = """
+LONG_DESC = """
 ![PyThaiNLP Logo](https://avatars0.githubusercontent.com/u/32934255?s=200&v=4)
 
 PyThaiNLP is a Python library for Thai natural language processing.
@@ -37,8 +38,9 @@ See https://github.com/PyThaiNLP/pythainlp for installation options.
 """
 
 requirements = [
-    "requests>=2.22.0",
     "backports.zoneinfo; python_version<'3.9'",
+    "nltk>=3.3",
+    "requests>=2.22.0",
     "tzdata; sys_platform == 'win32'"
 ]
 
@@ -59,31 +61,17 @@ extras = {
         "transformers>=4.6.0",
     ],
     "wunsen": ["wunsen>=0.0.1"],
-    "textaugment": [
-        "bpemb",
-        "gensim>=4.0.0"
-    ],
-    "wangchanberta": [
-        "transformers>=4.6.0",
-        "sentencepiece>=0.1.91"
-    ],
-    "mt5": ["transformers>=4.6.0", "sentencepiece>=0.1.91"],
+    "textaugment": ["bpemb", "gensim>=4.0.0"],
+    "wangchanberta": ["sentencepiece>=0.1.91", "transformers>=4.6.0"],
+    "mt5": ["sentencepiece>=0.1.91", "transformers>=4.6.0"],
     "wtp": ["transformers>=4.6.0", "wtpsplit>=1.0.1"],
     "wordnet": ["nltk>=3.3"],
     "generate": ["fastai<2.0"],
     "sefr_cut": ["sefr_cut>=1.1"],
-    "spell": [
-        "phunspell>=0.1.6",
-        "spylls>=0.1.5",
-        "symspellpy>=6.7.6"
-    ],
+    "spell": ["phunspell>=0.1.6", "spylls>=0.1.5", "symspellpy>=6.7.6"],
     "oskut": ["oskut>=1.3"],
     "nlpo3": ["nlpo3>=1.2.2"],
-    "onnx": [
-        "sentencepiece>=0.1.91",
-        "numpy>=1.22",
-        "onnxruntime>=1.10.0"
-    ],
+    "onnx": ["numpy>=1.22", "onnxruntime>=1.10.0", "sentencepiece>=0.1.91"],
     "thai_nner": ["thai_nner"],
     "esupar": [
         "esupar>=1.3.8",
@@ -92,70 +80,62 @@ extras = {
     ],
     "spacy_thai": ["spacy_thai>=0.7.1"],
     "transformers_ud": [
-        "ufal.chu-liu-edmonds>=1.0.2",
         "transformers>=4.22.1",
+        "ufal.chu-liu-edmonds>=1.0.2",
     ],
     "dependency_parsing": [
         "spacy_thai>=0.7.1",
-        "ufal.chu-liu-edmonds>=1.0.2",
         "transformers>=4.22.1",
+        "ufal.chu-liu-edmonds>=1.0.2",
     ],
-    "coreference_resolution":{
-        "spacy>=3.0",
+    "coreference_resolution": [
         "fastcoref>=2.1.5",
-    },
-    "word_approximation":{
-        "panphon>=0.20.0"
-    },
-    "wangchanglm": [
-        "transformers>=4.6.0",
-        "sentencepiece>=0.1.91",
-        "pandas>=0.24"
+        "spacy>=3.0",
     ],
-    "wsd":{
-        "sentence-transformers>=2.2.2"
-    },
-    "el":{
-        "multiel>=0.5"
-    },
-    "abbreviation":{
-        "khamyo>=0.2.0"
-    },
+    "word_approximation": ["panphon>=0.20.0"],
+    "wangchanglm": [
+        "pandas>=0.24",
+        "sentencepiece>=0.1.91",
+        "transformers>=4.6.0",
+    ],
+    "wsd": ["sentence-transformers>=2.2.2"],
+    "el": ["multiel>=0.5"],
+    "abbreviation": ["khamyo>=0.2.0"],
     "full": [
         "PyYAML>=5.3.1",
         "attacut>=1.0.4",
+        "bpemb>=0.3.2",
         "emoji>=0.5.1",
         "epitran>=1.1",
         "fairseq>=0.10.0",
+        "fastai<2.0",
+        "fastcoref>=2.1.5",
         "gensim>=4.0.0",
+        "khamyo>=0.2.0",
+        "nlpo3>=1.2.2",
         "nltk>=3.3",
         "numpy>=1.22",
+        "onnxruntime>=1.10.0",
+        "oskut>=1.3",
         "pandas>=0.24",
+        "panphon>=0.20.0",
+        "phunspell>=0.1.6",
         "pyicu>=2.3",
         "sacremoses>=0.0.41",
-        "sentencepiece>=0.1.91",
-        "ssg>=0.0.8",
-        "torch>=1.0.0",
-        "fastai<2.0",
-        "bpemb>=0.3.2",
-        "transformers>=4.22.1",
         "sefr_cut>=1.1",
-        "phunspell>=0.1.6",
-        "spylls>=0.1.5",
-        "symspellpy>=6.7.6",
-        "oskut>=1.3",
-        "nlpo3>=1.2.2",
-        "onnxruntime>=1.10.0",
-        "thai_nner",
-        "wunsen>=0.0.3",
-        "wtpsplit>=1.0.1",
-        "spacy_thai>=0.7.1",
-        "spacy>=3.0",
-        "fastcoref>=2.1.5",
-        "ufal.chu-liu-edmonds>=1.0.2",
-        "panphon>=0.20.0",
+        "sentencepiece>=0.1.91",
         "sentence-transformers>=2.2.2",
-        "khamyo>=0.2.0",
+        "spacy>=3.0",
+        "spacy_thai>=0.7.1",
+        "spylls>=0.1.5",
+        "ssg>=0.0.8",
+        "symspellpy>=6.7.6",
+        "thai_nner",
+        "torch>=1.0.0",
+        "transformers>=4.22.1",
+        "ufal.chu-liu-edmonds>=1.0.2",
+        "wtpsplit>=1.0.1",
+        "wunsen>=0.0.3",
     ],
 }
 
@@ -163,7 +143,7 @@ setup(
     name="pythainlp",
     version="5.0.4",
     description="Thai Natural Language Processing library",
-    long_description=readme,
+    long_description=LONG_DESC,
     long_description_content_type="text/markdown",
     author="PyThaiNLP",
     author_email="email@wannaphong.com",
@@ -179,7 +159,7 @@ setup(
     include_package_data=True,
     install_requires=requirements,
     extras_require=extras,
-    license="Apache Software License 2.0",
+    license="Apache-2.0",
     zip_safe=False,
     keywords=[
         "pythainlp",
