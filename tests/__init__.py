@@ -11,10 +11,16 @@ import sys
 from unittest import TestLoader, TestSuite, TextTestRunner
 
 
-def load_tests(loader: TestLoader, tests, pattern) -> TestSuite:
+test_packages = [
+    "tests.test_spell.TestSpellPackage",
+    "tests.test_tokenize.TestTokenizePackage",
+    "tests.test_util.TestUtilPackage",
+]
+
+def load_tests(loader: TestLoader, tests, pattern: str) -> TestSuite:
+    """A function to load tests."""
     suite = TestSuite()
-    tests = loader.loadTestsFromName("tests.test_util.TestUtilPackage")
-    suite.addTests(tests)
-    tests = loader.loadTestsFromName("tests.test_tokenize.TestTokenizePackage")
-    suite.addTests(tests)
+    for test_package in test_packages:
+        tests = loader.loadTestsFromName(test_package)
+        suite.addTests(tests)
     return suite

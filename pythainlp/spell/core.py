@@ -129,7 +129,7 @@ def correct(word: str, engine: str = "pn") -> str:
     return text_correct
 
 
-def spell_sent(list_words: List[str], engine: str = "pn") -> List[List[str]]:
+def SENT_TOKS(list_words: List[str], engine: str = "pn") -> List[List[str]]:
     """
     Provides a list of possible correct spellings of sentence
 
@@ -188,4 +188,4 @@ def correct_sent(list_words: List[str], engine: str = "pn") -> List[str]:
         correct_sent(["เด็","อินอร์เน็ต","แรง"],engine='symspellpy')
         # output: ['เด็ก', 'อินเทอร์เน็ต', 'แรง']
     """
-    return spell_sent(list_words, engine=engine)[0]
+    return SENT_TOKS(list_words, engine=engine)[0]
