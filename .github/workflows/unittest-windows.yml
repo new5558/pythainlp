@@ -50,8 +50,7 @@ jobs:
     - name: Install PyTorch
       shell: powershell
       run: python -m pip install torch
-      # python -m pip install http://download.pytorch.org/whl/cpu/torch-2.5.1%2Bcpu-cp39-cp39-win_amd64.whl
-      # get pip wheel link from http://download.pytorch.org/whl/torch/
+      # if needed, get pip wheel link from http://download.pytorch.org/whl/torch/
     # - name: Install dependencies
     #   shell: powershell
     #   env:

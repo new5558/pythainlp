@@ -36,10 +36,8 @@ jobs:
         python -m pip install --upgrade "pip<24.1" setuptools
         python -m pip install coverage coveralls pytest
     - name: Install PyTorch
-      run: |
-        python -m pip install torch
-    #    python -m pip install http://download.pytorch.org/whl/cpu/torch-2.5.1%2Bcpu-cp39-cp39-linux_x86_64.whl
-    # get pip wheel link from http://download.pytorch.org/whl/torch/
+      run: python -m pip install torch
+      # if needed, get pip wheel link from http://download.pytorch.org/whl/torch/
     # - name: Install dependencies
     #   env:
     #     SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL: True
