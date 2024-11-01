@@ -22,9 +22,9 @@ __all__ = [
     "thaiword_to_date",
 ]
 
+import re
 from datetime import datetime, timedelta
 from typing import Union
-import re
 
 try:
     from zoneinfo import ZoneInfo

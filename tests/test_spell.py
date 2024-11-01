@@ -10,11 +10,12 @@ from pythainlp.spell import (
     correct_sent,
     spell,
     spell_sent,
-    symspellpy,
 )
 
+SENT_TOKS = ["เด็", "อินอร์เน็ต", "แรง"]
 
-class TestSpellPackage(unittest.TestCase):
+
+class SpellTestCase(unittest.TestCase):
     def test_spell(self):
         self.assertEqual(spell(None), [""])
         self.assertEqual(spell(""), [""])
@@ -27,30 +28,6 @@ class TestSpellPackage(unittest.TestCase):
         self.assertIsInstance(result, list)
         self.assertGreater(len(result), 0)
 
-        result = spell("เน้ร", engine="phunspell")
-        self.assertIsInstance(result, list)
-        self.assertGreater(len(result), 0)
-
-        result = spell("เกสมร์", engine="phunspell")
-        self.assertIsInstance(result, list)
-        self.assertGreater(len(result), 0)
-
-        result = spell("เน้ร", engine="symspellpy")
-        self.assertIsInstance(result, list)
-        self.assertGreater(len(result), 0)
-
-        result = spell("เกสมร์", engine="symspellpy")
-        self.assertIsInstance(result, list)
-        self.assertGreater(len(result), 0)
-
-        result = spell("เน้ร", engine="tltk")
-        self.assertIsInstance(result, list)
-        self.assertGreater(len(result), 0)
-
-        result = spell("เดก", engine="tltk")
-        self.assertIsInstance(result, list)
-        self.assertGreater(len(result), 0)
-
     def test_word_correct(self):
         self.assertEqual(correct(None), "")
         self.assertEqual(correct(""), "")
@@ -60,18 +37,6 @@ class TestSpellPackage(unittest.TestCase):
         self.assertEqual(correct("1.01"), "1.01")
 
         result = correct("ทดสอง")
-        self.assertIsInstance(result, str)
-        self.assertNotEqual(result, "")
-
-        result = correct("ทดสอง", engine="phunspell")
-        self.assertIsInstance(result, str)
-        self.assertNotEqual(result, "")
-
-        result = correct("ทดสอง", engine="symspellpy")
-        self.assertIsInstance(result, str)
-        self.assertNotEqual(result, "")
-
-        result = correct("ทดสอง", engine="wanchanberta_thai_grammarly")
         self.assertIsInstance(result, str)
         self.assertNotEqual(result, "")
 
@@ -124,21 +89,9 @@ class TestSpellPackage(unittest.TestCase):
             checker = NorvigSpellChecker(custom_dict=user_dict)
 
     def test_spell_sent(self):
-        self.spell_sent = ["เด็", "อินอร์เน็ต", "แรง"]
-        self.assertIsNotNone(spell_sent(self.spell_sent))
-        self.assertIsNotNone(spell_sent(self.spell_sent, engine="pn"))
-        self.assertIsNotNone(spell_sent(self.spell_sent, engine="phunspell"))
-        self.assertIsNotNone(spell_sent(self.spell_sent, engine="symspellpy"))
+        self.assertIsNotNone(spell_sent(SENT_TOKS))
+        self.assertIsNotNone(spell_sent(SENT_TOKS, engine="pn"))
 
     def test_correct_sent(self):
-        self.spell_sent = ["เด็", "อินอร์เน็ต", "แรง"]
-        self.assertIsNotNone(correct_sent(self.spell_sent))
-        self.assertIsNotNone(correct_sent(self.spell_sent, engine="pn"))
-        self.assertIsNotNone(correct_sent(self.spell_sent, engine="phunspell"))
-        self.assertIsNotNone(
-            correct_sent(self.spell_sent, engine="symspellpy")
-        )
-        self.assertIsNotNone(
-            correct_sent(self.spell_sent, engine="wanchanberta_thai_grammarly")
-        )
-        self.assertIsNotNone(symspellpy.correct_sent(self.spell_sent))
+        self.assertIsNotNone(correct_sent(SENT_TOKS))
+        self.assertIsNotNone(correct_sent(SENT_TOKS, engine="pn"))

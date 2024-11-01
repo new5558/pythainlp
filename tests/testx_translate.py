@@ -10,7 +10,7 @@ from pythainlp.translate.en_th import (
 )
 
 
-class TestTranslatePackage(unittest.TestCase):
+class TranslateTestCaseX(unittest.TestCase):
     def test_translate(self):
         # remove("scb_1m_th-en_spm")
         self.assertIsNone(download_model_all())

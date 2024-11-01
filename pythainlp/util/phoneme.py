@@ -5,8 +5,9 @@
 Phonemes util
 """
 import unicodedata
-from pythainlp.util.trie import Trie
+
 from pythainlp.tokenize import Tokenizer
+from pythainlp.util.trie import Trie
 
 consonants_ipa_nectec = [
     ("k", "k", "k^"),

@@ -21,7 +21,7 @@ from pythainlp.tag import (
 from pythainlp.tag.thainer import ThaiNameTagger
 
 
-class TestTagPackage(unittest.TestCase):
+class TagTestCase(unittest.TestCase):
     # ### pythainlp.tag.PerceptronTagger
 
     def test_chunk_parse(self):

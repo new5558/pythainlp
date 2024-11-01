@@ -9,7 +9,7 @@ from AI builder
 - GitHub: https://github.com/LalitaDeelert/lalita-mt-zhth
 - Facebook post https://web.facebook.com/aibuildersx/posts/166736255494822
 """
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
 
 class ThZhTranslator:

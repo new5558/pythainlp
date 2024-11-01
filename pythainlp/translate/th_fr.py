@@ -12,7 +12,7 @@ BLEU 20.4
 
 - Huggingface https://huggingface.co/Helsinki-NLP/opus-mt-th-fr
 """
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
 
 class ThFrTranslator:

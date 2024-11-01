@@ -5,6 +5,7 @@
 """
 Unit tests for pythainlp.util module.
 """
+
 import os
 import unittest
 from collections import Counter
@@ -14,7 +15,6 @@ from pythainlp.corpus import _CORPUS_PATH, thai_words
 from pythainlp.corpus.common import _THAI_WORDS_FILENAME
 from pythainlp.util import (
     Trie,
-    # abbreviation_to_full_text,
     arabic_digit_to_thai_digit,
     bahttext,
     collate,
@@ -44,7 +44,6 @@ from pythainlp.util import (
     remove_tonemark,
     remove_trailing_repeat_consonants,
     remove_zw,
-    rhyme,
     sound_syllable,
     syllable_length,
     syllable_open_close_detector,
@@ -56,7 +55,6 @@ from pythainlp.util import (
     thai_strftime,
     thai_strptime,
     thai_to_eng,
-    thai_word_tone_detector,
     thaiword_to_date,
     thaiword_to_num,
     thaiword_to_time,
@@ -67,10 +65,9 @@ from pythainlp.util import (
     words_to_num,
 )
 from pythainlp.util.morse import morse_decode, morse_encode
-from pythainlp.util.spell_words import spell_word
 
 
-class TestUtilPackage(unittest.TestCase):
+class UtilTestCase(unittest.TestCase):
     # ### pythainlp.util.collate
 
     def test_collate(self):
@@ -541,8 +538,8 @@ class TestUtilPackage(unittest.TestCase):
         )
         self.assertEqual(
             maiyamok("เด็กๆๆชอบไปโรงเรียน"),
-            ['เด็ก', 'เด็ก', 'เด็ก', 'ชอบ', 'ไป', 'โรงเรียน'],
-        ) # 914
+            ["เด็ก", "เด็ก", "เด็ก", "ชอบ", "ไป", "โรงเรียน"],
+        )  # 914
         self.assertEqual(
             maiyamok(
                 ["ทำไม", "คน", "ดี", " ", "ๆ", "ๆ", " ", "ถึง", "ทำ", "ไม่ได้"]
@@ -745,12 +742,6 @@ class TestUtilPackage(unittest.TestCase):
     def test_to_idna(self):
         self.assertEqual(to_idna("คนละครึ่ง.com"), "xn--42caj4e6bk1f5b1j.com")
 
-    def test_thai_word_tone_detector(self):
-        self.assertIsNotNone(thai_word_tone_detector("คนดี"))
-        self.assertEqual(
-            thai_word_tone_detector("ราคา"), [("รา", "m"), ("คา", "m")]
-        )
-
     def test_thai_strptime(self):
         self.assertIsNotNone(
             thai_strptime(
@@ -812,18 +803,6 @@ class TestUtilPackage(unittest.TestCase):
         self.assertEqual(
             tis620_to_utf8("¡ÃÐ·ÃÇ§ÍØµÊÒË¡ÃÃÁ"), "กระทรวงอุตสาหกรรม"
         )
-
-    def test_spell_word(self):
-        self.assertEqual(spell_word("เสือ"), ["สอ", "เอือ", "เสือ"])
-        self.assertEqual(spell_word("เสื้อ"), ["สอ", "เอือ", "ไม้โท", "เสื้อ"])
-        self.assertEqual(spell_word("คน"), ["คอ", "นอ", "คน"])
-        self.assertEqual(
-            spell_word("คนดี"), ["คอ", "นอ", "คน", "ดอ", "อี", "ดี", "คนดี"]
-        )
-
-    def test_rhyme(self):
-        self.assertIsInstance(rhyme("แมว"), list)
-        self.assertTrue(len(rhyme("แมว")) > 2)
 
     def test_remove_repeat_consonants(self):
         # update of pythainlp.copus.thai_words() able to break this

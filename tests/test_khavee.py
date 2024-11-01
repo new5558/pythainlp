@@ -9,7 +9,7 @@ from pythainlp.khavee import KhaveeVerifier
 kv = KhaveeVerifier()
 
 
-class TestKhaveePackage(unittest.TestCase):
+class KhaveeTestCase(unittest.TestCase):
     def test_check_sara(self):
         self.assertEqual(kv.check_sara("เริง"), "เออ")
 

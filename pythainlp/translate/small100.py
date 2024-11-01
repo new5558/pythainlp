@@ -1,5 +1,7 @@
 from transformers import M2M100ForConditionalGeneration
+
 from .tokenization_small100 import SMALL100Tokenizer
+
 
 class Small100Translator:
     """

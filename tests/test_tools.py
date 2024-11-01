@@ -11,7 +11,7 @@ from pythainlp.tools import (
 )
 
 
-class TestToolsPackage(unittest.TestCase):
+class ToolsTestCase(unittest.TestCase):
     def test_path(self):
         data_filename = "ttc_freq.txt"
         self.assertTrue(

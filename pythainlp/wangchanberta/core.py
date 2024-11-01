@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
-from typing import List, Tuple, Union
 import re
 import warnings
+from typing import List, Tuple, Union
+
 from transformers import (
     CamembertTokenizer,
     pipeline,
 )
+
 from pythainlp.tokenize import word_tokenize
 
 _model_name = "wangchanberta-base-att-spm-uncased"
@@ -140,8 +142,7 @@ class NamedEntityRecognition:
              AI Research Institute of Thailand
         :param str model: The model that use wangchanberta pretrained.
         """
-        from transformers import AutoTokenizer
-        from transformers import AutoModelForTokenClassification
+        from transformers import AutoModelForTokenClassification, AutoTokenizer
 
         self.tokenizer = AutoTokenizer.from_pretrained(model)
         self.model = AutoModelForTokenClassification.from_pretrained(model)

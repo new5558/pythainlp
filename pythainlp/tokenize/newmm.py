@@ -20,9 +20,8 @@ from heapq import heappop, heappush
 from typing import Generator, List
 
 from pythainlp.tokenize import DEFAULT_WORD_DICT_TRIE
-from pythainlp.util import Trie
-
 from pythainlp.tokenize.tcc_p import tcc_pos
+from pythainlp.util import Trie
 
 # match non-Thai tokens
 # `|` is used as like "early return",

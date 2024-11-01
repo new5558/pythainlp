@@ -4,23 +4,22 @@
 """
 Check if it is Thai text
 """
+
 import string
 from typing import Tuple
 
 from pythainlp import (
-    thai_lead_vowels,
-    thai_follow_vowels,
     thai_above_vowels,
     thai_below_vowels,
     thai_consonants,
-    thai_vowels,
-    thai_tonemarks,
-    thai_signs,
     thai_digits,
+    thai_follow_vowels,
+    thai_lead_vowels,
     thai_punctuations,
+    thai_signs,
+    thai_tonemarks,
+    thai_vowels,
 )
-from pythainlp.transliterate import pronunciate
-from pythainlp.util.syllable import tone_detector
 
 _DEFAULT_IGNORE_CHARS = string.whitespace + string.digits + string.punctuation
 _TH_FIRST_CHAR_ASCII = 3584
@@ -193,6 +192,9 @@ def thai_word_tone_detector(word: str) -> Tuple[str, str]:
         print(thai_word_tone_detector("มือถือ"))
         # output: [('มือ', 'm'), ('ถือ', 'r')]
     """
+    from ..transliterate import pronunciate
+    from ..util.syllable import tone_detector
+
     _pronunciate = pronunciate(word).split("-")
     return [(i, tone_detector(i.replace("หฺ", "ห"))) for i in _pronunciate]
 

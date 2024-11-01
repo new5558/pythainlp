@@ -5,7 +5,7 @@ import unittest
 from pythainlp.wangchanberta import ThaiNameTagger, segment
 
 
-class TestWangchanberta(unittest.TestCase):
+class WangchanbertaTestCaseX(unittest.TestCase):
     def test_thainer_wangchanberta(self):
         ner = ThaiNameTagger()
         self.assertIsNotNone(

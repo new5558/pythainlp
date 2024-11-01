@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 from typing import List
 
-model = None
+_MODEL = None
 
 
 def coreference_resolution(
@@ -40,17 +40,17 @@ def coreference_resolution(
         # 'clusters': [[(0, 10), (50, 52)]]}
         # ]
     """
-    global model
+    global _MODEL
     if isinstance(texts, str):
         texts = [texts]
 
-    if model is None and model_name == "han-coref-v1.0":
+    if _MODEL is None and model_name == "han-coref-v1.0":
         from pythainlp.coref.han_coref import HanCoref
 
-        model = HanCoref(device=device)
+        _MODEL = HanCoref(device=device)
 
-    if model:
-        return model.predict(texts)
+    if _MODEL:
+        return _MODEL.predict(texts)
 
     return [
         {"text": text, "clusters_string": [], "clusters": []} for text in texts

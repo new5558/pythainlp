@@ -7,7 +7,7 @@ import unittest
 from pythainlp.coref import coreference_resolution
 
 
-class TestParsePackage(unittest.TestCase):
+class CorefTestCaseX(unittest.TestCase):
     def test_coreference_resolution(self):
         pass
         # self.assertIsNotNone(

@@ -2,9 +2,10 @@
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
 from typing import List
+
 try:
-    from tltk.nlp import word_segment as tltk_segment
     from tltk.nlp import syl_segment
+    from tltk.nlp import word_segment as tltk_segment
 except ImportError:
     raise ImportError("Not found tltk! Please install tltk by pip install tltk")
 

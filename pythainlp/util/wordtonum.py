@@ -10,8 +10,8 @@ https://colab.research.google.com/drive/148WNIeclf0kOU6QxKd6pcfwpSs8l-VKD#scroll
 import re
 from typing import List
 
-from pythainlp.tokenize import Tokenizer
 from pythainlp.corpus import thai_words
+from pythainlp.tokenize import Tokenizer
 
 _ptn_digits = r"(|หนึ่ง|เอ็ด|สอง|ยี่|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)"
 _ptn_six_figures = (

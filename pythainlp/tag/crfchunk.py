@@ -2,7 +2,9 @@
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
 from typing import Dict, List, Tuple
+
 from pycrfsuite import Tagger as CRFTagger
+
 from pythainlp.corpus import path_pythainlp_corpus, thai_stopwords
 
 

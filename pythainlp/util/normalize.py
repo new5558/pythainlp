@@ -4,6 +4,7 @@
 """
 Text normalization
 """
+
 import re
 from typing import List, Union
 
@@ -13,7 +14,6 @@ from pythainlp import thai_follow_vowels as follow_v
 from pythainlp import thai_lead_vowels as lead_v
 from pythainlp import thai_tonemarks as tonemarks
 from pythainlp.tokenize import word_tokenize
-
 
 _DANGLING_CHARS = f"{above_v}{below_v}{tonemarks}\u0e3a\u0e4c\u0e4d\u0e4e"
 _RE_REMOVE_DANGLINGS = re.compile(f"^[{_DANGLING_CHARS}]+")
@@ -76,7 +76,7 @@ def remove_dangling(text: str) -> str:
 
         from pythainlp.util import remove_dangling
 
-        remove_dangling('๊ก')
+        remove_dangling("๊ก")
         # output: 'ก'
     """
     return _RE_REMOVE_DANGLINGS.sub("", text)
@@ -98,7 +98,7 @@ def remove_dup_spaces(text: str) -> str:
 
         from pythainlp.util import remove_dup_spaces
 
-        remove_dup_spaces('ก    ข    ค')
+        remove_dup_spaces("ก    ข    ค")
         # output: 'ก ข ค'
     """
     while "  " in text:
@@ -132,7 +132,7 @@ def remove_tonemark(text: str) -> str:
 
         from pythainlp.util import remove_tonemark
 
-        remove_tonemark('สองพันหนึ่งร้อยสี่สิบเจ็ดล้านสี่แสนแปดหมื่นสามพันหกร้อยสี่สิบเจ็ด')
+        remove_tonemark("สองพันหนึ่งร้อยสี่สิบเจ็ดล้านสี่แสนแปดหมื่นสามพันหกร้อยสี่สิบเจ็ด")
         # output: สองพันหนึงรอยสีสิบเจ็ดลานสีแสนแปดหมืนสามพันหกรอยสีสิบเจ็ด
     """
     for ch in tonemarks:
@@ -235,10 +235,10 @@ def normalize(text: str) -> str:
 
         from pythainlp.util import normalize
 
-        normalize('เเปลก')  # starts with two Sara E
+        normalize("เเปลก")  # starts with two Sara E
         # output: แปลก
 
-        normalize('นานาาา')
+        normalize("นานาาา")
         # output: นานา
     """
     text = remove_zw(text)
@@ -268,7 +268,7 @@ def maiyamok(sent: Union[str, List[str]]) -> List[str]:
         maiyamok("เด็กๆชอบไปโรงเรียน")
         # output: ['เด็ก', 'เด็ก', 'ชอบ', 'ไป', 'โรงเรียน']
 
-        maiyamok(["ทำไม","คน","ดี"," ","ๆ","ๆ"," ","ถึง","ทำ","ไม่ได้"])
+        maiyamok(["ทำไม", "คน", "ดี", " ", "ๆ", "ๆ", " ", "ถึง", "ทำ", "ไม่ได้"])
         # output: ['ทำไม', 'คน', 'ดี', 'ดี', 'ดี', ' ', 'ถึง', 'ทำ', 'ไม่ได้']
     """
     if isinstance(sent, str):

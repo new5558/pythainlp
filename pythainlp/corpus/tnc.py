@@ -15,9 +15,7 @@ __all__ = [
 from collections import defaultdict
 from typing import List, Tuple
 
-from pythainlp.corpus import get_corpus
-from pythainlp.corpus import get_corpus_path
-
+from pythainlp.corpus import get_corpus, get_corpus_path
 
 _FILENAME = "tnc_freq.txt"
 _BIGRAM = "tnc_bigram_word_freqs"

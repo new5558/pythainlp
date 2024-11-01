@@ -6,6 +6,7 @@ Tokenzier classes for ULMFiT
 """
 
 from typing import Collection, List
+
 from pythainlp.tokenize import THAI2FIT_TOKENIZER
 
 

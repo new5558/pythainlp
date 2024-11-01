@@ -6,12 +6,31 @@ Unit test.
 
 Each file in tests/ is for each main package.
 """
-import sys
-import unittest
 
-sys.path.append("../pythainlp")
+from unittest import TestLoader, TestSuite
 
-loader = unittest.TestLoader()
-testSuite = loader.discover("tests")
-testRunner = unittest.TextTestRunner(verbosity=1)
-testRunner.run(testSuite)
+test_packages: list[str] = [
+    "tests.test_ancient",
+    # "tests.test_cli",
+    # "tests.test_corpus",
+    "tests.test_soundex",
+    "tests.test_spell",
+    "tests.test_tokenize",
+    "tests.test_transliterate",
+    "tests.test_util",
+]
+
+
+def load_tests(
+    loader: TestLoader, standard_tests: TestSuite, pattern: str
+) -> TestSuite:
+    """Load test protocol"""
+    suite = TestSuite()
+    for test_package in test_packages:
+        tests = loader.loadTestsFromName(test_package)
+        suite.addTests(tests)
+    return suite
+
+if __name__ == "__main__":
+    import unittest
+    unittest.main()

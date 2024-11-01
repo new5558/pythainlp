@@ -5,4 +5,5 @@
 Thai Word Sense Disambiguation (WSD)
 """
 __all__ = ["get_sense"]
+
 from pythainlp.wsd.core import get_sense

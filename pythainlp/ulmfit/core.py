@@ -9,6 +9,7 @@ from typing import Callable, Collection
 
 import numpy as np
 import torch
+
 from pythainlp.corpus import get_corpus_path
 from pythainlp.tokenize import THAI2FIT_TOKENIZER
 from pythainlp.ulmfit.preprocess import (

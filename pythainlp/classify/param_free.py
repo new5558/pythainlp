@@ -3,9 +3,10 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import gzip
-from typing import List, Tuple
-import numpy as np
 import json
+from typing import List, Tuple
+
+import numpy as np
 
 
 class GzipModel:

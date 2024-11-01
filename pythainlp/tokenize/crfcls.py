@@ -7,8 +7,9 @@ Clause segmenter
 from typing import List
 
 import pycrfsuite
-from pythainlp.tag import pos_tag
+
 from pythainlp.corpus import path_pythainlp_corpus
+from pythainlp.tag import pos_tag
 
 
 def _doc2features(doc, i):

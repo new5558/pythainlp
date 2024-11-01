@@ -8,6 +8,7 @@
 GitHub: https://github.com/PyThaiNLP/Han-solo
 """
 from typing import List
+
 from pythainlp.corpus import path_pythainlp_corpus
 
 try:

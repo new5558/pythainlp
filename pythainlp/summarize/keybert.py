@@ -10,8 +10,8 @@ that are most similar to a document.
 
 https://github.com/MaartenGr/KeyBERT
 """
-from typing import List, Optional, Iterable, Tuple, Union
 from collections import Counter
+from typing import Iterable, List, Optional, Tuple, Union
 
 import numpy as np
 from transformers import pipeline

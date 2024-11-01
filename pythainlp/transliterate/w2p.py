@@ -9,6 +9,7 @@ GitHub : https://github.com/wannaphong/Thai_W2P
 from typing import Union
 
 import numpy as np
+
 from pythainlp.corpus import download, get_corpus_path
 
 _GRAPHEMES = list(

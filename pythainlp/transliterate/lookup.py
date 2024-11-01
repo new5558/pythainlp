@@ -10,12 +10,12 @@ Zenodo. https://doi.org/10.5281/zenodo.6716672
 """
 
 from typing import Callable, Optional
+
 from pythainlp.corpus.th_en_translit import (
     TRANSLITERATE_DICT,
     TRANSLITERATE_EN,
     TRANSLITERATE_FOLLOW_RTSG,
 )
-
 
 _TRANSLITERATE_IDX = 0
 
