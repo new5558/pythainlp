@@ -79,13 +79,12 @@ jobs:
       # packages, which includes numpy, pyicu, python-crfsuite, and requests:
       # pip install .[compact]
     - name: Unit test and code coverage
+      run: coverage run -m unittest tests
+      # Use 'unittest tests' instead of 'unittest discover' to avoid loading
+      # tests with external imports.
+      # Test cases loaded is defined in __init__.py in the tests directory.
+    - name: Coverage report
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_SERVICE_NAME: github
-      run: |
-        coverage run -m unittest tests
-        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-        coveralls
-      # use 'unittest tests' instead of 'unittest discover' to avoid loading
-      # tests with external imports.
-      # test cases loaded is defined in __init__.py in the tests directory.
+      run: coveralls
