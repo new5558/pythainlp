@@ -23,7 +23,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       PYICU_WIN_VER: 2.14
-      INSTALL_PYICU_WIN: true
+      INSTALL_PYICU_WIN: false
       INSTALL_TORCH: false
       INSTALL_FULL_DEPS: false
 
@@ -70,11 +70,9 @@ jobs:
       if: env.INSTALL_FULL_DEPS == 'true'
       env:
         SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL: True
-      run: |
-        pip install -r docker_requirements.txt
+      run: pip install -r docker_requirements.txt
     - name: Install PyThaiNLP
-      run: |
-        pip install .
+      run: pip install .
       # Use the command below, if you want to install a small set of external
       # packages, which includes numpy, pyicu, python-crfsuite, and requests:
       # pip install .[compact]
