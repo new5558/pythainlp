@@ -297,7 +297,7 @@ def maiyamok(sent: Union[str, List[str]]) -> List[str]:
     """
     Expand Maiyamok.
 
-    Please use expand_maiyamok instead.
+    Deprecated. Use expand_maiyamok() instead.
 
     Maiyamok (ๆ) (Unicode U+0E46) is a Thai character indicating word
     repetition. This function preprocesses Thai text by replacing
