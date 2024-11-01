@@ -30,3 +30,7 @@ def load_tests(
         tests = loader.loadTestsFromName(test_package)
         suite.addTests(tests)
     return suite
+
+if __name__ == "__main__":
+    import unittest
+    unittest.main()
