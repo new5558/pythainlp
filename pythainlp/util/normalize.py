@@ -265,37 +265,39 @@ def expand_maiyamok(sent: Union[str, List[str]]) -> List[str]:
     :Example:
     ::
 
-        from pythainlp.util import maiyamok
+        from pythainlp.util import expand_maiyamok
 
-        maiyamok("เด็กๆกิน")
+        expand_maiyamok("เด็กๆกิน")
         # output: ['เด็ก', 'เด็ก', 'กิน']
     """
     if isinstance(sent, str):
         sent = word_tokenize(sent)
-    _list_word: list[str] = []
+    output_toks: list[str] = []
     i = 0
-    for j, text in enumerate(sent):
-        if text.isspace() and "ๆ" in sent[j + 1]:
+    for j, token in enumerate(sent):
+        if token.isspace() and "ๆ" in sent[j + 1]:
             continue
-        if " ๆ" in text:
-            text = text.replace(" ๆ", "ๆ")
-        if "ๆ" == text:
-            text = _list_word[i - 1]
-        elif "ๆ" in text:
-            count = text.count("ๆ")
-            text = _list_word[i - 1]
+        # Replace any number of spaces followed by "ๆ" with "ๆ"
+        token = re.sub(r'\s+ๆ', 'ๆ', token)
+        if "ๆ" == token:
+            token = output_toks[i - 1]
+        elif "ๆ" in token:
+            count = token.count("ๆ")
+            token = output_toks[i - 1]
             for _ in range(count):
-                _list_word.append(text)
+                output_toks.append(token)
             i += 1
             continue
-        _list_word.append(text)
+        output_toks.append(token)
         i += 1
-    return _list_word
+    return output_toks
 
 
 def maiyamok(sent: Union[str, List[str]]) -> List[str]:
     """
     Expand Maiyamok.
+
+    Use expand_maiyamok() instead.
 
     Maiyamok (ๆ) (Unicode U+0E46) is a Thai character indicating word
     repetition. This function preprocesses Thai text by expanding Maiyamok
@@ -307,9 +309,9 @@ def maiyamok(sent: Union[str, List[str]]) -> List[str]:
     :Example:
     ::
 
-        from pythainlp.util import maiyamok
+        from pythainlp.util import expand_maiyamok
 
-        maiyamok("เด็กๆกิน")
+        expand_maiyamok("เด็กๆกิน")
         # output: ['เด็ก', 'เด็ก', 'กิน']
     """
     warn_deprecation(
