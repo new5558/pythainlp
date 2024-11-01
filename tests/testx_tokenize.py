@@ -205,7 +205,7 @@ SENT_4 = ["ผม", "กิน", "ข้าว", " ", "\n", "เธอ", "เล
 
 
 # Tests for functions that need external imports
-class TestXTokenizePackage(unittest.TestCase):
+class TokenizeTestCaseX(unittest.TestCase):
     def testx_subword_tokenize(self):
         self.assertEqual(subword_tokenize(None, engine="ssg"), [])
         self.assertEqual(subword_tokenize(None, engine="han_solo"), [])

@@ -9,7 +9,7 @@ from types import ModuleType
 from pythainlp import __main__, cli
 
 
-class TestMainPackage(unittest.TestCase):
+class CliTestCase(unittest.TestCase):
     def test_cli_main(self):
         # call with no argument, should exit with 2
         with self.assertRaises(SystemExit) as ex:

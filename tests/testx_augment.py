@@ -15,7 +15,7 @@ from pythainlp.augment.word2vec.bpemb_wv import BPEmbAug
 from pythainlp.augment.wordnet import postype2wordnet
 
 
-class TestTextAugmentPackage(unittest.TestCase):
+class AugmentTestCaseX(unittest.TestCase):
     def setUp(self):
         self.text = "เรารักคุณมากที่สุดในโลก"
         self.text2 = "เราอยู่ที่มหาวิทยาลัยขอนแก่น"

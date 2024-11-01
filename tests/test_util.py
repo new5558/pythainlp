@@ -67,7 +67,7 @@ from pythainlp.util import (
 from pythainlp.util.morse import morse_decode, morse_encode
 
 
-class TestUtilPackage(unittest.TestCase):
+class UtilTestCase(unittest.TestCase):
     # ### pythainlp.util.collate
 
     def test_collate(self):

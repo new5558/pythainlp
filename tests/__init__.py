@@ -9,12 +9,14 @@ Each file in tests/ is for each main package.
 
 from unittest import TestLoader, TestSuite
 
-test_packages = [
-#    "tests.test_cli.TestMainPackage",
-#    "tests.test_soundex.TestSoundexPackage",
-#    "tests.test_spell.TestSpellPackage",
-#    "tests.test_tokenize.TestTokenizePackage",
-#    "tests.test_util.TestUtilPackage",
+test_packages: list[str] = [
+    # "tests.test_cli",
+    # "tests.test_corpus",
+    "tests.test_tokenize",
+    # "tests.test_transliterate",
+    # "tests.test_spell",
+    # "tests.test_soundex",
+    # "tests.test_util",
 ]
 
 

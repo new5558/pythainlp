@@ -7,7 +7,7 @@ import unittest
 from pythainlp.summarize import extract_keywords, summarize
 
 
-class TestSummarizePackage(unittest.TestCase):
+class SummarizeTestCaseX(unittest.TestCase):
     def test_summarize(self):
         text = (
             "อาหาร หมายถึง ของแข็งหรือของเหลว "

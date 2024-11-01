@@ -14,7 +14,7 @@ from pythainlp.soundex import (
 from pythainlp.soundex.sound import audio_vector, word_approximation
 
 
-class TestSoundexPackage(unittest.TestCase):
+class SoundexTestCase(unittest.TestCase):
     def test_soundex(self):
         self.assertIsNotNone(soundex("a", engine="lk82"))
         self.assertIsNotNone(soundex("a", engine="udom83"))

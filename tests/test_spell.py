@@ -14,7 +14,7 @@ from pythainlp.spell import (
 
 SENT_TOKS = ["เด็", "อินอร์เน็ต", "แรง"]
 
-class TestSpellPackage(unittest.TestCase):
+class SpellTestCase(unittest.TestCase):
     def test_spell(self):
         self.assertEqual(spell(None), [""])
         self.assertEqual(spell(""), [""])

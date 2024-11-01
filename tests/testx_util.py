@@ -12,7 +12,7 @@ from pythainlp.util import rhyme, thai_word_tone_detector
 from pythainlp.util.spell_words import spell_word
 
 
-class TestXUtilPackage(unittest.TestCase):
+class UtilTestCaseX(unittest.TestCase):
     def testx_rhyme(self):
         self.assertIsInstance(rhyme("แมว"), list)
         self.assertTrue(len(rhyme("แมว")) > 2)

@@ -204,7 +204,7 @@ SENT_3_TOKS = [
 SENT_4 = ["ผม", "กิน", "ข้าว", " ", "\n", "เธอ", "เล่น", "เกม"]
 
 
-class TestTokenizePackage(unittest.TestCase):
+class TokenizeTestCase(unittest.TestCase):
     def test_Tokenizer(self):
         _tokenizer = Tokenizer(DEFAULT_WORD_DICT_TRIE)
         self.assertEqual(_tokenizer.word_tokenize(""), [])

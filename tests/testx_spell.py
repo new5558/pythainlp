@@ -15,7 +15,7 @@ from pythainlp.spell import (
 SENT_TOKS = ["เด็", "อินอร์เน็ต", "แรง"]
 
 
-class TestSpellPackage(unittest.TestCase):
+class SpellTestCaseX(unittest.TestCase):
     def test_spell(self):
         result = spell("เน้ร", engine="phunspell")
         self.assertIsInstance(result, list)

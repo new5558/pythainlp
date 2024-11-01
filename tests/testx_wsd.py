@@ -7,7 +7,7 @@ import unittest
 from pythainlp.wsd import get_sense
 
 
-class TestWsdPackage(unittest.TestCase):
+class WsdTestCaseX(unittest.TestCase):
     def test_get_sense(self):
         self.assertTrue(get_sense("เขากำลังอบขนมคุกกี้", "คุกกี้"))
         self.assertTrue(get_sense("เว็บนี้ต้องการคุกกี้ในการทำงาน", "คุกกี้"))

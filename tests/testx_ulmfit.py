@@ -40,7 +40,7 @@ from pythainlp.ulmfit.preprocess import (
 from pythainlp.ulmfit.tokenizer import BaseTokenizer as base_tokenizer
 
 
-class TestUlmfitPackage(unittest.TestCase):
+class UlmfitTestCaseX(unittest.TestCase):
     def test_ThaiTokenizer(self):
         self.thai = ThaiTokenizer()
         self.assertIsNotNone(self.thai.tokenizer("ทดสอบการตัดคำ"))

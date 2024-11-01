@@ -6,7 +6,7 @@ import unittest
 from pythainlp.ancient import aksonhan_to_current
 
 
-class TestAncientPackage(unittest.TestCase):
+class AncientTestCase(unittest.TestCase):
     def test_aksonhan_to_current(self):
         self.assertEqual(aksonhan_to_current("ก"), "ก")
         self.assertEqual(aksonhan_to_current("กก"), "กก")

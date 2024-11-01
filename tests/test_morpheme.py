@@ -7,7 +7,7 @@ import unittest
 from pythainlp.morpheme import is_native_thai, nighit
 
 
-class TestMorphemePackage(unittest.TestCase):
+class MorphemeTestCase(unittest.TestCase):
     def test_nighit(self):
         self.assertEqual(nighit("สํ", "คีต"), "สังคีต")
         self.assertEqual(nighit("สํ", "จร"), "สัญจร")

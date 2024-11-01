@@ -40,7 +40,7 @@ from pythainlp.corpus import (
 from pythainlp.corpus.util import revise_newmm_default_wordset
 
 
-class TestCorpusPackage(unittest.TestCase):
+class CorpusTestCase(unittest.TestCase):
     def test_conceptnet(self):
         self.assertIsNotNone(conceptnet.edges("รัก"))
 

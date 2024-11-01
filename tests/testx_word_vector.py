@@ -5,7 +5,7 @@ import unittest
 from pythainlp.word_vector import WordVector
 
 
-class TestWordVectorPackage(unittest.TestCase):
+class WordVectorTestCaseX(unittest.TestCase):
     def test_thai2vec(self):
         _wv = WordVector("thai2fit_wv")
         self.assertGreaterEqual(

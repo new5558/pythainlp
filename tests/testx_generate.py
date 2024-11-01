@@ -8,7 +8,7 @@ from pythainlp.generate import Bigram, Trigram, Unigram
 from pythainlp.generate.thai2fit import gen_sentence
 
 
-class TestGeneratePackage(unittest.TestCase):
+class GenerateTestCaseX(unittest.TestCase):
     def test_unigram(self):
         _tnc_unigram = Unigram("tnc")
         self.assertIsNotNone(_tnc_unigram.gen_sentence("ผม"))
