@@ -21,6 +21,10 @@ jobs:
         python-version: ["3.10"]
 
     runs-on: ${{ matrix.os }}
+    env:
+      INSTALL_ICU: true
+      INSTALL_TORCH: true
+      INSTALL_DEPS: false
 
     steps:
     - name: Checkout
@@ -38,7 +42,7 @@ jobs:
       # setuptools>65.0.2 because https://github.com/pypa/setuptools/commit/d03da04e024ad4289342077eef6de40013630a44#diff-9ea6e1e3dde6d4a7e08c7c88eceed69ca745d0d2c779f8f85219b22266efff7fR1
       # setuptools<=73.0.1 because https://github.com/pypa/setuptools/issues/4620
     - name: Install ICU (macOS)
-      if: startsWith(matrix.os, 'macos-')
+      if: startsWith(matrix.os, 'macos-') && env.INSTALL_ICU == 'true'
       run: |
         brew install icu4c
         PKG_CONFIG_PATH=$(brew --prefix)/opt/icu4c/lib/pkgconfig
@@ -47,21 +51,27 @@ jobs:
         echo "ICU_VER=${ICU_VER}"
         echo "ICU_VER=${ICU_VER}" >> "${GITHUB_ENV}"
     - name: Install ICU (Windows)
-      if: startsWith(matrix.os, 'windows-')
+      if: startsWith(matrix.os, 'windows-') && env.INSTALL_ICU == 'true'
       run: |
-        python -m pip install "https://github.com/cgohlke/pyicu-build/releases/download/v2.14/PyICU-2.14-cp310-cp310-win_amd64.whl"
+        PYICU_VER=2.14
+        PYTHON_VER=${{ matrix.python-version }}
+        CP_VER="cp${PYTHON_VER//./}"
+        WHEEL_URL="https://github.com/cgohlke/pyicu-build/releases/download/v${PYICU_VER}/PyICU-${PYICU_VER}-${CP_VER}-${CP_VER}-win_amd64.whl"
+        python -m pip install "$WHEEL_URL"
       # Get pyicu wheel link from https://github.com/cgohlke/pyicu-build/releases
-    # - name: Install PyTorch
-    #  run: pip install torch
+    - name: Install PyTorch
+      if: env.INSTALL_TORCH == 'true'
+      run: pip install torch
       # If torch for the platform is not available in PyPI,
       # use the following command:
       # pip install "<torch_wheel_link>"
       # Get torch wheel link from http://download.pytorch.org/whl/torch/
-    # - name: Install dependencies
-    #   env:
-    #     SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL: True
-    #   run: |
-    #     python -m pip install -r docker_requirements.txt
+    - name: Install dependencies
+      if: env.INSTALL_DEPS == 'true'
+      env:
+        SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL: True
+      run: |
+        python -m pip install -r docker_requirements.txt
     - name: Install PyThaiNLP
       run: |
         python -m pip install .

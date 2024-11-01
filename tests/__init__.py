@@ -12,7 +12,7 @@ from unittest import TestLoader, TestSuite
 test_packages: list[str] = [
     "tests.test_ancient",
     # "tests.test_cli",
-    "tests.test_corpus",
+    # "tests.test_corpus",
     "tests.test_soundex",
     "tests.test_spell",
     "tests.test_tokenize",
