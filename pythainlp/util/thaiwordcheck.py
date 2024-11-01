@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
-import warnings
+from pythainlp.tools import warn_deprecation
 
 
 def is_native_thai(word: str) -> bool:
-    warnings.warn(
-        """
-        pythainlp.util.is_native_thai has been renamed to \
-            pythainlp.morpheme.is_native_thai.
-        This function will be removed in PyThaiNLP 5.1.
-        """,
-        DeprecationWarning,
+    warn_deprecation(
+        "pythainlp.util.is_native_thai",
+        "pythainlp.morpheme.is_native_thai",
+        "5.1",
     )
+
     from pythainlp.morpheme import is_native_thai as check
 
     return check(word)
