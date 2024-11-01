@@ -10,8 +10,9 @@ Each file in tests/ is for each main package.
 from unittest import TestLoader, TestSuite
 
 test_packages: list[str] = [
+    "tests.test_ancient",
     # "tests.test_cli",
-    # "tests.test_corpus",
+    "tests.test_corpus",
     "tests.test_tokenize",
     # "tests.test_transliterate",
     # "tests.test_spell",

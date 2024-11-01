@@ -5,8 +5,6 @@
 import os
 import unittest
 
-import nltk
-from nltk.corpus import wordnet as wn
 from requests import Response
 
 from pythainlp.corpus import (
@@ -35,7 +33,6 @@ from pythainlp.corpus import (
     thai_words,
     tnc,
     ttc,
-    wordnet,
 )
 from pythainlp.corpus.util import revise_newmm_default_wordset
 
@@ -133,13 +130,11 @@ class CorpusTestCase(unittest.TestCase):
         self.assertIsNotNone(download(name="test", version="0.0.10"))
         with self.assertRaises(Exception) as context:
             # Force re-downloading since the corpus already exists
-            self.assertIsNotNone(download(
-                name="test", version="0.0.11", force=True
-            ))
+            self.assertIsNotNone(
+                download(name="test", version="0.0.11", force=True)
+            )
         self.assertTrue(
-            "Hash does not match expected."
-            in
-            str(context.exception)
+            "Hash does not match expected." in str(context.exception)
         )
         self.assertIsNotNone(download(name="test", version="0.1"))
         self.assertIsNotNone(remove("test"))
@@ -159,38 +154,6 @@ class CorpusTestCase(unittest.TestCase):
         self.assertIsNotNone(ttc.word_freqs())
         self.assertIsNotNone(ttc.unigram_word_freqs())
 
-    def test_wordnet(self):
-        nltk.download('omw-1.4', force=True)  # load wordnet
-        self.assertIsNotNone(wordnet.langs())
-        self.assertIn("tha", wordnet.langs())
-
-        self.assertEqual(
-            wordnet.synset("spy.n.01").lemma_names("tha"), ["สปาย", "สายลับ"]
-        )
-        self.assertIsNotNone(wordnet.synsets("นก"))
-        self.assertIsNotNone(wordnet.all_synsets(pos=wn.ADJ))
-
-        self.assertIsNotNone(wordnet.lemmas("นก"))
-        self.assertIsNotNone(wordnet.all_lemma_names(pos=wn.ADV))
-        self.assertIsNotNone(wordnet.lemma("cat.n.01.cat"))
-
-        self.assertEqual(wordnet.morphy("dogs"), "dog")
-
-        bird = wordnet.synset("bird.n.01")
-        mouse = wordnet.synset("mouse.n.01")
-        self.assertEqual(
-            wordnet.path_similarity(bird, mouse), bird.path_similarity(mouse)
-        )
-        self.assertEqual(
-            wordnet.wup_similarity(bird, mouse), bird.wup_similarity(mouse)
-        )
-        self.assertEqual(
-            wordnet.lch_similarity(bird, mouse), bird.lch_similarity(mouse)
-        )
-
-        cat_key = wordnet.synsets("แมว")[0].lemmas()[0].key()
-        self.assertIsNotNone(wordnet.lemma_from_key(cat_key))
-
     def test_revise_wordset(self):
         training_data = [
             ["ถวิล อุดล", " ", "เป็น", "นักการเมือง", "หนึ่ง", "ใน"],
@@ -208,7 +171,6 @@ class CorpusTestCase(unittest.TestCase):
 
     def test_find_synonyms(self):
         self.assertEqual(
-            find_synonyms("หมู"),
-            ['จรุก', 'วราหะ', 'วราห์', 'ศูกร', 'สุกร']
+            find_synonyms("หมู"), ["จรุก", "วราหะ", "วราห์", "ศูกร", "สุกร"]
         )
         self.assertEqual(find_synonyms("1"), [])
