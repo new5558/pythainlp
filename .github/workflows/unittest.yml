@@ -53,10 +53,11 @@ jobs:
         echo "ICU_VER=${ICU_VER}" >> "${GITHUB_ENV}"
     - name: Install PyICU (Windows)
       if: startsWith(matrix.os, 'windows-') && env.INSTALL_PYICU_WIN == 'true'
+      shell: powershell
       run: |
-        PYTHON_WIN_VER=${{ matrix.python-version }}
-        CP_VER="cp${PYTHON_WIN_VER//./}"
-        WHEEL_URL="https://github.com/cgohlke/pyicu-build/releases/download/v${PYICU_WIN_VER}/PyICU-${PYICU_WIN_VER}-${CP_VER}-${CP_VER}-win_amd64.whl"
+        $PYTHON_WIN_VER = "${{ matrix.python-version }}"
+        $CP_VER = "cp" + $PYTHON_WIN_VER.Replace(".", "")
+        $WHEEL_URL = "https://github.com/cgohlke/pyicu-build/releases/download/v${PYICU_WIN_VER}/PyICU-${PYICU_WIN_VER}-${CP_VER}-${CP_VER}-win_amd64.whl"
         pip install "$WHEEL_URL"
       # Get wheel URL from https://github.com/cgohlke/pyicu-build/releases
     - name: Install PyTorch
