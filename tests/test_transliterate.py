@@ -4,7 +4,7 @@ import unittest
 
 from pythainlp.transliterate import romanize, transliterate
 
-_BASIC_TESTS = {
+BASIC_TESTS = {
     None: "",
     "": "",
     "abc": "abc",
@@ -39,7 +39,7 @@ _BASIC_TESTS = {
 # these are set of two-syllable words,
 # to test if the transliteration/romanization is consistent, say
 # romanize(1+2) = romanize(1) + romanize(2)
-_CONSISTENCY_TESTS = [
+CONSISTENCY_TESTS = [
     # ("กระจก", "กระ", "จก"),  # failed
     # ("ระเบิด", "ระ", "เบิด"),  # failed
     # ("หยากไย่", "หยาก", "ไย่"),  # failed
@@ -56,11 +56,11 @@ class TransliterateTestCase(unittest.TestCase):
         self.assertEqual(romanize("แมว", engine="tltk"), "maeo")
 
     def test_romanize_royin_basic(self):
-        for word, expect in _BASIC_TESTS.items():
+        for word, expect in BASIC_TESTS.items():
             self.assertEqual(romanize(word, engine="royin"), expect)
 
     def test_romanize_royin_consistency(self):
-        for word, part1, part2 in _CONSISTENCY_TESTS:
+        for word, part1, part2 in CONSISTENCY_TESTS:
             self.assertEqual(
                 romanize(word, engine="royin"),
                 (

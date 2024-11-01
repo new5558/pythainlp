@@ -11,49 +11,6 @@ from pythainlp.transliterate.thai2rom import ThaiTransliterator
 from pythainlp.transliterate.thai2rom_onnx import ThaiTransliterator_ONNX
 from pythainlp.transliterate.wunsen import WunsenTransliterate
 
-_BASIC_TESTS = {
-    None: "",
-    "": "",
-    "abc": "abc",
-    "หมอก": "mok",
-    "หาย": "hai",
-    "แมว": "maeo",
-    "เดือน": "duean",
-    "ดำ": "dam",
-    "ดู": "du",
-    "บัว": "bua",
-    "กก": "kok",
-    "พร": "phon",
-    "กร": "kon",
-    "กรร": "kan",
-    "กรรม": "kam",
-    # "กรม": "krom",  # failed
-    "ฝ้าย": "fai",
-    "นพพร": "nopphon",
-    "อัก": "ak",
-    # "ทีปกร": "thipakon",  # failed
-    # "ธรรพ์": "than",  # failed
-    # "ธรรม": "tham",  # failed
-    # "มหา": "maha",  # failed
-    # "หยาก": "yak",  # failed
-    # "อยาก": "yak",  # failed
-    # "ยมก": "yamok",  # failed
-    # "กลัว": "klua",  # failed
-    # "บ้านไร่": "banrai",  # failed
-    # "ชารินทร์": "charin",  # failed
-}
-
-# these are set of two-syllable words,
-# to test if the transliteration/romanization is consistent, say
-# romanize(1+2) = romanize(1) + romanize(2)
-_CONSISTENCY_TESTS = [
-    # ("กระจก", "กระ", "จก"),  # failed
-    # ("ระเบิด", "ระ", "เบิด"),  # failed
-    # ("หยากไย่", "หยาก", "ไย่"),  # failed
-    ("ตากใบ", "ตาก", "ใบ"),
-    # ("จัดสรร", "จัด", "สรร"),  # failed
-]
-
 
 class TransliterateTestCaseX(unittest.TestCase):
     def test_romanize_thai2rom(self):

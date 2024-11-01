@@ -12,7 +12,7 @@ from pythainlp.spell import (
     symspellpy,
 )
 
-SENT_TOKS = ["เด็", "อินอร์เน็ต", "แรง"]
+from .test_spell import SENT_TOKS
 
 
 class SpellTestCaseX(unittest.TestCase):
