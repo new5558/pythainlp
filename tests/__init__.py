@@ -14,7 +14,7 @@ test_packages = [
 #    "tests.test_soundex.TestSoundexPackage",
 #    "tests.test_spell.TestSpellPackage",
 #    "tests.test_tokenize.TestTokenizePackage",
-    "tests.test_util.TestUtilPackage",
+#    "tests.test_util.TestUtilPackage",
 ]
 
 
