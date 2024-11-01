@@ -277,8 +277,7 @@ def expand_maiyamok(sent: Union[str, List[str]]) -> List[str]:
     for j, token in enumerate(sent):
         if token.isspace() and "ๆ" in sent[j + 1]:
             continue
-        # Replace any number of spaces followed by "ๆ" with "ๆ"
-        token = re.sub(r'\s+ๆ', 'ๆ', token)
+        token = re.sub(r"\s+ๆ", "ๆ", token)
         if "ๆ" == token:
             token = output_toks[i - 1]
         elif "ๆ" in token:
@@ -297,7 +296,7 @@ def maiyamok(sent: Union[str, List[str]]) -> List[str]:
     """
     Expand Maiyamok.
 
-    Use expand_maiyamok() instead.
+    Deprecated. Use expand_maiyamok() instead.
 
     Maiyamok (ๆ) (Unicode U+0E46) is a Thai character indicating word
     repetition. This function preprocesses Thai text by replacing
