@@ -25,7 +25,10 @@ def edges(word: str, lang: str = "th"):
           --a part of--> "artificial intelligence"
 
     With this illustration, it shows relationships (represented as *Edge*)
-    between the terms (represented as *Node*)
+    between the terms (represented as *Node*).
+
+    This function requires an internet connection to access the ConceptNet API.
+    Please use it considerately. It will timeout after 10 seconds.
 
     :param str word: word to be sent to ConceptNet API
     :param str lang: abbreviation of language (i.e. *th* for Thai, *en* for
@@ -107,5 +110,5 @@ def edges(word: str, lang: str = "th"):
         # }, ...]
     """
 
-    obj = requests.get(f"https://api.conceptnet.io/c/{lang}/{word}").json()
+    obj = requests.get(f"https://api.conceptnet.io/c/{lang}/{word}", timeout=10).json()
     return obj["edges"]
