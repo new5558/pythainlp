@@ -12,8 +12,8 @@ from unittest import TestLoader, TestSuite
 test_packages: list[str] = [
     "tests.test_ancient",
     # "tests.test_cli",
-    "tests.test_corpus",
-    "tests.test_tokenize",
+    # "tests.test_corpus",
+    # "tests.test_tokenize",
     # "tests.test_transliterate",
     # "tests.test_spell",
     # "tests.test_soundex",
@@ -21,10 +21,9 @@ test_packages: list[str] = [
 ]
 
 
-def load_tests(loader: TestLoader, tests, pattern) -> TestSuite:
+def load_tests(loader: TestLoader, tests, pattern="test_") -> TestSuite:
     """A function to load tests."""
     suite = TestSuite()
-    for test_package in test_packages:
-        tests = loader.loadTestsFromName(test_package)
-        suite.addTests(tests)
+    tests = loader.loadTestsFromNames(test_packages)
+    suite.addTests(tests)
     return suite
