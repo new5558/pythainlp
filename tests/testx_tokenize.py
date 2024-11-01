@@ -89,6 +89,10 @@ class TokenizeTestCaseX(unittest.TestCase):
         )
 
     def testx_sent_tokenize(self):
+        # Use default engine (crfcut)
+        self.assertEqual(sent_tokenize(None), [])
+        self.assertEqual(sent_tokenize(""), [])
+
         self.assertEqual(
             sent_tokenize(SENT_1, engine="crfcut"),
             SENT_1_TOKS,
