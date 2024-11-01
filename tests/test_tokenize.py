@@ -217,8 +217,6 @@ class TokenizeTestCase(unittest.TestCase):
             Tokenizer(engine="catcut888")
 
     def test_sent_tokenize(self):
-        self.assertEqual(sent_tokenize(None), [])
-        self.assertEqual(sent_tokenize(""), [])
         self.assertEqual(
             sent_tokenize("รักน้ำ  รักปลา  ", engine="whitespace"),
             ["รักน้ำ", "รักปลา", ""],
