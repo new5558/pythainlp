@@ -26,12 +26,12 @@ from pythainlp.util import (
     display_thai_char,
     emoji_to_thai,
     eng_to_thai,
+    expand_maiyamok,
     find_keyword,
     ipa_to_rtgs,
     is_native_thai,
     isthai,
     isthaichar,
-    maiyamok,
     nectec_to_ipa,
     normalize,
     now_reign_year,
@@ -533,27 +533,27 @@ class UtilTestCase(unittest.TestCase):
 
         # expand maiyamok
         self.assertEqual(
-            maiyamok("เด็กๆชอบไปโรงเรียน"),
+            expand_maiyamok("เด็กๆชอบไปโรงเรียน"),
             ["เด็ก", "เด็ก", "ชอบ", "ไป", "โรงเรียน"],
         )
         self.assertEqual(
-            maiyamok("เด็กๆๆชอบไปโรงเรียน"),
+            expand_maiyamok("เด็กๆๆชอบไปโรงเรียน"),
             ["เด็ก", "เด็ก", "เด็ก", "ชอบ", "ไป", "โรงเรียน"],
         )  # 914
         self.assertEqual(
-            maiyamok(
+            expand_maiyamok(
                 ["ทำไม", "คน", "ดี", " ", "ๆ", "ๆ", " ", "ถึง", "ทำ", "ไม่ได้"]
             ),
             ["ทำไม", "คน", "ดี", "ดี", "ดี", " ", "ถึง", "ทำ", "ไม่ได้"],
         )
         self.assertEqual(
-            maiyamok(
+            expand_maiyamok(
                 ["ทำไม", "คน", "ดี", " ", " ๆ", "ๆ", " ", "ถึง", "ทำ", "ไม่ได้"]
             ),
             ["ทำไม", "คน", "ดี", "ดี", "ดี", " ", "ถึง", "ทำ", "ไม่ได้"],
         )
         self.assertEqual(
-            maiyamok(
+            expand_maiyamok(
                 ["ทำไม", "คน", "ดีๆ", " ", "ๆ", "ๆ", " ", "ถึง", "ทำ", "ไม่ได้"]
             ),
             ["ทำไม", "คน", "ดี", "ดี", "ดี", "ดี", " ", "ถึง", "ทำ", "ไม่ได้"],
