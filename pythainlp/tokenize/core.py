@@ -538,7 +538,7 @@ def sent_tokenize(
         result = map_indices_to_words(word_indices, segments)
         return result
     else:
-        return [segments]
+        return segments
 
 
 def paragraph_tokenize(
