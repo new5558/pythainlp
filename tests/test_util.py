@@ -531,7 +531,7 @@ class UtilTestCase(unittest.TestCase):
         self.assertEqual(remove_zw("\u200bกา"), "กา")
         self.assertEqual(remove_zw("กา\u200b\u200c\u200b"), "กา")
 
-        # maiyamok
+        # expand maiyamok
         self.assertEqual(
             maiyamok("เด็กๆชอบไปโรงเรียน"),
             ["เด็ก", "เด็ก", "ชอบ", "ไป", "โรงเรียน"],

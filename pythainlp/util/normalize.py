@@ -14,6 +14,7 @@ from pythainlp import thai_follow_vowels as follow_v
 from pythainlp import thai_lead_vowels as lead_v
 from pythainlp import thai_tonemarks as tonemarks
 from pythainlp.tokenize import word_tokenize
+from pythainlp.tools import warn_deprecation
 
 _DANGLING_CHARS = f"{above_v}{below_v}{tonemarks}\u0e3a\u0e4c\u0e4d\u0e4e"
 _RE_REMOVE_DANGLINGS = re.compile(f"^[{_DANGLING_CHARS}]+")
@@ -249,12 +250,13 @@ def normalize(text: str) -> str:
     return text
 
 
-def maiyamok(sent: Union[str, List[str]]) -> List[str]:
+def expand_maiyamok(sent: Union[str, List[str]]) -> List[str]:
     """
-    Thai MaiYaMok
+    Expand Maiyamok.
 
-    MaiYaMok (ๆ) is the mark of duplicate word in Thai language.
-    This function is preprocessing MaiYaMok in Thai sentence.
+    Maiyamok (ๆ) (Unicode U+0E46) is a Thai character indicating word
+    repetition. This function preprocesses Thai text by expanding Maiyamok
+
 
     :param Union[str, List[str]] sent: input sentence (list or str)
     :return: list of words
@@ -265,15 +267,12 @@ def maiyamok(sent: Union[str, List[str]]) -> List[str]:
 
         from pythainlp.util import maiyamok
 
-        maiyamok("เด็กๆชอบไปโรงเรียน")
-        # output: ['เด็ก', 'เด็ก', 'ชอบ', 'ไป', 'โรงเรียน']
-
-        maiyamok(["ทำไม", "คน", "ดี", " ", "ๆ", "ๆ", " ", "ถึง", "ทำ", "ไม่ได้"])
-        # output: ['ทำไม', 'คน', 'ดี', 'ดี', 'ดี', ' ', 'ถึง', 'ทำ', 'ไม่ได้']
+        maiyamok("เด็กๆกิน")
+        # output: ['เด็ก', 'เด็ก', 'กิน']
     """
     if isinstance(sent, str):
         sent = word_tokenize(sent)
-    _list_word = []
+    _list_word: list[str] = []
     i = 0
     for j, text in enumerate(sent):
         if text.isspace() and "ๆ" in sent[j + 1]:
@@ -292,3 +291,28 @@ def maiyamok(sent: Union[str, List[str]]) -> List[str]:
         _list_word.append(text)
         i += 1
     return _list_word
+
+
+def maiyamok(sent: Union[str, List[str]]) -> List[str]:
+    """
+    Expand Maiyamok.
+
+    Maiyamok (ๆ) (Unicode U+0E46) is a Thai character indicating word
+    repetition. This function preprocesses Thai text by expanding Maiyamok
+
+    :param Union[str, List[str]] sent: input sentence (list or str)
+    :return: list of words
+    :rtype: List[str]
+
+    :Example:
+    ::
+
+        from pythainlp.util import maiyamok
+
+        maiyamok("เด็กๆกิน")
+        # output: ['เด็ก', 'เด็ก', 'กิน']
+    """
+    warn_deprecation(
+        "pythainlp.util.maiyamok", "pythainlp.util.expand_maiyamok"
+    )
+    return expand_maiyamok(sent)
