@@ -100,7 +100,9 @@ extras = {
     "wsd": ["sentence-transformers>=2.2.2"],
     "wtp": ["transformers>=4.6.0", "wtpsplit>=1.0.1"],
     "wunsen": ["wunsen>=0.0.1"],
+    # Compact dependencies
     "compact": ["numpy>=1.22", "pyicu>=2.3", "python-crfsuite>=0.9.7"],
+    # Full dependencies
     "full": [
         "PyYAML>=5.3.1",
         "attacut>=1.0.4",

@@ -32,8 +32,11 @@ jobs:
         cache: "pip"
     - name: Install build tools
       run: |
-        python -m pip install --upgrade "pip<24.1" "setuptools==73.0.1"
+        python -m pip install --upgrade "pip<24.1" "setuptools>65.0.2,<=73.0.1"
         python -m pip install coverage coveralls
+      # pip<24.1 because https://github.com/omry/omegaconf/pull/1195
+      # setuptools>65.0.2 because https://github.com/pypa/setuptools/commit/d03da04e024ad4289342077eef6de40013630a44#diff-9ea6e1e3dde6d4a7e08c7c88eceed69ca745d0d2c779f8f85219b22266efff7fR1
+      # setuptools<=73.0.1 because https://github.com/pypa/setuptools/issues/4620
     - name: Install ICU (macOS)
       if: startsWith(matrix.os, 'macos-')
       run: |
@@ -47,10 +50,13 @@ jobs:
       if: startsWith(matrix.os, 'windows-')
       run: |
         python -m pip install "https://github.com/cgohlke/pyicu-build/releases/download/v2.14/PyICU-2.14-cp310-cp310-win_amd64.whl"
-      # if needed, get pip wheel link from https://github.com/cgohlke/pyicu-build/releases
-    - name: Install PyTorch
-      run: pip install torch
-      # if needed, get pip wheel link from http://download.pytorch.org/whl/torch/
+      # Get pyicu wheel link from https://github.com/cgohlke/pyicu-build/releases
+    # - name: Install PyTorch
+    #  run: pip install torch
+      # If torch for the platform is not available in PyPI,
+      # use the following command:
+      # pip install "<torch_wheel_link>"
+      # Get torch wheel link from http://download.pytorch.org/whl/torch/
     # - name: Install dependencies
     #   env:
     #     SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL: True
@@ -59,6 +65,9 @@ jobs:
     - name: Install PyThaiNLP
       run: |
         python -m pip install .
+      # Use the command below, if you want to install a small set of external
+      # packages, which includes numpy, pyicu, python-crfsuite, and requests:
+      # python -m pip install .[compact]
     - name: Test
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -66,3 +75,6 @@ jobs:
       run: |
         coverage run -m unittest tests
         coveralls
+      # use 'unittest tests' instead of 'unittest discover' to avoid loading
+      # tests with external imports.
+      # test cases loaded is defined in __init__.py in the tests directory.

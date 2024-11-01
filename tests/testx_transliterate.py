@@ -13,6 +13,9 @@ from pythainlp.transliterate.wunsen import WunsenTransliterate
 
 
 class TransliterateTestCaseX(unittest.TestCase):
+    def test_romanize(self):
+        self.assertEqual(romanize("แมว", engine="tltk"), "maeo")
+
     def test_romanize_thai2rom(self):
         self.assertEqual(romanize("แมว", engine="thai2rom"), "maeo")
         self.assertEqual(romanize("บ้านไร่", engine="thai2rom"), "banrai")
