@@ -19,6 +19,7 @@ __all__ = [
     "display_thai_char",
     "emoji_to_thai",
     "eng_to_thai",
+    "expand_maiyamok",
     "find_keyword",
     "ipa_to_rtgs",
     "is_native_thai",
@@ -97,6 +98,7 @@ from pythainlp.util.normalize import (
     remove_tonemark,
     remove_zw,
     reorder_vowels,
+    expand_maiyamok,
 )
 from pythainlp.util.numtoword import bahttext, num_to_thaiword
 from pythainlp.util.phoneme import ipa_to_rtgs, nectec_to_ipa, remove_tone_ipa
@@ -117,7 +119,7 @@ from pythainlp.util.time import thaiword_to_time, time_to_thaiword
 from pythainlp.util.trie import Trie, dict_trie
 from pythainlp.util.wordtonum import text_to_num, thaiword_to_num, words_to_num
 
-# syllable and pronounce have to be imported last
+# sound_syllable and pronounce have to be imported last
 from pythainlp.util.syllable import (
     sound_syllable,
     syllable_length,
