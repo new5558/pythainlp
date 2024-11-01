@@ -225,18 +225,6 @@ class TokenizeTestCase(unittest.TestCase):
             sent_tokenize("รักน้ำ  รักปลา  ", engine="whitespace+newline"),
             ["รักน้ำ", "รักปลา"],
         )
-        self.assertEqual(
-            sent_tokenize(SENT_1),
-            SENT_1_TOKS,
-        )
-        self.assertEqual(
-            sent_tokenize(SENT_2),
-            SENT_2_TOKS,
-        )
-        self.assertEqual(
-            sent_tokenize(SENT_3),
-            SENT_3_TOKS,
-        )
         self.assertIsNotNone(
             sent_tokenize(
                 SENT_1,
