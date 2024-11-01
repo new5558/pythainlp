@@ -25,7 +25,7 @@ jobs:
       PYICU_WIN_VER: 2.14
       INSTALL_PYICU_WIN: true
       INSTALL_TORCH: true
-      INSTALL_DEPS: false
+      INSTALL_FULL_DEPS: false
 
     steps:
     - name: Checkout
@@ -51,14 +51,15 @@ jobs:
         ICU_VER=$(pkg-config --modversion icu-i18n)
         echo "ICU_VER=${ICU_VER}"
         echo "ICU_VER=${ICU_VER}" >> "${GITHUB_ENV}"
-    - name: Install PyICU (Windows)
+    - name: Install PyICU (Win dows)
       if: startsWith(matrix.os, 'windows-') && env.INSTALL_PYICU_WIN == 'true'
       shell: powershell
       run: |
         $PYTHON_WIN_VER = "${{ matrix.python-version }}"
         $CP_VER = "cp" + $PYTHON_WIN_VER.Replace(".", "")
         $WHEEL_URL = "https://github.com/cgohlke/pyicu-build/releases/download/v${PYICU_WIN_VER}/PyICU-${PYICU_WIN_VER}-${CP_VER}-${CP_VER}-win_amd64.whl"
-        pip install "$WHEEL_URL"
+        echo $WHEEL_URL
+        pip install -v "$WHEEL_URL"
       # Get wheel URL from https://github.com/cgohlke/pyicu-build/releases
     - name: Install PyTorch
       if: env.INSTALL_TORCH == 'true'
@@ -67,7 +68,7 @@ jobs:
       # pip install "<torch_wheel_url>"
       # Get wheel URL from http://download.pytorch.org/whl/torch/
     - name: Install dependencies
-      if: env.INSTALL_DEPS == 'true'
+      if: env.INSTALL_FULL_DEPS == 'true'
       env:
         SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL: True
       run: |
