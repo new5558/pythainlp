@@ -255,8 +255,8 @@ def expand_maiyamok(sent: Union[str, List[str]]) -> List[str]:
     Expand Maiyamok.
 
     Maiyamok (ๆ) (Unicode U+0E46) is a Thai character indicating word
-    repetition. This function preprocesses Thai text by expanding Maiyamok
-
+    repetition. This function preprocesses Thai text by replacing
+    Maiyamok with a word being repeated.
 
     :param Union[str, List[str]] sent: input sentence (list or str)
     :return: list of words
@@ -300,7 +300,8 @@ def maiyamok(sent: Union[str, List[str]]) -> List[str]:
     Use expand_maiyamok() instead.
 
     Maiyamok (ๆ) (Unicode U+0E46) is a Thai character indicating word
-    repetition. This function preprocesses Thai text by expanding Maiyamok
+    repetition. This function preprocesses Thai text by replacing
+    Maiyamok with a word being repeated.
 
     :param Union[str, List[str]] sent: input sentence (list or str)
     :return: list of words

@@ -89,6 +89,22 @@ class TokenizeTestCaseX(unittest.TestCase):
         )
 
     def testx_sent_tokenize(self):
+        # Use default engine (crfcut)
+        self.assertEqual(sent_tokenize(None), [])
+        self.assertEqual(sent_tokenize(""), [])
+        self.assertEqual(
+            sent_tokenize(SENT_1),
+            SENT_1_TOKS,
+        )
+        self.assertEqual(
+            sent_tokenize(SENT_2),
+            SENT_2_TOKS,
+        )
+        self.assertEqual(
+            sent_tokenize(SENT_3),
+            SENT_3_TOKS,
+        )
+
         self.assertEqual(
             sent_tokenize(SENT_1, engine="crfcut"),
             SENT_1_TOKS,
@@ -102,16 +118,8 @@ class TokenizeTestCaseX(unittest.TestCase):
             SENT_3_TOKS,
         )
         self.assertEqual(
-            sent_tokenize(SENT_1),
-            SENT_1_TOKS,
-        )
-        self.assertEqual(
-            sent_tokenize(SENT_2),
-            SENT_2_TOKS,
-        )
-        self.assertEqual(
-            sent_tokenize(SENT_3),
-            SENT_3_TOKS,
+            sent_tokenize(SENT_4, engine="crfcut"),
+            [["ผม", "กิน", "ข้าว", " ", "\n", "เธอ", "เล่น", "เกม"]],
         )
         self.assertIsNotNone(
             sent_tokenize(
@@ -131,6 +139,7 @@ class TokenizeTestCaseX(unittest.TestCase):
                 engine="tltk",
             ),
         )
+
         self.assertIsNotNone(
             sent_tokenize(
                 SENT_1,
@@ -149,6 +158,11 @@ class TokenizeTestCaseX(unittest.TestCase):
                 engine="thaisum",
             ),
         )
+        self.assertEqual(
+            sent_tokenize(SENT_4, engine="thaisum"),
+            [["ผม", "กิน", "ข้าว", " ", "เธอ", "เล่น", "เกม"]],
+        )
+
         self.assertIsNotNone(
             sent_tokenize(
                 SENT_3,
@@ -173,14 +187,6 @@ class TokenizeTestCaseX(unittest.TestCase):
         #         engine="wtp-large",
         #     ),
         # )
-        self.assertEqual(
-            sent_tokenize(SENT_4, engine="crfcut"),
-            [["ผม", "กิน", "ข้าว", " ", "\n", "เธอ", "เล่น", "เกม"]],
-        )
-        self.assertEqual(
-            sent_tokenize(SENT_4, engine="thaisum"),
-            [["ผม", "กิน", "ข้าว", " ", "เธอ", "เล่น", "เกม"]],
-        )
 
     def testx_word_tokenize(self):
         self.assertIsNotNone(word_tokenize(TEXT_1, engine="nlpo3"))
