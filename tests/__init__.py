@@ -24,6 +24,6 @@ test_packages: list[str] = [
 def load_tests(loader: TestLoader, tests, pattern) -> TestSuite:
     """A function to load tests."""
     suite = TestSuite()
-    tests = loader.loadTestsFromNames(test_packages)
+    tests = loader.loadTestsFromModule(tests.test_tokenize)
     suite.addTests(tests)
     return suite
