@@ -20,10 +20,12 @@ test_packages: list[str] = [
     # "tests.test_util",
 ]
 
+from . import test_tokenize
+
 
 def load_tests(loader: TestLoader, tests, pattern) -> TestSuite:
     """A function to load tests."""
     suite = TestSuite()
-    tests = loader.loadTestsFromModule(tests.test_tokenize)
+    tests = loader.loadTestsFromModule(test_tokenize)
     suite.addTests(tests)
     return suite
