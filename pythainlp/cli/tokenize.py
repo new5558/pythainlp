@@ -16,6 +16,7 @@ from pythainlp.tokenize import (
     subword_tokenize,
     word_tokenize,
 )
+from pythainlp.tools import safe_print
 
 DEFAULT_SENT_TOKEN_SEPARATOR = "@@"
 DEFAULT_SUBWORD_TOKEN_SEPARATOR = "/"
@@ -71,7 +72,7 @@ class SubAppBase:
             engine=args.algorithm,
             keep_whitespace=args.keep_whitespace,
         )
-        print(args.separator.join(result) + args.separator)
+        safe_print(args.separator.join(result) + args.separator)
 
 
 class WordTokenizationApp(SubAppBase):
@@ -144,4 +145,4 @@ class App:
         elif token_type.startswith("se"):
             SentenceTokenizationApp("sent", argv)
         else:
-            print(f"Token type not available: {token_type}")
+            safe_print(f"Token type not available: {token_type}")
