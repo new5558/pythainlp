@@ -60,6 +60,7 @@ coverage.xml
 .pytest_cache/
 cover/
 tests/ptagger_temp*
+ptagger_temp*
 
 # Translations
 *.mo
