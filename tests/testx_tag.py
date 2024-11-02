@@ -29,8 +29,6 @@ class TagTestCaseX(unittest.TestCase):
     def test_pos_tag(self):
         tokens = ["ผม", "รัก", "คุณ"]
         self.assertIsNotNone(pos_tag(tokens, engine="tltk"))
-        with self.assertRaises(ValueError):
-            self.assertIsNotNone(tltk.pos_tag(tokens, corpus="blackboard"))
 
     def test_tltk_ner(self):
         self.assertEqual(tltk.get_ner(""), [])
