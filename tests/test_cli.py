@@ -15,7 +15,7 @@ from pythainlp.cli.tokenize import App as TokenizeApp
 class CliTestCase(unittest.TestCase):
     def test_cli(self):
         with self.assertRaises((ArgumentError, SystemExit)):
-            self.assertIsNone(cli.exit_if_empty("", None))
+            cli.exit_if_empty("", None)
 
     def test_cli_main(self):
         # call with no argument, should exit with 2
