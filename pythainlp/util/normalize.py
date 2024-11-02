@@ -251,6 +251,24 @@ def normalize(text: str) -> str:
 
 
 def expand_maiyamok(sent: Union[str, List[str]]) -> List[str]:
+    """
+    Expand Maiyamok.
+
+    Maiyamok (ๆ) (Unicode U+0E46) is a Thai character indicating word
+    repetition. This function preprocesses Thai text by replacing
+    Maiyamok with a word being repeated.
+
+    :param Union[str, List[str]] sent: sentence (list or string)
+    :return: list of words
+    :rtype: List[str]
+
+    :Example:
+    ::
+        from pythainlp.util import expand_maiyamok
+
+        expand_maiyamok("คนๆนก")
+        # output: ['คน', 'คน', 'นก']
+    """
     if isinstance(sent, str):
         sent = word_tokenize(sent)
 
@@ -300,7 +318,7 @@ def maiyamok(sent: Union[str, List[str]]) -> List[str]:
     repetition. This function preprocesses Thai text by replacing
     Maiyamok with a word being repeated.
 
-    :param Union[str, List[str]] sent: input sentence (list or str)
+    :param Union[str, List[str]] sent: sentence (list or string)
     :return: list of words
     :rtype: List[str]
 
@@ -309,8 +327,8 @@ def maiyamok(sent: Union[str, List[str]]) -> List[str]:
 
         from pythainlp.util import expand_maiyamok
 
-        expand_maiyamok("เด็กๆกิน")
-        # output: ['เด็ก', 'เด็ก', 'กิน']
+        expand_maiyamok("คนๆนก")
+        # output: ['คน', 'คน', 'นก']
     """
     warn_deprecation(
         "pythainlp.util.maiyamok", "pythainlp.util.expand_maiyamok"
