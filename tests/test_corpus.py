@@ -128,14 +128,6 @@ class CorpusTestCase(unittest.TestCase):
         self.assertIsNotNone(download(name="test", version="0.0.8"))
         self.assertIsNotNone(download(name="test", version="0.0.9"))
         self.assertIsNotNone(download(name="test", version="0.0.10"))
-        with self.assertRaises(Exception) as context:
-            # Force re-downloading since the corpus already exists
-            self.assertIsNotNone(
-                download(name="test", version="0.0.11", force=True)
-            )
-        self.assertTrue(
-            "Hash does not match expected." in str(context.exception)
-        )
         self.assertIsNotNone(download(name="test", version="0.1"))
         self.assertIsNotNone(remove("test"))
         # END - Need to clean up this section

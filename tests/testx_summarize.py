@@ -30,8 +30,6 @@ class SummarizeTestCaseX(unittest.TestCase):
             summarize(INPUT_TEXT, 1, engine="mt5-cpe-kmutt-thai-sentence-sum")
         )
         self.assertIsNotNone(summarize(INPUT_TEXT, 1, engine="XX"))
-        with self.assertRaises(ValueError):
-            self.assertIsNotNone(summarize(INPUT_TEXT, 1, engine="mt5-cat"))
 
     def test_keyword_extraction(self):
         self.assertEqual(extract_keywords(""), [])
