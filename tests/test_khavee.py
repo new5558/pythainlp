@@ -27,6 +27,7 @@ class KhaveeTestCase(unittest.TestCase):
         self.assertEqual(kv.check_marttra("จาม"), "กม")
         self.assertEqual(kv.check_marttra("ยิ้ม"), "กม")
         self.assertEqual(kv.check_marttra("เกม"), "กม")
+        # self.assertEqual(kv.check_marttra("ขำ"), "กม")
         # self.assertEqual(kv.check_marttra("รมย์"), "กม")
 
         self.assertEqual(kv.check_marttra("สวย"), "เกย")
@@ -56,8 +57,10 @@ class KhaveeTestCase(unittest.TestCase):
         self.assertEqual(kv.check_marttra("เสริฐ"), "กด")
         self.assertEqual(kv.check_marttra("บุตร"), "กด")
         self.assertEqual(kv.check_marttra("ตรุษ"), "กด")
+        self.assertEqual(kv.check_marttra("มืด"), "กด")
         # self.assertEqual(kv.check_marttra("โยชน์"), "กด")
 
+        self.assertEqual(kv.check_marttra("มึน"), "กน")
         self.assertEqual(kv.check_marttra("ร้าน"), "กน")
         self.assertEqual(kv.check_marttra("ขนุน"), "กน")
         self.assertEqual(kv.check_marttra("คน"), "กน")
@@ -80,6 +83,7 @@ class KhaveeTestCase(unittest.TestCase):
         self.assertEqual(kv.check_marttra("งู"), "กา")
         self.assertEqual(kv.check_marttra("หมู"), "กา")
         self.assertEqual(kv.check_marttra("มือ"), "กา")
+        self.assertEqual(kv.check_marttra("ล้อ"), "กา")
 
     def test_is_sumpus(self):
         self.assertTrue(kv.is_sumpus("สรร", "อัน"))
