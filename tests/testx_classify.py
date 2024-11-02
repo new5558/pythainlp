@@ -7,7 +7,7 @@ import unittest
 from pythainlp.classify import GzipModel
 
 
-class ClsTestCase(unittest.TestCase):
+class ClsTestCaseX(unittest.TestCase):
     def test_GzipModel(self):
         training_data = [
             ("รายละเอียดตามนี้เลยค่าา ^^", "Neutral"),
