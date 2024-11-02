@@ -11,4 +11,4 @@ __all__ = ["GzipModel"]
 from pythainlp.classify.param_free import GzipModel
 from pythainlp.tools import warn_deprecation
 
-warn_deprecation("pythainlp.cls", "pythainlp.classify", "5.1")
+warn_deprecation("pythainlp.cls", "pythainlp.classify", "5.2")

@@ -331,6 +331,6 @@ def maiyamok(sent: Union[str, List[str]]) -> List[str]:
         # output: ['คน', 'คน', 'นก']
     """
     warn_deprecation(
-        "pythainlp.util.maiyamok", "pythainlp.util.expand_maiyamok"
+        "pythainlp.util.maiyamok", "pythainlp.util.expand_maiyamok", "5.2"
     )
     return expand_maiyamok(sent)
