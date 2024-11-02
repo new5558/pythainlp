@@ -13,9 +13,9 @@ class KhaveeTestCase(unittest.TestCase):
     def test_check_sara(self):
         self.assertEqual(kv.check_sara("เริง"), "เออ")
 
-    def test_check_marttra(self):    
-        self.assertEqual(kv.check_marttra("ปลิง"), "กง") 
-        self.assertEqual(kv.check_marttra("ลม"), "กม")   
+    def test_check_marttra(self):
+        self.assertEqual(kv.check_marttra("ปลิง"), "กง")
+        self.assertEqual(kv.check_marttra("ลม"), "กม")
         self.assertEqual(kv.check_marttra("โปรย"), "เกย")
         self.assertEqual(kv.check_marttra("สาว"), "เกอว")
         self.assertEqual(kv.check_marttra("บก"), "กก")
