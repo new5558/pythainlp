@@ -18,6 +18,7 @@ test_packages: list[str] = [
     "tests.test_morpheme",
     "tests.test_soundex",
     "tests.test_spell",
+    "tests.test_tag",
     "tests.test_tokenize",
     "tests.test_tools",
     "tests.test_transliterate",

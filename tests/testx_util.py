@@ -13,7 +13,7 @@ from pythainlp.util.spell_words import spell_word
 
 
 class UtilTestCaseX(unittest.TestCase):
-    def testx_rhyme(self):
+    def test_rhyme(self):
         self.assertIsInstance(rhyme("แมว"), list)
         self.assertTrue(len(rhyme("แมว")) > 2)
 
@@ -25,7 +25,7 @@ class UtilTestCaseX(unittest.TestCase):
             spell_word("คนดี"), ["คอ", "นอ", "คน", "ดอ", "อี", "ดี", "คนดี"]
         )
 
-    def testx_thai_word_tone_detector(self):
+    def test_thai_word_tone_detector(self):
         self.assertIsNotNone(thai_word_tone_detector("คนดี"))
         self.assertEqual(
             thai_word_tone_detector("ราคา"), [("รา", "m"), ("คา", "m")]
