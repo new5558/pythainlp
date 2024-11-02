@@ -36,7 +36,7 @@ class SubAppBase:
         result = self.run(tokens)
 
         for word, tag in result:
-            safe_print(word, "/", tag)
+            safe_print(word + " / " + tag)
 
 
 class POSTaggingApp(SubAppBase):
@@ -75,4 +75,4 @@ class App:
         if tag_type == "pos":
             POSTaggingApp("Part-of-Speech tagging", argv)
         else:
-            safe_print(f"Tag type not available: {tag_type}")
+            print(f"Tag type not available: {tag_type}")
