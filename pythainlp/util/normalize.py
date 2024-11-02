@@ -268,8 +268,6 @@ def expand_maiyamok(sent: Union[str, List[str]]) -> List[str]:
     yamok_count = 0
     len_sent = len(sent)
     for i in range(len_sent - 1, -1, -1):  # do it backward
-        print(i, sent[i])
-        print(i, output_toks)
         if yamok_count == 0 or (i + 1 >= len_sent):
             if sent[i] == yamok:
                 yamok_count = yamok_count + 1
