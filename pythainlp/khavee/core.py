@@ -219,7 +219,7 @@ class KhaveeVerifier:
 
             kv = KhaveeVerifier()
 
-            print(kv.check_marttra('สาว'))
+            print(kv.check_marttra("สาว"))
             # output: 'เกอว'
         """
         if word[-1] == "ร" and word[-2] in ["ต", "ท"]:
@@ -297,10 +297,10 @@ class KhaveeVerifier:
 
             kv = KhaveeVerifier()
 
-            print(kv.is_sumpus('สรร', 'อัน'))
+            print(kv.is_sumpus("สรร", "อัน"))
             # output: True
 
-            print(kv.is_sumpus('สรร', 'แมว'))
+            print(kv.is_sumpus("สรร", "แมว"))
             # output: False
         """
         marttra1 = self.check_marttra(word1)
@@ -609,9 +609,13 @@ class KhaveeVerifier:
             kv = KhaveeVerifier()
 
             # การเช็คคำเอกโท
-            print(kv.check_aek_too('เอง'), kv.check_aek_too('เอ่ง'), kv.check_aek_too('เอ้ง'))
+            print(
+                kv.check_aek_too("เอง"),
+                kv.check_aek_too("เอ่ง"),
+                kv.check_aek_too("เอ้ง"),
+            )
             # -> False, aek, too
-            print(kv.check_aek_too(['เอง', 'เอ่ง', 'เอ้ง'])) # ใช้ List ได้เหมือนกัน
+            print(kv.check_aek_too(["เอง", "เอ่ง", "เอ้ง"]))  # ใช้ List ได้เหมือนกัน
             # -> [False, 'aek', 'too']
 
 

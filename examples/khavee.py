@@ -2,9 +2,12 @@
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
 
-import core
+# Example of using KhaveeVerifier from pythainlp.khavee
 
-kv = core.KhaveeVerifier()
+from pythainlp.khavee import KhaveeVerifier
+
+
+kv = KhaveeVerifier()
 
 
 # การเช็คสระ
