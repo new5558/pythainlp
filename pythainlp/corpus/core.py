@@ -4,6 +4,7 @@
 """
 Corpus related functions.
 """
+
 import json
 import os
 from typing import Union
@@ -25,16 +26,16 @@ def get_corpus_db(url: str):
 
     corpus_db = None
     try:
-        corpus_db = requests.get(url)
+        corpus_db = requests.get(url, timeout=10)
     except requests.exceptions.HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")
-    except Exception as err:
+    except requests.exceptions.RequestException as err:
         print(f"Non-HTTP error occurred: {err}")
 
     return corpus_db
 
 
-def get_corpus_db_detail(name: str, version: str = '') -> dict:
+def get_corpus_db_detail(name: str, version: str = "") -> dict:
     """
     Get details about a corpus, using information from local catalog.
 
@@ -176,7 +177,7 @@ def get_corpus_as_is(filename: str) -> list:
     return lines
 
 
-def get_corpus_default_db(name: str, version: str = '') -> Union[str, None]:
+def get_corpus_default_db(name: str, version: str = "") -> Union[str, None]:
     """
     Get model path from default_db.json
 
@@ -207,7 +208,7 @@ def get_corpus_default_db(name: str, version: str = '') -> Union[str, None]:
 
 
 def get_corpus_path(
-    name: str, version: str = '', force: bool = False
+    name: str, version: str = "", force: bool = False
 ) -> Union[str, None]:
     """
     Get corpus path.
@@ -251,11 +252,11 @@ def get_corpus_path(
     """
     from typing import Dict
 
-    _CUSTOMIZE: Dict[str, str] = {
+    CUSTOMIZE: Dict[str, str] = {
         # "the corpus name":"path"
     }
-    if name in list(_CUSTOMIZE):
-        return _CUSTOMIZE[name]
+    if name in list(CUSTOMIZE):
+        return CUSTOMIZE[name]
 
     default_path = get_corpus_default_db(name=name, version=version)
     if default_path is not None:
@@ -290,14 +291,14 @@ def _download(url: str, dst: str) -> int:
     @param: URL for downloading file
     @param: dst place to put the file into
     """
-    _CHUNK_SIZE = 64 * 1024  # 64 KiB
+    CHUNK_SIZE = 64 * 1024  # 64 KiB
 
     from urllib.request import urlopen
 
     import requests
 
     file_size = int(urlopen(url).info().get("Content-Length", -1))
-    r = requests.get(url, stream=True)
+    r = requests.get(url, stream=True, timeout=10)
     with open(get_full_data_path(dst), "wb") as f:
         pbar = None
         try:
@@ -307,7 +308,7 @@ def _download(url: str, dst: str) -> int:
         except ImportError:
             pbar = None
 
-        for chunk in r.iter_content(chunk_size=_CHUNK_SIZE):
+        for chunk in r.iter_content(chunk_size=CHUNK_SIZE):
             if chunk:
                 f.write(chunk)
                 if pbar:
@@ -334,7 +335,7 @@ def _check_hash(dst: str, md5: str) -> None:
             file_md5 = hashlib.md5(content).hexdigest()
 
             if md5 != file_md5:
-                raise Exception("Hash does not match expected.")
+                raise ValueError("Hash does not match expected.")
 
 
 def _version2int(v: str) -> int:
@@ -401,7 +402,7 @@ def _check_version(cause: str) -> bool:
 
 
 def download(
-    name: str, force: bool = False, url: str = '', version: str = ''
+    name: str, force: bool = False, url: str = "", version: str = ""
 ) -> bool:
     """
     Download corpus.
@@ -422,7 +423,7 @@ def download(
 
         from pythainlp.corpus import download
 
-        download('wiki_lm_lstm', force=True)
+        download("wiki_lm_lstm", force=True)
         # output:
         # Corpus: wiki_lm_lstm
         # - Downloading: wiki_lm_lstm 0.1
@@ -459,10 +460,13 @@ def download(
 
         # version may still be None here
         if version not in corpus["versions"]:
-            print("Not found corpus")
+            print("Corpus not found.")
             return False
-        elif _check_version(corpus["versions"][version]["pythainlp_version"]) is False:
-            print("Versions Corpus not support")
+        elif (
+            _check_version(corpus["versions"][version]["pythainlp_version"])
+            is False
+        ):
+            print("Corpus version not supported.")
             return False
         corpus_versions = corpus["versions"][version]
         file_name = corpus_versions["filename"]
@@ -505,8 +509,10 @@ def download(
                 foldername = name + "_" + str(version)
                 if not os.path.exists(get_full_data_path(foldername)):
                     os.mkdir(get_full_data_path(foldername))
-                with zipfile.ZipFile(get_full_data_path(file_name), "r") as zip:
-                    zip.extractall(path=get_full_data_path(foldername))
+                with zipfile.ZipFile(
+                    get_full_data_path(file_name), "r"
+                ) as zip_file:
+                    zip_file.extractall(path=get_full_data_path(foldername))
 
             if found:
                 local_db["_default"][found]["version"] = version
@@ -517,7 +523,9 @@ def download(
                 # This awkward behavior is for backward-compatibility with
                 # database files generated previously using TinyDB
                 if local_db["_default"]:
-                    corpus_no = max((int(no) for no in local_db["_default"])) + 1
+                    corpus_no = (
+                        max((int(no) for no in local_db["_default"])) + 1
+                    )
                 else:
                     corpus_no = 1
                 local_db["_default"][str(corpus_no)] = {
@@ -564,13 +572,13 @@ def remove(name: str) -> bool:
 
         from pythainlp.corpus import remove, get_corpus_path, get_corpus
 
-        print(remove('ttc'))
+        print(remove("ttc"))
         # output: True
 
-        print(get_corpus_path('ttc'))
+        print(get_corpus_path("ttc"))
         # output: None
 
-        get_corpus('ttc')
+        get_corpus("ttc")
         # output:
         # FileNotFoundError: [Errno 2] No such file or directory:
         # '/usr/local/lib/python3.6/dist-packages/pythainlp/corpus/ttc'
@@ -580,7 +588,9 @@ def remove(name: str) -> bool:
         return False
     with open(corpus_db_path(), "r", encoding="utf-8-sig") as f:
         db = json.load(f)
-    data = [corpus for corpus in db["_default"].values() if corpus["name"] == name]
+    data = [
+        corpus for corpus in db["_default"].values() if corpus["name"] == name
+    ]
 
     if data:
         path = get_corpus_path(name)
