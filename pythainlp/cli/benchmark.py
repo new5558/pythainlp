@@ -11,6 +11,7 @@ import yaml
 
 from pythainlp import cli
 from pythainlp.benchmarks import word_tokenization
+from pythainlp.tools import safe_print
 
 
 def _read_file(path):
@@ -81,7 +82,7 @@ class WordTokenizationBenchmark:
             expected
         ), "Input and test files do not have the same number of samples"
 
-        print(
+        safe_print(
             "Benchmarking %s against %s with %d samples in total"
             % (args.input_file, args.test_file, len(actual))
         )
@@ -121,12 +122,12 @@ class WordTokenizationBenchmark:
             / statistics["word_level:total_words_in_ref_sample"]
         )
 
-        print("============== Benchmark Result ==============")
+        safe_print("============== Benchmark Result ==============")
 
         for c in ["tp", "fn", "tn", "fp", "precision", "recall"]:
             c = f"char_level:{c}"
             v = statistics[c]
-            print(f"{c:>40s} {v:.4f}")
+            safe_print(f"{c:>40s} {v:.4f}")
 
         for c in [
             "total_words_in_sample",
@@ -137,20 +138,20 @@ class WordTokenizationBenchmark:
         ]:
             c = f"word_level:{c}"
             v = statistics[c]
-            print(f"{c:>40s} {v:.4f}")
+            safe_print(f"{c:>40s} {v:.4f}")
 
         if args.save_details:
             dir_name = os.path.dirname(args.input_file)
             file_name = args.input_file.split("/")[-1].split(".")[0]
 
             res_path = "%s/eval-%s.yml" % (dir_name, file_name)
-            print("Evaluation result is saved to %s" % res_path)
+            safe_print("Evaluation result is saved to %s" % res_path)
 
             with open(res_path, "w", encoding="utf-8") as outfile:
                 yaml.dump(statistics, outfile, default_flow_style=False)
 
             res_path = "%s/eval-details-%s.json" % (dir_name, file_name)
-            print("Details of comparisons is saved to %s" % res_path)
+            safe_print("Details of comparisons is saved to %s" % res_path)
 
             with open(res_path, "w", encoding="utf-8") as f:
                 samples = []
@@ -160,7 +161,12 @@ class WordTokenizationBenchmark:
                     del r["actual"]
 
                     samples.append(
-                        {"metrics": r, "expected": expected, "actual": actual, "id": i}
+                        {
+                            "metrics": r,
+                            "expected": expected,
+                            "actual": actual,
+                            "id": i,
+                        }
                     )
 
                 details = {"metrics": statistics, "samples": samples}
