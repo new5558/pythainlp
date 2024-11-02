@@ -7,7 +7,7 @@ import unittest
 from pythainlp.parse import dependency_parsing
 
 
-class ParseTestCase(unittest.TestCase):
+class ParseTestCaseX(unittest.TestCase):
     def test_dependency_parsing(self):
         self.assertIsNotNone(dependency_parsing("ผมเป็นคนดี", engine="esupar"))
         self.assertIsNotNone(

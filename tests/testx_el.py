@@ -7,7 +7,7 @@ import unittest
 from pythainlp.el import EntityLinker
 
 
-class ElTestCase(unittest.TestCase):
+class ElTestCaseX(unittest.TestCase):
     def test_EntityLinker(self):
         with self.assertRaises(NotImplementedError):
             EntityLinker(model_name="cat")
