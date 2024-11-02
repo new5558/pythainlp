@@ -4,10 +4,11 @@
 """
 Command line for PyThaiNLP's dataset/corpus management.
 """
+
 import argparse
 
 from pythainlp import corpus
-from pythainlp.tools import get_pythainlp_data_path
+from pythainlp.tools import get_pythainlp_data_path, safe_print
 
 
 class App:
@@ -55,9 +56,9 @@ class App:
         )
         args = parser.parse_args(argv[3:])
         if corpus.download(args.dataset_name):
-            print("Downloaded successfully.")
+            safe_print("Downloaded successfully.")
         else:
-            print("Not found.")
+            safe_print("Not found.")
 
     def rm(self, argv):
         parser = argparse.ArgumentParser(
@@ -71,9 +72,9 @@ class App:
         )
         args = parser.parse_args(argv[3:])
         if corpus.remove(args.dataset_name):
-            print("Removed successfully.")
+            safe_print("Removed successfully.")
         else:
-            print("Not found.")
+            safe_print("Not found.")
 
     def info(self, argv):
         parser = argparse.ArgumentParser(
@@ -88,29 +89,29 @@ class App:
         args = parser.parse_args(argv[3:])
         info = corpus.get_corpus_db_detail(args.dataset_name)
         if info:
-            print(info)
+            safe_print(info)
         else:
-            print("Not found.")
+            safe_print("Not found.")
 
     def catalog(self, argv):
         """Print dataset/corpus available for download."""
         corpus_db = corpus.get_corpus_db(corpus.corpus_db_url())
         corpus_db = corpus_db.json()
         corpus_names = sorted(corpus_db.keys())
-        print("Dataset/corpus available for download:")
+        safe_print("Dataset/corpus available for download:")
         for name in corpus_names:
-            print(f"- {name} {corpus_db[name]['latest_version']}", end="")
+            safe_print(f"- {name} {corpus_db[name]['latest_version']}", end="")
             corpus_info = corpus.get_corpus_db_detail(name)
             if corpus_info:
-                print(f"  (Local: {corpus_info['version']})")
+                safe_print(f"  (Local: {corpus_info['version']})")
             else:
-                print()
+                safe_print()
 
-        print(
+        safe_print(
             "\nUse subcommand 'get' to download a dataset.\n\n"
             "Example: thainlp data get crfcut\n"
         )
 
     def path(self, argv):
         """Print path of local dataset."""
-        print(get_pythainlp_data_path())
+        safe_print(get_pythainlp_data_path())
