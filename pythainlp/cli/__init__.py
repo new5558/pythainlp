@@ -5,7 +5,7 @@
 
 import io
 import sys
-from argparse import ArgumentParser
+from argparse import ArgumentError, ArgumentParser
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8")
@@ -23,6 +23,14 @@ def make_usage(command: str) -> dict:
 
 
 def exit_if_empty(command: str, parser: ArgumentParser) -> None:
+    """Print help and exit if command is empty.
+
+    :param command: command from command line
+    :type command: str
+    :param parser: parser object of the app
+    :type parser: ArgumentParser
+    """
     if not command:
-        parser.print_help()
-        sys.exit(0)
+        if parser:
+            parser.print_help()
+        raise ArgumentError(None, "No command provided.")
