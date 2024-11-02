@@ -26,10 +26,10 @@ def get_corpus_db(url: str):
 
     corpus_db = None
     try:
-        corpus_db = requests.get(url)
+        corpus_db = requests.get(url, timeout=10)
     except requests.exceptions.HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")
-    except Exception as err:
+    except requests.exceptions.RequestException as err:
         print(f"Non-HTTP error occurred: {err}")
 
     return corpus_db
@@ -252,11 +252,11 @@ def get_corpus_path(
     """
     from typing import Dict
 
-    _CUSTOMIZE: Dict[str, str] = {
+    CUSTOMIZE: Dict[str, str] = {
         # "the corpus name":"path"
     }
-    if name in list(_CUSTOMIZE):
-        return _CUSTOMIZE[name]
+    if name in list(CUSTOMIZE):
+        return CUSTOMIZE[name]
 
     default_path = get_corpus_default_db(name=name, version=version)
     if default_path is not None:
@@ -291,14 +291,14 @@ def _download(url: str, dst: str) -> int:
     @param: URL for downloading file
     @param: dst place to put the file into
     """
-    _CHUNK_SIZE = 64 * 1024  # 64 KiB
+    CHUNK_SIZE = 64 * 1024  # 64 KiB
 
     from urllib.request import urlopen
 
     import requests
 
     file_size = int(urlopen(url).info().get("Content-Length", -1))
-    r = requests.get(url, stream=True)
+    r = requests.get(url, stream=True, timeout=10)
     with open(get_full_data_path(dst), "wb") as f:
         pbar = None
         try:
@@ -308,7 +308,7 @@ def _download(url: str, dst: str) -> int:
         except ImportError:
             pbar = None
 
-        for chunk in r.iter_content(chunk_size=_CHUNK_SIZE):
+        for chunk in r.iter_content(chunk_size=CHUNK_SIZE):
             if chunk:
                 f.write(chunk)
                 if pbar:
@@ -335,7 +335,7 @@ def _check_hash(dst: str, md5: str) -> None:
             file_md5 = hashlib.md5(content).hexdigest()
 
             if md5 != file_md5:
-                raise Exception("Hash does not match expected.")
+                raise ValueError("Hash does not match expected.")
 
 
 def _version2int(v: str) -> int:
@@ -511,8 +511,8 @@ def download(
                     os.mkdir(get_full_data_path(foldername))
                 with zipfile.ZipFile(
                     get_full_data_path(file_name), "r"
-                ) as zip:
-                    zip.extractall(path=get_full_data_path(foldername))
+                ) as zip_file:
+                    zip_file.extractall(path=get_full_data_path(foldername))
 
             if found:
                 local_db["_default"][found]["version"] = version
