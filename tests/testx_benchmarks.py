@@ -13,7 +13,7 @@ with open("./tests/data/sentences.yml", "r", encoding="utf8") as stream:
     TEST_DATA = yaml.safe_load(stream)
 
 
-class BenchmarksTestCase(unittest.TestCase):
+class BenchmarksTestCaseX(unittest.TestCase):
     def test_preprocessing(self):
         self.assertIsNotNone(
             word_tokenization.preprocessing(

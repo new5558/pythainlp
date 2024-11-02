@@ -4,10 +4,12 @@
 """
 Command line for PyThaiNLP's taggers.
 """
+
 import argparse
 
 from pythainlp import cli
 from pythainlp.tag import pos_tag
+from pythainlp.tools import safe_print
 
 
 class SubAppBase:
@@ -34,7 +36,7 @@ class SubAppBase:
         result = self.run(tokens)
 
         for word, tag in result:
-            print(word, "/", tag)
+            safe_print(word + " / " + tag)
 
 
 class POSTaggingApp(SubAppBase):

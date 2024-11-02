@@ -4,6 +4,7 @@
 """
 Command line for PyThaiNLP's dataset/corpus management.
 """
+
 import argparse
 
 from pythainlp import corpus

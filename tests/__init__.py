@@ -12,7 +12,7 @@ from unittest import TestLoader, TestSuite
 # Names of module to be tested
 test_packages: list[str] = [
     "tests.test_ancient",
-    # "tests.test_cli",
+    "tests.test_cli",
     # "tests.test_corpus",
     "tests.test_khavee",
     "tests.test_morpheme",

@@ -6,9 +6,11 @@ Command line for PyThaiNLP's soundex.
 
 It takes input text from the command line.
 """
+
 import argparse
 
 from pythainlp.soundex import DEFAULT_SOUNDEX_ENGINE, soundex
+from pythainlp.tools import safe_print
 
 
 class App:
@@ -47,4 +49,5 @@ class App:
         args = parser.parse_args(argv[2:])
 
         sdx = soundex(args.text, engine=args.algorithm)
-        print(sdx)
+
+        safe_print(sdx)
