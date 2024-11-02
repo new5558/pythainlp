@@ -24,12 +24,10 @@ class CliTestCase(unittest.TestCase):
         self.assertEqual(ex.exception.code, 2)
 
         with self.assertRaises((ArgumentError, SystemExit)):
-            self.assertIsNone(__main__.main(["thainlp"]))
+            __main__.main(["thainlp"])
 
         with self.assertRaises((ArgumentError, SystemExit)):
-            self.assertIsNone(
-                __main__.main(["thainlp", "NOT_EXIST", "command"])
-            )
+            __main__.main(["thainlp", "NOT_EXIST", "command"])
 
         self.assertIsNone(__main__.main(["thainlp", "data", "path"]))
 
