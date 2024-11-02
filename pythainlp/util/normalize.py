@@ -258,39 +258,54 @@ def expand_maiyamok(sent: Union[str, List[str]]) -> List[str]:
     repetition. This function preprocesses Thai text by replacing
     Maiyamok with a word being repeated.
 
-    :param Union[str, List[str]] sent: input sentence (list or str)
+    :param Union[str, List[str]] sent: sentence (list or string)
     :return: list of words
     :rtype: List[str]
 
     :Example:
     ::
-
         from pythainlp.util import expand_maiyamok
 
-        expand_maiyamok("เด็กๆกิน")
-        # output: ['เด็ก', 'เด็ก', 'กิน']
+        expand_maiyamok("คนๆนก")
+        # output: ['คน', 'คน', 'นก']
     """
     if isinstance(sent, str):
         sent = word_tokenize(sent)
-    _list_word: list[str] = []
-    i = 0
-    for j, text in enumerate(sent):
-        if text.isspace() and "ๆ" in sent[j + 1]:
+
+    # Breaks Maiyamok that attached to others, e.g. "นกๆๆ", "นกๆ ๆ", "นกๆคน"
+    temp_toks: list[str] = []
+    for _, token in enumerate(sent):
+        toks = re.split(r"(ๆ)", token)
+        toks = [tok for tok in toks if tok]  # remove empty string ("")
+        temp_toks.extend(toks)
+    sent = temp_toks
+
+    output_toks: list[str] = []
+
+    yamok = "ๆ"
+    yamok_count = 0
+    len_sent = len(sent)
+    for i in range(len_sent - 1, -1, -1):  # do it backward
+        if yamok_count == 0 or (i + 1 >= len_sent):
+            if sent[i] == yamok:
+                yamok_count = yamok_count + 1
+            else:
+                output_toks.append(sent[i])
             continue
-        if " ๆ" in text:
-            text = text.replace(" ๆ", "ๆ")
-        if "ๆ" == text:
-            text = _list_word[i - 1]
-        elif "ๆ" in text:
-            count = text.count("ๆ")
-            text = _list_word[i - 1]
-            for _ in range(count):
-                _list_word.append(text)
-            i += 1
-            continue
-        _list_word.append(text)
-        i += 1
-    return _list_word
+
+        if sent[i] == yamok:
+            yamok_count = yamok_count + 1
+        else:
+            if sent[i].isspace():
+                if yamok_count > 0:  # remove space before yamok
+                    continue
+                else:  # with preprocessing above, this should not happen
+                    output_toks.append(sent[i])
+            else:
+                output_toks.extend([sent[i]] * (yamok_count + 1))
+                yamok_count = 0
+
+    return output_toks[::-1]
 
 
 def maiyamok(sent: Union[str, List[str]]) -> List[str]:
@@ -303,7 +318,7 @@ def maiyamok(sent: Union[str, List[str]]) -> List[str]:
     repetition. This function preprocesses Thai text by replacing
     Maiyamok with a word being repeated.
 
-    :param Union[str, List[str]] sent: input sentence (list or str)
+    :param Union[str, List[str]] sent: sentence (list or string)
     :return: list of words
     :rtype: List[str]
 
@@ -312,8 +327,8 @@ def maiyamok(sent: Union[str, List[str]]) -> List[str]:
 
         from pythainlp.util import expand_maiyamok
 
-        expand_maiyamok("เด็กๆกิน")
-        # output: ['เด็ก', 'เด็ก', 'กิน']
+        expand_maiyamok("คนๆนก")
+        # output: ['คน', 'คน', 'นก']
     """
     warn_deprecation(
         "pythainlp.util.maiyamok", "pythainlp.util.expand_maiyamok"
