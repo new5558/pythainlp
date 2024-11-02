@@ -3,7 +3,7 @@
   <h1>PyThaiNLP: Thai Natural Language Processing in Python</h1>
   <a href="https://www.repostatus.org/#active"><img alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed." src="https://www.repostatus.org/badges/latest/active.svg"/></a>
   <a href="https://pypi.python.org/pypi/pythainlp"><img alt="pypi" src="https://img.shields.io/pypi/v/pythainlp.svg"/></a>
-  <a href="https://www.python.org/downloads/release/python-370/"><img alt="Python 3.8" src="https://img.shields.io/badge/python-3.8-blue.svg"/></a>
+  <a href="https://www.python.org/downloads/"><img alt="Python 3.9" src="https://img.shields.io/badge/python-3.9-blue.svg"/></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
   <a href="https://www.codacy.com/gh/PyThaiNLP/pythainlp/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=PyThaiNLP/pythainlp&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/5821a0de122041c79999bbb280230ffb"/></a>
   <a href="https://coveralls.io/github/PyThaiNLP/pythainlp?branch=dev"><img alt="Coverage Status" src="https://coveralls.io/repos/github/PyThaiNLP/pythainlp/badge.svg?branch=dev"/></a>
@@ -27,7 +27,8 @@ PyThaiNLP เป็นไลบารีภาษาไพทอนสำหร�
 
 ## Getting Started
 
-- PyThaiNLP requires Python 3.7+. Python 2.7 users can use PyThaiNLP 1.6. See [2.0 change log](https://github.com/PyThaiNLP/pythainlp/issues/118) | [Upgrading from 1.7](https://pythainlp.org/docs/2.0/notes/pythainlp-1_7-2_0.html) | [Upgrading ThaiNER from 1.7](https://github.com/PyThaiNLP/pythainlp/wiki/Upgrade-ThaiNER-from-PyThaiNLP-1.7-to-PyThaiNLP-2.0)
+- PyThaiNLP requires Python 3.7+.
+  - Python 2.7 users can use PyThaiNLP 1.6. See [2.0 change log](https://github.com/PyThaiNLP/pythainlp/issues/118) | [Upgrading from 1.7](https://pythainlp.org/docs/2.0/notes/pythainlp-1_7-2_0.html) | [Upgrading ThaiNER from 1.7](https://github.com/PyThaiNLP/pythainlp/wiki/Upgrade-ThaiNER-from-PyThaiNLP-1.7-to-PyThaiNLP-2.0)
 - [PyThaiNLP Get Started notebook](https://pythainlp.org/tutorials/notebooks/pythainlp_get_started.html) | [API document](https://pythainlp.org/docs) | [Tutorials](https://pythainlp.org/tutorials)
 - [Official website](https://pythainlp.org/) | [PyPI](https://pypi.org/project/pythainlp/) | [Facebook page](https://www.facebook.com/pythainlp/)
 - [Who uses PyThaiNLP?](https://github.com/PyThaiNLP/pythainlp/blob/dev/INTHEWILD.md)

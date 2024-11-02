@@ -13,6 +13,10 @@ from pythainlp.cli.tokenize import App as TokenizeApp
 
 
 class CliTestCase(unittest.TestCase):
+    def test_cli(self):
+        with self.assertRaises((ArgumentError, SystemExit)):
+            cli.exit_if_empty("", None)
+
     def test_cli_main(self):
         # call with no argument, should exit with 2
         with self.assertRaises(SystemExit) as ex:
@@ -20,12 +24,10 @@ class CliTestCase(unittest.TestCase):
         self.assertEqual(ex.exception.code, 2)
 
         with self.assertRaises((ArgumentError, SystemExit)):
-            self.assertIsNone(__main__.main(["thainlp"]))
+            __main__.main(["thainlp"])
 
         with self.assertRaises((ArgumentError, SystemExit)):
-            self.assertIsNone(
-                __main__.main(["thainlp", "NOT_EXIST", "command"])
-            )
+            __main__.main(["thainlp", "NOT_EXIST", "command"])
 
         self.assertIsNone(__main__.main(["thainlp", "data", "path"]))
 
