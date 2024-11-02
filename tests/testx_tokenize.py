@@ -35,7 +35,7 @@ from .test_tokenize import (
 
 # Tests for functions that need external imports
 class TokenizeTestCaseX(unittest.TestCase):
-    def testx_subword_tokenize(self):
+    def test_subword_tokenize(self):
         self.assertEqual(subword_tokenize(None, engine="ssg"), [])
         self.assertEqual(subword_tokenize(None, engine="han_solo"), [])
         self.assertEqual(
@@ -88,7 +88,7 @@ class TokenizeTestCaseX(unittest.TestCase):
             subword_tokenize("โควิด19", engine="wangchanberta"), list
         )
 
-    def testx_sent_tokenize(self):
+    def test_sent_tokenize(self):
         # Use default engine (crfcut)
         self.assertEqual(sent_tokenize(None), [])
         self.assertEqual(sent_tokenize(""), [])
@@ -188,7 +188,7 @@ class TokenizeTestCaseX(unittest.TestCase):
         #     ),
         # )
 
-    def testx_word_tokenize(self):
+    def test_word_tokenize(self):
         self.assertIsNotNone(word_tokenize(TEXT_1, engine="nlpo3"))
         self.assertIsNotNone(word_tokenize(TEXT_1, engine="attacut"))
         self.assertIsNotNone(word_tokenize(TEXT_1, engine="deepcut"))
