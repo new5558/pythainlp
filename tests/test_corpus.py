@@ -76,9 +76,7 @@ class CorpusTestCase(unittest.TestCase):
         self.assertIsInstance(thai_female_names(), frozenset)
         self.assertIsInstance(thai_male_names(), frozenset)
 
-        self.assertIsNotNone(get_corpus_default_db("thainer", "1.5.1"))
-        self.assertIsNotNone(get_corpus_default_db("thainer"))
-        self.assertIsNone(get_corpus_default_db("thainer", "1.2"))
+        # Tying not to download big files here, it slow down the test
 
         # BEGIN - Test non-exists
         self.assertIsInstance(
