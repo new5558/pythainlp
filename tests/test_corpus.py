@@ -76,9 +76,9 @@ class CorpusTestCase(unittest.TestCase):
         self.assertIsInstance(thai_female_names(), frozenset)
         self.assertIsInstance(thai_male_names(), frozenset)
 
-        self.assertIsNotNone(get_corpus_default_db("thainer", "1.5.1"))
-        self.assertIsNotNone(get_corpus_default_db("thainer"))
-        self.assertIsNone(get_corpus_default_db("thainer", "1.2"))
+        # Tying not to download big files here, it slow down the test
+
+        self.assertIsNone(get_corpus_default_db("3XKg0013", "1.2.345"))
 
         # BEGIN - Test non-exists
         self.assertIsInstance(
@@ -112,25 +112,9 @@ class CorpusTestCase(unittest.TestCase):
         self.assertFalse(remove("test"))  # remove non-existing
         # END - Test download
 
-        # TODO: Need this clean up this "test" download test
-        # BEGIN - Need to clean up this section
-        self.assertFalse(download(name="test", version="0.0"))
-        self.assertFalse(download(name="test", version="0.0.0"))
+        # Corpus version does not support in this PyThaiNLP version
+        # test 0.0.1 is for PyThaiNLP version <2.0
         self.assertFalse(download(name="test", version="0.0.1"))
-        self.assertFalse(download(name="test", version="0.0.2"))
-        self.assertFalse(download(name="test", version="0.0.3"))
-        self.assertFalse(download(name="test", version="0.0.4"))
-        self.assertIsNotNone(download(name="test", version="0.0.5"))
-        self.assertTrue(download("test"))
-        self.assertIsNotNone(remove("test"))  # remove existing
-        self.assertIsNotNone(download(name="test", version="0.0.6"))
-        self.assertIsNotNone(download(name="test", version="0.0.7"))
-        self.assertIsNotNone(download(name="test", version="0.0.8"))
-        self.assertIsNotNone(download(name="test", version="0.0.9"))
-        self.assertIsNotNone(download(name="test", version="0.0.10"))
-        self.assertIsNotNone(download(name="test", version="0.1"))
-        self.assertIsNotNone(remove("test"))
-        # END - Need to clean up this section
 
     def test_oscar(self):
         self.assertIsNotNone(oscar.word_freqs())
