@@ -251,45 +251,45 @@ def normalize(text: str) -> str:
 
 
 def expand_maiyamok(sent: Union[str, List[str]]) -> List[str]:
-    """
-    Expand Maiyamok.
-
-    Maiyamok (ๆ) (Unicode U+0E46) is a Thai character indicating word
-    repetition. This function preprocesses Thai text by replacing
-    Maiyamok with a word being repeated.
-
-    :param Union[str, List[str]] sent: input sentence (list or str)
-    :return: list of words
-    :rtype: List[str]
-
-    :Example:
-    ::
-
-        from pythainlp.util import expand_maiyamok
-
-        expand_maiyamok("เด็กๆกิน")
-        # output: ['เด็ก', 'เด็ก', 'กิน']
-    """
     if isinstance(sent, str):
         sent = word_tokenize(sent)
+
+    # Breaks Maiyamok that attached to others, e.g. "นกๆๆ", "นกๆ ๆ", "นกๆคน"
+    temp_toks: list[str] = []
+    for _, token in enumerate(sent):
+        toks = re.split(r"(ๆ)", token)
+        toks = [tok for tok in toks if tok]  # remove empty string ("")
+        temp_toks.extend(toks)
+    sent = temp_toks
+
     output_toks: list[str] = []
-    i = 0
-    for j, token in enumerate(sent):
-        if token.isspace() and "ๆ" in sent[j + 1]:
+
+    yamok = "ๆ"
+    yamok_count = 0
+    len_sent = len(sent)
+    for i in range(len_sent - 1, -1, -1):  # do it backward
+        print(i, sent[i])
+        print(i, output_toks)
+        if yamok_count == 0 or (i + 1 >= len_sent):
+            if sent[i] == yamok:
+                yamok_count = yamok_count + 1
+            else:
+                output_toks.append(sent[i])
             continue
-        token = re.sub(r"\s+ๆ", "ๆ", token)
-        if "ๆ" == token:
-            token = output_toks[i - 1]
-        elif "ๆ" in token:
-            count = token.count("ๆ")
-            token = output_toks[i - 1]
-            for _ in range(count):
-                output_toks.append(token)
-            i += 1
-            continue
-        output_toks.append(token)
-        i += 1
-    return output_toks
+
+        if sent[i] == yamok:
+            yamok_count = yamok_count + 1
+        else:
+            if sent[i].isspace():
+                if yamok_count > 0:  # remove space before yamok
+                    continue
+                else:  # with preprocessing above, this should not happen
+                    output_toks.append(sent[i])
+            else:
+                output_toks.extend([sent[i]] * (yamok_count + 1))
+                yamok_count = 0
+
+    return output_toks[::-1]
 
 
 def maiyamok(sent: Union[str, List[str]]) -> List[str]:
