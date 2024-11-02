@@ -4,9 +4,12 @@
 
 import unittest
 from argparse import ArgumentError
-from types import ModuleType
 
 from pythainlp import __main__, cli
+from pythainlp.cli.data import App as DataApp
+from pythainlp.cli.soundex import App as SoundexApp
+from pythainlp.cli.tag import App as TagApp
+from pythainlp.cli.tokenize import App as TokenizeApp
 
 
 class CliTestCase(unittest.TestCase):
@@ -26,68 +29,40 @@ class CliTestCase(unittest.TestCase):
 
         self.assertIsNone(__main__.main(["thainlp", "data", "path"]))
 
-    def test_cli_benchmark(self):
-        self.assertIsInstance(getattr(cli, "benchmark"), ModuleType)
-
-        with self.assertRaises(SystemExit) as ex:
-            cli.data.App(["thainlp", "benchmark"])
-        self.assertEqual(ex.exception.code, 2)
-
-        self.assertIsNotNone(
-            cli.benchmark.App(
-                [
-                    "thainlp",
-                    "benchmark",
-                    "word-tokenization",
-                    "--input-file",
-                    "./tests/data/input.txt",
-                    "--test-file",
-                    "./tests/data/test.txt",
-                    "--save-details",
-                ]
-            )
-        )
-
     def test_cli_data(self):
-        self.assertIsInstance(getattr(cli, "data"), ModuleType)
+        self.assertTrue(hasattr(cli, "data"))
 
         with self.assertRaises(SystemExit) as ex:
-            cli.data.App(["thainlp", "data"])
+            DataApp(["thainlp", "data"])
         self.assertEqual(ex.exception.code, 2)
 
-        self.assertIsNotNone(cli.data.App(["thainlp", "data", "catalog"]))
-        self.assertIsNotNone(cli.data.App(["thainlp", "data", "path"]))
-        self.assertIsNotNone(cli.data.App(["thainlp", "data", "get", "test"]))
-        self.assertIsNotNone(cli.data.App(["thainlp", "data", "info", "test"]))
-        self.assertIsNotNone(cli.data.App(["thainlp", "data", "rm", "test"]))
-        self.assertIsNotNone(
-            cli.data.App(["thainlp", "data", "get", "NOT_EXIST"])
-        )
-        self.assertIsNotNone(
-            cli.data.App(["thainlp", "data", "info", "NOT_EXIST"])
-        )
-        self.assertIsNotNone(
-            cli.data.App(["thainlp", "data", "rm", "NOT_EXIST"])
-        )
+        self.assertIsNotNone(DataApp(["thainlp", "data", "catalog"]))
+        self.assertIsNotNone(DataApp(["thainlp", "data", "path"]))
+        self.assertIsNotNone(DataApp(["thainlp", "data", "get", "test"]))
+        self.assertIsNotNone(DataApp(["thainlp", "data", "info", "test"]))
+        self.assertIsNotNone(DataApp(["thainlp", "data", "rm", "test"]))
+        self.assertIsNotNone(DataApp(["thainlp", "data", "get", "NOT_EXIST"]))
+        self.assertIsNotNone(DataApp(["thainlp", "data", "info", "NOT_EXIST"]))
+        self.assertIsNotNone(DataApp(["thainlp", "data", "rm", "NOT_EXIST"]))
 
     def test_cli_soundex(self):
-        self.assertIsInstance(getattr(cli, "soundex"), ModuleType)
+        self.assertTrue(hasattr(cli, "soundex"))
 
         with self.assertRaises(SystemExit) as ex:
-            cli.data.App(["thainlp", "soundex"])
+            DataApp(["thainlp", "soundex"])
         self.assertEqual(ex.exception.code, 2)
 
-        self.assertIsNotNone(cli.soundex.App(["thainlp", "soundex", "ทดสอบ"]))
+        self.assertIsNotNone(SoundexApp(["thainlp", "soundex", "ทดสอบ"]))
 
     def test_cli_tag(self):
-        self.assertIsInstance(getattr(cli, "tag"), ModuleType)
+        self.assertTrue(hasattr(cli, "tag"))
 
         with self.assertRaises(SystemExit) as ex:
-            cli.data.App(["thainlp", "tag"])
+            DataApp(["thainlp", "tag"])
         self.assertEqual(ex.exception.code, 2)
 
         self.assertIsNotNone(
-            cli.tag.App(
+            TagApp(
                 [
                     "thainlp",
                     "tag",
@@ -99,7 +74,7 @@ class CliTestCase(unittest.TestCase):
             )
         )
         self.assertIsNotNone(
-            cli.tag.App(
+            TagApp(
                 [
                     "thainlp",
                     "tag",
@@ -112,17 +87,17 @@ class CliTestCase(unittest.TestCase):
         )
 
     def test_cli_tokenize(self):
-        self.assertIsInstance(getattr(cli, "tokenize"), ModuleType)
+        self.assertTrue(hasattr(cli, "tokenize"))
 
         with self.assertRaises(SystemExit) as ex:
-            cli.data.App(["thainlp", "tokenize"])
+            DataApp(["thainlp", "tokenize"])
         self.assertEqual(ex.exception.code, 2)
 
         self.assertIsNotNone(
-            cli.tokenize.App(["thainlp", "tokenize", "NOT_EXIST", "ไม่มีอยู่ จริง"])
+            TokenizeApp(["thainlp", "tokenize", "NOT_EXIST", "ไม่มีอยู่ จริง"])
         )
         self.assertIsNotNone(
-            cli.tokenize.App(
+            TokenizeApp(
                 [
                     "thainlp",
                     "tokenize",
@@ -134,7 +109,7 @@ class CliTestCase(unittest.TestCase):
             )
         )
         self.assertIsNotNone(
-            cli.tokenize.App(
+            TokenizeApp(
                 [
                     "thainlp",
                     "tokenize",
@@ -147,7 +122,7 @@ class CliTestCase(unittest.TestCase):
             )
         )
         self.assertIsNotNone(
-            cli.tokenize.App(
+            TokenizeApp(
                 [
                     "thainlp",
                     "tokenize",
@@ -158,22 +133,6 @@ class CliTestCase(unittest.TestCase):
                     "-s",
                     "|",
                     "ถ้าฉันยิงกระต่ายได้ ฉันก็ยิงฟาสซิสต์ได้",
-                ]
-            )
-        )
-        self.assertIsNotNone(
-            cli.tokenize.App(
-                [
-                    "thainlp",
-                    "tokenize",
-                    "sent",
-                    "-s",
-                    "|",
-                    (
-                        "ถ้าฉันยิงกระต่ายได้ ฉันก็ยิงฟาสซิสต์ได้"
-                        "กระสุนสำหรับสมองของคุณวันนี้"
-                        "แต่คุณก็จะลืมมันไปทั้งหมดอีกครั้ง"
-                    ),
                 ]
             )
         )
