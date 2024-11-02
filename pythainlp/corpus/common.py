@@ -339,7 +339,7 @@ def thai_synonym() -> dict:
     warn_deprecation(
         "pythainlp.corpus.thai_synonym",
         "pythainlp.corpus.thai_synonyms",
-        "5.1",
+        "5.2",
     )
     return thai_synonyms()
 
