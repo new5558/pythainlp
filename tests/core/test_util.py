@@ -762,9 +762,7 @@ class UtilTestCase(unittest.TestCase):
         self.assertEqual(convert_years("242", src="re", target="ad"), "2023")
         self.assertEqual(convert_years("242", src="re", target="ah"), "1444")
         with self.assertRaises(NotImplementedError):
-            self.assertIsNotNone(
-                convert_years("2023", src="cat", target="dog")
-            )
+            convert_years("2023", src="cat", target="dog")
 
     def test_nectec_to_ipa(self):
         self.assertEqual(nectec_to_ipa("kl-uua-j^-2"), "kl uua j ˥˩")
