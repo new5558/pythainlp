@@ -10,7 +10,7 @@ from nlpo3 import segment as nlpo3_segment
 from pythainlp.corpus import path_pythainlp_corpus
 from pythainlp.corpus.common import _THAI_WORDS_FILENAME
 
-_NLPO3_DEFAULT_DICT_NAME = "_67a47bf9"
+_NLPO3_DEFAULT_DICT_NAME = "_67a47bf9"  # supposed to be unique
 _NLPO3_DEFAULT_DICT = nlpo3_load_dict(
     path_pythainlp_corpus(_THAI_WORDS_FILENAME), _NLPO3_DEFAULT_DICT_NAME
 )

@@ -4,6 +4,7 @@
 """
 Romanization of Thai words based on machine-learnt engine ("thai2rom")
 """
+
 import random
 
 import torch
@@ -120,12 +121,11 @@ class Encoder(nn.Module):
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, sequences, sequences_lengths):
-
         # sequences: (batch_size, sequence_length=MAX_LENGTH)
         # sequences_lengths: (batch_size)
 
         batch_size = sequences.size(0)
-        self.hidden = self.init_hidden(batch_size)
+        hidden = self.init_hidden(batch_size)
 
         sequences_lengths = torch.flip(
             torch.sort(sequences_lengths).values, dims=(0,)
@@ -141,7 +141,7 @@ class Encoder(nn.Module):
             sequences, sequences_lengths.clone(), batch_first=True
         )
 
-        sequences_output, self.hidden = self.rnn(sequences_packed, self.hidden)
+        sequences_output, hidden = self.rnn(sequences_packed, hidden)
 
         sequences_output, _ = nn.utils.rnn.pad_packed_sequence(
             sequences_output, batch_first=True
@@ -150,7 +150,7 @@ class Encoder(nn.Module):
         sequences_output = sequences_output.index_select(
             0, index_unsort.clone().detach()
         )
-        return sequences_output, self.hidden
+        return sequences_output, hidden
 
     def init_hidden(self, batch_size):
         h_0 = torch.zeros(
@@ -190,9 +190,7 @@ class Attn(nn.Module):
             attn_energies = torch.bmm(
                 attn_energies.view(*encoder_outputs.size()),
                 hidden.transpose(1, 2),
-            ).squeeze(
-                2
-            )  # (batch_size,  sequence_len)
+            ).squeeze(2)  # (batch_size,  sequence_len)
         elif self.method == "concat":
             attn_energies = self.attn(
                 torch.cat(
@@ -235,7 +233,7 @@ class AttentionDecoder(nn.Module):
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, input_character, last_hidden, encoder_outputs, mask):
-        """ "Defines the forward computation of the decoder"""
+        """Defines the forward computation of the decoder"""
 
         # input_character: (batch_size, 1)
         # last_hidden: (batch_size, hidden_dim)
@@ -289,7 +287,6 @@ class Seq2Seq(nn.Module):
     def forward(
         self, source_seq, source_seq_len, target_seq, teacher_forcing_ratio=0.5
     ):
-
         # source_seq: (batch_size, MAX_LENGTH)
         # source_seq_len: (batch_size, 1)
         # target_seq: (batch_size, MAX_LENGTH)
@@ -356,4 +353,11 @@ _THAI_TO_ROM = ThaiTransliterator()
 
 
 def romanize(text: str) -> str:
+    """Romanize Thai text
+
+    :param text: Thai text to be romanized
+    :type text: str
+    :return: Roman characters representing the pronunciation of the Thai text
+    :rtype: str
+    """
     return _THAI_TO_ROM.romanize(text)
