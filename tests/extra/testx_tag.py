@@ -21,6 +21,8 @@ class TagTestCaseX(unittest.TestCase):
         tokens = ["ผม", "รัก", "คุณ"]
         self.assertIsNotNone(pos_tag(tokens, engine="tltk"))
 
+    # ### pythainlp.tag.named_entity
+
     def test_tltk_ner(self):
         self.assertEqual(tltk.get_ner(""), [])
         self.assertIsNotNone(tltk.get_ner("แมวทำอะไรตอนห้าโมงเช้า"))

@@ -11,6 +11,7 @@ from unittest import TestLoader, TestSuite
 
 # Names of module to be tested
 test_packages: list[str] = [
+    "tests.compact.testc_tag",
     "tests.compact.testc_tokenize",
     "tests.compact.testc_util",
 ]
