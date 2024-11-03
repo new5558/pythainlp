@@ -14,6 +14,7 @@ test_packages: list[str] = [
     "tests.compact.testc_parse",
     "tests.compact.testc_tokenize",
     "tests.compact.testc_tools",
+    "tests.compact.testc_transliterate",
     "tests.compact.testc_util",
 ]
 
