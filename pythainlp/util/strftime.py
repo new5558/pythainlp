@@ -4,6 +4,7 @@
 """
 Thai date/time formatting.
 """
+
 import warnings
 from datetime import datetime
 from string import digits
@@ -145,7 +146,8 @@ def _thai_strftime(dt_obj: datetime, fmt_char: str) -> str:
         )
     else:
         # No known localization available, use Python's default
-        str_ = _std_strftime(dt_obj, fmt_char)
+        # With a good _NEED_L10N and _EXTENSIONS, this should not happen
+        str_ = _std_strftime(dt_obj, fmt_char)  # pragma: no cover
 
     return str_
 
