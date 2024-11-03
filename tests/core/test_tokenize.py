@@ -551,6 +551,10 @@ class TokenizeTestCase(unittest.TestCase):
         self.assertEqual(list(tcc_p.tcc("")), [])
         self.assertEqual(tcc_p.tcc_pos(""), set())
 
+
+class DetokenizeTestCase(unittest.TestCase):
+    """Detokenize and regrouping test cases"""
+
     def test_word_detokenize(self):
         self.assertIsInstance(word_detokenize(["ผม", "5"]), str)
         self.assertEqual(

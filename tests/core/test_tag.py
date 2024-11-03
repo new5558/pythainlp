@@ -14,13 +14,13 @@ from pythainlp.tag import (
     unigram,
 )
 
+TEST_TOKENS = ["ผม", "รัก", "คุณ"]
+
 
 class TagTestCase(unittest.TestCase):
-    # ### pythainlp.tag.pos_tag
+    """Test pythainlp.tag.pos_tag"""
 
     def test_pos_tag(self):
-        tokens = ["ผม", "รัก", "คุณ"]
-
         self.assertEqual(pos_tag(None), [])
         self.assertEqual(pos_tag([]), [])
         self.assertEqual(
@@ -40,15 +40,17 @@ class TagTestCase(unittest.TestCase):
         self.assertEqual(unigram.tag(None, corpus="tud"), [])
         self.assertEqual(unigram.tag([], corpus="tud"), [])
         self.assertIsNotNone(
-            pos_tag(tokens, engine="unigram", corpus="orchid")
+            pos_tag(TEST_TOKENS, engine="unigram", corpus="orchid")
         )
         self.assertIsNotNone(
-            pos_tag(tokens, engine="unigram", corpus="orchid_ud")
+            pos_tag(TEST_TOKENS, engine="unigram", corpus="orchid_ud")
         )
-        self.assertIsNotNone(pos_tag(tokens, engine="unigram", corpus="pud"))
+        self.assertIsNotNone(
+            pos_tag(TEST_TOKENS, engine="unigram", corpus="pud")
+        )
         self.assertIsNotNone(pos_tag([""], engine="unigram", corpus="pud"))
         self.assertIsNotNone(
-            pos_tag(tokens, engine="unigram", corpus="blackboard")
+            pos_tag(TEST_TOKENS, engine="unigram", corpus="blackboard")
         )
         self.assertIsNotNone(
             pos_tag([""], engine="unigram", corpus="blackboard")
@@ -56,9 +58,13 @@ class TagTestCase(unittest.TestCase):
         self.assertIsNotNone(
             pos_tag([""], engine="unigram", corpus="blackboard_ud")
         )
-        self.assertIsNotNone(pos_tag(tokens, engine="unigram", corpus="tdtb"))
+        self.assertIsNotNone(
+            pos_tag(TEST_TOKENS, engine="unigram", corpus="tdtb")
+        )
         self.assertIsNotNone(pos_tag([""], engine="unigram", corpus="tdtb"))
-        self.assertIsNotNone(pos_tag(tokens, engine="unigram", corpus="tud"))
+        self.assertIsNotNone(
+            pos_tag(TEST_TOKENS, engine="unigram", corpus="tud")
+        )
         self.assertIsNotNone(pos_tag([""], engine="unigram", corpus="tud"))
         self.assertEqual(
             pos_tag(["คุณ", "กำลัง", "ประชุม"], engine="unigram"),
@@ -72,41 +78,6 @@ class TagTestCase(unittest.TestCase):
             pos_tag(["ความ", "พอเพียง"], corpus="orchid_ud")[0][1], "NOUN"
         )
 
-        self.assertEqual(perceptron.tag(None, corpus="orchid"), [])
-        self.assertEqual(perceptron.tag([], corpus="orchid"), [])
-        self.assertEqual(perceptron.tag(None, corpus="orchid_ud"), [])
-        self.assertEqual(perceptron.tag([], corpus="orchid_ud"), [])
-        self.assertEqual(perceptron.tag(None, corpus="pud"), [])
-        self.assertEqual(perceptron.tag([], corpus="pud"), [])
-        self.assertEqual(perceptron.tag(None, corpus="blackboard"), [])
-        self.assertEqual(perceptron.tag([], corpus="blackboard"), [])
-        self.assertEqual(perceptron.tag(None, corpus="tud"), [])
-        self.assertEqual(perceptron.tag([], corpus="tud"), [])
-        self.assertIsNotNone(
-            pos_tag(tokens, engine="perceptron", corpus="orchid")
-        )
-        self.assertIsNotNone(
-            pos_tag(tokens, engine="perceptron", corpus="orchid_ud")
-        )
-        self.assertIsNotNone(
-            pos_tag(tokens, engine="perceptron", corpus="pud")
-        )
-        self.assertIsNotNone(
-            pos_tag(tokens, engine="perceptron", corpus="blackboard")
-        )
-        self.assertIsNotNone(
-            pos_tag(tokens, engine="perceptron", corpus="blackboard_ud")
-        )
-        self.assertIsNotNone(
-            pos_tag(tokens, engine="perceptron", corpus="tdtb")
-        )
-        self.assertIsNotNone(
-            pos_tag(tokens, engine="perceptron", corpus="tdtb")
-        )
-        self.assertIsNotNone(
-            pos_tag(tokens, engine="perceptron", corpus="tud")
-        )
-
         self.assertEqual(pos_tag_sents(None), [])
         self.assertEqual(pos_tag_sents([]), [])
         self.assertEqual(
@@ -117,9 +88,53 @@ class TagTestCase(unittest.TestCase):
             ],
         )
 
-    # ### pythainlp.tag.PerceptronTagger
+
+class PerceptronTaggerTestCase(unittest.TestCase):
+    """Test pythainlp.tag.PerceptronTagger
+
+    :param unittest: _description_
+    :type unittest: _type_
+    """
 
     def test_perceptron_tagger(self):
+        self.assertEqual(perceptron.tag(None, corpus="orchid"), [])
+        self.assertEqual(perceptron.tag([], corpus="orchid"), [])
+        self.assertEqual(perceptron.tag(None, corpus="orchid_ud"), [])
+        self.assertEqual(perceptron.tag([], corpus="orchid_ud"), [])
+        self.assertEqual(perceptron.tag(None, corpus="pud"), [])
+        self.assertEqual(perceptron.tag([], corpus="pud"), [])
+        self.assertEqual(perceptron.tag(None, corpus="blackboard"), [])
+        self.assertEqual(perceptron.tag([], corpus="blackboard"), [])
+        self.assertEqual(perceptron.tag(None, corpus="tud"), [])
+        self.assertEqual(perceptron.tag([], corpus="tud"), [])
+
+        self.assertIsNotNone(
+            pos_tag(TEST_TOKENS, engine="perceptron", corpus="orchid")
+        )
+        self.assertIsNotNone(
+            pos_tag(TEST_TOKENS, engine="perceptron", corpus="orchid_ud")
+        )
+        self.assertIsNotNone(
+            pos_tag(TEST_TOKENS, engine="perceptron", corpus="pud")
+        )
+        self.assertIsNotNone(
+            pos_tag(TEST_TOKENS, engine="perceptron", corpus="blackboard")
+        )
+        self.assertIsNotNone(
+            pos_tag(TEST_TOKENS, engine="perceptron", corpus="blackboard_ud")
+        )
+        self.assertIsNotNone(
+            pos_tag(TEST_TOKENS, engine="perceptron", corpus="tdtb")
+        )
+        self.assertIsNotNone(
+            pos_tag(TEST_TOKENS, engine="perceptron", corpus="tdtb")
+        )
+        self.assertIsNotNone(
+            pos_tag(TEST_TOKENS, engine="perceptron", corpus="tud")
+        )
+
+    def test_perceptron_tagger_custom(self):
+        """Test pythainlp.tag.PerceptronTagger"""
         tagger = PerceptronTagger()
         # train data, with "กิน" > 20 instances to trigger conditions
         # in _make_tagdict()
@@ -182,7 +197,9 @@ class TagTestCase(unittest.TestCase):
         with self.assertRaises(IOError):
             tagger.load("ptagger_notexistX4AcOcX.pkl")  # file does not exist
 
-    # ### pythainlp.tag.locations
+
+class TagLocationsTestCase(unittest.TestCase):
+    """Test pythainlp.tag.locations"""
 
     def test_ner_locations(self):
         self.assertEqual(

@@ -2,6 +2,8 @@
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
 
+# Tests for tokenize functions that need "compact" dependencies
+
 import unittest
 
 from pythainlp.tokenize import (
@@ -23,8 +25,7 @@ from ..core.test_tokenize import (
 )
 
 
-# Tests for functions that need "compact" dependencies
-class TokenizeTestCaseCompact(unittest.TestCase):
+class WordTokenizeICUTestCase(unittest.TestCase):
     def test_icu(self):
         self.assertEqual(pyicu.segment(None), [])
         self.assertEqual(pyicu.segment(""), [])
@@ -33,6 +34,11 @@ class TokenizeTestCaseCompact(unittest.TestCase):
             ["ฉัน", "รัก", "ภาษา", "ไทย", "เพราะ", "ฉัน", "เป็น", "คน", "ไทย"],
         )
 
+    def test_word_tokenize_icu(self):
+        self.assertIsNotNone(word_tokenize(TEXT_1, engine="icu"))
+
+
+class SentTokenizeCRFCutTestCase(unittest.TestCase):
     def test_sent_tokenize(self):
         # Use default engine (crfcut)
         self.assertEqual(sent_tokenize(None), [])
@@ -67,6 +73,8 @@ class TokenizeTestCaseCompact(unittest.TestCase):
             [["ผม", "กิน", "ข้าว", " ", "\n", "เธอ", "เล่น", "เกม"]],
         )
 
+
+class SubwordTokenizeHanSoloTestCase(unittest.TestCase):
     def test_subword_tokenize(self):
         self.assertEqual(subword_tokenize(None, engine="han_solo"), [])
         self.assertEqual(
@@ -80,6 +88,3 @@ class TokenizeTestCaseCompact(unittest.TestCase):
         self.assertNotIn(
             "า", subword_tokenize("สวัสดีดาวอังคาร", engine="han_solo")
         )
-
-    def test_word_tokenize_icu(self):
-        self.assertIsNotNone(word_tokenize(TEXT_1, engine="icu"))
