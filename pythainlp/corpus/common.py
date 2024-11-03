@@ -273,12 +273,12 @@ def thai_dict() -> dict:
 
     import csv
 
-    _THAI_DICT = {"word": [], "meaning": []}
     path = get_corpus_path("thai_dict")
     if not path:
         return _THAI_DICT
     path = str(path)
 
+    _THAI_DICT = {"word": [], "meaning": []}
     with open(path, newline="\n", encoding="utf-8") as csvfile:
         reader = csv.DictReader(csvfile, delimiter=",")
         for row in reader:
@@ -331,12 +331,12 @@ def thai_synonyms() -> dict:
 
     import csv
 
-    _THAI_SYNONYMS = {"word": [], "pos": [], "synonym": []}
     path = get_corpus_path("thai_synonym")
     if not path:
         return _THAI_SYNONYMS
     path = str(path)
 
+    _THAI_SYNONYMS = {"word": [], "pos": [], "synonym": []}
     with open(path, newline="\n", encoding="utf-8") as csvfile:
         reader = csv.DictReader(csvfile, delimiter=",")
         for row in reader:
