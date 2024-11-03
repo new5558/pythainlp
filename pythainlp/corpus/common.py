@@ -6,6 +6,8 @@
 Common lists of words.
 """
 
+import ast
+
 __all__ = [
     "countries",
     "find_synonyms",
@@ -304,7 +306,7 @@ def thai_wsd_dict() -> dict:
     thai_wsd = thai_dict()
     _THAI_WSD_DICT = {"word": [], "meaning": []}
     for i, j in zip(thai_wsd["word"], thai_wsd["meaning"]):
-        all_value = list(eval(j).values())
+        all_value = list(ast.literal_eval(j).values())
         use = []
         for k in all_value:
             use.extend(k)
