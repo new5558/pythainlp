@@ -3,14 +3,12 @@
 import pickle
 import unittest
 
-# fastai
 import fastai
 import pandas as pd
 import torch
 from fastai.text import *
 
 from pythainlp.tokenize import THAI2FIT_TOKENIZER
-from pythainlp.ulmfit import *
 from pythainlp.ulmfit import (
     THWIKI_LSTM,
     ThaiTokenizer,
