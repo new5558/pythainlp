@@ -7,6 +7,7 @@ Text generator using n-gram language model
 codes are from
 https://towardsdatascience.com/understanding-word-n-grams-and-n-gram-probability-in-natural-language-processing-9d9eef0fa058
 """
+
 import random
 from typing import List, Union
 
@@ -41,11 +42,11 @@ class Unigram:
         for i in self.word:
             self.n += self.counts[i]
         self.prob = {i: self.counts[i] / self.n for i in self.word}
-        self._word_prob = {}
+        self._word_prob: dict = {}
 
     def gen_sentence(
         self,
-        start_seq: str = None,
+        start_seq: str = "",
         N: int = 3,
         prob: float = 0.001,
         output_str: bool = True,
@@ -70,7 +71,7 @@ class Unigram:
             gen.gen_sentence("แมว")
             # output: 'แมวเวลานะนั้น'
         """
-        if start_seq is None:
+        if not start_seq:
             start_seq = random.choice(self.word)
         rand_text = start_seq.lower()
         self._word_prob = {
@@ -86,25 +87,25 @@ class Unigram:
         self,
         text: str,
         N: int,
-        output_str: str,
+        output_str: bool,
         prob: float,
         duplicate: bool = False,
     ):
-        self.words = []
-        self.words.append(text)
-        self._word_list = list(self._word_prob.keys())
-        if N > len(self._word_list):
-            N = len(self._word_list)
+        words = []
+        words.append(text)
+        word_list = list(self._word_prob.keys())
+        if N > len(word_list):
+            N = len(word_list)
         for _ in range(N):
-            self._word = random.choice(self._word_list)
+            w = random.choice(word_list)
             if duplicate is False:
-                while self._word in self.words:
-                    self._word = random.choice(self._word_list)
-            self.words.append(self._word)
+                while w in words:
+                    w = random.choice(word_list)
+            words.append(w)
 
         if output_str:
-            return "".join(self.words)
-        return self.words
+            return "".join(words)
+        return words
 
 
 class Bigram:
@@ -141,7 +142,7 @@ class Bigram:
 
     def gen_sentence(
         self,
-        start_seq: str = None,
+        start_seq: str = "",
         N: int = 4,
         prob: float = 0.001,
         output_str: bool = True,
@@ -166,36 +167,33 @@ class Bigram:
             gen.gen_sentence("แมว")
             # output: 'แมวไม่ได้รับเชื้อมัน'
         """
-        if start_seq is None:
+        if not start_seq:
             start_seq = random.choice(self.words)
-        self.late_word = start_seq
-        self.list_word = []
-        self.list_word.append(start_seq)
+        late_word = start_seq
+        list_word = []
+        list_word.append(start_seq)
 
         for _ in range(N):
             if duplicate:
-                self._temp = [
-                    j for j in self.bi_keys if j[0] == self.late_word
-                ]
+                temp = [j for j in self.bi_keys if j[0] == late_word]
             else:
-                self._temp = [
+                temp = [
                     j
                     for j in self.bi_keys
-                    if j[0] == self.late_word and j[1] not in self.list_word
+                    if j[0] == late_word and j[1] not in list_word
                 ]
-            self._probs = [
-                self.prob(self.late_word, next_word[-1])
-                for next_word in self._temp
-            ]
-            self._p2 = [j for j in self._probs if j >= prob]
-            if len(self._p2) == 0:
+            probs = [self.prob(late_word, next_word[-1]) for next_word in temp]
+            p2 = [j for j in probs if j >= prob]
+            if len(p2) == 0:
                 break
-            self.items = self._temp[self._probs.index(random.choice(self._p2))]
-            self.late_word = self.items[-1]
-            self.list_word.append(self.late_word)
+            items = temp[probs.index(random.choice(p2))]
+            late_word = items[-1]
+            list_word.append(late_word)
+
         if output_str:
-            return "".join(self.list_word)
-        return self.list_word
+            return "".join(list_word)
+
+        return list_word
 
 
 class Trigram:
@@ -236,7 +234,7 @@ class Trigram:
 
     def gen_sentence(
         self,
-        start_seq: str = None,
+        start_seq: str = "",
         N: int = 4,
         prob: float = 0.001,
         output_str: bool = True,
@@ -261,37 +259,36 @@ class Trigram:
             gen.gen_sentence()
             # output: 'ยังทำตัวเป็นเซิร์ฟเวอร์คือ'
         """
-        if start_seq is None:
+        if not start_seq:
             start_seq = random.choice(self.bi_keys)
-        self.late_word = start_seq
-        self.list_word = []
-        self.list_word.append(start_seq)
+        late_word = start_seq
+        list_word = []
+        list_word.append(start_seq)
 
         for i in range(N):
             if duplicate:
-                self._temp = [
-                    j for j in self.ti_keys if j[:2] == self.late_word
-                ]
+                temp = [j for j in self.ti_keys if j[:2] == late_word]
             else:
-                self._temp = [
+                temp = [
                     j
                     for j in self.ti_keys
-                    if j[:2] == self.late_word and j[1:] not in self.list_word
+                    if j[:2] == late_word and j[1:] not in list_word
                 ]
-            self._probs = [
-                self.prob(word[0], word[1], word[2]) for word in self._temp
-            ]
-            self._p2 = [j for j in self._probs if j >= prob]
-            if len(self._p2) == 0:
+            probs = [self.prob(word[0], word[1], word[2]) for word in temp]
+            p2 = [j for j in probs if j >= prob]
+            if len(p2) == 0:
                 break
-            self.items = self._temp[self._probs.index(random.choice(self._p2))]
-            self.late_word = self.items[1:]
-            self.list_word.append(self.late_word)
-        self.listdata = []
-        for i in self.list_word:
+            items = temp[probs.index(random.choice(p2))]
+            late_word = items[1:]
+            list_word.append(late_word)
+
+        listdata = []
+        for i in list_word:
             for j in i:
-                if j not in self.listdata:
-                    self.listdata.append(j)
+                if j not in listdata:
+                    listdata.append(j)
+
         if output_str:
-            return "".join(self.listdata)
-        return self.listdata
+            return "".join(listdata)
+
+        return listdata
