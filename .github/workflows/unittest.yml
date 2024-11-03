@@ -100,9 +100,9 @@ jobs:
       # Test cases loaded is defined in __init__.py in the tests directory.
       # See also tests/README.md
     - name: Coverage report
-      if: matrix.python-version == env.PYTHON_VERSION_LATEST
+      if: matrix.os == 'ubuntu-latest' && matrix.python-version == env.PYTHON_VERSION_LATEST
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_SERVICE_NAME: github
       run: coveralls
-      # Only submit a report from the latest Python version
+      # Only submit a report from the latest Python version on ubuntu-latest.
