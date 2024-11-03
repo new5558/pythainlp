@@ -11,7 +11,7 @@ from pythainlp.tokenize import (
     word_tokenize,
 )
 
-from ..test_tokenize import (
+from ..core.test_tokenize import (
     SENT_1,
     SENT_1_TOKS,
     SENT_2,
