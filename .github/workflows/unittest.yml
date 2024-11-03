@@ -25,6 +25,8 @@ jobs:
       PYICU_WIN_VER: 2.14
       INSTALL_TORCH: false
       INSTALL_FULL_DEPS: false
+      PYTHON_VERSION_LATEST: "3.13"
+      PYTHON_VERSION_LATEST_2: "3.12"
 
     steps:
     - name: Checkout
@@ -71,10 +73,10 @@ jobs:
         SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL: True
       run: pip install -r docker_requirements.txt
     - name: Install PyThaiNLP + dependencies (minimum)
-      if: matrix.python-version != '3.12' && matrix.python-version != '3.13'
+      if: matrix.python-version != env.PYTHON_VERSION_LATEST && matrix.python-version != env.PYTHON_VERSION_LATEST_2
       run: pip install .
     - name: Install PyThaiNLP + dependencies (compact)
-      if: matrix.python-version == '3.12' || matrix.python-version == '3.13'
+      if: matrix.python-version == env.PYTHON_VERSION_LATEST || matrix.python-version == env.PYTHON_VERSION_LATEST_2
       run: pip install ".[compact]"
       # If you want to install a safe small set of optional dependencies, use:
       # pip install ".[compact]"
@@ -83,23 +85,24 @@ jobs:
       # of dependencies to avoid the conflict between dependencies.
       # See: https://github.com/PyThaiNLP/pythainlp/issues/935
     - name: Unit test (core)
-      if: matrix.python-version != '3.12' && matrix.python-version != '3.13'
+      if: matrix.python-version != env.PYTHON_VERSION_LATEST && matrix.python-version != env.PYTHON_VERSION_LATEST_2
       env:
         PYTHONIOENCODING: utf-8
       run: coverage run -m unittest tests.core
     - name: Unit test (core + compact)
-      if: matrix.python-version == '3.12' || matrix.python-version == '3.13'
+      if: matrix.python-version == env.PYTHON_VERSION_LATEST || matrix.python-version == env.PYTHON_VERSION_LATEST_2
       env:
         PYTHONIOENCODING: utf-8
       run: coverage run -m unittest tests.core tests.compact
+      # Only test "compact" set with the latest two stable Python versions.
       # Use 'unittest <test_module>' instead of 'unittest discover' to avoid
       # loading tests with dependencies more than expected.
       # Test cases loaded is defined in __init__.py in the tests directory.
       # See also tests/README.md
     - name: Coverage report
-      if: matrix.python-version == '3.13'
+      if: matrix.python-version == env.PYTHON_VERSION_LATEST
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_SERVICE_NAME: github
       run: coveralls
-      # Submit only from the latest Python version
+      # Only submit a report from the latest Python version
