@@ -20,6 +20,8 @@ class TagTestCaseX(unittest.TestCase):
     def test_pos_tag(self):
         tokens = ["ผม", "รัก", "คุณ"]
         self.assertIsNotNone(pos_tag(tokens, engine="tltk"))
+        with self.assertRaises(ValueError):
+            tltk.pos_tag(tokens, corpus="blackboard")
 
     # ### pythainlp.tag.named_entity
 
