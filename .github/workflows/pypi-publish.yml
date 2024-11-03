@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
+# SPDX-License-Identifier: CC0-1.0
+
 name: Upload package to PyPI
 
 on:

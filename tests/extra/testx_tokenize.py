@@ -2,6 +2,8 @@
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
 
+# Tests for tokenize functions that need extra dependencies
+
 import unittest
 
 from pythainlp.tokenize import (
@@ -20,7 +22,7 @@ from pythainlp.tokenize import (
 )
 from pythainlp.tokenize import clause_tokenize as sent_clause_tokenize
 
-from ..test_tokenize import (
+from ..core.test_tokenize import (
     SENT_1,
     SENT_2,
     SENT_3,
@@ -29,137 +31,13 @@ from ..test_tokenize import (
 )
 
 
-# Tests for functions that need more dependencies
-class TokenizeTestCaseX(unittest.TestCase):
-    def test_subword_tokenize(self):
-        self.assertEqual(subword_tokenize(None, engine="ssg"), [])
-        self.assertEqual(
-            subword_tokenize("แมวกินปลา", engine="ssg"), ["แมว", "กิน", "ปลา"]
-        )
-        self.assertIn("ดาว", subword_tokenize("สวัสดีดาวอังคาร", engine="ssg"))
-        self.assertNotIn("า", subword_tokenize("สวัสดีดาวอังคาร", engine="ssg"))
+class ClauseTokenizeTestCase(unittest.TestCase):
+    def test_clause_tokenize(self):
+        self.assertIsNotNone(sent_clause_tokenize(["ฉัน", "ทดสอบ"]))
+        self.assertIsInstance(sent_clause_tokenize(["ฉัน", "ทดสอบ"]), list)
 
-        self.assertEqual(subword_tokenize(None, engine="tltk"), [])
-        self.assertEqual(subword_tokenize("", engine="tltk"), [])
-        self.assertIsInstance(
-            subword_tokenize("สวัสดิีดาวอังคาร", engine="tltk"), list
-        )
-        self.assertNotIn("า", subword_tokenize("สวัสดีดาวอังคาร", engine="tltk"))
-        self.assertIsInstance(subword_tokenize("โควิด19", engine="tltk"), list)
 
-        self.assertEqual(subword_tokenize(None, engine="phayathai"), [])
-        self.assertEqual(subword_tokenize("", engine="phayathai"), [])
-        self.assertIsInstance(
-            subword_tokenize("สวัสดิีดาวอังคาร", engine="phayathai"), list
-        )
-        self.assertNotIn(
-            "า", subword_tokenize("สวัสดีดาวอังคาร", engine="phayathai")
-        )
-        self.assertIsInstance(
-            subword_tokenize("โควิด19", engine="phayathai"), list
-        )
-
-        self.assertEqual(subword_tokenize(None, engine="wangchanberta"), [])
-        self.assertEqual(subword_tokenize("", engine="wangchanberta"), [])
-        self.assertIsInstance(
-            subword_tokenize("สวัสดิีดาวอังคาร", engine="wangchanberta"), list
-        )
-        self.assertNotIn(
-            "า", subword_tokenize("สวัสดีดาวอังคาร", engine="wangchanberta")
-        )
-        self.assertIsInstance(
-            subword_tokenize("โควิด19", engine="wangchanberta"), list
-        )
-
-    def test_sent_tokenize(self):
-        self.assertIsNotNone(
-            sent_tokenize(
-                SENT_1,
-                engine="tltk",
-            ),
-        )
-        self.assertIsNotNone(
-            sent_tokenize(
-                SENT_2,
-                engine="tltk",
-            ),
-        )
-        self.assertIsNotNone(
-            sent_tokenize(
-                SENT_3,
-                engine="tltk",
-            ),
-        )
-
-        self.assertIsNotNone(
-            sent_tokenize(
-                SENT_1,
-                engine="thaisum",
-            ),
-        )
-        self.assertIsNotNone(
-            sent_tokenize(
-                SENT_2,
-                engine="thaisum",
-            ),
-        )
-        self.assertIsNotNone(
-            sent_tokenize(
-                SENT_3,
-                engine="thaisum",
-            ),
-        )
-        self.assertEqual(
-            sent_tokenize(SENT_4, engine="thaisum"),
-            [["ผม", "กิน", "ข้าว", " ", "เธอ", "เล่น", "เกม"]],
-        )
-
-        self.assertIsNotNone(
-            sent_tokenize(
-                SENT_3,
-                engine="wtp",
-            ),
-        )
-        self.assertIsNotNone(
-            sent_tokenize(
-                SENT_3,
-                engine="wtp-tiny",
-            ),
-        )
-        # self.assertIsNotNone(
-        #     sent_tokenize(
-        #         SENT_3,
-        #         engine="wtp-base",
-        #     ),
-        # )
-        # self.assertIsNotNone(
-        #     sent_tokenize(
-        #         SENT_3,
-        #         engine="wtp-large",
-        #     ),
-        # )
-
-    def test_word_tokenize_attacut(self):
-        self.assertIsNotNone(word_tokenize(TEXT_1, engine="attacut"))
-
-    def test_word_tokenize_deepcut(self):
-        self.assertIsNotNone(word_tokenize(TEXT_1, engine="deepcut"))
-
-    def test_word_tokenize_nercut(self):
-        self.assertIsNotNone(word_tokenize(TEXT_1, engine="nercut"))
-
-    def test_word_tokenize_nlpo3(self):
-        self.assertIsNotNone(word_tokenize(TEXT_1, engine="nlpo3"))
-
-    def test_word_tokenize_oskut(self):
-        self.assertIsNotNone(word_tokenize(TEXT_1, engine="oskut"))
-
-    def test_word_tokenize_sefr_cut(self):
-        self.assertIsNotNone(word_tokenize(TEXT_1, engine="sefr_cut"))
-
-    def test_word_tokenize_tltk(self):
-        self.assertIsNotNone(word_tokenize(TEXT_1, engine="tltk"))
-
+class DetokenizeTestCase(unittest.TestCase):
     def test_numeric_data_format(self):
         engines = ["attacut", "deepcut", "sefr_cut"]
 
@@ -206,68 +84,154 @@ class TokenizeTestCaseX(unittest.TestCase):
             ),
         )
 
-    def test_attacut(self):
-        self.assertEqual(attacut.segment(None), [])
-        self.assertEqual(attacut.segment(""), [])
+
+class ParagraphTokenizeTestCase(unittest.TestCase):
+    def test_paragraph_tokenize(self):
+        sent = (
+            "(1) บทความนี้ผู้เขียนสังเคราะห์ขึ้นมา"
+            "จากผลงานวิจัยที่เคยทำมาในอดีต"
+            " มิได้ทำการศึกษาค้นคว้าใหม่อย่างกว้างขวางแต่อย่างใด"
+            " จึงใคร่ขออภัยในความบกพร่องทั้งปวงมา ณ ที่นี้"
+        )
+        self.assertIsNotNone(paragraph_tokenize(sent))
+        with self.assertRaises(ValueError):
+            paragraph_tokenize(
+                sent, engine="ai2+2thai"
+            )  # engine does not exist
+
+
+class SentTokenizeTLTKTestCase(unittest.TestCase):
+    def test_sent_tokenize_tltk(self):
+        self.assertIsNotNone(
+            sent_tokenize(
+                SENT_1,
+                engine="tltk",
+            ),
+        )
+        self.assertIsNotNone(
+            sent_tokenize(
+                SENT_2,
+                engine="tltk",
+            ),
+        )
+        self.assertIsNotNone(
+            sent_tokenize(
+                SENT_3,
+                engine="tltk",
+            ),
+        )
+
+
+class SentTokenizeThaiSumTestCase(unittest.TestCase):
+    def test_sent_tokenize_thaisum(self):
+        self.assertIsNotNone(
+            sent_tokenize(
+                SENT_1,
+                engine="thaisum",
+            ),
+        )
+        self.assertIsNotNone(
+            sent_tokenize(
+                SENT_2,
+                engine="thaisum",
+            ),
+        )
+        self.assertIsNotNone(
+            sent_tokenize(
+                SENT_3,
+                engine="thaisum",
+            ),
+        )
         self.assertEqual(
-            word_tokenize("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย", engine="attacut"),
-            ["ฉัน", "รัก", "ภาษา", "ไทย", "เพราะ", "ฉัน", "เป็น", "คน", "ไทย"],
-        )
-        self.assertEqual(
-            attacut.segment("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย", model="attacut-sc"),
-            ["ฉัน", "รัก", "ภาษา", "ไทย", "เพราะ", "ฉัน", "เป็น", "คน", "ไทย"],
-        )
-        self.assertIsNotNone(
-            attacut.segment("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย", model="attacut-c")
+            sent_tokenize(SENT_4, engine="thaisum"),
+            [["ผม", "กิน", "ข้าว", " ", "เธอ", "เล่น", "เกม"]],
         )
 
-    def test_deepcut(self):
-        self.assertEqual(deepcut.segment(None), [])
-        self.assertEqual(deepcut.segment(""), [])
-        self.assertIsNotNone(deepcut.segment("ทดสอบ", DEFAULT_WORD_DICT_TRIE))
-        self.assertIsNotNone(deepcut.segment("ทดสอบ", ["ทด", "สอบ"]))
-        self.assertIsNotNone(word_tokenize("ทดสอบ", engine="deepcut"))
+
+class SentTokenizeWTPTestCase(unittest.TestCase):
+    def test_sent_tokenize_wtp(self):
         self.assertIsNotNone(
-            word_tokenize(
-                "ทดสอบ", engine="deepcut", custom_dict=DEFAULT_WORD_DICT_TRIE
-            )
+            sent_tokenize(
+                SENT_3,
+                engine="wtp",
+            ),
         )
 
-    def test_oskut(self):
-        self.assertEqual(oskut.segment(None), [])
-        self.assertEqual(oskut.segment(""), [])
+    def test_sent_tokenize_wtp_tiny(self):
         self.assertIsNotNone(
-            oskut.segment("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย"),
+            sent_tokenize(
+                SENT_3,
+                engine="wtp-tiny",
+            ),
         )
-        self.assertIsNotNone(
-            oskut.segment("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย", engine="scads"),
+        # self.assertIsNotNone(
+        #     sent_tokenize(
+        #         SENT_3,
+        #         engine="wtp-base",
+        #     ),
+        # )
+        # self.assertIsNotNone(
+        #     sent_tokenize(
+        #         SENT_3,
+        #         engine="wtp-large",
+        #     ),
+        # )
+
+
+class SubwordTokenizePhayathaiTestCase(unittest.TestCase):
+    def test_subword_tokenize_phayathai(self):
+        self.assertEqual(subword_tokenize(None, engine="phayathai"), [])
+        self.assertEqual(subword_tokenize("", engine="phayathai"), [])
+        self.assertIsInstance(
+            subword_tokenize("สวัสดิีดาวอังคาร", engine="phayathai"), list
+        )
+        self.assertNotIn(
+            "า", subword_tokenize("สวัสดีดาวอังคาร", engine="phayathai")
+        )
+        self.assertIsInstance(
+            subword_tokenize("โควิด19", engine="phayathai"), list
         )
 
-    def test_nercut(self):
-        self.assertEqual(nercut.segment(None), [])
-        self.assertEqual(nercut.segment(""), [])
-        self.assertIsNotNone(nercut.segment("ทดสอบ"))
-        self.assertEqual(nercut.segment("ทันแน่ๆ"), ["ทัน", "แน่ๆ"])
-        self.assertEqual(nercut.segment("%1ครั้ง"), ["%", "1", "ครั้ง"])
-        self.assertEqual(nercut.segment("ทุ๊กกโคนน"), ["ทุ๊กกโคนน"])
-        self.assertIsNotNone(nercut.segment("อย่าลืมอัพการ์ดนะจ๊ะ"))
-        self.assertIsNotNone(word_tokenize("ทดสอบ", engine="nercut"))
 
-    def test_sefr_cut(self):
-        self.assertEqual(sefr_cut.segment(None), [])
-        self.assertEqual(sefr_cut.segment(""), [])
-        self.assertIsNotNone(
-            sefr_cut.segment("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย"),
-        )
-        self.assertIsNotNone(
-            sefr_cut.segment("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย", engine="tnhc"),
-        )
-
-    def test_ssg(self):
+class SubwordTokenizeSSGTestCase(unittest.TestCase):
+    def test_subword_tokenize_ssg(self):
         self.assertEqual(ssg.segment(None), [])
         self.assertEqual(ssg.segment(""), [])
+        self.assertEqual(subword_tokenize(None, engine="ssg"), [])
+        self.assertEqual(
+            subword_tokenize("แมวกินปลา", engine="ssg"), ["แมว", "กิน", "ปลา"]
+        )
         self.assertIn("ดาว", subword_tokenize("สวัสดีดาวอังคาร", engine="ssg"))
+        self.assertNotIn("า", subword_tokenize("สวัสดีดาวอังคาร", engine="ssg"))
 
+
+class SubwordTokenizeTLTKTestCase(unittest.TestCase):
+    def test_subword_tokenize_tltk(self):
+        self.assertEqual(subword_tokenize(None, engine="tltk"), [])
+        self.assertEqual(subword_tokenize("", engine="tltk"), [])
+        self.assertIsInstance(
+            subword_tokenize("สวัสดิีดาวอังคาร", engine="tltk"), list
+        )
+        self.assertNotIn("า", subword_tokenize("สวัสดีดาวอังคาร", engine="tltk"))
+        self.assertIsInstance(subword_tokenize("โควิด19", engine="tltk"), list)
+
+
+class SubwordTokenizeWangchanbertaTestCase(unittest.TestCase):
+    def test_subword_tokenize_wangchanberta(self):
+        self.assertEqual(subword_tokenize(None, engine="wangchanberta"), [])
+        self.assertEqual(subword_tokenize("", engine="wangchanberta"), [])
+        self.assertIsInstance(
+            subword_tokenize("สวัสดิีดาวอังคาร", engine="wangchanberta"), list
+        )
+        self.assertNotIn(
+            "า", subword_tokenize("สวัสดีดาวอังคาร", engine="wangchanberta")
+        )
+        self.assertIsInstance(
+            subword_tokenize("โควิด19", engine="wangchanberta"), list
+        )
+
+
+class SyllableTokenizeTLTKTestCase(unittest.TestCase):
     def test_tltk(self):
         self.assertEqual(tltk.segment(None), [])
         self.assertEqual(tltk.segment(""), [])
@@ -289,19 +253,94 @@ class TokenizeTestCaseX(unittest.TestCase):
         self.assertEqual(tltk.syllable_tokenize(None), [])
         self.assertEqual(tltk.syllable_tokenize(""), [])
 
-    def test_paragraph_tokenize(self):
-        sent = (
-            "(1) บทความนี้ผู้เขียนสังเคราะห์ขึ้นมา"
-            + "จากผลงานวิจัยที่เคยทำมาในอดีต"
-            + " มิได้ทำการศึกษาค้นคว้าใหม่อย่างกว้างขวางแต่อย่างใด"
-            + " จึงใคร่ขออภัยในความบกพร่องทั้งปวงมา ณ ที่นี้"
-        )
-        self.assertIsNotNone(paragraph_tokenize(sent))
-        with self.assertRaises(ValueError):
-            paragraph_tokenize(
-                sent, engine="ai2+2thai"
-            )  # engine does not exist
 
-    def test_clause_tokenize(self):
-        self.assertIsNotNone(sent_clause_tokenize(["ฉัน", "ทดสอบ"]))
-        self.assertIsInstance(sent_clause_tokenize(["ฉัน", "ทดสอบ"]), list)
+class WordTokenizeAttacutTestCase(unittest.TestCase):
+    def test_word_tokenize_attacut(self):
+        self.assertIsNotNone(word_tokenize(TEXT_1, engine="attacut"))
+
+    def test_attacut(self):
+        self.assertEqual(attacut.segment(None), [])
+        self.assertEqual(attacut.segment(""), [])
+        self.assertEqual(
+            word_tokenize("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย", engine="attacut"),
+            ["ฉัน", "รัก", "ภาษา", "ไทย", "เพราะ", "ฉัน", "เป็น", "คน", "ไทย"],
+        )
+        self.assertEqual(
+            attacut.segment("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย", model="attacut-sc"),
+            ["ฉัน", "รัก", "ภาษา", "ไทย", "เพราะ", "ฉัน", "เป็น", "คน", "ไทย"],
+        )
+        self.assertIsNotNone(
+            attacut.segment("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย", model="attacut-c")
+        )
+
+
+class WordTokenizeDeepcutTestCase(unittest.TestCase):
+    def test_word_tokenize_deepcut(self):
+        self.assertIsNotNone(word_tokenize(TEXT_1, engine="deepcut"))
+
+    def test_deepcut(self):
+        self.assertEqual(deepcut.segment(None), [])
+        self.assertEqual(deepcut.segment(""), [])
+        self.assertIsNotNone(deepcut.segment("ทดสอบ", DEFAULT_WORD_DICT_TRIE))
+        self.assertIsNotNone(deepcut.segment("ทดสอบ", ["ทด", "สอบ"]))
+        self.assertIsNotNone(word_tokenize("ทดสอบ", engine="deepcut"))
+        self.assertIsNotNone(
+            word_tokenize(
+                "ทดสอบ", engine="deepcut", custom_dict=DEFAULT_WORD_DICT_TRIE
+            )
+        )
+
+
+class WordTokenizeNERCutTestCase(unittest.TestCase):
+    def test_word_tokenize_nercut(self):
+        self.assertIsNotNone(word_tokenize(TEXT_1, engine="nercut"))
+
+    def test_nercut(self):
+        self.assertEqual(nercut.segment(None), [])
+        self.assertEqual(nercut.segment(""), [])
+        self.assertIsNotNone(nercut.segment("ทดสอบ"))
+        self.assertEqual(nercut.segment("ทันแน่ๆ"), ["ทัน", "แน่ๆ"])
+        self.assertEqual(nercut.segment("%1ครั้ง"), ["%", "1", "ครั้ง"])
+        self.assertEqual(nercut.segment("ทุ๊กกโคนน"), ["ทุ๊กกโคนน"])
+        self.assertIsNotNone(nercut.segment("อย่าลืมอัพการ์ดนะจ๊ะ"))
+        self.assertIsNotNone(word_tokenize("ทดสอบ", engine="nercut"))
+
+
+class WordTokenizeNlpO3TestCase(unittest.TestCase):
+    def test_word_tokenize_nlpo3(self):
+        self.assertIsNotNone(word_tokenize(TEXT_1, engine="nlpo3"))
+
+
+class WordTokenizeOSKutTestCase(unittest.TestCase):
+    def test_word_tokenize_oskut(self):
+        self.assertIsNotNone(word_tokenize(TEXT_1, engine="oskut"))
+
+    def test_oskut(self):
+        self.assertEqual(oskut.segment(None), [])
+        self.assertEqual(oskut.segment(""), [])
+        self.assertIsNotNone(
+            oskut.segment("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย"),
+        )
+        self.assertIsNotNone(
+            oskut.segment("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย", engine="scads"),
+        )
+
+
+class WordTokenizeSEFRCutTestCase(unittest.TestCase):
+    def test_word_tokenize_sefr_cut(self):
+        self.assertIsNotNone(word_tokenize(TEXT_1, engine="sefr_cut"))
+
+    def test_sefr_cut(self):
+        self.assertEqual(sefr_cut.segment(None), [])
+        self.assertEqual(sefr_cut.segment(""), [])
+        self.assertIsNotNone(
+            sefr_cut.segment("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย"),
+        )
+        self.assertIsNotNone(
+            sefr_cut.segment("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย", engine="tnhc"),
+        )
+
+
+class WordTokenizeTLTKTestCase(unittest.TestCase):
+    def test_word_tokenize_tltk(self):
+        self.assertIsNotNone(word_tokenize(TEXT_1, engine="tltk"))

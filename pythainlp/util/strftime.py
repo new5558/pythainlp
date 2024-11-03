@@ -36,9 +36,9 @@ def _std_strftime(dt_obj: datetime, fmt_char: str) -> str:
     try:
         str_ = dt_obj.strftime(f"%{fmt_char}")
         if not str_ or str_ == "%{}".format(fmt_char):
-            # normalize outputs for unsupported directives
-            # in different platforms
-            # "%Q" may result "%Q", "Q", or "", make it "Q"
+            # Normalize outputs for unsupported directives
+            # in different platforms:
+            # "%Q" may result "", "%Q", or "Q", make it all "Q"
             str_ = fmt_char
     except ValueError as err:
         # Unsupported directives may raise ValueError on Windows,
@@ -46,7 +46,8 @@ def _std_strftime(dt_obj: datetime, fmt_char: str) -> str:
         warnings.warn(
             (
                 f"String format directive unknown/not support: %{fmt_char}\n"
-                f"The system raises this ValueError: {err}"
+                f"The system raises this ValueError: {err}\n"
+                f"Continue working without the directive."
             ),
             UserWarning,
         )

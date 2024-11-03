@@ -12,7 +12,7 @@ from pythainlp.spell import (
     symspellpy,
 )
 
-from .test_spell import SENT_TOKS
+from ..core.test_spell import SENT_TOKS
 
 
 class SpellTestCaseX(unittest.TestCase):

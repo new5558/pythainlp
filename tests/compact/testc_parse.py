@@ -7,7 +7,7 @@ import unittest
 from pythainlp.tag import chunk_parse, pos_tag
 
 
-class TagTestCase(unittest.TestCase):
+class ChunkParseTestCase(unittest.TestCase):
     def test_chunk_parse(self):
         tokens = ["ผม", "รัก", "คุณ"]
 

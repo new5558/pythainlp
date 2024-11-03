@@ -11,7 +11,7 @@ import unittest
 from pythainlp.util.spell_words import spell_word
 
 
-class UtilTestCaseX(unittest.TestCase):
+class SpellWordTestCase(unittest.TestCase):
     def test_spell_word(self):
         self.assertEqual(spell_word("เสือ"), ["สอ", "เอือ", "เสือ"])
         self.assertEqual(spell_word("เสื้อ"), ["สอ", "เอือ", "ไม้โท", "เสื้อ"])
