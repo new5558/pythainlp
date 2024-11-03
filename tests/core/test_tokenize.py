@@ -552,6 +552,7 @@ class TokenizeTestCase(unittest.TestCase):
         self.assertEqual(tcc_p.tcc_pos(""), set())
 
     def test_word_detokenize(self):
+        self.assertIsInstance(word_detokenize(["ผม", "5"]), str)
         self.assertEqual(
             word_detokenize(["ผม", "เลี้ยง", "5", "ตัว"]), "ผมเลี้ยง 5 ตัว"
         )
@@ -566,9 +567,6 @@ class TokenizeTestCase(unittest.TestCase):
         self.assertEqual(
             word_detokenize(["ผม", "เลี้ยง", "5", "ตัว", " ", "ๆ", "คน", "ดี"]),
             "ผมเลี้ยง 5 ตัว ๆ คนดี",
-        )
-        self.assertTrue(
-            isinstance(word_detokenize(["ผม", "เลี้ยง", "5", "ตัว"]), str)
         )
         self.assertEqual(
             word_detokenize(["ม่ายย", " ", "ผม", "เลี้ยง", "5", "ตัว"]),
