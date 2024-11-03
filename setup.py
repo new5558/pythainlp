@@ -39,14 +39,14 @@ See https://github.com/PyThaiNLP/pythainlp for installation options.
 
 requirements = [
     "backports.zoneinfo; python_version<'3.9'",
-    "requests>=2.22.0",
+    "requests>=2.31",
     "tzdata; sys_platform == 'win32'",
 ]
 
 extras = {
     "abbreviation": ["khamyo>=0.2.0"],
     "attacut": ["attacut>=1.0.6"],
-    "benchmarks": ["PyYAML>=5.3.1", "numpy>=1.22", "pandas>=0.24"],
+    "benchmarks": ["PyYAML>=5.4.1", "numpy>=1.22", "pandas>=0.24"],
     "coreference_resolution": [
         "fastcoref>=2.1.5",
         "spacy>=3.0",
@@ -100,11 +100,11 @@ extras = {
     "wsd": ["sentence-transformers>=2.2.2"],
     "wtp": ["transformers>=4.6.0", "wtpsplit>=1.0.1"],
     "wunsen": ["wunsen>=0.0.1"],
-    # Compact dependencies
-    "compact": ["numpy>=1.22", "pyicu>=2.3", "python-crfsuite>=0.9.7"],
+    # Compact dependencies, this one matches requirements.txt
+    "compact": ["PyYAML>=5.4.1", "numpy>=1.22", "pyicu>=2.3", "python-crfsuite>=0.9.7"],
     # Full dependencies
     "full": [
-        "PyYAML>=5.3.1",
+        "PyYAML>=5.4.1",
         "attacut>=1.0.4",
         "bpemb>=0.3.2",
         "emoji>=0.5.1",
