@@ -36,10 +36,8 @@ class TokenizeTestCaseX(unittest.TestCase):
         self.assertEqual(
             subword_tokenize("แมวกินปลา", engine="ssg"), ["แมว", "กิน", "ปลา"]
         )
-        self.assertTrue(
-            "ดาว" in subword_tokenize("สวัสดีดาวอังคาร", engine="ssg")
-        )
-        self.assertFalse("า" in subword_tokenize("สวัสดีดาวอังคาร", engine="ssg"))
+        self.assertIn("ดาว", subword_tokenize("สวัสดีดาวอังคาร", engine="ssg"))
+        self.assertNotIn("า", subword_tokenize("สวัสดีดาวอังคาร", engine="ssg"))
 
         self.assertEqual(subword_tokenize(None, engine="tltk"), [])
         self.assertEqual(subword_tokenize("", engine="tltk"), [])
@@ -62,6 +60,7 @@ class TokenizeTestCaseX(unittest.TestCase):
         self.assertIsInstance(
             subword_tokenize("โควิด19", engine="phayathai"), list
         )
+
         self.assertEqual(subword_tokenize(None, engine="wangchanberta"), [])
         self.assertEqual(subword_tokenize("", engine="wangchanberta"), [])
         self.assertIsInstance(
