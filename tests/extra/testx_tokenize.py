@@ -89,9 +89,9 @@ class ParagraphTokenizeTestCase(unittest.TestCase):
     def test_paragraph_tokenize(self):
         sent = (
             "(1) บทความนี้ผู้เขียนสังเคราะห์ขึ้นมา"
-            + "จากผลงานวิจัยที่เคยทำมาในอดีต"
-            + " มิได้ทำการศึกษาค้นคว้าใหม่อย่างกว้างขวางแต่อย่างใด"
-            + " จึงใคร่ขออภัยในความบกพร่องทั้งปวงมา ณ ที่นี้"
+            "จากผลงานวิจัยที่เคยทำมาในอดีต"
+            " มิได้ทำการศึกษาค้นคว้าใหม่อย่างกว้างขวางแต่อย่างใด"
+            " จึงใคร่ขออภัยในความบกพร่องทั้งปวงมา ณ ที่นี้"
         )
         self.assertIsNotNone(paragraph_tokenize(sent))
         with self.assertRaises(ValueError):
