@@ -141,7 +141,7 @@ class CorpusTestCase(unittest.TestCase):
         self.assertIsInstance(revise_newmm_default_wordset(training_data), set)
 
     def test_zip(self):
-        p = get_corpus_path("test_zip")
+        p = get_corpus_path("test_zip")  # may need to reduce the test zip size
         self.assertEqual(os.path.isdir(p), True)
         self.assertEqual(remove("test_zip"), True)
 

@@ -7,6 +7,7 @@ from os import path
 
 from pythainlp.tag import (
     PerceptronTagger,
+    chunk_parse,
     perceptron,
     pos_tag,
     pos_tag_sents,
@@ -16,6 +17,14 @@ from pythainlp.tag import (
 
 
 class TagTestCase(unittest.TestCase):
+    # ### pythainlp.tag.PerceptronTagger
+
+    def test_chunk_parse(self):
+        tokens = ["ผม", "รัก", "คุณ"]
+
+        w_p = pos_tag(tokens, engine="perceptron", corpus="orchid")
+        self.assertIsNotNone(chunk_parse(w_p))
+
     # ### pythainlp.tag.pos_tag
 
     def test_pos_tag(self):

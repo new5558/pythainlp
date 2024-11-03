@@ -578,3 +578,30 @@ class TokenizeTestCase(unittest.TestCase):
             word_detokenize(["ม่ายย", " ", "ผม", "เลี้ยง", "5", "ตัว"]),
             "ม่ายย ผมเลี้ยง 5 ตัว",
         )
+
+    def test_numeric_data_format(self):
+        engines = ["newmm"]
+
+        for engine in engines:
+            self.assertIn(
+                "127.0.0.1",
+                word_tokenize("ไอพีของคุณคือ 127.0.0.1 ครับ", engine=engine),
+            )
+
+            tokens = word_tokenize(
+                "เวลา 12:12pm มีโปรโมชั่น 11.11", engine=engine
+            )
+            self.assertTrue(
+                any(value in tokens for value in ["12:12pm", "12:12"]),
+                msg=f"{engine}: {tokens}",
+            )
+            self.assertIn("11.11", tokens)
+
+            self.assertIn(
+                "1,234,567.89",
+                word_tokenize("รางวัลมูลค่า 1,234,567.89 บาท", engine=engine),
+            )
+
+            tokens = word_tokenize("อัตราส่วน 2.5:1 คือ 5:2", engine=engine)
+            self.assertIn("2.5:1", tokens)
+            self.assertIn("5:2", tokens)

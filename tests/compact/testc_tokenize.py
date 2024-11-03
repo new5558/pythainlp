@@ -1,0 +1,84 @@
+# -*- coding: utf-8 -*-
+# SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
+# SPDX-License-Identifier: Apache-2.0
+
+import unittest
+
+from pythainlp.tokenize import (
+    pyicu,
+    sent_tokenize,
+    subword_tokenize,
+    word_tokenize,
+)
+
+from ..test_tokenize import (
+    SENT_1,
+    SENT_1_TOKS,
+    SENT_2,
+    SENT_2_TOKS,
+    SENT_3,
+    SENT_3_TOKS,
+    SENT_4,
+    TEXT_1,
+)
+
+
+# Tests for functions that need "compact" dependencies
+class TokenizeTestCaseCompact(unittest.TestCase):
+    def test_icu(self):
+        self.assertEqual(pyicu.segment(None), [])
+        self.assertEqual(pyicu.segment(""), [])
+        self.assertEqual(
+            word_tokenize("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย", engine="icu"),
+            ["ฉัน", "รัก", "ภาษา", "ไทย", "เพราะ", "ฉัน", "เป็น", "คน", "ไทย"],
+        )
+
+    def test_sent_tokenize(self):
+        # Use default engine (crfcut)
+        self.assertEqual(sent_tokenize(None), [])
+        self.assertEqual(sent_tokenize(""), [])
+        self.assertEqual(
+            sent_tokenize(SENT_1),
+            SENT_1_TOKS,
+        )
+        self.assertEqual(
+            sent_tokenize(SENT_2),
+            SENT_2_TOKS,
+        )
+        self.assertEqual(
+            sent_tokenize(SENT_3),
+            SENT_3_TOKS,
+        )
+
+        self.assertEqual(
+            sent_tokenize(SENT_1, engine="crfcut"),
+            SENT_1_TOKS,
+        )
+        self.assertEqual(
+            sent_tokenize(SENT_2, engine="crfcut"),
+            SENT_2_TOKS,
+        )
+        self.assertEqual(
+            sent_tokenize(SENT_3, engine="crfcut"),
+            SENT_3_TOKS,
+        )
+        self.assertEqual(
+            sent_tokenize(SENT_4, engine="crfcut"),
+            [["ผม", "กิน", "ข้าว", " ", "\n", "เธอ", "เล่น", "เกม"]],
+        )
+
+    def test_subword_tokenize(self):
+        self.assertEqual(subword_tokenize(None, engine="han_solo"), [])
+        self.assertEqual(
+            subword_tokenize("แมวกินปลา", engine="han_solo"),
+            ["แมว", "กิน", "ปลา"],
+        )
+        self.assertTrue(
+            "ดาว" in subword_tokenize("สวัสดีดาวอังคาร", engine="han_solo")
+        )
+        self.assertFalse(
+            "า" in subword_tokenize("สวัสดีดาวอังคาร", engine="han_solo")
+        )
+
+    def test_word_tokenize_icu(self):
+        self.assertIsNotNone(word_tokenize(TEXT_1, engine="icu"))

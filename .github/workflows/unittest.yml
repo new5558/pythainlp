@@ -1,4 +1,4 @@
-name: Unit test and coverage
+name: Unit test
 
 on:
   push:
@@ -23,7 +23,6 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       PYICU_WIN_VER: 2.14
-      INSTALL_PYICU_WIN: false
       INSTALL_TORCH: false
       INSTALL_FULL_DEPS: false
 
@@ -52,7 +51,7 @@ jobs:
         echo "ICU_VER=${ICU_VER}"
         echo "ICU_VER=${ICU_VER}" >> "${GITHUB_ENV}"
     - name: Install PyICU (Windows)
-      if: startsWith(matrix.os, 'windows-') && env.INSTALL_PYICU_WIN == 'true'
+      if: startsWith(matrix.os, 'windows-') && (matrix.python-version == '3.12' || matrix.python-version == '3.13')
       shell: powershell
       run: |
         $PYTHON_WIN_VER = "${{ matrix.python-version }}"
@@ -66,15 +65,17 @@ jobs:
       # If torch for the platform is not available in PyPI, use this command:
       # pip install "<torch_wheel_url>"
       # Get wheel URL from http://download.pytorch.org/whl/torch/
-    - name: Install dependencies
+    - name: Install dependencies from docker_requirements.txt
       if: env.INSTALL_FULL_DEPS == 'true'
       env:
         SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL: True
       run: pip install -r docker_requirements.txt
-    - name: Install PyThaiNLP
-      env:
-        PYTHONIOENCODING: utf-8
+    - name: Install PyThaiNLP + dependencies (minimum)
+      if: matrix.python-version != '3.12' && matrix.python-version != '3.13'
       run: pip install .
+    - name: Install PyThaiNLP + dependencies (compact)
+      if: matrix.python-version == '3.12' || matrix.python-version == '3.13'
+      run: pip install ".[compact]"
       # If you want to install a safe small set of optional dependencies, use:
       # pip install .[compact]
       # "compact" includes numpy, pyicu, and python-crfsuite.
@@ -82,10 +83,17 @@ jobs:
       # dependencies. But we should also consider to reduce the number
       # of dependencies to avoid the conflict between dependencies.
       # See: https://github.com/PyThaiNLP/pythainlp/issues/935
-    - name: Unit test and code coverage
+    - name: Unit test (core)
+      env:
+        PYTHONIOENCODING: utf-8
       run: coverage run -m unittest tests
-      # Use 'unittest tests' instead of 'unittest discover' to avoid loading
-      # tests with external imports.
+    - name: Unit test (compact)
+      if: matrix.python-version == '3.12' || matrix.python-version == '3.13'
+      env:
+        PYTHONIOENCODING: utf-8
+      run: coverage run -m unittest tests.compact
+      # Use 'unittest <test_module>' instead of 'unittest discover' to avoid
+      # loading tests with dependencies more than expected.
       # Test cases loaded is defined in __init__.py in the tests directory.
     - name: Coverage report
       env:
