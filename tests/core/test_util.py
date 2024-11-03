@@ -199,7 +199,7 @@ class UtilTestCase(unittest.TestCase):
         self.assertEqual(find_keyword(word_list), {"แมว": 3})
 
     def test_rank(self):
-        self.assertEqual(rank([]), None)
+        self.assertIsNone(rank([]))
         self.assertEqual(
             rank(["แมว", "คน", "แมว"]), Counter({"แมว": 2, "คน": 1})
         )
@@ -604,17 +604,17 @@ class UtilTestCase(unittest.TestCase):
         )
 
     def test_isthaichar(self):
-        self.assertEqual(isthaichar("ก"), True)
-        self.assertEqual(isthaichar("a"), False)
-        self.assertEqual(isthaichar("0"), False)
+        self.assertTrue(isthaichar("ก"))
+        self.assertFalse(isthaichar("a"))
+        self.assertFalse(isthaichar("0"))
 
     def test_isthai(self):
-        self.assertEqual(isthai("ไทย"), True)
-        self.assertEqual(isthai("ไทย0"), False)
-        self.assertEqual(isthai("ต.ค."), True)
-        self.assertEqual(isthai("(ต.ค.)"), False)
-        self.assertEqual(isthai("ต.ค.", ignore_chars=None), False)
-        self.assertEqual(isthai("(ต.ค.)", ignore_chars=".()"), True)
+        self.assertTrue(isthai("ไทย"))
+        self.assertTrue(isthai("ต.ค."))
+        self.assertTrue(isthai("(ต.ค.)", ignore_chars=".()"))
+        self.assertFalse(isthai("ไทย0"))
+        self.assertFalse(isthai("(ต.ค.)"))
+        self.assertFalse(isthai("ต.ค.", ignore_chars=None))
 
     def test_display_thai_char(self):
         self.assertEqual(display_thai_char("้"), "_้")
@@ -629,7 +629,7 @@ class UtilTestCase(unittest.TestCase):
     def test_emoji_to_thai(self):
         self.assertEqual(
             emoji_to_thai("จะมานั่งรถเมล์เหมือนผมก็ได้นะครับ ใกล้ชิดประชาชนดี 😀"),
-            ("จะมานั่งรถเมล์เหมือนผมก็ได้นะครับ " "ใกล้ชิดประชาชนดี :หน้ายิ้มยิงฟัน:"),
+            ("จะมานั่งรถเมล์เหมือนผมก็ได้นะครับ ใกล้ชิดประชาชนดี :หน้ายิ้มยิงฟัน:"),
         )
         self.assertEqual(
             emoji_to_thai("หิวข้าวอยากกินอาหารญี่ปุ่น 🍣"),
@@ -762,9 +762,7 @@ class UtilTestCase(unittest.TestCase):
         self.assertEqual(convert_years("242", src="re", target="ad"), "2023")
         self.assertEqual(convert_years("242", src="re", target="ah"), "1444")
         with self.assertRaises(NotImplementedError):
-            self.assertIsNotNone(
-                convert_years("2023", src="cat", target="dog")
-            )
+            convert_years("2023", src="cat", target="dog")
 
     def test_nectec_to_ipa(self):
         self.assertEqual(nectec_to_ipa("kl-uua-j^-2"), "kl uua j ˥˩")

@@ -111,7 +111,7 @@ class KhaveeTestCase(unittest.TestCase):
         )
 
     def test_check_aek_too(self):
-        self.assertEqual(kv.check_aek_too("ไกด์"), False)
+        self.assertFalse(kv.check_aek_too("ไกด์"))
         self.assertEqual(kv.check_aek_too("ไก่"), "aek")
         self.assertEqual(kv.check_aek_too("ไก้"), "too")
         self.assertTrue(

@@ -7,7 +7,6 @@ import unittest
 from pythainlp.tag import (
     NER,
     NNER,
-    chunk_parse,
     pos_tag,
     pos_tag_transformers,
     tltk,
@@ -16,19 +15,15 @@ from pythainlp.tag.thainer import ThaiNameTagger
 
 
 class TagTestCaseX(unittest.TestCase):
-    # ### pythainlp.tag.PerceptronTagger
-
-    def test_chunk_parse(self):
-        tokens = ["ผม", "รัก", "คุณ"]
-
-        w_p = pos_tag(tokens, engine="perceptron", corpus="orchid")
-        self.assertIsNotNone(chunk_parse(w_p))
-
     # ### pythainlp.tag.pos_tag
 
     def test_pos_tag(self):
         tokens = ["ผม", "รัก", "คุณ"]
         self.assertIsNotNone(pos_tag(tokens, engine="tltk"))
+        with self.assertRaises(ValueError):
+            tltk.pos_tag(tokens, corpus="blackboard")
+
+    # ### pythainlp.tag.named_entity
 
     def test_tltk_ner(self):
         self.assertEqual(tltk.get_ner(""), [])

@@ -2,17 +2,18 @@
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
 # SPDX-License-Identifier: Apache-2.0
 """
-Unit test.
+Unit test. Compact version.
 
-Each file in tests/ is for each main package.
+Test functions that require "compact" dependencies (see setup.py).
 """
 
 from unittest import TestLoader, TestSuite
 
 # Names of module to be tested
 test_packages: list[str] = [
-    "tests.core",
-    "tests.compact",
+    "tests.compact.testc_tag",
+    "tests.compact.testc_tokenize",
+    "tests.compact.testc_util",
 ]
 
 

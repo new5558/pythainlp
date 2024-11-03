@@ -11,8 +11,18 @@ from unittest import TestLoader, TestSuite
 
 # Names of module to be tested
 test_packages: list[str] = [
-    "tests.core",
-    "tests.compact",
+    "tests.core.test_ancient",
+    "tests.core.test_cli",
+    "tests.core.test_corpus",
+    "tests.core.test_khavee",
+    "tests.core.test_morpheme",
+    "tests.core.test_soundex",
+    "tests.core.test_spell",
+    "tests.core.test_tag",
+    "tests.core.test_tokenize",
+    "tests.core.test_tools",
+    "tests.core.test_transliterate",
+    "tests.core.test_util",
 ]
 
 

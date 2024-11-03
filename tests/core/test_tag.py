@@ -189,5 +189,3 @@ class TagTestCase(unittest.TestCase):
             tag_provinces(["หนองคาย", "น่าอยู่"]),
             [("หนองคาย", "B-LOCATION"), ("น่าอยู่", "O")],
         )
-
-    # ### pythainlp.tag.named_entity

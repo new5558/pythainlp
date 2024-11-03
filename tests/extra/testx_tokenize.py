@@ -11,7 +11,6 @@ from pythainlp.tokenize import (
     nercut,
     oskut,
     paragraph_tokenize,
-    pyicu,
     sefr_cut,
     sent_tokenize,
     ssg,
@@ -21,48 +20,31 @@ from pythainlp.tokenize import (
 )
 from pythainlp.tokenize import clause_tokenize as sent_clause_tokenize
 
-from .test_tokenize import (
+from ..test_tokenize import (
     SENT_1,
-    SENT_1_TOKS,
     SENT_2,
-    SENT_2_TOKS,
     SENT_3,
-    SENT_3_TOKS,
     SENT_4,
     TEXT_1,
 )
 
 
-# Tests for functions that need external imports
+# Tests for functions that need more dependencies
 class TokenizeTestCaseX(unittest.TestCase):
     def test_subword_tokenize(self):
         self.assertEqual(subword_tokenize(None, engine="ssg"), [])
-        self.assertEqual(subword_tokenize(None, engine="han_solo"), [])
         self.assertEqual(
             subword_tokenize("แมวกินปลา", engine="ssg"), ["แมว", "กิน", "ปลา"]
         )
-        self.assertTrue(
-            "ดาว" in subword_tokenize("สวัสดีดาวอังคาร", engine="ssg")
-        )
-        self.assertFalse("า" in subword_tokenize("สวัสดีดาวอังคาร", engine="ssg"))
-        self.assertEqual(
-            subword_tokenize("แมวกินปลา", engine="han_solo"),
-            ["แมว", "กิน", "ปลา"],
-        )
-        self.assertTrue(
-            "ดาว" in subword_tokenize("สวัสดีดาวอังคาร", engine="han_solo")
-        )
-        self.assertFalse(
-            "า" in subword_tokenize("สวัสดีดาวอังคาร", engine="han_solo")
-        )
+        self.assertIn("ดาว", subword_tokenize("สวัสดีดาวอังคาร", engine="ssg"))
+        self.assertNotIn("า", subword_tokenize("สวัสดีดาวอังคาร", engine="ssg"))
+
         self.assertEqual(subword_tokenize(None, engine="tltk"), [])
         self.assertEqual(subword_tokenize("", engine="tltk"), [])
         self.assertIsInstance(
             subword_tokenize("สวัสดิีดาวอังคาร", engine="tltk"), list
         )
-        self.assertFalse(
-            "า" in subword_tokenize("สวัสดีดาวอังคาร", engine="tltk")
-        )
+        self.assertNotIn("า", subword_tokenize("สวัสดีดาวอังคาร", engine="tltk"))
         self.assertIsInstance(subword_tokenize("โควิด19", engine="tltk"), list)
 
         self.assertEqual(subword_tokenize(None, engine="phayathai"), [])
@@ -70,57 +52,26 @@ class TokenizeTestCaseX(unittest.TestCase):
         self.assertIsInstance(
             subword_tokenize("สวัสดิีดาวอังคาร", engine="phayathai"), list
         )
-        self.assertFalse(
-            "า" in subword_tokenize("สวัสดีดาวอังคาร", engine="phayathai")
+        self.assertNotIn(
+            "า", subword_tokenize("สวัสดีดาวอังคาร", engine="phayathai")
         )
         self.assertIsInstance(
             subword_tokenize("โควิด19", engine="phayathai"), list
         )
+
         self.assertEqual(subword_tokenize(None, engine="wangchanberta"), [])
         self.assertEqual(subword_tokenize("", engine="wangchanberta"), [])
         self.assertIsInstance(
             subword_tokenize("สวัสดิีดาวอังคาร", engine="wangchanberta"), list
         )
-        self.assertFalse(
-            "า" in subword_tokenize("สวัสดีดาวอังคาร", engine="wangchanberta")
+        self.assertNotIn(
+            "า", subword_tokenize("สวัสดีดาวอังคาร", engine="wangchanberta")
         )
         self.assertIsInstance(
             subword_tokenize("โควิด19", engine="wangchanberta"), list
         )
 
     def test_sent_tokenize(self):
-        # Use default engine (crfcut)
-        self.assertEqual(sent_tokenize(None), [])
-        self.assertEqual(sent_tokenize(""), [])
-        self.assertEqual(
-            sent_tokenize(SENT_1),
-            SENT_1_TOKS,
-        )
-        self.assertEqual(
-            sent_tokenize(SENT_2),
-            SENT_2_TOKS,
-        )
-        self.assertEqual(
-            sent_tokenize(SENT_3),
-            SENT_3_TOKS,
-        )
-
-        self.assertEqual(
-            sent_tokenize(SENT_1, engine="crfcut"),
-            SENT_1_TOKS,
-        )
-        self.assertEqual(
-            sent_tokenize(SENT_2, engine="crfcut"),
-            SENT_2_TOKS,
-        )
-        self.assertEqual(
-            sent_tokenize(SENT_3, engine="crfcut"),
-            SENT_3_TOKS,
-        )
-        self.assertEqual(
-            sent_tokenize(SENT_4, engine="crfcut"),
-            [["ผม", "กิน", "ข้าว", " ", "\n", "เธอ", "เล่น", "เกม"]],
-        )
         self.assertIsNotNone(
             sent_tokenize(
                 SENT_1,
@@ -188,18 +139,29 @@ class TokenizeTestCaseX(unittest.TestCase):
         #     ),
         # )
 
-    def test_word_tokenize(self):
-        self.assertIsNotNone(word_tokenize(TEXT_1, engine="nlpo3"))
+    def test_word_tokenize_attacut(self):
         self.assertIsNotNone(word_tokenize(TEXT_1, engine="attacut"))
+
+    def test_word_tokenize_deepcut(self):
         self.assertIsNotNone(word_tokenize(TEXT_1, engine="deepcut"))
-        self.assertIsNotNone(word_tokenize(TEXT_1, engine="icu"))
+
+    def test_word_tokenize_nercut(self):
         self.assertIsNotNone(word_tokenize(TEXT_1, engine="nercut"))
-        self.assertIsNotNone(word_tokenize(TEXT_1, engine="sefr_cut"))
-        self.assertIsNotNone(word_tokenize(TEXT_1, engine="tltk"))
+
+    def test_word_tokenize_nlpo3(self):
+        self.assertIsNotNone(word_tokenize(TEXT_1, engine="nlpo3"))
+
+    def test_word_tokenize_oskut(self):
         self.assertIsNotNone(word_tokenize(TEXT_1, engine="oskut"))
 
+    def test_word_tokenize_sefr_cut(self):
+        self.assertIsNotNone(word_tokenize(TEXT_1, engine="sefr_cut"))
+
+    def test_word_tokenize_tltk(self):
+        self.assertIsNotNone(word_tokenize(TEXT_1, engine="tltk"))
+
     def test_numeric_data_format(self):
-        engines = ["attacut", "deepcut", "newmm", "sefr_cut"]
+        engines = ["attacut", "deepcut", "sefr_cut"]
 
         for engine in engines:
             self.assertIn(
@@ -271,14 +233,6 @@ class TokenizeTestCaseX(unittest.TestCase):
             )
         )
 
-    def test_icu(self):
-        self.assertEqual(pyicu.segment(None), [])
-        self.assertEqual(pyicu.segment(""), [])
-        self.assertEqual(
-            word_tokenize("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย", engine="icu"),
-            ["ฉัน", "รัก", "ภาษา", "ไทย", "เพราะ", "ฉัน", "เป็น", "คน", "ไทย"],
-        )
-
     def test_oskut(self):
         self.assertEqual(oskut.segment(None), [])
         self.assertEqual(oskut.segment(""), [])
@@ -312,9 +266,7 @@ class TokenizeTestCaseX(unittest.TestCase):
     def test_ssg(self):
         self.assertEqual(ssg.segment(None), [])
         self.assertEqual(ssg.segment(""), [])
-        self.assertTrue(
-            "ดาว" in subword_tokenize("สวัสดีดาวอังคาร", engine="ssg")
-        )
+        self.assertIn("ดาว", subword_tokenize("สวัสดีดาวอังคาร", engine="ssg"))
 
     def test_tltk(self):
         self.assertEqual(tltk.segment(None), [])
