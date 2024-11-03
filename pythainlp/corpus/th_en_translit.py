@@ -28,7 +28,7 @@ def get_transliteration_dict() -> defaultdict:
     """
     Get Thai to English transliteration dictionary.
 
-    The returned dict is in defaultdict[str, defaultdict[List[str], List[Optional[bool]]]] format.
+    The returned dict is in dict[str, dict[List[str], List[Optional[bool]]]] format.
     """
     path = path_pythainlp_corpus(_FILE_NAME)
     if not path:
@@ -38,7 +38,7 @@ def get_transliteration_dict() -> defaultdict:
         )
 
     # use list, as one word can have multiple transliterations.
-    trans_dict = defaultdict(
+    trans_dict: defaultdict[str, dict[str, list]] = defaultdict(
         lambda: {TRANSLITERATE_EN: [], TRANSLITERATE_FOLLOW_RTSG: []}
     )
     try:
@@ -61,11 +61,11 @@ def get_transliteration_dict() -> defaultdict:
                         en_follow_rtgs
                     )
 
-    except ValueError:
+    except ValueError as exc:
         raise ValueError(
-            f"Unable to parse {_FILE_NAME}."
+            f"Unable to parse {_FILE_NAME}. "
             f"Make sure it is a 3-column tab-separated file with header."
-        )
+        ) from exc
     else:
         return trans_dict
 
