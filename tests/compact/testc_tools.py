@@ -9,7 +9,7 @@ import numpy as np
 from pythainlp.tools.misspell import misspell
 
 
-def _count_difference(st1, st2):
+def _count_difference(st1: str, st2: str) -> int:
     # this assumes len(st1) == len(st2)
 
     count = 0

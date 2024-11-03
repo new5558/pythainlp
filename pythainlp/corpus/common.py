@@ -6,6 +6,8 @@
 Common lists of words.
 """
 
+import ast
+
 __all__ = [
     "countries",
     "find_synonyms",
@@ -56,9 +58,9 @@ _THAI_MALE_NAMES_FILENAME = "person_names_male_th.txt"
 
 _THAI_ORST_WORDS: FrozenSet[str] = frozenset()
 
-_THAI_DICT = {}
-_THAI_WSD_DICT = {}
-_THAI_SYNONYMS = {}
+_THAI_DICT: dict[str, list] = {}
+_THAI_WSD_DICT: dict[str, list] = {}
+_THAI_SYNONYMS: dict[str, list] = {}
 
 
 def countries() -> FrozenSet[str]:
@@ -268,17 +270,22 @@ def thai_dict() -> dict:
     :rtype: dict
     """
     global _THAI_DICT
-    if not _THAI_DICT:
-        import csv
+    if _THAI_DICT:
+        return _THAI_DICT
 
-        _THAI_DICT = {"word": [], "meaning": []}
-        with open(
-            get_corpus_path("thai_dict"), newline="\n", encoding="utf-8"
-        ) as csvfile:
-            reader = csv.DictReader(csvfile, delimiter=",")
-            for row in reader:
-                _THAI_DICT["word"].append(row["word"])
-                _THAI_DICT["meaning"].append(row["meaning"])
+    import csv
+
+    path = get_corpus_path("thai_dict")
+    if not path:
+        return _THAI_DICT
+    path = str(path)
+
+    _THAI_DICT = {"word": [], "meaning": []}
+    with open(path, newline="\n", encoding="utf-8") as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=",")
+        for row in reader:
+            _THAI_DICT["word"].append(row["word"])
+            _THAI_DICT["meaning"].append(row["meaning"])
 
     return _THAI_DICT
 
@@ -293,18 +300,20 @@ def thai_wsd_dict() -> dict:
     :rtype: dict
     """
     global _THAI_WSD_DICT
-    if not _THAI_WSD_DICT:
-        _thai_wsd = thai_dict()
-        _THAI_WSD_DICT = {"word": [], "meaning": []}
-        for i, j in zip(_thai_wsd["word"], _thai_wsd["meaning"]):
-            _all_value = list(eval(j).values())
-            _use = []
-            for k in _all_value:
-                _use.extend(k)
-            _use = list(set(_use))
-            if len(_use) > 1:
-                _THAI_WSD_DICT["word"].append(i)
-                _THAI_WSD_DICT["meaning"].append(_use)
+    if _THAI_WSD_DICT:
+        return _THAI_WSD_DICT
+
+    thai_wsd = thai_dict()
+    _THAI_WSD_DICT = {"word": [], "meaning": []}
+    for i, j in zip(thai_wsd["word"], thai_wsd["meaning"]):
+        all_value = list(ast.literal_eval(j).values())
+        use = []
+        for k in all_value:
+            use.extend(k)
+        use = list(set(use))
+        if len(use) > 1:
+            _THAI_WSD_DICT["word"].append(i)
+            _THAI_WSD_DICT["meaning"].append(use)
 
     return _THAI_WSD_DICT
 
@@ -319,18 +328,23 @@ def thai_synonyms() -> dict:
     :rtype: dict
     """
     global _THAI_SYNONYMS
-    if not _THAI_SYNONYMS:
-        import csv
+    if _THAI_SYNONYMS:
+        return _THAI_SYNONYMS
 
-        _THAI_SYNONYMS = {"word": [], "pos": [], "synonym": []}
-        with open(
-            get_corpus_path("thai_synonym"), newline="\n", encoding="utf-8"
-        ) as csvfile:
-            reader = csv.DictReader(csvfile, delimiter=",")
-            for row in reader:
-                _THAI_SYNONYMS["word"].append(row["word"])
-                _THAI_SYNONYMS["pos"].append(row["pos"])
-                _THAI_SYNONYMS["synonym"].append(row["synonym"].split("|"))
+    import csv
+
+    path = get_corpus_path("thai_synonym")
+    if not path:
+        return _THAI_SYNONYMS
+    path = str(path)
+
+    _THAI_SYNONYMS = {"word": [], "pos": [], "synonym": []}
+    with open(path, newline="\n", encoding="utf-8") as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=",")
+        for row in reader:
+            _THAI_SYNONYMS["word"].append(row["word"])
+            _THAI_SYNONYMS["pos"].append(row["pos"])
+            _THAI_SYNONYMS["synonym"].append(row["synonym"].split("|"))
 
     return _THAI_SYNONYMS
 

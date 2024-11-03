@@ -11,21 +11,30 @@ We used unigram & bigram from Thai National Corpus (TNC).
     * \
         https://github.com/mammothb/symspellpy
 """
+
 from typing import List
 
 from symspellpy import SymSpell, Verbosity
 
 from pythainlp.corpus import get_corpus_path, path_pythainlp_corpus
 
-_UNIGRAM = "tnc_freq.txt"
-_BIGRAM = "tnc_bigram_word_freqs"
+_UNIGRAM_FILENAME = "tnc_freq.txt"
+_BIGRAM_CORPUS_NAME = "tnc_bigram_word_freqs"
 
 sym_spell = SymSpell()
 sym_spell.load_dictionary(
-    path_pythainlp_corpus(_UNIGRAM), 0, 1, separator="\t", encoding="utf-8-sig"
+    path_pythainlp_corpus(_UNIGRAM_FILENAME),
+    0,
+    1,
+    separator="\t",
+    encoding="utf-8-sig",
 )
 sym_spell.load_bigram_dictionary(
-    get_corpus_path(_BIGRAM), 0, 2, separator="\t", encoding="utf-8-sig"
+    get_corpus_path(_BIGRAM_CORPUS_NAME),
+    0,
+    2,
+    separator="\t",
+    encoding="utf-8-sig",
 )
 
 
@@ -44,8 +53,10 @@ def correct(text: str, max_edit_distance: int = 1) -> str:
     return spell(text, max_edit_distance=max_edit_distance)[0]
 
 
-def spell_sent(list_words: List[str], max_edit_distance: int = 2) -> List[str]:
-    _temp = [
+def spell_sent(
+    list_words: List[str], max_edit_distance: int = 2
+) -> List[List[str]]:
+    temp = [
         str(i).split(",", maxsplit=1)[0].split(" ")
         for i in list(
             sym_spell.lookup_compound(
@@ -56,7 +67,7 @@ def spell_sent(list_words: List[str], max_edit_distance: int = 2) -> List[str]:
         )
     ]
     list_new = []
-    for i in _temp:
+    for i in temp:
         list_new.append(i)
 
     return list_new

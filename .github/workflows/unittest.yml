@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
+# SPDX-License-Identifier: CC0-1.0
+
 name: Unit test
 
 on:
@@ -17,8 +20,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["macos-latest", "ubuntu-latest", "windows-latest"]
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        os: ["ubuntu-latest", "windows-latest", "macos-latest"]
+        python-version: ["3.13", "3.12", "3.11", "3.10", "3.9"]
 
     runs-on: ${{ matrix.os }}
     env:
@@ -100,9 +103,9 @@ jobs:
       # Test cases loaded is defined in __init__.py in the tests directory.
       # See also tests/README.md
     - name: Coverage report
-      if: matrix.python-version == env.PYTHON_VERSION_LATEST
+      if: matrix.os == 'ubuntu-latest' && matrix.python-version == env.PYTHON_VERSION_LATEST
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_SERVICE_NAME: github
       run: coveralls
-      # Only submit a report from the latest Python version
+      # Only submit a report from the latest Python version on ubuntu-latest.

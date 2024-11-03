@@ -6,10 +6,10 @@ Thai National Corpus word frequency
 """
 
 __all__ = [
-    "word_freqs",
-    "unigram_word_freqs",
     "bigram_word_freqs",
     "trigram_word_freqs",
+    "unigram_word_freqs",
+    "word_freqs",
 ]
 
 from collections import defaultdict
@@ -17,9 +17,9 @@ from typing import List, Tuple
 
 from pythainlp.corpus import get_corpus, get_corpus_path
 
-_FILENAME = "tnc_freq.txt"
-_BIGRAM = "tnc_bigram_word_freqs"
-_TRIGRAM = "tnc_trigram_word_freqs"
+_UNIGRAM_FILENAME = "tnc_freq.txt"
+_BIGRAM_CORPUS_NAME = "tnc_bigram_word_freqs"
+_TRIGRAM_CORPUS_NAME = "tnc_trigram_word_freqs"
 
 
 def word_freqs() -> List[Tuple[str, int]]:
@@ -30,53 +30,61 @@ def word_freqs() -> List[Tuple[str, int]]:
 
     Credit: Korakot Chaovavanich https://www.facebook.com/groups/thainlp/posts/434330506948445
     """
-    lines = list(get_corpus(_FILENAME))
-    word_freqs = []
+    freqs: list[tuple[str, int]] = []
+    lines = list(get_corpus(_UNIGRAM_FILENAME))
     for line in lines:
         word_freq = line.split("\t")
         if len(word_freq) >= 2:
-            word_freqs.append((word_freq[0], int(word_freq[1])))
+            freqs.append((word_freq[0], int(word_freq[1])))
 
-    return word_freqs
+    return freqs
 
 
-def unigram_word_freqs() -> defaultdict:
+def unigram_word_freqs() -> dict[str, int]:
     """
     Get unigram word frequency from Thai National Corpus (TNC)
     """
-    lines = list(get_corpus(_FILENAME))
-    _word_freqs = defaultdict(int)
+    freqs: dict[str, int] = defaultdict(int)
+    lines = list(get_corpus(_UNIGRAM_FILENAME))
     for i in lines:
         _temp = i.strip().split("	")
         if len(_temp) >= 2:
-            _word_freqs[_temp[0]] = int(_temp[-1])
+            freqs[_temp[0]] = int(_temp[-1])
 
-    return _word_freqs
+    return freqs
 
 
-def bigram_word_freqs() -> defaultdict:
+def bigram_word_freqs() -> dict[Tuple[str, str], int]:
     """
     Get bigram word frequency from Thai National Corpus (TNC)
     """
-    _path = get_corpus_path(_BIGRAM)
-    _word_freqs = defaultdict(int)
-    with open(_path, "r", encoding="utf-8-sig") as fh:
+    freqs: dict[tuple[str, str], int] = defaultdict(int)
+    path = get_corpus_path(_BIGRAM_CORPUS_NAME)
+    if not path:
+        return freqs
+    path = str(path)
+
+    with open(path, "r", encoding="utf-8-sig") as fh:
         for i in fh.readlines():
-            _temp = i.strip().split("	")
-            _word_freqs[(_temp[0], _temp[1])] = int(_temp[-1])
+            temp = i.strip().split("	")
+            freqs[(temp[0], temp[1])] = int(temp[-1])
 
-    return _word_freqs
+    return freqs
 
 
-def trigram_word_freqs() -> defaultdict:
+def trigram_word_freqs() -> dict[Tuple[str, str, str], int]:
     """
     Get trigram word frequency from Thai National Corpus (TNC)
     """
-    _path = get_corpus_path(_TRIGRAM)
-    _word_freqs = defaultdict(int)
-    with open(_path, "r", encoding="utf-8-sig") as fh:
-        for i in fh.readlines():
-            _temp = i.strip().split("	")
-            _word_freqs[(_temp[0], _temp[1], _temp[2])] = int(_temp[-1])
+    freqs: dict[tuple[str, str, str], int] = defaultdict(int)
+    path = get_corpus_path(_TRIGRAM_CORPUS_NAME)
+    if not path:
+        return freqs
+    path = str(path)
 
-    return _word_freqs
+    with open(path, "r", encoding="utf-8-sig") as fh:
+        for i in fh.readlines():
+            temp = i.strip().split("	")
+            freqs[(temp[0], temp[1], temp[2])] = int(temp[-1])
+
+    return freqs

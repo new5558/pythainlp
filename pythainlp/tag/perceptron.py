@@ -4,11 +4,14 @@
 """
 Perceptron part-of-speech tagger
 """
+
 import os
 from typing import List, Tuple
 
 from pythainlp.corpus import corpus_path, get_corpus_path
 from pythainlp.tag import PerceptronTagger, blackboard, orchid
+
+_BLACKBOARD_NAME = "blackboard_pt_tagger"
 
 _ORCHID_FILENAME = "pos_orchid_perceptron.json"
 _ORCHID_PATH = os.path.join(corpus_path(), _ORCHID_FILENAME)
@@ -19,14 +22,12 @@ _PUD_PATH = os.path.join(corpus_path(), _PUD_FILENAME)
 _TDTB_FILENAME = "tdtb-pt_tagger.json"
 _TDTB_PATH = os.path.join(corpus_path(), _TDTB_FILENAME)
 
-_BLACKBOARD_NAME = "blackboard_pt_tagger"
-
 _TUD_FILENAME = "pos_tud_perceptron.json"
 _TUD_PATH = os.path.join(corpus_path(), _TUD_FILENAME)
 
+_BLACKBOARD_TAGGER = None
 _ORCHID_TAGGER = None
 _PUD_TAGGER = None
-_BLACKBOARD_TAGGER = None
 _TDTB_TAGGER = None
 _TUD_TAGGER = None
 
@@ -46,10 +47,11 @@ def _pud_tagger():
 
 
 def _blackboard_tagger():
+    global _BLACKBOARD_TAGGER
     if not _BLACKBOARD_TAGGER:
         path = get_corpus_path(_BLACKBOARD_NAME)
-        _LST20_TAGGER = PerceptronTagger(path=path)
-    return _LST20_TAGGER
+        _BLACKBOARD_TAGGER = PerceptronTagger(path=path)
+    return _BLACKBOARD_TAGGER
 
 
 def _tdtb():

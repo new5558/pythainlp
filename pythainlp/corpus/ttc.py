@@ -15,7 +15,7 @@ from typing import List, Tuple
 
 from pythainlp.corpus import get_corpus
 
-_FILENAME = "ttc_freq.txt"
+_UNIGRAM_FILENAME = "ttc_freq.txt"
 
 
 def word_freqs() -> List[Tuple[str, int]]:
@@ -24,25 +24,26 @@ def word_freqs() -> List[Tuple[str, int]]:
     \n(See: `dev/pythainlp/corpus/ttc_freq.txt\
     <https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/ttc_freq.txt>`_)
     """
-    lines = list(get_corpus(_FILENAME))
-    word_freqs = []
+    freqs: list[tuple[str, int]] = []
+    lines = list(get_corpus(_UNIGRAM_FILENAME))
     for line in lines:
         word_freq = line.split("\t")
         if len(word_freq) >= 2:
-            word_freqs.append((word_freq[0], int(word_freq[1])))
+            freqs.append((word_freq[0], int(word_freq[1])))
 
-    return word_freqs
+    return freqs
 
 
-def unigram_word_freqs() -> defaultdict:
+def unigram_word_freqs() -> dict[str, int]:
     """
     Get unigram word frequency from Thai Textbook Corpus (TTC)
     """
-    lines = list(get_corpus(_FILENAME))
-    _word_freqs = defaultdict(int)
-    for i in lines:
-        _temp = i.strip().split("	")
-        if len(_temp) >= 2:
-            _word_freqs[_temp[0]] = int(_temp[-1])
+    freqs: dict[str, int] = defaultdict(int)
 
-    return _word_freqs
+    lines = list(get_corpus(_UNIGRAM_FILENAME))
+    for i in lines:
+        temp = i.strip().split("	")
+        if len(temp) >= 2:
+            freqs[temp[0]] = int(temp[-1])
+
+    return freqs
