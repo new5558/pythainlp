@@ -77,8 +77,7 @@ jobs:
       if: matrix.python-version == '3.12' || matrix.python-version == '3.13'
       run: pip install ".[compact]"
       # If you want to install a safe small set of optional dependencies, use:
-      # pip install .[compact]
-      # "compact" includes numpy, pyicu, and python-crfsuite.
+      # pip install ".[compact]"
       # We can gradually run more test cases by installing more optional
       # dependencies. But we should also consider to reduce the number
       # of dependencies to avoid the conflict between dependencies.
@@ -95,6 +94,7 @@ jobs:
       # Use 'unittest <test_module>' instead of 'unittest discover' to avoid
       # loading tests with dependencies more than expected.
       # Test cases loaded is defined in __init__.py in the tests directory.
+      # See also tests/README.md
     - name: Coverage report
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
