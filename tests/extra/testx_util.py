@@ -14,7 +14,7 @@ from pythainlp.util import rhyme, thai_word_tone_detector
 class UtilTestCaseX(unittest.TestCase):
     def test_rhyme(self):
         self.assertIsInstance(rhyme("แมว"), list)
-        self.assertTrue(len(rhyme("แมว")) > 2)
+        self.assertGreater(len(rhyme("แมว")), 2)
 
     def test_thai_word_tone_detector(self):
         self.assertIsNotNone(thai_word_tone_detector("คนดี"))

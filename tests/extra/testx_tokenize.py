@@ -44,9 +44,7 @@ class TokenizeTestCaseX(unittest.TestCase):
         self.assertIsInstance(
             subword_tokenize("สวัสดิีดาวอังคาร", engine="tltk"), list
         )
-        self.assertFalse(
-            "า" in subword_tokenize("สวัสดีดาวอังคาร", engine="tltk")
-        )
+        self.assertNotIn("า", subword_tokenize("สวัสดีดาวอังคาร", engine="tltk"))
         self.assertIsInstance(subword_tokenize("โควิด19", engine="tltk"), list)
 
         self.assertEqual(subword_tokenize(None, engine="phayathai"), [])
@@ -54,8 +52,8 @@ class TokenizeTestCaseX(unittest.TestCase):
         self.assertIsInstance(
             subword_tokenize("สวัสดิีดาวอังคาร", engine="phayathai"), list
         )
-        self.assertFalse(
-            "า" in subword_tokenize("สวัสดีดาวอังคาร", engine="phayathai")
+        self.assertNotIn(
+            "า", subword_tokenize("สวัสดีดาวอังคาร", engine="phayathai")
         )
         self.assertIsInstance(
             subword_tokenize("โควิด19", engine="phayathai"), list
@@ -66,8 +64,8 @@ class TokenizeTestCaseX(unittest.TestCase):
         self.assertIsInstance(
             subword_tokenize("สวัสดิีดาวอังคาร", engine="wangchanberta"), list
         )
-        self.assertFalse(
-            "า" in subword_tokenize("สวัสดีดาวอังคาร", engine="wangchanberta")
+        self.assertNotIn(
+            "า", subword_tokenize("สวัสดีดาวอังคาร", engine="wangchanberta")
         )
         self.assertIsInstance(
             subword_tokenize("โควิด19", engine="wangchanberta"), list
@@ -163,7 +161,7 @@ class TokenizeTestCaseX(unittest.TestCase):
         self.assertIsNotNone(word_tokenize(TEXT_1, engine="tltk"))
 
     def test_numeric_data_format(self):
-        engines = ["attacut", "deepcut" "sefr_cut"]
+        engines = ["attacut", "deepcut", "sefr_cut"]
 
         for engine in engines:
             self.assertIn(
@@ -268,9 +266,7 @@ class TokenizeTestCaseX(unittest.TestCase):
     def test_ssg(self):
         self.assertEqual(ssg.segment(None), [])
         self.assertEqual(ssg.segment(""), [])
-        self.assertTrue(
-            "ดาว" in subword_tokenize("สวัสดีดาวอังคาร", engine="ssg")
-        )
+        self.assertIn("ดาว", subword_tokenize("สวัสดีดาวอังคาร", engine="ssg"))
 
     def test_tltk(self):
         self.assertEqual(tltk.segment(None), [])

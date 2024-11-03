@@ -73,11 +73,12 @@ class TokenizeTestCaseCompact(unittest.TestCase):
             subword_tokenize("แมวกินปลา", engine="han_solo"),
             ["แมว", "กิน", "ปลา"],
         )
-        self.assertTrue(
-            "ดาว" in subword_tokenize("สวัสดีดาวอังคาร", engine="han_solo")
+        self.assertIn(
+            "ดาว", subword_tokenize("สวัสดีดาวอังคาร", engine="han_solo")
         )
-        self.assertFalse(
-            "า" in subword_tokenize("สวัสดีดาวอังคาร", engine="han_solo")
+
+        self.assertNotIn(
+            "า", subword_tokenize("สวัสดีดาวอังคาร", engine="han_solo")
         )
 
     def test_word_tokenize_icu(self):

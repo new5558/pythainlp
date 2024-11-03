@@ -236,13 +236,13 @@ class TokenizeTestCase(unittest.TestCase):
             sent_tokenize(SENT_4, engine="whitespace"),
             [["ผม", "กิน", "ข้าว"], ["\n", "เธอ", "เล่น", "เกม"]],
         )
-        self.assertFalse(
-            " "
-            in sent_tokenize(
+        self.assertNotIn(
+            " ",
+            sent_tokenize(
                 SENT_1,
                 engine="whitespace",
                 keep_whitespace=False,
-            )
+            ),
         )
         with self.assertRaises(ValueError):
             sent_tokenize("ฉันไป กิน", engine="XX")  # engine does not exist
@@ -253,32 +253,28 @@ class TokenizeTestCase(unittest.TestCase):
         self.assertIsInstance(
             subword_tokenize("สวัสดีดาวอังคาร", engine="tcc"), list
         )
-        self.assertFalse("า" in subword_tokenize("สวัสดีดาวอังคาร", engine="tcc"))
+        self.assertNotIn("า", subword_tokenize("สวัสดีดาวอังคาร", engine="tcc"))
         self.assertIsInstance(
             subword_tokenize("สวัสดีดาวอังคาร", engine="tcc_p"), list
         )
-        self.assertFalse(
-            "า" in subword_tokenize("สวัสดีดาวอังคาร", engine="tcc_p")
-        )
+        self.assertNotIn("า", subword_tokenize("สวัสดีดาวอังคาร", engine="tcc_p"))
         self.assertEqual(subword_tokenize(None, engine="etcc"), [])
         self.assertEqual(subword_tokenize("", engine="etcc"), [])
         self.assertIsInstance(
             subword_tokenize("สวัสดิีดาวอังคาร", engine="etcc"), list
         )
-        self.assertFalse(
-            "า" in subword_tokenize("สวัสดีดาวอังคาร", engine="etcc")
-        )
+        self.assertNotIn("า", subword_tokenize("สวัสดีดาวอังคาร", engine="etcc"))
         self.assertIsInstance(subword_tokenize("โควิด19", engine="etcc"), list)
-        self.assertFalse(
-            " " in subword_tokenize("พันธมิตร ชา นม", keep_whitespace=False)
+        self.assertNotIn(
+            " ", subword_tokenize("พันธมิตร ชา นม", keep_whitespace=False)
         )
         self.assertEqual(
             subword_tokenize("สวัสดีชาวโลก", engine="dict"),
             ["สวัส", "ดี", "ชาว", "โลก"],
         )
-        self.assertFalse("า" in subword_tokenize("สวัสดีชาวโลก", engine="dict"))
-        self.assertFalse(
-            " " in subword_tokenize("พันธมิตร ชา นม", keep_whitespace=False)
+        self.assertNotIn("า", subword_tokenize("สวัสดีชาวโลก", engine="dict"))
+        self.assertNotIn(
+            " ", subword_tokenize("พันธมิตร ชา นม", keep_whitespace=False)
         )
         with self.assertRaises(ValueError):
             subword_tokenize("นกแก้ว", engine="XX")  # engine does not exist
@@ -301,8 +297,8 @@ class TokenizeTestCase(unittest.TestCase):
         with self.assertRaises(ValueError):
             word_tokenize("หมอนทอง", engine="XX")  # engine does not exist
 
-        self.assertTrue(
-            "ไฟ" in word_tokenize("รถไฟฟ้า", custom_dict=dict_trie(["ไฟ"]))
+        self.assertIn(
+            "ไฟ", word_tokenize("รถไฟฟ้า", custom_dict=dict_trie(["ไฟ"]))
         )
 
     def test_etcc(self):
@@ -423,12 +419,12 @@ class TokenizeTestCase(unittest.TestCase):
             word_tokenize("จุ๋ม   ง่วง", engine="newmm", keep_whitespace=False),
             ["จุ๋ม", "ง่วง"],
         )
-        self.assertFalse(
-            " "
-            in word_tokenize(
+        self.assertNotIn(
+            " ",
+            word_tokenize(
                 "จุ๋มง่วง",
                 keep_whitespace=False,
-            )
+            ),
         )
         self.assertEqual(
             word_tokenize("(คนไม่เอา)", engine="newmm"),

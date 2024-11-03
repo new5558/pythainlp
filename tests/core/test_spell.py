@@ -42,7 +42,7 @@ class SpellTestCase(unittest.TestCase):
 
     def test_norvig_spell_checker(self):
         checker = NorvigSpellChecker(dict_filter=None)
-        self.assertTrue(len(checker.dictionary()) > 0)
+        self.assertGreater(len(checker.dictionary()), 0)
         self.assertGreaterEqual(checker.prob("มี"), 0)
 
         user_dict = [
@@ -86,7 +86,7 @@ class SpellTestCase(unittest.TestCase):
 
         user_dict = [24, 6, 2475]
         with self.assertRaises(TypeError):
-            checker = NorvigSpellChecker(custom_dict=user_dict)
+            _ = NorvigSpellChecker(custom_dict=user_dict)
 
     def test_spell_sent(self):
         self.assertIsNotNone(spell_sent(SENT_TOKS))
