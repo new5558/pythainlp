@@ -16,6 +16,12 @@ PyThaiNLP is a Python package for text processing and linguistic analysis, simil
 
 PyThaiNLP เป็นไลบารีภาษาไพทอนสำหรับประมวลผลภาษาธรรมชาติ คล้ายกับ NLTK โดยเน้นภาษาไทย [ดูรายละเอียดภาษาไทยได้ที่ README_TH.MD](https://github.com/PyThaiNLP/pythainlp/blob/dev/README_TH.md)
 
+## Quick install
+
+```sh
+pip install pythainlp
+```
+
 ## News
 
 > Now, You can contact with or ask any questions of the PyThaiNLP team. <a href="https://matrix.to/#/#thainlp:matrix.org" rel="noopener" target="_blank"><img src="https://matrix.to/img/matrix-badge.svg" alt="Chat on Matrix"></a>
