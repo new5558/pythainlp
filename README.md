@@ -76,7 +76,7 @@ Install different releases:
 Some functionalities, like Thai WordNet, may require extra packages. To install those requirements, specify a set of `[name]` immediately after `pythainlp`:
 
 ```sh
-pip install pythainlp[extra1,extra2,...]
+pip install "pythainlp[extra1,extra2,...]"
 ```
 
 Possible `extras`:
