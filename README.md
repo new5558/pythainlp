@@ -76,6 +76,7 @@ pip install pythainlp[extra1,extra2,...]
 Possible `extras`:
 
 - `full` (install everything)
+- `compact` (install a stable and small subset of dependencies)
 - `attacut` (to support attacut, a fast and accurate tokenizer)
 - `benchmarks` (for [word tokenization benchmarking](tokenization-benchmark.md))
 - `icu` (for ICU, International Components for Unicode, support in transliteration and tokenization)
@@ -85,7 +86,8 @@ Possible `extras`:
 - `thai2rom` (for machine-learnt romanization)
 - `wordnet` (for Thai WordNet API)
 
-For dependency details, look at the `extras` variable in [`setup.py`](https://github.com/PyThaiNLP/pythainlp/blob/dev/setup.py).
+For dependency details, look at the `extras` variable in
+[`setup.py`](https://github.com/PyThaiNLP/pythainlp/blob/dev/setup.py).
 
 ## Data Directory
 
@@ -109,6 +111,19 @@ To show how to use:
 ```sh
 thainlp help
 ```
+
+## Testing and test suites
+
+We test core functionalities on all officially supported Python versions.
+
+Some functionality requiring extra dependencies may be tested less frequently
+due to potential version conflicts or incompatibilities between packages.
+
+Test cases are categorized into three groups: core, compact, and extra.
+You can find these tests in the [tests/](/tests/) directory.
+
+For more detailed information on testing, please refer to the tests README:
+[tests/README.md](./tests/README.md)
 
 ## Licenses
 

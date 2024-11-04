@@ -25,19 +25,6 @@ from ..core.test_tokenize import (
 )
 
 
-class WordTokenizeICUTestCase(unittest.TestCase):
-    def test_icu(self):
-        self.assertEqual(pyicu.segment(None), [])
-        self.assertEqual(pyicu.segment(""), [])
-        self.assertEqual(
-            word_tokenize("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย", engine="icu"),
-            ["ฉัน", "รัก", "ภาษา", "ไทย", "เพราะ", "ฉัน", "เป็น", "คน", "ไทย"],
-        )
-
-    def test_word_tokenize_icu(self):
-        self.assertIsNotNone(word_tokenize(TEXT_1, engine="icu"))
-
-
 class SentTokenizeCRFCutTestCase(unittest.TestCase):
     def test_sent_tokenize(self):
         # Use default engine (crfcut)
@@ -88,3 +75,16 @@ class SubwordTokenizeHanSoloTestCase(unittest.TestCase):
         self.assertNotIn(
             "า", subword_tokenize("สวัสดีดาวอังคาร", engine="han_solo")
         )
+
+
+class WordTokenizeICUTestCase(unittest.TestCase):
+    def test_icu(self):
+        self.assertEqual(pyicu.segment(None), [])
+        self.assertEqual(pyicu.segment(""), [])
+        self.assertEqual(
+            word_tokenize("ฉันรักภาษาไทยเพราะฉันเป็นคนไทย", engine="icu"),
+            ["ฉัน", "รัก", "ภาษา", "ไทย", "เพราะ", "ฉัน", "เป็น", "คน", "ไทย"],
+        )
+
+    def test_word_tokenize_icu(self):
+        self.assertIsNotNone(word_tokenize(TEXT_1, engine="icu"))

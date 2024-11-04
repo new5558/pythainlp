@@ -44,7 +44,7 @@ so it may be a good idea to familiarize yourself with it.
 
 - We use the famous [gitflow](http://nvie.com/posts/a-successful-git-branching-model/)
 to manage our branches.
-- When you create pull requests on GitHub, Github Actions and AppVeyor will run tests
+- When you create pull requests on GitHub, GitHub Actions will run tests
 and several checks automatically. Click the "Details" link at the end of
 each check to see what needs to be fixed.
 
@@ -66,7 +66,7 @@ To run unit tests locally together with code coverage test:
 (from main `pythainlp/` directory)
 
 ```sh
-coverage run -m unittest discover
+coverage run -m unittest tests.core
 ```
 
 See code coverage test:
@@ -75,13 +75,16 @@ See code coverage test:
 coverage report
 ```
 
-Generate code coverage test in HTML (files will be available in `htmlcov/` directory):
+Generate code coverage test in HTML
+(files will be available in `htmlcov/` directory):
 
 ```sh
 coverage html
 ```
 
-Make sure the tests pass on both Github Actions and AppVeyor.
+Make sure the tests pass on GitHub Actions.
+
+See more in [tests/README.md](./tests/README.md)
 
 ## Releasing
 
