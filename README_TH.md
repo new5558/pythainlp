@@ -2,10 +2,9 @@
   <img src="https://avatars0.githubusercontent.com/u/32934255?s=200&v=4"/>
   <h1>PyThaiNLP: Thai Natural Language Processing in Python</h1>
   <a href="https://pypi.python.org/pypi/pythainlp"><img alt="pypi" src="https://img.shields.io/pypi/v/pythainlp.svg"/></a>
-  <a href="https://www.python.org/downloads/release/python-370/"><img alt="Python 3.7" src="https://img.shields.io/badge/python-3.7-blue.svg"/></a>
+  <a href="https://www.python.org/downloads/"><img alt="Python 3.9" src="https://img.shields.io/badge/python-3.9-blue.svg"/></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
   <a href="https://pepy.tech/project/pythainlp"><img alt="Download" src="https://pepy.tech/badge/pythainlp/month"/></a>
-  <a href="https://ci.appveyor.com/project/wannaphongcom/pythainlp-9y1ch"><img alt="Build status" src="https://ci.appveyor.com/api/projects/status/9g3mfcwchi8em40x?svg=true"/></a>
   <a href="https://coveralls.io/github/PyThaiNLP/pythainlp?branch=dev"><img alt="Coverage Status" src="https://coveralls.io/repos/github/PyThaiNLP/pythainlp/badge.svg?branch=dev"/></a>
   <a href="https://www.codacy.com/app/pythainlp/pythainlp_2"><img alt="Codacy Badge" src="https://api.codacy.com/project/badge/Grade/cb946260c87a4cc5905ca608704406f7"/></a>
   <a href="https://app.fossa.io/projects/git%2Bgithub.com%2FPyThaiNLP%2Fpythainlp"><img alt="FOSSA Status" src="https://app.fossa.io/api/projects/git%2Bgithub.com%2FPyThaiNLP%2Fpythainlp.svg?type=shield"/></a>
@@ -51,6 +50,7 @@ PyThaiNLP มีความสามารถพื้นฐานสำหร�
 - Thai datetime formatting (`thai_strftime`)
 - Thai-English keyboard misswitched fix (`eng_to_thai`, `thai_to_eng`)
 - Command-line interface for basic functions, like tokenization and pos tagging (run `thainlp` in your shell)
+
 </details>
 
 อ่านรายละเอียดได้ที่ [tutorials](https://pythainlp.org/tutorials)
@@ -82,6 +82,7 @@ pip install pythainlp[extra1,extra2,...]
   <summary>รายการสำหรับติดตั้งผ่าน <code>extras</code></summary>
 
 - `full` (ติดตั้งทุกอย่าง)
+- `compact` (ติดตั้งไลบารีชุดเล็กที่ทดสอบแล้วว่าไม่ตีกันเองและติดตั้งได้ในทุกระบบปฏิบัติการ)
 - `attacut` (เพื่อสนับสนุน attacut ซึ่งเป็นตัวตัดคำที่ทำงานได้รวดเร็วและมีประสิทธิภาพ)
 - `benchmarks` (สำหรับ [word tokenization benchmarking](tokenization-benchmark.md))
 - `icu` (สำหรับการรองรับ ICU หรือ International Components for Unicode ในการถอดเสียงเป็นอักษรและการตัดแบ่งคำ)
@@ -90,6 +91,7 @@ pip install pythainlp[extra1,extra2,...]
 - `thai2fit` (สำหรับ Thai word vector)
 - `thai2rom` (สำหรับการถอดอักษรไทยเป็นอักษรโรมัน)
 - `wordnet` (สำหรับ Thai WordNet API)
+
 </details>
 
 สำหรับโมดูลที่ต้องการ สามารถดูรายละเอียดได้ที่ตัวแปร `extras` ใน [`setup.py`](https://github.com/PyThaiNLP/pythainlp/blob/dev/setup.py).

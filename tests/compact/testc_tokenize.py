@@ -88,8 +88,3 @@ class WordTokenizeICUTestCase(unittest.TestCase):
 
     def test_word_tokenize_icu(self):
         self.assertIsNotNone(word_tokenize(TEXT_1, engine="icu"))
-
-
-class WordTokenizeNlpO3TestCase(unittest.TestCase):
-    def test_word_tokenize_nlpo3(self):
-        self.assertIsNotNone(word_tokenize(TEXT_1, engine="nlpo3"))
