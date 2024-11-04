@@ -14,10 +14,10 @@ Tests are categorized into three groups: core, compact, and extra.
 ## Compact Tests (testc_*.py)
 
 - Run `unittest tests.compact`
-- Test a limited set of additional functionalities that rely on optional
-  dependencies specified in `requirements.txt`.
-- These dependencies are `PyYAML`, `numpy`, `pyicu`, `python-crfsuite`, and
-  `requests`.
+- Test a limited set of functionalities that rely on a stable and small subset
+  of optional dependencies specified in `requirements.txt`.
+- These dependencies are `PyYAML`, `nlpo3`, `numpy`, `pyicu`,
+  `python-crfsuite`, and `requests`.
 - Test with the latest two stable Python versions.
 
 ## Extra Tests (testx_*.py)
