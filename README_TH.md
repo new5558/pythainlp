@@ -1,17 +1,24 @@
 <div align="center">
   <img src="https://avatars0.githubusercontent.com/u/32934255?s=200&v=4"/>
   <h1>PyThaiNLP: Thai Natural Language Processing in Python</h1>
+  <a href="https://www.repostatus.org/#active"><img alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed." src="https://www.repostatus.org/badges/latest/active.svg"/></a>
   <a href="https://pypi.python.org/pypi/pythainlp"><img alt="pypi" src="https://img.shields.io/pypi/v/pythainlp.svg"/></a>
   <a href="https://www.python.org/downloads/"><img alt="Python 3.9" src="https://img.shields.io/badge/python-3.9-blue.svg"/></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
-  <a href="https://pepy.tech/project/pythainlp"><img alt="Download" src="https://pepy.tech/badge/pythainlp/month"/></a>
+  <a href="https://www.codacy.com/gh/PyThaiNLP/pythainlp/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=PyThaiNLP/pythainlp&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/5821a0de122041c79999bbb280230ffb"/></a>
   <a href="https://coveralls.io/github/PyThaiNLP/pythainlp?branch=dev"><img alt="Coverage Status" src="https://coveralls.io/repos/github/PyThaiNLP/pythainlp/badge.svg?branch=dev"/></a>
-  <a href="https://www.codacy.com/app/pythainlp/pythainlp_2"><img alt="Codacy Badge" src="https://api.codacy.com/project/badge/Grade/cb946260c87a4cc5905ca608704406f7"/></a>
-  <a href="https://app.fossa.io/projects/git%2Bgithub.com%2FPyThaiNLP%2Fpythainlp"><img alt="FOSSA Status" src="https://app.fossa.io/api/projects/git%2Bgithub.com%2FPyThaiNLP%2Fpythainlp.svg?type=shield"/></a>
   <a href="https://colab.research.google.com/github/PyThaiNLP/tutorials/blob/master/source/notebooks/pythainlp_get_started.ipynb"><img alt="Google Colab Badge" src="https://badgen.net/badge/Launch%20Quick%20Start%20Guide/on%20Google%20Colab/blue?icon=terminal"/></a>
-  <a href="https://zenodo.org/badge/latestdoi/61813823"><img alt="DOI" src="https://zenodo.org/badge/61813823.svg"/></a>
+  <a href="https://doi.org/10.5281/zenodo.3519354"><img alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.3519354.svg"/></a>
+  <a href="https://matrix.to/#/#thainlp:matrix.org" rel="noopener" target="_blank"><img src="https://matrix.to/img/matrix-badge.svg" alt="Chat on Matrix"></a>
 </div>
+
 PyThaiNLP เป็นไลบารีภาษาไพทอนสำหรับประมวลผลภาษาธรรมชาติ โดยเน้นภาษาไทย
+
+## ติดตั้งแบบด่วน
+
+```sh
+pip install pythainlp
+```
 
 ## ข่าวสาร
 
@@ -123,19 +130,25 @@ thainlp help
 
 หากคุณใช้ซอฟต์แวร์ `PyThaiNLP` ในโครงงานหรืองานวิจัยของคุณ คุณสามารถอ้างอิงได้ตามนี้
 
-> Wannaphong Phatthiyaphaibun, Korakot Chaovavanich, Charin Polpanumas, Arthit Suriyawongkul, Lalita Lowphansirikul, & Pattarawat Chormai. (2016, Jun 27). PyThaiNLP: Thai Natural Language Processing in Python. Zenodo. <http://doi.org/10.5281/zenodo.3519354>
+> Phatthiyaphaibun, Wannaphong, Korakot Chaovavanich, Charin Polpanumas, Arthit Suriyawongkul, Lalita Lowphansirikul, and Pattarawat Chormai. “Pythainlp: Thai Natural Language Processing in Python”. Zenodo, 2 June 2024. <http://doi.org/10.5281/zenodo.3519354>.
 
 โดยสามารถใช้ BibTeX นี้:
 
-```bib
-@misc{pythainlp,
-    author       = {Wannaphong Phatthiyaphaibun, Korakot Chaovavanich, Charin Polpanumas, Arthit Suriyawongkul, Lalita Lowphansirikul, Pattarawat Chormai},
-    title        = {{PyThaiNLP: Thai Natural Language Processing in Python}},
-    month        = Jun,
-    year         = 2016,
-    doi          = {10.5281/zenodo.3519354},
-    publisher    = {Zenodo},
-    url          = {http://doi.org/10.5281/zenodo.3519354}
+```bibtex
+@software{pythainlp,
+    title = "{P}y{T}hai{NLP}: {T}hai Natural Language Processing in {P}ython",
+    author = "Phatthiyaphaibun, Wannaphong  and
+      Chaovavanich, Korakot  and
+      Polpanumas, Charin  and
+      Suriyawongkul, Arthit  and
+      Lowphansirikul, Lalita  and
+      Chormai, Pattarawat",
+    doi = {10.5281/zenodo.3519354},
+    license = {Apache-2.0},
+    month = jun,
+    url = {https://github.com/PyThaiNLP/pythainlp/},
+    version = {v5.0.4},
+    year = {2024},
 }
 ```
 
@@ -145,7 +158,7 @@ thainlp help
 
 โดยสามารถใช้ BibTeX นี้:
 
-```bib
+```bibtex
 @inproceedings{phatthiyaphaibun-etal-2023-pythainlp,
     title = "{P}y{T}hai{NLP}: {T}hai Natural Language Processing in Python",
     author = "Phatthiyaphaibun, Wannaphong  and
@@ -193,7 +206,8 @@ thainlp help
 
 ## บัตรโมเดล
 
-สำหรับรายละเอียดทางเทคนิค ข้อควรระวัง และข้อคำนึงทางจริยธรรมของตัวแบบ (โมเดล) ที่ใช้ใน PyThaiNLP กรุณาดูที่ [Model cards](https://github.com/PyThaiNLP/pythainlp/wiki/Model-Cards)
+สำหรับรายละเอียดทางเทคนิค ข้อควรระวัง และข้อคำนึงทางจริยธรรมของตัวแบบ (โมเดล) ที่ใช้ใน PyThaiNLP
+กรุณาดูที่ [Model cards](https://github.com/PyThaiNLP/pythainlp/wiki/Model-Cards)
 
 ## ผู้สนับสนุน
 
