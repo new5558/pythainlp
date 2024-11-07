@@ -1,25 +1,49 @@
 cff-version: "1.2.0"
-message: "If you use this software, please cite it as below."
-authors:
-- family-names: "Phatthiyaphaibun"
-  given-names: "Wannaphong"
-  orcid: "https://orcid.org/0000-0002-4153-4354"
-- family-names: "Chaovavanich"
-  given-names: "Korakot"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-- family-names: "Polpanumas"
-  given-names: "Charin"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-- family-names: "Suriyawongkul"
-  given-names: "Arthit"
-  orcid: "https://orcid.org/0000-0002-9698-1899"
-- family-names: "Lowphansirikul"
-  given-names: "Lalita"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-- family-names: "Chormai"
-  given-names: "Pattarawat"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
 title: "PyThaiNLP: Thai Natural Language Processing in Python"
-version: v5.0.4
+message: >-
+  If you use this software, please cite it using these
+  metadata.
+type: software
+authors:
+  - family-names: Phatthiyaphaibun
+    given-names: Wannaphong
+    orcid: "https://orcid.org/0000-0002-4153-4354"
+  - family-names: Chaovavanich
+    given-names: Korakot
+    orcid: "https://orcid.org/0009-0002-7350-9855"
+  - family-names: Polpanumas
+    given-names: Charin
+    orcid: "https://orcid.org/0000-0001-7822-4600"
+  - family-names: Suriyawongkul
+    given-names: Arthit
+    orcid: "https://orcid.org/0000-0002-9698-1899"
+  - family-names: Lowphansirikul
+    given-names: Lalita
+    orcid: "https://orcid.org/0000-0002-5305-2088"
+  - family-names: Chormai
+    given-names: Pattarawat
+    orcid: "https://orcid.org/0000-0002-7582-4667"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.3519354
+    description: >-
+      This is the collection of archived snapshots of all
+      versions of PyThaiNLP.
+repository-code: "https://github.com/PyThaiNLP/pythainlp/"
+repository: "https://github.com/PyThaiNLP/pythainlp/"
+url: "https://pythainlp.org/"
+abstract: "Thai natural language processing in Python"
+keywords:
+  - "natural language processing"
+  - Thai
+  - Python
+  - "text processing"
+  - "computational linguistics"
+  - tokenization
+  - "word segmentation"
+  - NLP
+  - "Thai language"
+  - Thai NLP
 license: Apache-2.0
-date-released: 2024-06-02
+version: v5.0.4
+date-released: "2024-06-02"
