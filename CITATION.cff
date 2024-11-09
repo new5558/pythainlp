@@ -35,15 +35,15 @@ url: "https://pythainlp.org/"
 abstract: "Thai natural language processing in Python"
 keywords:
   - "natural language processing"
-  - Thai
-  - Python
+  - "Thai"
+  - "Python"
   - "text processing"
   - "computational linguistics"
-  - tokenization
+  - "tokenization"
   - "word segmentation"
-  - NLP
+  - "NLP"
   - "Thai language"
-  - Thai NLP
+  - "Thai NLP"
 license: Apache-2.0
 version: v5.0.4
 date-released: "2024-06-02"
