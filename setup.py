@@ -103,6 +103,7 @@ extras = {
     # Compact dependencies, this one matches requirements.txt
     "compact": [
         "PyYAML>=5.4.1",
+        "nlpo3>=1.3.0",
         "numpy>=1.22",
         "pyicu>=2.3",
         "python-crfsuite>=0.9.7",
