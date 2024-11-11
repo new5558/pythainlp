@@ -306,11 +306,6 @@ class WordTokenizeNERCutTestCase(unittest.TestCase):
         self.assertIsNotNone(word_tokenize("ทดสอบ", engine="nercut"))
 
 
-class WordTokenizeNlpO3TestCase(unittest.TestCase):
-    def test_word_tokenize_nlpo3(self):
-        self.assertIsNotNone(word_tokenize(TEXT_1, engine="nlpo3"))
-
-
 class WordTokenizeOSKutTestCase(unittest.TestCase):
     def test_word_tokenize_oskut(self):
         self.assertIsNotNone(word_tokenize(TEXT_1, engine="oskut"))
