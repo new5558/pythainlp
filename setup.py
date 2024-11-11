@@ -67,7 +67,7 @@ extras = {
     "ipa": ["epitran>=1.1"],
     "ml": ["numpy>=1.22", "torch>=1.0.0"],
     "mt5": ["sentencepiece>=0.1.91", "transformers>=4.6.0"],
-    "nlpo3": ["nlpo3>=1.3.0"],
+    "nlpo3": ["nlpo3>=1.3.1"],
     "onnx": ["numpy>=1.22", "onnxruntime>=1.10.0", "sentencepiece>=0.1.91"],
     "oskut": ["oskut>=1.3"],
     "sefr_cut": ["sefr_cut>=1.1"],
@@ -103,7 +103,7 @@ extras = {
     # Compact dependencies, this one matches requirements.txt
     "compact": [
         "PyYAML>=5.4.1",
-        "nlpo3>=1.3.0",
+        "nlpo3>=1.3.1",
         "numpy>=1.22",
         "pyicu>=2.3",
         "python-crfsuite>=0.9.7",
@@ -120,7 +120,7 @@ extras = {
         "fastcoref>=2.1.5",
         "gensim>=4.0.0",
         "khamyo>=0.2.0",
-        "nlpo3>=1.3.0",
+        "nlpo3>=1.3.1",
         "nltk>=3.3",
         "numpy>=1.22",
         "onnxruntime>=1.10.0",
