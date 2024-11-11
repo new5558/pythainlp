@@ -1,6 +1,6 @@
 PyYAML==5.4.1
 attacut==1.0.6
-bpemb==0.3.4
+bpemb==0.3.6
 deepcut==0.7.0.0
 emoji==0.5.4
 epitran==1.9
