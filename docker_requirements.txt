@@ -1,6 +1,6 @@
 PyYAML==5.4.1
 attacut==1.0.6
-bpemb==0.3.4
+bpemb==0.3.6
 deepcut==0.7.0.0
 emoji==0.5.4
 epitran==1.9
@@ -31,7 +31,7 @@ spacy==3.5.*
 spylls==0.1.5
 ssg==0.0.8
 symspellpy==6.7.8
-tensorflow==2.13.1
+tensorflow==2.18.0
 thai-nner==0.3
 tltk==1.6.8
 torch==1.13.1
