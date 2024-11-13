@@ -14,10 +14,39 @@ on:
     types: [published]
 
 jobs:
+  echo_github_env:
+    name: Echo env variables
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "github.event.action   : ${{ github.event.action }}"
+        echo "github.event_name     : ${{ github.event_name }}"
+        echo "github.ref            : ${{ github.ref }}"
+        echo "github.ref_type       : ${{ github.ref_type }}"
+        echo "github.event.ref      : ${{ github.event.ref }}"
+
+  # Check whether to build the wheels and the source tarball
+  check_build_trigger:
+    name: Check build trigger
+    runs-on: ubuntu-latest
+    # Not for forks
+    if: github.repository == 'pythainlp/pythainlp'
+    outputs:
+      build: ${{ steps.check_build_trigger.outputs.build }}
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+    - id: check_build_trigger
+      name: Check build trigger
+      run: bash build_tools/github/check_build_trigger.sh
+      # To trigger the build steps, add "[cd build]" to commit message
+
   build:
     name: Build and check distributions
+    needs: [check_build_trigger]
     runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.message, '[cd build]')
     strategy:
       matrix:
         python-version: ["3.12"]
