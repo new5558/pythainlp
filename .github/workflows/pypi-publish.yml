@@ -6,10 +6,10 @@ name: Build and publish to PyPI
 on:
   push:
     branches:
-      - main
+      - dev
   pull_request:
     branches:
-      - main
+      - dev
   release:
     types: [published]
 
