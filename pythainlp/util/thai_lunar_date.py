@@ -9,11 +9,7 @@ from datetime import date, timedelta
 from typing import Tuple, Union
 
 
-def XLMod(a: float, b: float) -> int:
-    return a - b * int(a / b)
-
-
-StartY = [[0 for _ in range(2)] for _ in range(113)]
+start_y = [[0 for _ in range(2)] for _ in range(113)]
 years = [
     0, 1901, 1906, 1911, 1916, 1921, 1926, 1931, 1936, 1941, 1946,
     1951, 1956, 1961, 1966, 1971, 1976, 1981, 1986, 1991, 1996,
@@ -29,9 +25,9 @@ years = [
     2451, 2456
 ]
 for i, year in enumerate(years):
-    StartY[i][0] = year
+    start_y[i][0] = year
 
-v = [
+value_years = [
     0,
     0.122733000004352,
     1.91890000045229E-02,
@@ -145,302 +141,305 @@ v = [
     -0.18355899997642,
     -0.287102999976249,
     -0.390646999976078]
-for i, year in enumerate(v):
-    StartY[i][1] = year
+for i, value in enumerate(value_years):
+    start_y[i][1] = value
 
 
-def calculate_Fyear_FDev(iYear: int) -> Tuple[int, float]:
-    if iYear >= 2456:
-        Fyear, FDev = StartY[112]
-    elif iYear >= 2451:
-        Fyear, FDev = StartY[111]
-    elif iYear >= 2446:
-        Fyear, FDev = StartY[110]
-    elif iYear >= 2441:
-        Fyear, FDev = StartY[109]
-    elif iYear >= 2436:
-        Fyear, FDev = StartY[108]
-    elif iYear >= 2431:
-        Fyear, FDev = StartY[107][0], StartY[107][1]
-    elif iYear >= 2426:
-        Fyear, FDev = StartY[106][0], StartY[106][1]
-    elif iYear >= 2421:
-        Fyear, FDev = StartY[105][0], StartY[105][1]
-    elif iYear >= 2416:
-        Fyear, FDev = StartY[104][0], StartY[104][1]
-    elif iYear >= 2411:
-        Fyear, FDev = StartY[103][0], StartY[103][1]
-    elif iYear >= 2406:
-        Fyear, FDev = StartY[102][0], StartY[102][1]
-    elif iYear >= 2401:
-        Fyear, FDev = StartY[101][0], StartY[101][1]
-    elif iYear >= 2396:
-        Fyear, FDev = StartY[100][0], StartY[100][1]
-    elif iYear >= 2391:
-        Fyear, FDev = StartY[99][0], StartY[99][1]
-    elif iYear >= 2386:
-        Fyear, FDev = StartY[98][0], StartY[98][1]
-    elif iYear >= 2381:
-        Fyear, FDev = StartY[97][0], StartY[97][1]
-    elif iYear >= 2376:
-        Fyear, FDev = StartY[96][0], StartY[96][1]
-    elif iYear >= 2371:
-        Fyear, FDev = StartY[95][0], StartY[95][1]
-    elif iYear >= 2366:
-        Fyear, FDev = StartY[94][0], StartY[94][1]
-    elif iYear >= 2361:
-        Fyear, FDev = StartY[93][0], StartY[93][1]
-    elif iYear >= 2356:
-        Fyear, FDev = StartY[92][0], StartY[92][1]
-    elif iYear >= 2351:
-        Fyear, FDev = StartY[91][0], StartY[91][1]
-    elif iYear >= 2346:
-        Fyear, FDev = StartY[90][0], StartY[90][1]
-    elif iYear >= 2341:
-        Fyear, FDev = StartY[89][0], StartY[89][1]
-    elif iYear >= 2336:
-        Fyear, FDev = StartY[88][0], StartY[88][1]
-    elif iYear >= 2331:
-        Fyear, FDev = StartY[87][0], StartY[87][1]
-    elif iYear >= 2326:
-        Fyear, FDev = StartY[86][0], StartY[86][1]
-    elif iYear >= 2321:
-        Fyear, FDev = StartY[85][0], StartY[85][1]
-    elif iYear >= 2316:
-        Fyear, FDev = StartY[84][0], StartY[84][1]
-    elif iYear >= 2311:
-        Fyear, FDev = StartY[83][0], StartY[83][1]
-    elif iYear >= 2306:
-        Fyear, FDev = StartY[82][0], StartY[82][1]
-    elif iYear >= 2301:
-        Fyear, FDev = StartY[81][0], StartY[81][1]
-    elif iYear >= 2296:
-        Fyear, FDev = StartY[80][0], StartY[80][1]
-    elif iYear >= 2291:
-        Fyear, FDev = StartY[79][0], StartY[79][1]
-    elif iYear >= 2286:
-        Fyear, FDev = StartY[78][0], StartY[78][1]
-    elif iYear >= 2281:
-        Fyear, FDev = StartY[77][0], StartY[77][1]
-    elif iYear >= 2276:
-        Fyear, FDev = StartY[76][0], StartY[76][1]
-    elif iYear >= 2271:
-        Fyear, FDev = StartY[75][0], StartY[75][1]
-    elif iYear >= 2266:
-        Fyear, FDev = StartY[74][0], StartY[74][1]
-    elif iYear >= 2261:
-        Fyear, FDev = StartY[73][0], StartY[73][1]
-    elif iYear >= 2256:
-        Fyear, FDev = StartY[72][0], StartY[72][1]
-    elif iYear >= 2251:
-        Fyear, FDev = StartY[71][0], StartY[71][1]
-    elif iYear >= 2246:
-        Fyear, FDev = StartY[70][0], StartY[70][1]
-    elif iYear >= 2241:
-        Fyear, FDev = StartY[69][0], StartY[69][1]
-    elif iYear >= 2236:
-        Fyear, FDev = StartY[68][0], StartY[68][1]
-    elif iYear >= 2231:
-        Fyear, FDev = StartY[67][0], StartY[67][1]
-    elif iYear >= 2226:
-        Fyear, FDev = StartY[66][0], StartY[66][1]
-    elif iYear >= 2221:
-        Fyear, FDev = StartY[65][0], StartY[65][1]
-    elif iYear >= 2216:
-        Fyear, FDev = StartY[64][0], StartY[64][1]
-    elif iYear >= 2211:
-        Fyear, FDev = StartY[63][0], StartY[63][1]
-    elif iYear >= 2206:
-        Fyear, FDev = StartY[62][0], StartY[62][1]
-    elif iYear >= 2201:
-        Fyear, FDev = StartY[61][0], StartY[61][1]
-    elif iYear >= 2196:
-        Fyear, FDev = StartY[60][0], StartY[60][1]
-    elif iYear >= 2191:
-        Fyear, FDev = StartY[59][0], StartY[59][1]
-    elif iYear >= 2186:
-        Fyear, FDev = StartY[58][0], StartY[58][1]
-    elif iYear >= 2181:
-        Fyear, FDev = StartY[57][0], StartY[57][1]
-    elif iYear >= 2176:
-        Fyear, FDev = StartY[56][0], StartY[56][1]
-    elif iYear >= 2171:
-        Fyear, FDev = StartY[55][0], StartY[55][1]
-    elif iYear >= 2166:
-        Fyear, FDev = StartY[54][0], StartY[54][1]
-    elif iYear >= 2161:
-        Fyear, FDev = StartY[53][0], StartY[53][1]
-    elif iYear >= 2156:
-        Fyear, FDev = StartY[52][0], StartY[52][1]
-    elif iYear >= 2151:
-        Fyear, FDev = StartY[51][0], StartY[51][1]
-    elif iYear >= 2146:
-        Fyear, FDev = StartY[50][0], StartY[50][1]
-    elif iYear >= 2141:
-        Fyear, FDev = StartY[49][0], StartY[49][1]
-    elif iYear >= 2136:
-        Fyear, FDev = StartY[48][0], StartY[48][1]
-    elif iYear >= 2131:
-        Fyear, FDev = StartY[47][0], StartY[47][1]
-    elif iYear >= 2126:
-        Fyear, FDev = StartY[46][0], StartY[46][1]
-    elif iYear >= 2121:
-        Fyear, FDev = StartY[45][0], StartY[45][1]
-    elif iYear >= 2116:
-        Fyear, FDev = StartY[44][0], StartY[44][1]
-    elif iYear >= 2111:
-        Fyear, FDev = StartY[43][0], StartY[43][1]
-    elif iYear >= 2106:
-        Fyear, FDev = StartY[42][0], StartY[42][1]
-    elif iYear >= 2101:
-        Fyear, FDev = StartY[41][0], StartY[41][1]
-    elif iYear >= 2096:
-        Fyear, FDev = StartY[40][0], StartY[40][1]
-    elif iYear >= 2091:
-        Fyear, FDev = StartY[39][0], StartY[39][1]
-    elif iYear >= 2086:
-        Fyear, FDev = StartY[38][0], StartY[38][1]
-    elif iYear >= 2081:
-        Fyear, FDev = StartY[37][0], StartY[37][1]
-    elif iYear >= 2076:
-        Fyear, FDev = StartY[36][0], StartY[36][1]
-    elif iYear >= 2071:
-        Fyear, FDev = StartY[35][0], StartY[35][1]
-    elif iYear >= 2066:
-        Fyear, FDev = StartY[34][0], StartY[34][1]
-    elif iYear >= 2061:
-        Fyear, FDev = StartY[33][0], StartY[33][1]
-    elif iYear >= 2056:
-        Fyear, FDev = StartY[32][0], StartY[32][1]
-    elif iYear >= 2051:
-        Fyear, FDev = StartY[31][0], StartY[31][1]
-    elif iYear >= 2046:
-        Fyear, FDev = StartY[30][0], StartY[30][1]
-    elif iYear >= 2041:
-        Fyear, FDev = StartY[29][0], StartY[29][1]
-    elif iYear >= 2036:
-        Fyear, FDev = StartY[28][0], StartY[28][1]
-    elif iYear >= 2031:
-        Fyear, FDev = StartY[27][0], StartY[27][1]
-    elif iYear >= 2026:
-        Fyear, FDev = StartY[26][0], StartY[26][1]
-    elif iYear >= 2021:
-        Fyear, FDev = StartY[25][0], StartY[25][1]
-    elif iYear >= 2016:
-        Fyear, FDev = StartY[24][0], StartY[24][1]
-    elif iYear >= 2011:
-        Fyear, FDev = StartY[23][0], StartY[23][1]
-    elif iYear >= 2006:
-        Fyear, FDev = StartY[22][0], StartY[22][1]
-    elif iYear >= 2001:
-        Fyear, FDev = StartY[21][0], StartY[21][1]
-    elif iYear >= 1996:
-        Fyear, FDev = StartY[20][0], StartY[20][1]
-    elif iYear >= 1991:
-        Fyear, FDev = StartY[19][0], StartY[19][1]
-    elif iYear >= 1986:
-        Fyear, FDev = StartY[18][0], StartY[18][1]
-    elif iYear >= 1981:
-        Fyear, FDev = StartY[17][0], StartY[17][1]
-    elif iYear >= 1976:
-        Fyear, FDev = StartY[16][0], StartY[16][1]
-    elif iYear >= 1971:
-        Fyear, FDev = StartY[15][0], StartY[15][1]
-    elif iYear >= 1966:
-        Fyear, FDev = StartY[14][0], StartY[14][1]
-    elif iYear >= 1961:
-        Fyear, FDev = StartY[13][0], StartY[13][1]
-    elif iYear >= 1956:
-        Fyear, FDev = StartY[12][0], StartY[12][1]
-    elif iYear >= 1951:
-        Fyear, FDev = StartY[11][0], StartY[11][1]
-    elif iYear >= 1946:
-        Fyear, FDev = StartY[10][0], StartY[10][1]
-    elif iYear >= 1941:
-        Fyear, FDev = StartY[9][0], StartY[9][1]
-    elif iYear >= 1936:
-        Fyear, FDev = StartY[8][0], StartY[8][1]
-    elif iYear >= 1931:
-        Fyear, FDev = StartY[7][0], StartY[7][1]
-    elif iYear >= 1926:
-        Fyear, FDev = StartY[6][0], StartY[6][1]
-    elif iYear >= 1921:
-        Fyear, FDev = StartY[5][0], StartY[5][1]
-    elif iYear >= 1916:
-        Fyear, FDev = StartY[4][0], StartY[4][1]
-    elif iYear >= 1911:
-        Fyear, FDev = StartY[3][0], StartY[3][1]
-    elif iYear >= 1906:
-        Fyear, FDev = StartY[2][0], StartY[2][1]
-    elif iYear >= 1901:
-        Fyear, FDev = StartY[1][0], StartY[1][1]
+def calculate_f_year_f_dev(i_year: int) -> Tuple[int, float]:
+    if i_year >= 2456:
+        f_year, f_dev = start_y[112]
+    elif i_year >= 2451:
+        f_year, f_dev = start_y[111]
+    elif i_year >= 2446:
+        f_year, f_dev = start_y[110]
+    elif i_year >= 2441:
+        f_year, f_dev = start_y[109]
+    elif i_year >= 2436:
+        f_year, f_dev = start_y[108]
+    elif i_year >= 2431:
+        f_year, f_dev = start_y[107][0], start_y[107][1]
+    elif i_year >= 2426:
+        f_year, f_dev = start_y[106][0], start_y[106][1]
+    elif i_year >= 2421:
+        f_year, f_dev = start_y[105][0], start_y[105][1]
+    elif i_year >= 2416:
+        f_year, f_dev = start_y[104][0], start_y[104][1]
+    elif i_year >= 2411:
+        f_year, f_dev = start_y[103][0], start_y[103][1]
+    elif i_year >= 2406:
+        f_year, f_dev = start_y[102][0], start_y[102][1]
+    elif i_year >= 2401:
+        f_year, f_dev = start_y[101][0], start_y[101][1]
+    elif i_year >= 2396:
+        f_year, f_dev = start_y[100][0], start_y[100][1]
+    elif i_year >= 2391:
+        f_year, f_dev = start_y[99][0], start_y[99][1]
+    elif i_year >= 2386:
+        f_year, f_dev = start_y[98][0], start_y[98][1]
+    elif i_year >= 2381:
+        f_year, f_dev = start_y[97][0], start_y[97][1]
+    elif i_year >= 2376:
+        f_year, f_dev = start_y[96][0], start_y[96][1]
+    elif i_year >= 2371:
+        f_year, f_dev = start_y[95][0], start_y[95][1]
+    elif i_year >= 2366:
+        f_year, f_dev = start_y[94][0], start_y[94][1]
+    elif i_year >= 2361:
+        f_year, f_dev = start_y[93][0], start_y[93][1]
+    elif i_year >= 2356:
+        f_year, f_dev = start_y[92][0], start_y[92][1]
+    elif i_year >= 2351:
+        f_year, f_dev = start_y[91][0], start_y[91][1]
+    elif i_year >= 2346:
+        f_year, f_dev = start_y[90][0], start_y[90][1]
+    elif i_year >= 2341:
+        f_year, f_dev = start_y[89][0], start_y[89][1]
+    elif i_year >= 2336:
+        f_year, f_dev = start_y[88][0], start_y[88][1]
+    elif i_year >= 2331:
+        f_year, f_dev = start_y[87][0], start_y[87][1]
+    elif i_year >= 2326:
+        f_year, f_dev = start_y[86][0], start_y[86][1]
+    elif i_year >= 2321:
+        f_year, f_dev = start_y[85][0], start_y[85][1]
+    elif i_year >= 2316:
+        f_year, f_dev = start_y[84][0], start_y[84][1]
+    elif i_year >= 2311:
+        f_year, f_dev = start_y[83][0], start_y[83][1]
+    elif i_year >= 2306:
+        f_year, f_dev = start_y[82][0], start_y[82][1]
+    elif i_year >= 2301:
+        f_year, f_dev = start_y[81][0], start_y[81][1]
+    elif i_year >= 2296:
+        f_year, f_dev = start_y[80][0], start_y[80][1]
+    elif i_year >= 2291:
+        f_year, f_dev = start_y[79][0], start_y[79][1]
+    elif i_year >= 2286:
+        f_year, f_dev = start_y[78][0], start_y[78][1]
+    elif i_year >= 2281:
+        f_year, f_dev = start_y[77][0], start_y[77][1]
+    elif i_year >= 2276:
+        f_year, f_dev = start_y[76][0], start_y[76][1]
+    elif i_year >= 2271:
+        f_year, f_dev = start_y[75][0], start_y[75][1]
+    elif i_year >= 2266:
+        f_year, f_dev = start_y[74][0], start_y[74][1]
+    elif i_year >= 2261:
+        f_year, f_dev = start_y[73][0], start_y[73][1]
+    elif i_year >= 2256:
+        f_year, f_dev = start_y[72][0], start_y[72][1]
+    elif i_year >= 2251:
+        f_year, f_dev = start_y[71][0], start_y[71][1]
+    elif i_year >= 2246:
+        f_year, f_dev = start_y[70][0], start_y[70][1]
+    elif i_year >= 2241:
+        f_year, f_dev = start_y[69][0], start_y[69][1]
+    elif i_year >= 2236:
+        f_year, f_dev = start_y[68][0], start_y[68][1]
+    elif i_year >= 2231:
+        f_year, f_dev = start_y[67][0], start_y[67][1]
+    elif i_year >= 2226:
+        f_year, f_dev = start_y[66][0], start_y[66][1]
+    elif i_year >= 2221:
+        f_year, f_dev = start_y[65][0], start_y[65][1]
+    elif i_year >= 2216:
+        f_year, f_dev = start_y[64][0], start_y[64][1]
+    elif i_year >= 2211:
+        f_year, f_dev = start_y[63][0], start_y[63][1]
+    elif i_year >= 2206:
+        f_year, f_dev = start_y[62][0], start_y[62][1]
+    elif i_year >= 2201:
+        f_year, f_dev = start_y[61][0], start_y[61][1]
+    elif i_year >= 2196:
+        f_year, f_dev = start_y[60][0], start_y[60][1]
+    elif i_year >= 2191:
+        f_year, f_dev = start_y[59][0], start_y[59][1]
+    elif i_year >= 2186:
+        f_year, f_dev = start_y[58][0], start_y[58][1]
+    elif i_year >= 2181:
+        f_year, f_dev = start_y[57][0], start_y[57][1]
+    elif i_year >= 2176:
+        f_year, f_dev = start_y[56][0], start_y[56][1]
+    elif i_year >= 2171:
+        f_year, f_dev = start_y[55][0], start_y[55][1]
+    elif i_year >= 2166:
+        f_year, f_dev = start_y[54][0], start_y[54][1]
+    elif i_year >= 2161:
+        f_year, f_dev = start_y[53][0], start_y[53][1]
+    elif i_year >= 2156:
+        f_year, f_dev = start_y[52][0], start_y[52][1]
+    elif i_year >= 2151:
+        f_year, f_dev = start_y[51][0], start_y[51][1]
+    elif i_year >= 2146:
+        f_year, f_dev = start_y[50][0], start_y[50][1]
+    elif i_year >= 2141:
+        f_year, f_dev = start_y[49][0], start_y[49][1]
+    elif i_year >= 2136:
+        f_year, f_dev = start_y[48][0], start_y[48][1]
+    elif i_year >= 2131:
+        f_year, f_dev = start_y[47][0], start_y[47][1]
+    elif i_year >= 2126:
+        f_year, f_dev = start_y[46][0], start_y[46][1]
+    elif i_year >= 2121:
+        f_year, f_dev = start_y[45][0], start_y[45][1]
+    elif i_year >= 2116:
+        f_year, f_dev = start_y[44][0], start_y[44][1]
+    elif i_year >= 2111:
+        f_year, f_dev = start_y[43][0], start_y[43][1]
+    elif i_year >= 2106:
+        f_year, f_dev = start_y[42][0], start_y[42][1]
+    elif i_year >= 2101:
+        f_year, f_dev = start_y[41][0], start_y[41][1]
+    elif i_year >= 2096:
+        f_year, f_dev = start_y[40][0], start_y[40][1]
+    elif i_year >= 2091:
+        f_year, f_dev = start_y[39][0], start_y[39][1]
+    elif i_year >= 2086:
+        f_year, f_dev = start_y[38][0], start_y[38][1]
+    elif i_year >= 2081:
+        f_year, f_dev = start_y[37][0], start_y[37][1]
+    elif i_year >= 2076:
+        f_year, f_dev = start_y[36][0], start_y[36][1]
+    elif i_year >= 2071:
+        f_year, f_dev = start_y[35][0], start_y[35][1]
+    elif i_year >= 2066:
+        f_year, f_dev = start_y[34][0], start_y[34][1]
+    elif i_year >= 2061:
+        f_year, f_dev = start_y[33][0], start_y[33][1]
+    elif i_year >= 2056:
+        f_year, f_dev = start_y[32][0], start_y[32][1]
+    elif i_year >= 2051:
+        f_year, f_dev = start_y[31][0], start_y[31][1]
+    elif i_year >= 2046:
+        f_year, f_dev = start_y[30][0], start_y[30][1]
+    elif i_year >= 2041:
+        f_year, f_dev = start_y[29][0], start_y[29][1]
+    elif i_year >= 2036:
+        f_year, f_dev = start_y[28][0], start_y[28][1]
+    elif i_year >= 2031:
+        f_year, f_dev = start_y[27][0], start_y[27][1]
+    elif i_year >= 2026:
+        f_year, f_dev = start_y[26][0], start_y[26][1]
+    elif i_year >= 2021:
+        f_year, f_dev = start_y[25][0], start_y[25][1]
+    elif i_year >= 2016:
+        f_year, f_dev = start_y[24][0], start_y[24][1]
+    elif i_year >= 2011:
+        f_year, f_dev = start_y[23][0], start_y[23][1]
+    elif i_year >= 2006:
+        f_year, f_dev = start_y[22][0], start_y[22][1]
+    elif i_year >= 2001:
+        f_year, f_dev = start_y[21][0], start_y[21][1]
+    elif i_year >= 1996:
+        f_year, f_dev = start_y[20][0], start_y[20][1]
+    elif i_year >= 1991:
+        f_year, f_dev = start_y[19][0], start_y[19][1]
+    elif i_year >= 1986:
+        f_year, f_dev = start_y[18][0], start_y[18][1]
+    elif i_year >= 1981:
+        f_year, f_dev = start_y[17][0], start_y[17][1]
+    elif i_year >= 1976:
+        f_year, f_dev = start_y[16][0], start_y[16][1]
+    elif i_year >= 1971:
+        f_year, f_dev = start_y[15][0], start_y[15][1]
+    elif i_year >= 1966:
+        f_year, f_dev = start_y[14][0], start_y[14][1]
+    elif i_year >= 1961:
+        f_year, f_dev = start_y[13][0], start_y[13][1]
+    elif i_year >= 1956:
+        f_year, f_dev = start_y[12][0], start_y[12][1]
+    elif i_year >= 1951:
+        f_year, f_dev = start_y[11][0], start_y[11][1]
+    elif i_year >= 1946:
+        f_year, f_dev = start_y[10][0], start_y[10][1]
+    elif i_year >= 1941:
+        f_year, f_dev = start_y[9][0], start_y[9][1]
+    elif i_year >= 1936:
+        f_year, f_dev = start_y[8][0], start_y[8][1]
+    elif i_year >= 1931:
+        f_year, f_dev = start_y[7][0], start_y[7][1]
+    elif i_year >= 1926:
+        f_year, f_dev = start_y[6][0], start_y[6][1]
+    elif i_year >= 1921:
+        f_year, f_dev = start_y[5][0], start_y[5][1]
+    elif i_year >= 1916:
+        f_year, f_dev = start_y[4][0], start_y[4][1]
+    elif i_year >= 1911:
+        f_year, f_dev = start_y[3][0], start_y[3][1]
+    elif i_year >= 1906:
+        f_year, f_dev = start_y[2][0], start_y[2][1]
+    elif i_year >= 1901:
+        f_year, f_dev = start_y[1][0], start_y[1][1]
     else:
-        Fyear, FDev = StartY[0][0], StartY[0][1]
+        f_year, f_dev = start_y[0][0], start_y[0][1]
 
-    return Fyear, FDev
+    return f_year, f_dev
 
 
-def AthikaMas(iYear: int) -> bool:
-    Athi = XLMod((iYear - 78) - 0.45222, 2.7118886)
+def AthikaMas(i_year: int) -> bool:
+    Athi = ((i_year - 78) - 0.45222) % 2.7118886
     return Athi < 1
 
 
-def AthikaVar(iYear: int) -> bool:
-    if AthikaMas(iYear):
+def AthikaVar(i_year: int) -> bool:
+    if AthikaMas(i_year):
         return False
-    if AthikaMas(iYear + 1):
+    if AthikaMas(i_year + 1):
         CutOff = 1.69501433191599E-02
     else:
         CutOff = -1.42223099315486E-02
-    return Deviation(iYear) > CutOff
+    return deviation(i_year) > CutOff
 
 
-def Deviation(iYear: int) -> float:
-    FDev = None
-    Fyear = None
-    CurrDev = 0
-    lastDev = None
-    Fyear, FDev = calculate_Fyear_FDev(iYear)
-    if iYear == Fyear:
-        CurrDev = FDev
+def deviation(i_year: int) -> float:
+    f_dev = None
+    f_year = None
+    curr_dev = 0
+    last_dev = None
+    f_year, f_dev = calculate_f_year_f_dev(i_year)
+    if i_year == f_year:
+        curr_dev = f_dev
     else:
-        Fyear = Fyear + 1
-        for i in range(Fyear, iYear + 1):
-            if i == Fyear:
-                lastDev = FDev
+        f_year = f_year + 1
+        for i in range(f_year, i_year + 1):
+            if i == f_year:
+                last_dev = f_dev
             else:
-                lastDev = CurrDev
+                last_dev = curr_dev
             if AthikaMas(i - 1):
-                CurrDev = -0.102356
+                curr_dev = -0.102356
             elif AthikaVar(i - 1):
-                CurrDev = -0.632944
+                curr_dev = -0.632944
             else:
-                CurrDev = 0.367056
-            CurrDev = lastDev + CurrDev
-    return CurrDev
+                curr_dev = 0.367056
+            curr_dev = last_dev + curr_dev
+    return curr_dev
 
 
-def LDayInYear(iYear: int) -> int:
-    if AthikaMas(iYear):
+def last_day_in_year(i_year: int) -> int:
+    if AthikaMas(i_year):
         return 384
-    elif AthikaVar(iYear):
+    elif AthikaVar(i_year):
         return 355
     else:
         return 354
 
 
-def AthikaSurathin(iYear: int) -> bool:
+def athikasurathin(i_year: int) -> bool:
+    """
+    AthikaSurathin
+    """
     # Check divisibility by 400 (divisible by 400 is always a leap year)
-    if iYear % 400 == 0:
+    if i_year % 400 == 0:
         return True
 
     # Check divisibility by 100 (divisible by 100 but not 400 is not a leap
     # year)
-    elif iYear % 100 == 0:
+    elif i_year % 100 == 0:
         return False
 
     # Check divisibility by 4 (divisible by 4 but not by 100 is a leap year)
-    elif iYear % 4 == 0:
+    elif i_year % 4 == 0:
         return True
 
     # All other cases are not leap years
@@ -448,8 +447,8 @@ def AthikaSurathin(iYear: int) -> bool:
         return False
 
 
-def NODIYear(iYear: int) -> int:
-    if AthikaSurathin(iYear):
+def number_day_in_year(i_year: int) -> int:
+    if athikasurathin(i_year):
         return 366
     else:
         return 365
@@ -508,7 +507,7 @@ def th_zodiac(i_year: int, o_type: int = 1) -> Union[str, int]:
 
 def to_lunar_date(i_date: date) -> str:
     """
-    Solar Date convert to Thai Lunar Date
+    Convert the solar date to Thai Lunar Date
 
     :param date i_date: date of the day.
     :return: Thai text lunar date
@@ -545,284 +544,281 @@ def to_lunar_date(i_date: date) -> str:
 
     current_date = begin_date
     for year in range(begin_date.year + 1, i_date.year):
-        day_in_year = LDayInYear(year)  # Custom function needed
+        day_in_year = last_day_in_year(year)  # Custom function needed
         current_date += timedelta(days=day_in_year)
 
     r_day_prev = (date(current_date.year, 12, 31) - current_date).days
     day_of_year = (i_date - date(i_date.year, 1, 1)).days
     day_from_one = r_day_prev + day_of_year + 1
-    nb_lday_year = LDayInYear(i_date.year)  # Custom function needed
+    nb_lday_year = last_day_in_year(i_date.year)  # Custom function needed
     if nb_lday_year == 354:  # Normal year
-        RDayLY = r_day_prev + NODIYear(i_date.year)
-        DofY = day_from_one
+        days_of_year = day_from_one
         for j in range(1, 14 + 1):
-            ThM = j
+            th_m = j
             if j == 1:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 2:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 3:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 4:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 5:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 6:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 7:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 8:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 9:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 10:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 11:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 12:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 13:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 14:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
-        if ThM > 12:
-            ThM = ThM - 12
-            ThZ = 1
+                    days_of_year -= 30
+        if th_m > 12:
+            th_m = th_m - 12
+            th_z = 1
         else:
-            ThZ = 0
-        if DofY > 15:
-            ThS = "แรม "
-            DofY = DofY - 15
+            th_z = 0
+        if days_of_year > 15:
+            th_s = "แรม "
+            days_of_year = days_of_year - 15
         else:
-            ThS = "ขึ้น "
-        THLDate = ThS + str(DofY) + " ค่ำ เดือน " + str(ThM)
+            th_s = "ขึ้น "
+        thai_lunar_date = th_s + str(days_of_year) + " ค่ำ เดือน " + str(th_m)
     elif nb_lday_year == 355:  # Normal year
-        RDayLY = r_day_prev + NODIYear(i_date.year)
-        DofY = day_from_one
+        days_of_year = day_from_one
         for j in range(1, 14 + 1):
-            ThM = j
+            th_m = j
             if j == 1:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 2:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 3:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 4:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 5:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 6:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 7:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 8:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 9:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 10:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 11:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 12:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 13:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 14:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
-        if ThM > 12:
-            ThM = ThM - 12
-            ThZ = 1
+                    days_of_year -= 30
+        if th_m > 12:
+            th_m = th_m - 12
+            th_z = 1
         else:
-            ThZ = 0
-        if DofY > 15:
-            ThS = "แรม "
-            DofY = DofY - 15
+            th_z = 0
+        if days_of_year > 15:
+            th_s = "แรม "
+            days_of_year = days_of_year - 15
         else:
-            ThS = "ขึ้น "
-        THLDate = ThS + str(DofY) + " ค่ำ เดือน " + str(ThM)
+            th_s = "ขึ้น "
+        thai_lunar_date = th_s + str(days_of_year) + " ค่ำ เดือน " + str(th_m)
     elif nb_lday_year == 384:  # Normal year
-        RDayLY = r_day_prev + NODIYear(i_date.year)
-        DofY = day_from_one
+        days_of_year = day_from_one
         for j in range(1, 15 + 1):
-            ThM = j
+            th_m = j
             if j == 1:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 2:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 3:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 4:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 5:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 6:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 7:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 8:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 9:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 10:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 11:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 12:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 13:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
+                    days_of_year -= 30
             elif j == 14:
-                if DofY <= 29 and DofY > 0:
+                if days_of_year <= 29 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 29
+                    days_of_year -= 29
             elif j == 15:
-                if DofY <= 30 and DofY > 0:
+                if days_of_year <= 30 and days_of_year > 0:
                     break
                 else:
-                    DofY -= 30
-        if ThM > 13:
-            ThM = ThM - 13
-            ThZ = 1
+                    days_of_year -= 30
+        if th_m > 13:
+            th_m = th_m - 13
+            th_z = 1
         else:
-            ThZ = 0
-        if ThM == 9:
-            ThM = 8
-        elif ThM == 10:
-            ThM = 9
-        elif ThM == 11:
-            ThM = 10
-        elif ThM == 12:
-            ThM = 11
-        elif ThM == 13:
-            ThM = 12
-        if DofY > 15:
-            ThS = "แรม "
-            DofY = DofY - 15
+            th_z = 0
+        if th_m == 9:
+            th_m = 8
+        elif th_m == 10:
+            th_m = 9
+        elif th_m == 11:
+            th_m = 10
+        elif th_m == 12:
+            th_m = 11
+        elif th_m == 13:
+            th_m = 12
+        if days_of_year > 15:
+            th_s = "แรม "
+            days_of_year = days_of_year - 15
         else:
-            ThS = "ขึ้น "
-        THLDate = ThS + str(DofY) + " ค่ำ เดือน " + str(ThM)
-    return THLDate
+            th_s = "ขึ้น "
+        thai_lunar_date = th_s + str(days_of_year) + " ค่ำ เดือน " + str(th_m)
+    return thai_lunar_date

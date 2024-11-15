@@ -268,6 +268,16 @@ Modules
 
     The `pythainlp.util.spell_words.spell_word` function is designed for spelling individual words in Thai text, facilitating phonetic analysis and pronunciation guides.
 
+.. autofunction:: to_lunar_date
+    :noindex:
+
+    The `to_lunar_date` function focuses on converts the solar date to Thai Lunar Date.
+
+.. autofunction:: th_zodiac
+    :noindex:
+
+    The `th_zodiac` function is converts a Gregorian year to its corresponding Thai Zodiac name.
+
 .. autoclass:: Trie
     :members:
 
