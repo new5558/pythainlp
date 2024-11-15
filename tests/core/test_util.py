@@ -9,7 +9,7 @@ Unit tests for pythainlp.util module.
 import os
 import unittest
 from collections import Counter
-from datetime import datetime, time, timedelta, timezone
+from datetime import datetime, time, timedelta, timezone, date
 
 from pythainlp.corpus import _CORPUS_PATH, thai_words
 from pythainlp.corpus.common import _THAI_WORDS_FILENAME
@@ -62,6 +62,8 @@ from pythainlp.util import (
     to_idna,
     tone_detector,
     words_to_num,
+    to_lunar_date,
+    th_zodiac,
 )
 from pythainlp.util.morse import morse_decode, morse_encode
 
@@ -810,6 +812,18 @@ class UtilTestCase(unittest.TestCase):
     def test_morse_decode(self):
         self.assertEqual(morse_decode(".-.- -- .--", lang="th"), "แมว")
         self.assertEqual(morse_decode("-.-. .- -", lang="en"), "CAT")
+
+    def test_to_lunar_date(self):
+        self.assertEqual(to_lunar_date(date(2024, 11, 15)),"ขึ้น 15 ค่ำ เดือน 12")
+        self.assertEqual(to_lunar_date(date(2023, 11, 27)),"ขึ้น 15 ค่ำ เดือน 12")
+        self.assertEqual(to_lunar_date(date(2022, 11, 8)),"ขึ้น 15 ค่ำ เดือน 12")
+        self.assertEqual(to_lunar_date(date(2021, 11, 19)),"ขึ้น 15 ค่ำ เดือน 12")
+        self.assertEqual(to_lunar_date(date(2020, 10, 31)),"ขึ้น 15 ค่ำ เดือน 12")
+
+    def test_th_zodiac(self):
+        self.assertEqual(th_zodiac(2024), "มะโรง")
+        self.assertEqual(th_zodiac(2024, 2), "DRAGON")
+        self.assertEqual(th_zodiac(2024, 2), 5)
 
     # def test_abbreviation_to_full_text(self):
     #     self.assertIsInstance(abbreviation_to_full_text("รร.ของเราน่าอยู่", list))

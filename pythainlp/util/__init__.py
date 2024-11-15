@@ -62,6 +62,8 @@ __all__ = [
     "to_idna",
     "tone_detector",
     "words_to_num",
+    "to_lunar_date",
+    "th_zodiac",
 ]
 
 from pythainlp.util import spell_words
@@ -127,3 +129,4 @@ from pythainlp.util.syllable import (
     tone_detector,
 )
 from pythainlp.util.pronounce import rhyme
+from pythainlp.util.thai_lunar_date import to_lunar_date, th_zodiac
