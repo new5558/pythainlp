@@ -122,7 +122,8 @@ from pythainlp.util.time import thaiword_to_time, time_to_thaiword
 from pythainlp.util.trie import Trie, dict_trie
 from pythainlp.util.wordtonum import text_to_num, thaiword_to_num, words_to_num
 
-# sound_syllable and pronounce have to be imported last because of dependencies
+# sound_syllable and pronounce have to be imported last,
+# to prevent circular import issues.
 # Other imports should be above this line, sorted.
 from pythainlp.util.syllable import (
     sound_syllable,
