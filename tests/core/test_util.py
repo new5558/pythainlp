@@ -814,11 +814,11 @@ class UtilTestCase(unittest.TestCase):
         self.assertEqual(morse_decode("-.-. .- -", lang="en"), "CAT")
 
     def test_to_lunar_date(self):
-        self.assertEqual(to_lunar_date(date(2024, 11, 15)),"ขึ้น 15 ค่ำ เดือน 12")
-        self.assertEqual(to_lunar_date(date(2023, 11, 27)),"ขึ้น 15 ค่ำ เดือน 12")
-        self.assertEqual(to_lunar_date(date(2022, 11, 8)),"ขึ้น 15 ค่ำ เดือน 12")
-        self.assertEqual(to_lunar_date(date(2021, 11, 19)),"ขึ้น 15 ค่ำ เดือน 12")
-        self.assertEqual(to_lunar_date(date(2020, 10, 31)),"ขึ้น 15 ค่ำ เดือน 12")
+        self.assertEqual(to_lunar_date(date(2024, 11, 15)), "ขึ้น 15 ค่ำ เดือน 12")
+        self.assertEqual(to_lunar_date(date(2023, 11, 27)), "ขึ้น 15 ค่ำ เดือน 12")
+        self.assertEqual(to_lunar_date(date(2022, 11, 8)), "ขึ้น 15 ค่ำ เดือน 12")
+        self.assertEqual(to_lunar_date(date(2021, 11, 19)), "ขึ้น 15 ค่ำ เดือน 12")
+        self.assertEqual(to_lunar_date(date(2020, 10, 31)), "ขึ้น 15 ค่ำ เดือน 12")
 
     def test_th_zodiac(self):
         self.assertEqual(th_zodiac(2024), "มะโรง")
