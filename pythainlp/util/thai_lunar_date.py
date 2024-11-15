@@ -857,9 +857,6 @@ def to_lunar_date(input_date: date) -> str:
                     days_of_year -= 30
         if th_m > 12:
             th_m = th_m - 12
-            th_z = 1
-        else:
-            th_z = 0
         if days_of_year > 15:
             th_s = "แรม "
             days_of_year = days_of_year - 15
@@ -947,9 +944,6 @@ def to_lunar_date(input_date: date) -> str:
                     days_of_year -= 30
         if th_m > 13:
             th_m = th_m - 13
-            th_z = 1
-        else:
-            th_z = 0
         if th_m == 9:
             th_m = 8
         elif th_m == 10:
