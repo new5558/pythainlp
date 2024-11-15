@@ -48,6 +48,7 @@ __all__ = [
     "text_to_arabic_digit",
     "text_to_num",
     "text_to_thai_digit",
+    "th_zodiac",
     "thai_digit_to_arabic_digit",
     "thai_keyboard_dist",
     "thai_strptime",
@@ -60,10 +61,9 @@ __all__ = [
     "time_to_thaiword",
     "tis620_to_utf8",
     "to_idna",
+    "to_lunar_date",
     "tone_detector",
     "words_to_num",
-    "to_lunar_date",
-    "th_zodiac",
 ]
 
 from pythainlp.util import spell_words
@@ -116,12 +116,14 @@ from pythainlp.util.thai import (
     isthaichar,
     thai_word_tone_detector,
 )
+from pythainlp.util.thai_lunar_date import th_zodiac, to_lunar_date
 from pythainlp.util.thaiwordcheck import is_native_thai
 from pythainlp.util.time import thaiword_to_time, time_to_thaiword
 from pythainlp.util.trie import Trie, dict_trie
 from pythainlp.util.wordtonum import text_to_num, thaiword_to_num, words_to_num
 
-# sound_syllable and pronounce have to be imported last
+# sound_syllable and pronounce have to be imported last because of dependencies
+# Other imports should be above this line, sorted.
 from pythainlp.util.syllable import (
     sound_syllable,
     syllable_length,
@@ -129,4 +131,3 @@ from pythainlp.util.syllable import (
     tone_detector,
 )
 from pythainlp.util.pronounce import rhyme
-from pythainlp.util.thai_lunar_date import to_lunar_date, th_zodiac
