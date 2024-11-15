@@ -9,7 +9,7 @@ Unit tests for pythainlp.util module.
 import os
 import unittest
 from collections import Counter
-from datetime import datetime, time, timedelta, timezone, date
+from datetime import date, datetime, time, timedelta, timezone
 
 from pythainlp.corpus import _CORPUS_PATH, thai_words
 from pythainlp.corpus.common import _THAI_WORDS_FILENAME
@@ -49,6 +49,7 @@ from pythainlp.util import (
     text_to_arabic_digit,
     text_to_num,
     text_to_thai_digit,
+    th_zodiac,
     thai_digit_to_arabic_digit,
     thai_keyboard_dist,
     thai_strftime,
@@ -60,10 +61,9 @@ from pythainlp.util import (
     time_to_thaiword,
     tis620_to_utf8,
     to_idna,
+    to_lunar_date,
     tone_detector,
     words_to_num,
-    to_lunar_date,
-    th_zodiac,
 )
 from pythainlp.util.morse import morse_decode, morse_encode
 
