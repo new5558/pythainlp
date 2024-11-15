@@ -392,10 +392,10 @@ def AthikaVar(i_year: int) -> bool:
 
 
 def deviation(i_year: int) -> float:
-    f_dev = None
-    f_year = None
-    curr_dev = 0
-    last_dev = None
+    f_dev = 0
+    f_year = 0
+    curr_dev = 0.0
+    last_dev = 0
     f_year, f_dev = calculate_f_year_f_dev(i_year)
     if i_year == f_year:
         curr_dev = f_dev
