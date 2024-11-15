@@ -823,7 +823,7 @@ class UtilTestCase(unittest.TestCase):
     def test_th_zodiac(self):
         self.assertEqual(th_zodiac(2024), "มะโรง")
         self.assertEqual(th_zodiac(2024, 2), "DRAGON")
-        self.assertEqual(th_zodiac(2024, 2), 5)
+        self.assertEqual(th_zodiac(2024, 3), 5)
 
     # def test_abbreviation_to_full_text(self):
     #     self.assertIsInstance(abbreviation_to_full_text("รร.ของเราน่าอยู่", list))
