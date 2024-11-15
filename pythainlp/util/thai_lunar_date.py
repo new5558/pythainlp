@@ -533,7 +533,7 @@ def to_lunar_date(i_date: date) -> str:
 
     # Check if date is within supported range
     if i_date.year < 1903 or i_date.year > 2460:
-        return "ไม่รองรับ"  # Unsupported date
+        raise NotImplementedError("Unsupported date")  # Unsupported date
 
     # Choose the nearest start date
     c_year = i_date.year - 1
