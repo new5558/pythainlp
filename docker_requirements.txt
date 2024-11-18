@@ -21,7 +21,7 @@ phunspell==0.1.6
 protobuf==3.20.3
 pyicu==2.8
 python-crfsuite==0.9.11
-requests==2.31.*
+requests==2.32.*
 sacremoses==0.0.41
 sefr_cut==1.1
 sentence-transformers==2.2.2
