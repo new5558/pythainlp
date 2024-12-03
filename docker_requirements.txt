@@ -26,7 +26,7 @@ sacremoses==0.0.41
 sefr_cut==1.1
 sentence-transformers==2.2.2
 sentencepiece==0.2.0
-spacy_thai==0.7.1
+spacy_thai==0.7.8
 spacy==3.5.*
 spylls==0.1.5
 ssg==0.0.8
