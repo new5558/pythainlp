@@ -8,10 +8,6 @@ The :mod:`pythainlp.tokenize` module contains a comprehensive set of functions a
 Modules
 -------
 
-.. autofunction:: clause_tokenize
-    :noindex:
-    
-    Tokenizes text into clauses. This function allows you to split text into meaningful sections, making it useful for more advanced text processing tasks.
 
 .. autofunction:: sent_tokenize
     :noindex:

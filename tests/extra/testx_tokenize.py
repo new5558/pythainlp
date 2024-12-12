@@ -20,7 +20,6 @@ from pythainlp.tokenize import (
     tltk,
     word_tokenize,
 )
-from pythainlp.tokenize import clause_tokenize as sent_clause_tokenize
 
 from ..core.test_tokenize import (
     SENT_1,
@@ -29,12 +28,6 @@ from ..core.test_tokenize import (
     SENT_4,
     TEXT_1,
 )
-
-
-class ClauseTokenizeTestCase(unittest.TestCase):
-    def test_clause_tokenize(self):
-        self.assertIsNotNone(sent_clause_tokenize(["ฉัน", "ทดสอบ"]))
-        self.assertIsInstance(sent_clause_tokenize(["ฉัน", "ทดสอบ"]), list)
 
 
 class DetokenizeTestCase(unittest.TestCase):

@@ -9,7 +9,6 @@ __all__ = [
     "THAI2FIT_TOKENIZER",
     "Tokenizer",
     "Trie",
-    "clause_tokenize",
     "paragraph_tokenize",
     "sent_tokenize",
     "subword_tokenize",
@@ -32,7 +31,6 @@ DEFAULT_DICT_TRIE = DEFAULT_WORD_DICT_TRIE
 
 from pythainlp.tokenize.core import (
     Tokenizer,
-    clause_tokenize,
     paragraph_tokenize,
     sent_tokenize,
     subword_tokenize,
