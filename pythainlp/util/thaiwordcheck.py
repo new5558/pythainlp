@@ -8,6 +8,7 @@ def is_native_thai(word: str) -> bool:
     warn_deprecation(
         "pythainlp.util.is_native_thai",
         "pythainlp.morpheme.is_native_thai",
+        "5.0",
         "5.1",
     )
 
