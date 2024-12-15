@@ -324,8 +324,9 @@ _BEGIN_DATES = [
     date(2442, 12, 2),
     date(2452, 12, 11),
 ]
-_DAYS_NORMAL = [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30]
-_DAYS_LEAP = [29, 30, 29, 30, 29, 30, 29, 30, 30, 29, 30, 29, 30, 29, 30]
+_DAYS_YEAR_354 = [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30]
+_DAYS_YEAR_355 = [29, 30, 29, 30, 29, 30, 30, 30, 29, 30, 29, 30, 29, 30]
+_DAYS_YEAR_384 = [29, 30, 29, 30, 29, 30, 29, 30, 30, 29, 30, 29, 30, 29, 30]
 
 
 def to_lunar_date(input_date: date) -> str:
@@ -358,10 +359,12 @@ def to_lunar_date(input_date: date) -> str:
     day_from_one = r_day_prev + day_of_year + 1
     last_day = last_day_in_year(input_date.year)
 
-    if last_day <= 355:  # Normal year
-        days_in_month = _DAYS_NORMAL
-    elif last_day == 384:  # Leap year
-        days_in_month = _DAYS_LEAP
+    if last_day == 354:
+        days_in_month = _DAYS_YEAR_354
+    elif last_day == 355:
+        days_in_month = _DAYS_YEAR_355
+    elif last_day == 384:
+        days_in_month = _DAYS_YEAR_384
 
     days_of_year = day_from_one
     for j, days in enumerate(days_in_month, start=1):
@@ -371,10 +374,10 @@ def to_lunar_date(input_date: date) -> str:
         else:
             days_of_year -= days
 
-    if last_day <= 355:  # Normal year
+    if last_day <= 355:  # 354 or 355
         if th_m > 12:
             th_m = th_m - 12
-    elif last_day == 384:  # Leap year
+    elif last_day == 384:
         if th_m > 13:
             th_m = th_m - 13
         if th_m >= 9 and th_m <= 13:
