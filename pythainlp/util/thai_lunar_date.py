@@ -358,10 +358,8 @@ def to_lunar_date(input_date: date) -> str:
     day_from_one = r_day_prev + day_of_year + 1
     last_day = last_day_in_year(input_date.year)
 
-    if last_day == 354:  # Normal year
-        days_in_month = _DAYS_NORMAL[:13]
-    elif last_day == 355:  # Normal year
-        days_in_month = _DAYS_NORMAL[:14]
+    if last_day <= 355:  # Normal year
+        days_in_month = _DAYS_NORMAL
     elif last_day == 384:  # Leap year
         days_in_month = _DAYS_LEAP
 
