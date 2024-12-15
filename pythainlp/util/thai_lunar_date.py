@@ -7,9 +7,9 @@ This file is port from
 """
 
 from datetime import date, timedelta
-from typing import Tuple, Union
+from typing import Dict, List, Tuple, Union
 
-year_dev: dict[int, float] = {
+_YEAR_DEV: Dict[int, float] = {
     0: 0,
     1901: 0.122733000004352,
     1906: 1.91890000045229e-02,
@@ -125,147 +125,6 @@ year_dev: dict[int, float] = {
     2456: -0.390646999976078,
 }
 
-
-def calculate_f_year_f_dev(year: int) -> Tuple[int, float]:
-    if year in year_dev:
-        return year, year_dev[year]
-
-    nearest_lower_year = max(y for y in year_dev if y < year)
-    return nearest_lower_year, year_dev[nearest_lower_year]
-
-
-def athikamas(year: int) -> bool:
-    athi = ((year - 78) - 0.45222) % 2.7118886
-    return athi < 1
-
-
-def athikavar(year: int) -> bool:
-    if athikamas(year):
-        return False
-    if athikamas(year + 1):
-        cutoff = 1.69501433191599e-02
-    else:
-        cutoff = -1.42223099315486e-02
-    return deviation(year) > cutoff
-
-
-def deviation(year: int) -> float:
-    curr_dev = 0.0
-    last_dev = 0.0
-    f_year, f_dev = calculate_f_year_f_dev(year)
-    if year == f_year:
-        curr_dev = f_dev
-    else:
-        f_year = f_year + 1
-        for i in range(f_year, year + 1):
-            if i == f_year:
-                last_dev = f_dev
-            else:
-                last_dev = curr_dev
-            if athikamas(i - 1):
-                curr_dev = -0.102356
-            elif athikavar(i - 1):
-                curr_dev = -0.632944
-            else:
-                curr_dev = 0.367056
-            curr_dev = last_dev + curr_dev
-    return curr_dev
-
-
-def last_day_in_year(year: int) -> int:
-    if athikamas(year):
-        return 384
-    elif athikavar(year):
-        return 355
-    else:
-        return 354
-
-
-def athikasurathin(year: int) -> bool:
-    """
-    athikasurathin - Check if a year is a leap year in the Thai lunar calendar
-    """
-    # Check divisibility by 400 (divisible by 400 is always a leap year)
-    if year % 400 == 0:
-        return True
-
-    # Check divisibility by 100 (divisible by 100 but not 400 is not a leap
-    # year)
-    elif year % 100 == 0:
-        return False
-
-    # Check divisibility by 4 (divisible by 4 but not by 100 is a leap year)
-    elif year % 4 == 0:
-        return True
-
-    # All other cases are not leap years
-    else:
-        return False
-
-
-def number_day_in_year(year: int) -> int:
-    if athikasurathin(year):
-        return 366
-    else:
-        return 365
-
-
-def th_zodiac(year: int, output_type: int = 1) -> Union[str, int]:
-    """
-    Thai Zodiac Year Name
-    Converts a Gregorian year to its corresponding Thai Zodiac name.
-
-    :param int year: The Gregorian year. AD (Anno Domini)
-    :param int output_type: Output Type (1 = Thai, 2 = English, 3 = Number).
-
-    :return: The Thai Zodiac name or number corresponding to the input year.
-    :rtype: Union[str, int]
-    """
-
-    # Zodiac names in Thai, English, and Numeric representations
-    zodiac: dict[int, list[Union[str, int]]] = {
-        1: [
-            "ชวด",
-            "ฉลู",
-            "ขาล",
-            "เถาะ",
-            "มะโรง",
-            "มะเส็ง",
-            "มะเมีย",
-            "มะแม",
-            "วอก",
-            "ระกา",
-            "จอ",
-            "กุน",
-        ],
-        2: [
-            "RAT",
-            "OX",
-            "TIGER",
-            "RABBIT",
-            "DRAGON",
-            "SNAKE",
-            "HORSE",
-            "GOAT",
-            "MONKEY",
-            "ROOSTER",
-            "DOG",
-            "PIG",
-        ],
-        3: list(range(1, 13)),
-    }
-
-    # Calculate zodiac index
-    result = year % 12
-    if result - 3 < 1:
-        result = result - 3 + 12
-    else:
-        result = result - 3
-
-    # Return the zodiac based on the output type
-    return zodiac[output_type][result - 1]
-
-
 _BEGIN_DATES = [
     date(1902, 11, 30),
     date(1912, 12, 8),
@@ -324,9 +183,148 @@ _BEGIN_DATES = [
     date(2442, 12, 2),
     date(2452, 12, 11),
 ]
+
 _DAYS_354 = [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30]
 _DAYS_355 = [29, 30, 29, 30, 29, 30, 30, 30, 29, 30, 29, 30, 29, 30]
 _DAYS_384 = [29, 30, 29, 30, 29, 30, 29, 30, 30, 29, 30, 29, 30, 29, 30]
+
+# Zodiac names in Thai, English, and Numeric representations
+_ZODIAC: Dict[int, List[Union[str, int]]] = {
+    1: [
+        "ชวด",
+        "ฉลู",
+        "ขาล",
+        "เถาะ",
+        "มะโรง",
+        "มะเส็ง",
+        "มะเมีย",
+        "มะแม",
+        "วอก",
+        "ระกา",
+        "จอ",
+        "กุน",
+    ],
+    2: [
+        "RAT",
+        "OX",
+        "TIGER",
+        "RABBIT",
+        "DRAGON",
+        "SNAKE",
+        "HORSE",
+        "GOAT",
+        "MONKEY",
+        "ROOSTER",
+        "DOG",
+        "PIG",
+    ],
+    3: list(range(1, 13)),
+}
+
+
+def calculate_f_year_f_dev(year: int) -> Tuple[int, float]:
+    if year in _YEAR_DEV:
+        return year, _YEAR_DEV[year]
+
+    nearest_lower_year = max(y for y in _YEAR_DEV if y < year)
+    return nearest_lower_year, _YEAR_DEV[nearest_lower_year]
+
+
+def athikamas(year: int) -> bool:
+    athi = ((year - 78) - 0.45222) % 2.7118886
+    return athi < 1
+
+
+def athikavar(year: int) -> bool:
+    if athikamas(year):
+        return False
+    if athikamas(year + 1):
+        cutoff = 1.69501433191599e-02
+    else:
+        cutoff = -1.42223099315486e-02
+    return deviation(year) > cutoff
+
+
+def deviation(year: int) -> float:
+    curr_dev = 0.0
+    last_dev = 0.0
+    f_year, f_dev = calculate_f_year_f_dev(year)
+    if year == f_year:
+        curr_dev = f_dev
+    else:
+        f_year = f_year + 1
+        for i in range(f_year, year + 1):
+            if i == f_year:
+                last_dev = f_dev
+            else:
+                last_dev = curr_dev
+            if athikamas(i - 1):
+                curr_dev = -0.102356
+            elif athikavar(i - 1):
+                curr_dev = -0.632944
+            else:
+                curr_dev = 0.367056
+            curr_dev = last_dev + curr_dev
+    return curr_dev
+
+
+def last_day_in_year(year: int) -> int:
+    if athikamas(year):
+        return 384
+    elif athikavar(year):
+        return 355
+
+    return 354
+
+
+def athikasurathin(year: int) -> bool:
+    """
+    athikasurathin - Check if a year is a leap year in the Thai lunar calendar
+    """
+    # Check divisibility by 400 (divisible by 400 is always a leap year)
+    if year % 400 == 0:
+        return True
+
+    # Check divisibility by 100 (divisible by 100 but not 400 is not a leap
+    # year)
+    elif year % 100 == 0:
+        return False
+
+    # Check divisibility by 4 (divisible by 4 but not by 100 is a leap year)
+    elif year % 4 == 0:
+        return True
+
+    # All other cases are not leap years
+    return False
+
+
+def number_day_in_year(year: int) -> int:
+    if athikasurathin(year):
+        return 366
+
+    return 365
+
+
+def th_zodiac(year: int, output_type: int = 1) -> Union[str, int]:
+    """
+    Thai Zodiac Year Name
+    Converts a Gregorian year to its corresponding Zodiac name.
+
+    :param int year: The Gregorian year. AD (Anno Domini)
+    :param int output_type: Output Type (1 = Thai, 2 = English, 3 = Number).
+
+    :return: The Zodiac name or number corresponding to the input year.
+    :rtype: Union[str, int]
+    """
+    # Calculate zodiac index
+    result = year % 12
+    if result - 3 < 1:
+        result = result - 3 + 12
+    else:
+        result = result - 3
+
+    # Return the zodiac based on the output type
+    return _ZODIAC[output_type][result - 1]
 
 
 def to_lunar_date(input_date: date) -> str:
