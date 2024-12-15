@@ -223,7 +223,7 @@ def th_zodiac(year: int, output_type: int = 1) -> Union[str, int]:
     """
 
     # Zodiac names in Thai, English, and Numeric representations
-    zodiac = {
+    zodiac: dict[int, list[Union[str, int]]] = {
         1: [
             "ชวด",
             "ฉลู",
@@ -266,6 +266,68 @@ def th_zodiac(year: int, output_type: int = 1) -> Union[str, int]:
     return zodiac[output_type][result - 1]
 
 
+_BEGIN_DATES = [
+    date(1902, 11, 30),
+    date(1912, 12, 8),
+    date(1922, 11, 19),
+    date(1932, 11, 27),
+    date(1942, 12, 7),
+    date(1952, 11, 16),
+    date(1962, 11, 26),
+    date(1972, 12, 5),
+    date(1982, 11, 15),
+    date(1992, 11, 24),
+    date(2002, 12, 4),
+    date(2012, 11, 13),
+    date(2022, 11, 23),
+    date(2032, 12, 2),
+    date(2042, 12, 12),
+    date(2052, 11, 21),
+    date(2062, 12, 1),
+    date(2072, 12, 9),
+    date(2082, 11, 20),
+    date(2092, 11, 28),
+    date(2102, 12, 9),
+    date(2112, 11, 18),
+    date(2122, 11, 28),
+    date(2132, 12, 7),
+    date(2142, 11, 17),
+    date(2152, 11, 26),
+    date(2162, 12, 6),
+    date(2172, 11, 15),
+    date(2182, 11, 25),
+    date(2192, 12, 4),
+    date(2202, 12, 15),
+    date(2212, 11, 24),
+    date(2222, 12, 4),
+    date(2232, 12, 12),
+    date(2242, 11, 23),
+    date(2252, 12, 1),
+    date(2262, 12, 11),
+    date(2272, 11, 20),
+    date(2282, 11, 30),
+    date(2292, 12, 9),
+    date(2302, 11, 20),
+    date(2312, 11, 29),
+    date(2322, 12, 9),
+    date(2332, 11, 18),
+    date(2342, 11, 28),
+    date(2352, 12, 7),
+    date(2362, 12, 17),
+    date(2372, 11, 26),
+    date(2382, 12, 6),
+    date(2392, 12, 14),
+    date(2402, 11, 25),
+    date(2412, 12, 3),
+    date(2422, 12, 13),
+    date(2432, 11, 23),
+    date(2442, 12, 2),
+    date(2452, 12, 11),
+]
+_DAYS_NORMAL = [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30]
+_DAYS_LEAP = [29, 30, 29, 30, 29, 30, 29, 30, 30, 29, 30, 29, 30, 29, 30]
+
+
 def to_lunar_date(input_date: date) -> str:
     """
     Convert the solar date to Thai Lunar Date
@@ -274,345 +336,58 @@ def to_lunar_date(input_date: date) -> str:
     :return: Thai text lunar date
     :rtype: str
     """
-    s_dates = [
-        date(1902, 11, 30),
-        date(1912, 12, 8),
-        date(1922, 11, 19),
-        date(1932, 11, 27),
-        date(1942, 12, 7),
-        date(1952, 11, 16),
-        date(1962, 11, 26),
-        date(1972, 12, 5),
-        date(1982, 11, 15),
-        date(1992, 11, 24),
-        date(2002, 12, 4),
-        date(2012, 11, 13),
-        date(2022, 11, 23),
-        date(2032, 12, 2),
-        date(2042, 12, 12),
-        date(2052, 11, 21),
-        date(2062, 12, 1),
-        date(2072, 12, 9),
-        date(2082, 11, 20),
-        date(2092, 11, 28),
-        date(2102, 12, 9),
-        date(2112, 11, 18),
-        date(2122, 11, 28),
-        date(2132, 12, 7),
-        date(2142, 11, 17),
-        date(2152, 11, 26),
-        date(2162, 12, 6),
-        date(2172, 11, 15),
-        date(2182, 11, 25),
-        date(2192, 12, 4),
-        date(2202, 12, 15),
-        date(2212, 11, 24),
-        date(2222, 12, 4),
-        date(2232, 12, 12),
-        date(2242, 11, 23),
-        date(2252, 12, 1),
-        date(2262, 12, 11),
-        date(2272, 11, 20),
-        date(2282, 11, 30),
-        date(2292, 12, 9),
-        date(2302, 11, 20),
-        date(2312, 11, 29),
-        date(2322, 12, 9),
-        date(2332, 11, 18),
-        date(2342, 11, 28),
-        date(2352, 12, 7),
-        date(2362, 12, 17),
-        date(2372, 11, 26),
-        date(2382, 12, 6),
-        date(2392, 12, 14),
-        date(2402, 11, 25),
-        date(2412, 12, 3),
-        date(2422, 12, 13),
-        date(2432, 11, 23),
-        date(2442, 12, 2),
-        date(2452, 12, 11),
-    ]
-
     # Check if date is within supported range
     if input_date.year < 1903 or input_date.year > 2460:
         raise NotImplementedError("Unsupported date")  # Unsupported date
 
-    # Choose the nearest start date
+    # Choose the nearest begin date
     c_year = input_date.year - 1
-    begin_date = s_dates[0]
-    for _date in reversed(s_dates):
+    begin_date = _BEGIN_DATES[0]
+    for _date in reversed(_BEGIN_DATES):
         if c_year > _date.year:
             begin_date = _date
             break
 
     current_date = begin_date
     for year in range(begin_date.year + 1, input_date.year):
-        day_in_year = last_day_in_year(year)  # Custom function needed
+        day_in_year = last_day_in_year(year)
         current_date += timedelta(days=day_in_year)
 
     r_day_prev = (date(current_date.year, 12, 31) - current_date).days
     day_of_year = (input_date - date(input_date.year, 1, 1)).days
     day_from_one = r_day_prev + day_of_year + 1
-    nb_lday_year = last_day_in_year(input_date.year)  # Custom function needed
-    if nb_lday_year == 354:  # Normal year
-        days_of_year = day_from_one
-        for j in range(1, 14 + 1):
-            th_m = j
-            if j == 1:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 2:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 3:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 4:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 5:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 6:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 7:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 8:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 9:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 10:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 11:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 12:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 13:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 14:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
+    last_day = last_day_in_year(input_date.year)
+
+    if last_day == 354:  # Normal year
+        days_in_month = _DAYS_NORMAL[:13]
+    elif last_day == 355:  # Normal year
+        days_in_month = _DAYS_NORMAL[:14]
+    elif last_day == 384:  # Leap year
+        days_in_month = _DAYS_LEAP
+
+    days_of_year = day_from_one
+    for j, days in enumerate(days_in_month, start=1):
+        th_m = j
+        if 0 < days_of_year <= days:
+            break
+        else:
+            days_of_year -= days
+
+    if last_day <= 355:  # Normal year
         if th_m > 12:
             th_m = th_m - 12
-        if days_of_year > 15:
-            th_s = "แรม "
-            days_of_year = days_of_year - 15
-        else:
-            th_s = "ขึ้น "
-        thai_lunar_date = th_s + str(days_of_year) + " ค่ำ เดือน " + str(th_m)
-    elif nb_lday_year == 355:  # Normal year
-        days_of_year = day_from_one
-        for j in range(1, 14 + 1):
-            th_m = j
-            if j == 1:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 2:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 3:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 4:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 5:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 6:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 7:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 8:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 9:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 10:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 11:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 12:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 13:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 14:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-        if th_m > 12:
-            th_m = th_m - 12
-        if days_of_year > 15:
-            th_s = "แรม "
-            days_of_year = days_of_year - 15
-        else:
-            th_s = "ขึ้น "
-        thai_lunar_date = th_s + str(days_of_year) + " ค่ำ เดือน " + str(th_m)
-    elif nb_lday_year == 384:  # Normal year
-        days_of_year = day_from_one
-        for j in range(1, 15 + 1):
-            th_m = j
-            if j == 1:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 2:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 3:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 4:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 5:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 6:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 7:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 8:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 9:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 10:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 11:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 12:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 13:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
-            elif j == 14:
-                if days_of_year <= 29 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 29
-            elif j == 15:
-                if days_of_year <= 30 and days_of_year > 0:
-                    break
-                else:
-                    days_of_year -= 30
+    elif last_day == 384:  # Leap year
         if th_m > 13:
             th_m = th_m - 13
-        if th_m == 9:
-            th_m = 8
-        elif th_m == 10:
-            th_m = 9
-        elif th_m == 11:
-            th_m = 10
-        elif th_m == 12:
-            th_m = 11
-        elif th_m == 13:
-            th_m = 12
-        if days_of_year > 15:
-            th_s = "แรม "
-            days_of_year = days_of_year - 15
-        else:
-            th_s = "ขึ้น "
-        thai_lunar_date = th_s + str(days_of_year) + " ค่ำ เดือน " + str(th_m)
+        if th_m >= 9 and th_m <= 13:
+            th_m = th_m - 1
+
+    if days_of_year > 15:
+        th_s = "แรม "
+        days_of_year = days_of_year - 15
+    else:
+        th_s = "ขึ้น "
+
+    thai_lunar_date = th_s + str(days_of_year) + " ค่ำ เดือน " + str(th_m)
+
     return thai_lunar_date
