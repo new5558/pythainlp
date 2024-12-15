@@ -324,9 +324,9 @@ _BEGIN_DATES = [
     date(2442, 12, 2),
     date(2452, 12, 11),
 ]
-_DAYS_YEAR_354 = [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30]
-_DAYS_YEAR_355 = [29, 30, 29, 30, 29, 30, 30, 30, 29, 30, 29, 30, 29, 30]
-_DAYS_YEAR_384 = [29, 30, 29, 30, 29, 30, 29, 30, 30, 29, 30, 29, 30, 29, 30]
+_DAYS_354 = [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30]
+_DAYS_355 = [29, 30, 29, 30, 29, 30, 30, 30, 29, 30, 29, 30, 29, 30]
+_DAYS_384 = [29, 30, 29, 30, 29, 30, 29, 30, 30, 29, 30, 29, 30, 29, 30]
 
 
 def to_lunar_date(input_date: date) -> str:
@@ -360,11 +360,11 @@ def to_lunar_date(input_date: date) -> str:
     last_day = last_day_in_year(input_date.year)
 
     if last_day == 354:
-        days_in_month = _DAYS_YEAR_354
+        days_in_month = _DAYS_354
     elif last_day == 355:
-        days_in_month = _DAYS_YEAR_355
+        days_in_month = _DAYS_355
     elif last_day == 384:
-        days_in_month = _DAYS_YEAR_384
+        days_in_month = _DAYS_384
 
     days_of_year = day_from_one
     for j, days in enumerate(days_in_month, start=1):
@@ -384,11 +384,11 @@ def to_lunar_date(input_date: date) -> str:
             th_m = th_m - 1
 
     if days_of_year > 15:
-        th_s = "แรม "
+        th_s = "แรม"
         days_of_year = days_of_year - 15
     else:
-        th_s = "ขึ้น "
+        th_s = "ขึ้น"
 
-    thai_lunar_date = th_s + str(days_of_year) + " ค่ำ เดือน " + str(th_m)
+    thai_lunar_date = f"{th_s} {days_of_year} ค่ำ เดือน {th_m}"
 
     return thai_lunar_date
