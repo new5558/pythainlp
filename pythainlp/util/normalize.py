@@ -272,17 +272,19 @@ def expand_maiyamok(sent: Union[str, List[str]]) -> List[str]:
     if isinstance(sent, str):
         sent = word_tokenize(sent)
 
+    yamok = "ๆ"
+
     # Breaks Maiyamok that attached to others, e.g. "นกๆๆ", "นกๆ ๆ", "นกๆคน"
+    re_yamok = re.compile(rf"({yamok})")
     temp_toks: list[str] = []
-    for _, token in enumerate(sent):
-        toks = re.split(r"(ๆ)", token)
+    for token in sent:
+        toks = re_yamok.split(token)
         toks = [tok for tok in toks if tok]  # remove empty string ("")
         temp_toks.extend(toks)
     sent = temp_toks
+    del temp_toks
 
     output_toks: list[str] = []
-
-    yamok = "ๆ"
     yamok_count = 0
     len_sent = len(sent)
     for i in range(len_sent - 1, -1, -1):  # do it backward
