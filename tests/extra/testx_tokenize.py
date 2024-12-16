@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
+# SPDX-FileType: SOURCE
 # SPDX-License-Identifier: Apache-2.0
 
 # Tests for tokenize functions that need extra dependencies

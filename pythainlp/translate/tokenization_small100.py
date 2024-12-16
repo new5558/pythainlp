@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2022 Idiap Research Institute
+# SPDX-FileType: SOURCE
+# SPDX-License-Identifier: Apache-2.0
+
 # Copyright (c) 2022 Idiap Research Institute, http://www.idiap.ch/
 # Written by Alireza Mohammadshahi <alireza.mohammadshahi@idiap.ch>
 # This is a modified version of https://github.com/huggingface/transformers/blob/main/src/transformers/models/m2m_100/tokenization_m2m_100.py
@@ -16,6 +20,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tokenization classes for SMALL100."""
+
 import json
 import os
 from pathlib import Path
