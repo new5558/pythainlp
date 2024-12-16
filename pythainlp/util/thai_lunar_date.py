@@ -3,7 +3,7 @@
 # SPDX-FileType: SOURCE
 # SPDX-License-Identifier: Apache-2.0
 """
-This file is port from
+This file is a port from
 > https://gist.github.com/touchiep/99f4f5bb349d6b983ef78697630ab78e
 """
 
@@ -223,7 +223,7 @@ _ZODIAC: Dict[int, List[Union[str, int]]] = {
 }
 
 
-def calculate_f_year_f_dev(year: int) -> Tuple[int, float]:
+def _calculate_f_year_f_dev(year: int) -> Tuple[int, float]:
     if year in _YEAR_DEV:
         return year, _YEAR_DEV[year]
 
@@ -239,6 +239,7 @@ def athikamas(year: int) -> bool:
 def athikavar(year: int) -> bool:
     if athikamas(year):
         return False
+
     if athikamas(year + 1):
         cutoff = 1.69501433191599e-02
     else:
@@ -249,7 +250,7 @@ def athikavar(year: int) -> bool:
 def deviation(year: int) -> float:
     curr_dev = 0.0
     last_dev = 0.0
-    f_year, f_dev = calculate_f_year_f_dev(year)
+    f_year, f_dev = _calculate_f_year_f_dev(year)
     if year == f_year:
         curr_dev = f_dev
     else:
@@ -266,6 +267,7 @@ def deviation(year: int) -> float:
             else:
                 curr_dev = 0.367056
             curr_dev = last_dev + curr_dev
+
     return curr_dev
 
 
@@ -280,7 +282,7 @@ def last_day_in_year(year: int) -> int:
 
 def athikasurathin(year: int) -> bool:
     """
-    athikasurathin - Check if a year is a leap year in the Thai lunar calendar
+    Check if a year is a leap year in the Thai lunar calendar
     """
     # Check divisibility by 400 (divisible by 400 is always a leap year)
     if year % 400 == 0:
@@ -312,7 +314,7 @@ def th_zodiac(year: int, output_type: int = 1) -> Union[str, int]:
     Converts a Gregorian year to its corresponding Zodiac name.
 
     :param int year: The Gregorian year. AD (Anno Domini)
-    :param int output_type: Output Type (1 = Thai, 2 = English, 3 = Number).
+    :param int output_type: Output type (1 = Thai, 2 = English, 3 = Number).
 
     :return: The Zodiac name or number corresponding to the input year.
     :rtype: Union[str, int]
