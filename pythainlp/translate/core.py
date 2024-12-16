@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
+# SPDX-FileType: SOURCE
 # SPDX-License-Identifier: Apache-2.0
-
 
 class Translate:
     """
@@ -9,7 +9,11 @@ class Translate:
     """
 
     def __init__(
-        self, src_lang: str, target_lang: str, engine: str="default", use_gpu: bool = False
+        self,
+        src_lang: str,
+        target_lang: str,
+        engine: str = "default",
+        use_gpu: bool = False,
     ) -> None:
         """
         :param str src_lang: source language
@@ -35,7 +39,8 @@ class Translate:
         Translate text from Thai to English::
 
             from pythainlp.translate import Translate
-            th2en = Translate('th', 'en')
+
+            th2en = Translate("th", "en")
 
             th2en.translate("ฉันรักแมว")
             # output: I love cat.

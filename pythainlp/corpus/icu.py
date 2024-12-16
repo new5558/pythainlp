@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
+# SPDX-FileType: SOURCE
 # SPDX-License-Identifier: Apache-2.0
 """
 Provides an optional word list from International Components for Unicode (ICU) dictionary.
