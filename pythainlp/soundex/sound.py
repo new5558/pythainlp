@@ -44,7 +44,7 @@ def word2audio(word: str) -> str:
     _ipa = [_clean_ipa(transliterate(phone, engine="thaig2p")) for phone in _phone]
     return '.'.join(_ipa)
 
-def audio_vector(word:str) -> List[List[int]]:
+def audio_vector(word: str) -> List[List[int]]:
     """
     Convert audio to vector list
 
@@ -62,14 +62,14 @@ def audio_vector(word:str) -> List[List[int]]:
     """
     return _ft.word_to_vector_list(word2audio(word), numeric=True)
 
-def word_approximation(word:str, list_word:List[str]):
+def word_approximation(word: str, list_word: List[str]) -> List[float]:
     """
     Thai Word Approximation
 
     :param str word: Thai word
     :param str list_word: Thai word
     :return: List of approximation of words (The smaller the value, the closer)
-    :rtype: List[str]
+    :rtype: List[float]
 
     :Example:
     ::

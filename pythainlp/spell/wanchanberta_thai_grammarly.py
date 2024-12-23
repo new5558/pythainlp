@@ -11,6 +11,7 @@ Two-stage Thai Misspelling Correction based on Pre-trained Language Models
     * GitHub: \
         https://github.com/bookpanda/Two-stage-Thai-Misspelling-Correction-Based-on-Pre-trained-Language-Models
 """
+from typing import List
 import torch
 from transformers import (
     AutoModelForMaskedLM,
@@ -36,7 +37,7 @@ if use_cuda:
     tagging_model = tagging_model.to(device=device)
 ids_to_labels = {0: 'f', 1: 'i'}
 
-def align_word_ids(texts):
+def align_word_ids(texts: str) -> List[int]:
     tokenized_inputs = tokenizer(texts, padding='max_length', max_length=512, truncation=True)
     word_ids = tokenized_inputs.word_ids()
     label_ids = []
@@ -70,7 +71,7 @@ mlm_model = AutoModelForMaskedLM.from_pretrained("bookpanda/wangchanberta-base-a
 if use_cuda:
     mlm_model = mlm_model.to(device=device)
 
-def correct(text):
+def correct(text: str) -> str:
     ans = []
     i_f = evaluate_one_text(tagging_model, text)
     a = tokenizer(text)
