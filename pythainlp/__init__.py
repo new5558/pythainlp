@@ -37,6 +37,7 @@ thai_symbols = "\u0e3f"  # Thai Bath ฿
 thai_characters = "".join(
     [thai_letters, thai_punctuations, thai_digits, thai_symbols]
 )
+thai_pangram = "นายสังฆภัณฑ์ เฮงพิทักษ์ฝั่ง ผู้เฒ่าซึ่งมีอาชีพเป็นฅนขายฃวด ถูกตำรวจปฏิบัติการจับฟ้องศาล ฐานลักนาฬิกาคุณหญิงฉัตรชฎา ฌานสมาธิ"
 
 
 from pythainlp.soundex import soundex
