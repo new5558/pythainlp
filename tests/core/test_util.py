@@ -708,6 +708,8 @@ class UtilTestCase(unittest.TestCase):
             ("f", "ไหม้"),
             ("f", "ต้น"),
             ("f", "ผู้"),
+            ("h", "ครับ"),
+            ("f", "ค่ะ"),
         ]
         for i, j in data:
             self.assertEqual(tone_detector(j), i)
