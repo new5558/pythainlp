@@ -37,7 +37,19 @@ thai_symbols = "\u0e3f"  # Thai Bath ฿
 thai_characters = "".join(
     [thai_letters, thai_punctuations, thai_digits, thai_symbols]
 )
-
+# Thai pangram by Sungsit Sawaiwan
+# CC BY-SA License
+# Source: https://fontuni.com/articles/2015-07-12-thai-poetgram.html
+thai_pangram = """กีฬาบังลังก์ ฿๑,๒๓๔,๕๖๗,๘๙๐
+๏ จับฅอคนบั่นต้อง 	อาญา
+ขุดฆ่าโคตรฃัตติยา 	ซ่านม้วย
+ธรรมฤๅผ่อนรักษา 	ใจชั่ว โฉดแฮ
+สืบอยู่เต็มศึกด้วย 	ฝุ่นฟ้ากีฬา กามฦๅ ฯ
+๏ กตัญญูไป่พร้อม 	ปฐมฌาน
+เกมส๎วัฒน์ปฏิภาณ 	ห่อนล้ำ
+ทฤษฎีถ่อยๆ สังหาร 	เกณฑ์โทษ
+โกรธจี๊ดจ๋อยจ่มถ้ำ 	อยู่เฝ้า “อตฺตา” ๚ะ๛
+๑๒ กรกฎาคม ๒๕๕๘"""
 
 from pythainlp.soundex import soundex
 from pythainlp.spell import correct, spell
