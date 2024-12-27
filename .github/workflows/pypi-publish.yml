@@ -68,7 +68,7 @@ jobs:
     - name: Store distributions
       uses: actions/upload-artifact@v3
       with:
-        path: pythainlp/dist/*
+        path: dist
 
   publish_pypi:
     name: Publish to PyPI
