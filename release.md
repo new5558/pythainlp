@@ -22,9 +22,11 @@
 6. You can optionally include any particular thank-you's to contributors or
    reviewers in a note at the bottom of the release.
 7. You can then click "publish release."
-8. If the CI run is successful, then the release will be published on both
+8. If [the CI][ci] run is [successful][actions], then the release will be published on both
    the GitHub release page and also the [Python Package Index][pypi].
 
 [semver]: https://semver.org/
 [releases]: https://github.com/PyThaiNLP/pythainlp/releases
+[ci]: https://github.com/PyThaiNLP/pythainlp/blob/dev/.github/workflows/pypi-publish.yml
+[actions]: https://github.com/PyThaiNLP/pythainlp/actions/workflows/pypi-publish.yml
 [pypi]: https://pypi.org/project/pythainlp/
