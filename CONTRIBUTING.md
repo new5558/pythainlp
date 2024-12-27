@@ -127,6 +127,8 @@ See more in [tests/README.md](./tests/README.md)
   #current_version = 3.0.0
   ```
 
+- Read the full [how to cut a new release](./release.md) documentation.
+
 ## Credits
 
 <a href="https://github.com/PyThaiNLP/pythainlp/graphs/contributors">
@@ -140,11 +142,11 @@ Thanks to all [contributors](https://github.com/PyThaiNLP/pythainlp/graphs/contr
 - Wannaphong Phatthiyaphaibun <wannaphong@yahoo.com> - foundation, distribution and maintenance
 - Korakot Chaovavanich - initial tokenization and soundex codes
 - Charin Polpanumas - classification and benchmarking
-- Arthit Suriyawongkul - documentation, refactoring, packaging, distribution, and maintenance
+- Arthit Suriyawongkul - CI/infrastructure, documentation, refactoring and distribution
 - Lalita Lowphansirikul - documentation
 - Pattarawat Chormai - benchmarking
 - Peerat Limkonchotiwat
-- Thanathip Suntorntip - nlpO3 maintenance, Rust Developer
+- Thanathip Suntorntip - nlpO3 maintenance, Rust developer
 - Can Udomcharoenchaikit - documentation and codes
 
 ### Maintainers
