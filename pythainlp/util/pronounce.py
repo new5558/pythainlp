@@ -22,6 +22,7 @@ def rhyme(word: str) -> List[str]:
 
     :Example:
     ::
+
         from pythainlp.util import rhyme
 
         print(rhyme("จีบ"))
