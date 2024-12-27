@@ -33,19 +33,18 @@ def remove_repeated_ngrams(string_list: List[str], n: int = 2) -> List[str]:
 
     for i in range(len(string_list)):
         if i + n <= len(string_list):
-            ngram = tuple(string_list[i:i+n])
+            ngram = tuple(string_list[i:i + n])
 
             if ngram not in unique_ngrams:
                 unique_ngrams.add(ngram)
 
-                if not output_list or output_list[-(n-1):]!= list(ngram[:-1]):
+                if not output_list or output_list[-(n - 1):] != list(ngram[:-1]):
                     output_list.extend(ngram)
                 else:
                     output_list.append(ngram[-1])
         else:
             for char in string_list[i:]:
-                if not output_list or output_list[-1]!= char:
+                if not output_list or output_list[-1] != char:
                     output_list.append(char)
 
     return output_list
-
