@@ -5,4 +5,4 @@
 
 __all__ = ["remove_repeated_ngrams"]
 
-from pythainlp.llm.text_util import remove_repeated_ngrams
+from pythainlp.lm.text_util import remove_repeated_ngrams
