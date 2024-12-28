@@ -5,10 +5,10 @@
 
 import unittest
 
-from pythainlp.llm import remove_repeated_ngrams
+from pythainlp.lm import remove_repeated_ngrams
 
 
-class LlmTestCase(unittest.TestCase):
+class LMTestCase(unittest.TestCase):
     def test_remove_repeated_ngrams(self):
         texts = ['เอา', 'เอา', 'แบบ', 'แบบ', 'แบบ', 'ไหน']
         self.assertEqual(
