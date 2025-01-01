@@ -1,5 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
-# SPDX-FileCopyrightText: 2016-2024 PyThaiNLP Project
+# SPDX-FileCopyrightText: 2016-2025 PyThaiNLP Project
 # SPDX-FileType: SOURCE
 # SPDX-License-Identifier: Apache-2.0
 """
