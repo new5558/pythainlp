@@ -8,4 +8,4 @@ __all__ = [
     "remove_repeated_ngrams"
 ]
 
-from pythainlp.lm.text_util import calculate_ngram_counts,remove_repeated_ngrams
+from pythainlp.lm.text_util import calculate_ngram_counts, remove_repeated_ngrams

@@ -9,8 +9,8 @@ from typing import List, Tuple, Dict
 
 def calculate_ngram_counts(
         list_words: List[str],
-        n_min: int=2,
-        n_max: int=4)-> Dict[Tuple[str], int]:
+        n_min: int = 2,
+        n_max: int = 4)-> Dict[Tuple[str], int]:
     """
     Calculates the counts of n-grams in the list words for the specified range.
 
@@ -26,7 +26,7 @@ def calculate_ngram_counts(
 
     for n in range(n_min, n_max + 1):
         for i in range(len(list_words) - n + 1):
-            ngram = tuple(list_words[i:i+n])
+            ngram = tuple(list_words[i:i + n])
             ngram_counts[ngram] = ngram_counts.get(ngram, 0) + 1
 
     return ngram_counts
