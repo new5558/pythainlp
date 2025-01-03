@@ -4,7 +4,32 @@
 # SPDX-License-Identifier: Apache-2.0
 # ruff: noqa: C901
 
-from typing import List
+from typing import List, Tuple, Dict
+
+
+def calculate_ngram_counts(
+        list_words: List[str],
+        n_min: int = 2,
+        n_max: int = 4) -> Dict[Tuple[str], int]:
+    """
+    Calculates the counts of n-grams in the list words for the specified range.
+
+    :param List[str] list_words: List of string
+    :param int n_min: The minimum n-gram size (default: 2).
+    :param int n_max: The maximum n-gram size (default: 4).
+
+    :return: A dictionary where keys are n-grams and values are their counts.
+    :rtype: Dict[Tuple[str], int]
+    """
+
+    ngram_counts = {}
+
+    for n in range(n_min, n_max + 1):
+        for i in range(len(list_words) - n + 1):
+            ngram = tuple(list_words[i:i + n])
+            ngram_counts[ngram] = ngram_counts.get(ngram, 0) + 1
+
+    return ngram_counts
 
 
 def remove_repeated_ngrams(string_list: List[str], n: int = 2) -> List[str]:
