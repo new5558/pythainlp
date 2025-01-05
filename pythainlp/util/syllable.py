@@ -81,14 +81,20 @@ def sound_syllable(syllable: str) -> str:
         print(sound_syllable("เลข"))
         # output: dead
     """
-    # get consonants
-    consonants = [i for i in syllable if i in list(thai_consonants_all)]
-    # get spelling consonants
-    spelling_consonant = consonants[-1]
     # if len of syllable < 2
     if len(syllable) < 2:
         return "dead"
-    elif (spelling_consonant in _check_2) and (
+    # get consonants
+    consonants = [i for i in syllable if i in list(thai_consonants_all)]
+    if (len(consonants) == 0 and
+        "อ" in syllable
+        and any((c in set("เ")) for c in syllable)
+        and len(syllable)== 2
+    ):
+        return "live"
+    # get spelling consonants
+    spelling_consonant = consonants[-1]
+    if (spelling_consonant in _check_2) and (
         any((c in set("าีืแูาเโ")) for c in syllable) is False
         and any((c in set("ำใไ")) for c in syllable) is False
         and bool(pattern.search(syllable)) is not True
@@ -121,6 +127,8 @@ def sound_syllable(syllable: str) -> str:
             bool(re_short.search(syllable))
             or any((c in set(short)) for c in syllable)
         ) and len(consonants) < 2:
+            return "dead"
+        elif syllable[-1] in set(short):
             return "dead"
         return "live"
     elif bool(
