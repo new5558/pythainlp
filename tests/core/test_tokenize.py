@@ -392,15 +392,15 @@ class TokenizeTestCase(unittest.TestCase):
         )
         self.assertEqual(
             longest.segment("ทดสอบ  ทดสอบ  ทดสอบ"),
-            ["ทดสอบ", " ", "ทดสอบ", " ", "ทดสอบ"],
+            ["ทดสอบ", "  ", "ทดสอบ", "  ", "ทดสอบ"],
         )
         self.assertEqual(
-            longest.segment("ทดสอบ   ทดสอบ"),
+            longest.segment("ทดสอบ  ทดสอบ"),
             ["ทดสอบ", "  ", "ทดสอบ"],
         )
         self.assertEqual(
             longest.segment("ทดสอบ    ทดสอบ"),
-            ["ทดสอบ", "   ", "ทดสอบ"],
+            ["ทดสอบ", "    ", "ทดสอบ"],
         )
 
     def test_mm(self):
