@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # SPDX-FileCopyrightText: 2016-2025 PyThaiNLP Project
 # SPDX-FileType: SOURCE
+# SPDX-FileType: SOURCE
 # SPDX-License-Identifier: Apache-2.0
 """
 Dictionary-based longest-matching Thai word segmentation. Implementation is based
@@ -38,6 +39,7 @@ _REAR_DEP_CHAR = ["ั", "ื", "เ", "แ", "โ", "ใ", "ไ", "ํ"]
 _TRAILING_CHAR = ["ๆ", "ฯ"]
 
 _RE_NONTHAI = re.compile(r"[A-Za-z\d]*")
+_RE_SPACES = re.compile(r"\s+")
 
 _KNOWN = True
 _UNKNOWN = False
@@ -134,7 +136,15 @@ class LongestMatchTokenizer:
                     token_statuses.append(_KNOWN)
                 begin_pos += len(match)
 
-        return tokens
+        # Group consecutive spaces into one token
+        grouped_tokens = []
+        for token in tokens:
+            if token.isspace() and grouped_tokens and grouped_tokens[-1].isspace():
+                grouped_tokens[-1] += token
+            else:
+                grouped_tokens.append(token)
+
+        return grouped_tokens
 
     def tokenize(self, text: str) -> List[str]:
         tokens = self.__segment(text)
