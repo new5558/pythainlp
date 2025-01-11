@@ -390,6 +390,18 @@ class TokenizeTestCase(unittest.TestCase):
             longest_tokenizer.word_tokenize("เฉียบพลัน"),
             ["เฉียบพลัน"],
         )
+        self.assertEqual(
+            longest.segment("ทดสอบ  ทดสอบ  ทดสอบ"),
+            ["ทดสอบ", "  ", "ทดสอบ", "  ", "ทดสอบ"],
+        )
+        self.assertEqual(
+            longest.segment("ทดสอบ  ทดสอบ"),
+            ["ทดสอบ", "  ", "ทดสอบ"],
+        )
+        self.assertEqual(
+            longest.segment("ทดสอบ    ทดสอบ"),
+            ["ทดสอบ", "    ", "ทดสอบ"],
+        )
 
     def test_mm(self):
         self.assertEqual(multi_cut.segment(None), [])
