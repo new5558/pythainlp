@@ -25,6 +25,8 @@ class AttacutTokenizer:
     def tokenize(self, text: str) -> List[str]:
         return self._tokenizer.tokenize(text)
 
+_tokenizers = {}
+
 
 def segment(text: str, model: str = "attacut-sc") -> List[str]:
     """
@@ -39,7 +41,9 @@ def segment(text: str, model: str = "attacut-sc") -> List[str]:
     """
     if not text or not isinstance(text, str):
         return []
+    
+    global _tokenizers
+    if model not in _tokenizers:
+        _tokenizers[model] = AttacutTokenizer(model)
 
-    _tokenizer = AttacutTokenizer(model)
-
-    return _tokenizer.tokenize(text)
+    return _tokenizers[model].tokenize(text)

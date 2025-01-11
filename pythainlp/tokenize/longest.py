@@ -150,6 +150,8 @@ class LongestMatchTokenizer:
         return tokens
 
 
+_tokenizers = {}
+
 def segment(
     text: str, custom_dict: Trie = DEFAULT_WORD_DICT_TRIE
 ) -> List[str]:
@@ -166,4 +168,10 @@ def segment(
     if not custom_dict:
         custom_dict = DEFAULT_WORD_DICT_TRIE
 
-    return LongestMatchTokenizer(custom_dict).tokenize(text)
+    global _tokenizers
+    custom_dict_ref_id = id(custom_dict)
+    if custom_dict_ref_id not in _tokenizers:
+        _tokenizers[custom_dict_ref_id] = LongestMatchTokenizer(custom_dict)
+
+    return _tokenizers[custom_dict_ref_id].tokenize(text)
+    # return LongestMatchTokenizer(custom_dict).tokenize(text)

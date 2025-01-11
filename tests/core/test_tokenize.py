@@ -403,6 +403,26 @@ class TokenizeTestCase(unittest.TestCase):
             ["ทดสอบ", "    ", "ทดสอบ"],
         )
 
+    def test_longest_custom_dict(self):
+        """Test switching the custom dict on longest segment function"""
+
+        self.assertEqual(
+            word_tokenize("ทดสอบ  ทดสอบ", engine="longest"),
+            ["ทดสอบ", "  ", "ทดสอบ"],
+        )
+        self.assertEqual(
+            word_tokenize("ปวดเฉียบพลัน", engine="longest", custom_dict={'ปวดเฉียบพลัน'}),
+            ["ปวดเฉียบพลัน"],
+        )
+        self.assertEqual(
+            word_tokenize("ทดสอบทดสอบ", engine="longest", custom_dict={'ทดสอบท'}),
+             ['ทดสอบท', 'ดสอบ'],
+        )
+        self.assertEqual(
+            word_tokenize("ทดสอบ  ทดสอบ", engine="longest"),
+             ["ทดสอบ", "  ", "ทดสอบ"],
+        )
+
     def test_mm(self):
         self.assertEqual(multi_cut.segment(None), [])
         self.assertEqual(multi_cut.segment(""), [])
