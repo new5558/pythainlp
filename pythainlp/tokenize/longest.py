@@ -172,4 +172,3 @@ def segment(text: str, custom_dict: Trie = DEFAULT_WORD_DICT_TRIE) -> List[str]:
         _tokenizers[custom_dict_ref_id] = LongestMatchTokenizer(custom_dict)
 
     return _tokenizers[custom_dict_ref_id].tokenize(text)
-    # return LongestMatchTokenizer(custom_dict).tokenize(text)
