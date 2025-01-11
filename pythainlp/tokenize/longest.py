@@ -38,7 +38,6 @@ _REAR_DEP_CHAR = ["ั", "ื", "เ", "แ", "โ", "ใ", "ไ", "ํ"]
 _TRAILING_CHAR = ["ๆ", "ฯ"]
 
 _RE_NONTHAI = re.compile(r"[A-Za-z\d]*")
-_RE_SPACES = re.compile(r"\s+")
 
 _KNOWN = True
 _UNKNOWN = False
