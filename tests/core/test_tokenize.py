@@ -411,11 +411,13 @@ class TokenizeTestCase(unittest.TestCase):
             ["ทดสอบ", "  ", "ทดสอบ"],
         )
         self.assertEqual(
-            word_tokenize("ปวดเฉียบพลัน", engine="longest", custom_dict=dict_trie(["ปวดเฉียบพลัน"])),
+            word_tokenize(
+                "ปวดเฉียบพลัน", engine="longest", custom_dict=dict_trie(["ปวดเฉียบพลัน"])
+            ),
             ["ปวดเฉียบพลัน"],
         )
         self.assertEqual(
-            word_tokenize("ทดสอบทดสอบ", engine="longest", custom_dict=dict_trie(["ทดสอบท"]) ),
+            word_tokenize("ทดสอบทดสอบ", engine="longest", custom_dict=dict_trie(["ทดสอบท"])),
             ["ทดสอบท", "ดสอบ"],
         )
         self.assertEqual(
